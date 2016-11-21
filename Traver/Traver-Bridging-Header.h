@@ -4,10 +4,3 @@
 
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import <SVGKit/SVGKit.h>
-#import <SVGKit/SVGKImage.h>
-#import <SVGKit/SVGKParser.h>
-#import <SVGKit/SVGKLayer.h>
-#import <SVGKit/CALayerExporter.h>
-#import <SVGKit/SVGKExporterNSData.h>
-#import <SVGKit/SVGKExporterUIImage.h>
-#import <SVGKit/SVGKImage+CGContext.h>

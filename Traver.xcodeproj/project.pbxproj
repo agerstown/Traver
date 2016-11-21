@@ -25,6 +25,7 @@
 		615665861DE3846B0050AE5A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665851DE3846A0050AE5A /* ProfileViewController.swift */; };
 		615665881DE384830050AE5A /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665871DE384830050AE5A /* RecommendationsViewController.swift */; };
 		6156658A1DE384920050AE5A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665891DE384920050AE5A /* SettingsViewController.swift */; };
+		615BAD161DE3A05D00D1478D /* WorldMap.svg in Resources */ = {isa = PBXBuildFile; fileRef = 615BAD151DE3A05D00D1478D /* WorldMap.svg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		615665851DE3846A0050AE5A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		615665871DE384830050AE5A /* RecommendationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		615665891DE384920050AE5A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		615BAD151DE3A05D00D1478D /* WorldMap.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WorldMap.svg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				6156654A1DE322D70050AE5A /* LaunchScreen.storyboard */,
 				6156654D1DE322D70050AE5A /* Info.plist */,
 				615665731DE323060050AE5A /* Traver-Bridging-Header.h */,
+				615BAD151DE3A05D00D1478D /* WorldMap.svg */,
 			);
 			path = Traver;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				615BAD161DE3A05D00D1478D /* WorldMap.svg in Resources */,
 				6156654C1DE322D70050AE5A /* LaunchScreen.storyboard in Resources */,
 				615665491DE322D70050AE5A /* Assets.xcassets in Resources */,
 				615665471DE322D70050AE5A /* Main.storyboard in Resources */,
@@ -583,6 +587,7 @@
 				615665681DE322D70050AE5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		615665691DE322D70050AE5A /* Build configuration list for PBXNativeTarget "TraverTests" */ = {
 			isa = XCConfigurationList;
@@ -591,6 +596,7 @@
 				6156656B1DE322D70050AE5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6156656C1DE322D70050AE5A /* Build configuration list for PBXNativeTarget "TraverUITests" */ = {
 			isa = XCConfigurationList;
@@ -599,6 +605,7 @@
 				6156656E1DE322D70050AE5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
