@@ -18,10 +18,6 @@
 		6156657B1DE323470050AE5A /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156657A1DE323470050AE5A /* libxml2.tbd */; };
 		6156657D1DE3234F0050AE5A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156657C1DE3234F0050AE5A /* QuartzCore.framework */; };
 		6156657F1DE323530050AE5A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156657E1DE323530050AE5A /* CoreGraphics.framework */; };
-		615665801DE323680050AE5A /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 615665711DE322FD0050AE5A /* CocoaLumberjack.framework */; };
-		615665811DE323680050AE5A /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 615665711DE322FD0050AE5A /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		615665821DE323680050AE5A /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156656F1DE322F70050AE5A /* SVGKit.framework */; };
-		615665831DE323680050AE5A /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6156656F1DE322F70050AE5A /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		615665861DE3846B0050AE5A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665851DE3846A0050AE5A /* ProfileViewController.swift */; };
 		615665881DE384830050AE5A /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665871DE384830050AE5A /* RecommendationsViewController.swift */; };
 		6156658A1DE384920050AE5A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665891DE384920050AE5A /* SettingsViewController.swift */; };
@@ -29,6 +25,10 @@
 		615BAD5C1DE4C13000D1478D /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5B1DE4C13000D1478D /* Countries.swift */; };
 		615BAD5F1DE4CF9500D1478D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5E1DE4CF9500D1478D /* User.swift */; };
 		615BAD611DE4D40E00D1478D /* CountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD601DE4D40E00D1478D /* CountryItemCell.swift */; };
+		61BFD8D91DE4FB0A00F49F6B /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BFD8D81DE4FB0A00F49F6B /* SVGKit.framework */; };
+		61BFD8DB1DE4FB1900F49F6B /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BFD8DA1DE4FB1900F49F6B /* CocoaLumberjack.framework */; };
+		61BFD8DC1DE4FB2200F49F6B /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 61BFD8DA1DE4FB1900F49F6B /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		61BFD8DD1DE4FB2800F49F6B /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 61BFD8D81DE4FB0A00F49F6B /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +55,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				615665831DE323680050AE5A /* SVGKit.framework in Embed Frameworks */,
-				615665811DE323680050AE5A /* CocoaLumberjack.framework in Embed Frameworks */,
+				61BFD8DD1DE4FB2800F49F6B /* SVGKit.framework in Embed Frameworks */,
+				61BFD8DC1DE4FB2200F49F6B /* CocoaLumberjack.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,8 +76,6 @@
 		6156655D1DE322D70050AE5A /* TraverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TraverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		615665611DE322D70050AE5A /* TraverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverUITests.swift; sourceTree = "<group>"; };
 		615665631DE322D70050AE5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6156656F1DE322F70050AE5A /* SVGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SVGKit.framework; sourceTree = "<group>"; };
-		615665711DE322FD0050AE5A /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = "<group>"; };
 		615665731DE323060050AE5A /* Traver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Traver-Bridging-Header.h"; sourceTree = "<group>"; };
 		615665761DE3232E0050AE5A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		615665781DE323320050AE5A /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -91,6 +89,8 @@
 		615BAD5B1DE4C13000D1478D /* Countries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
 		615BAD5E1DE4CF9500D1478D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		615BAD601DE4D40E00D1478D /* CountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryItemCell.swift; sourceTree = "<group>"; };
+		61BFD8D81DE4FB0A00F49F6B /* SVGKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SVGKit.framework; sourceTree = "<group>"; };
+		61BFD8DA1DE4FB1900F49F6B /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,12 +98,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				615665821DE323680050AE5A /* SVGKit.framework in Frameworks */,
+				61BFD8D91DE4FB0A00F49F6B /* SVGKit.framework in Frameworks */,
 				6156657F1DE323530050AE5A /* CoreGraphics.framework in Frameworks */,
 				6156657D1DE3234F0050AE5A /* QuartzCore.framework in Frameworks */,
-				615665801DE323680050AE5A /* CocoaLumberjack.framework in Frameworks */,
 				6156657B1DE323470050AE5A /* libxml2.tbd in Frameworks */,
 				615665791DE323320050AE5A /* CoreImage.framework in Frameworks */,
+				61BFD8DB1DE4FB1900F49F6B /* CocoaLumberjack.framework in Frameworks */,
 				615665771DE3232E0050AE5A /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,8 +186,8 @@
 		615665751DE3232E0050AE5A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				615665711DE322FD0050AE5A /* CocoaLumberjack.framework */,
-				6156656F1DE322F70050AE5A /* SVGKit.framework */,
+				61BFD8DA1DE4FB1900F49F6B /* CocoaLumberjack.framework */,
+				61BFD8D81DE4FB0A00F49F6B /* SVGKit.framework */,
 				6156657E1DE323530050AE5A /* CoreGraphics.framework */,
 				6156657C1DE3234F0050AE5A /* QuartzCore.framework */,
 				6156657A1DE323470050AE5A /* libxml2.tbd */,
@@ -448,11 +448,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = "arm64 armv7 armv7s ";
 			};
 			name = Debug;
 		};
@@ -493,11 +494,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = "arm64 armv7 armv7s ";
 			};
 			name = Release;
 		};
