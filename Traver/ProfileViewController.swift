@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import SVGKit
 
 class ProfileViewController: UIViewController {
