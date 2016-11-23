@@ -3,4 +3,4 @@
 //
 
 #import <CocoaLumberjack/CocoaLumberjack.h>
-#import <SVGKit/SVGKit.h>
+#import "SVGKit.h"

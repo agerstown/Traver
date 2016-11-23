@@ -7,23 +7,18 @@
 //
 
 import Foundation
-import UIKit
-import SVGKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UITableViewController {
 
     @IBOutlet weak var viewMap: UIView!
     @IBOutlet weak var viewUserInfo: UIView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelJob: UILabel!
     @IBOutlet weak var imageViewPhoto: UIImageView!
-    @IBOutlet weak var tableViewCountries: UITableView!
+    @IBOutlet var tableViewVisitedCountries: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableViewCountries.dataSource = self
-        tableViewCountries.delegate = self
         
         // setting up the map and it's size
         let mapImage = SVGKImage(named: "WorldMap.svg")!
@@ -52,54 +47,48 @@ class ProfileViewController: UIViewController {
 
     }
     
-}
-
-extension ProfileViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return sections[section]
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableViewVisitedCountries.reloadData()
+    }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let navController = segue.destination as? UINavigationController {
+            if let controller = navController.viewControllers[0] as? CountriesViewController {
+                controller.selectedIndexes = getVisitedCountriesIndexes()
+            }
+        }
+    }
+    
+    func getVisitedCountriesIndexes() -> [Int] {
+        var indexes = [Int]()
+        for (index, country) in Countries.countries.enumerated() {
+            if User.sharedInstance.visitedCountries.contains(country) {
+                indexes.append(index)
+            }
+        }
+        return indexes
+    }
+    
+    //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    //        return sections[section]
+    //    }
+    
+    // MARK: - tableViewDataSource
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 176
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return User.sharedInstance.visitedCountries.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableViewCountries.dequeueReusableCell(withIdentifier: "CountryItemCell") as! CountryItemCell
-        cell.labelCountryName.text = Countries.countries[indexPath.row]
+        let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
+        cell.labelCountryName.text = User.sharedInstance.visitedCountries[indexPath.row]
+        cell.selectionStyle = .none
         
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//    
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if (editingStyle == UITableViewCellEditingStyle.delete) {
-//            var mapToDelete: Map?
-//            if indexPath.section == 0 {
-//                mapToDelete = permanentMaps[indexPath.row]
-//            }
-//            else {
-//                mapToDelete = temporaryMaps[indexPath.row]
-//            }
-//            User.currentUser?.maps.removeObject(mapToDelete!)
-//            mapsList.removeObject(mapToDelete!)
-//            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
-//        }
-//    }
-
-}
-
-extension ProfileViewController: UITableViewDelegate {
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        
-//    }
     
 }
