@@ -10,6 +10,8 @@
 		612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6401DE5E04E0092D43F /* CountriesViewController.swift */; };
 		612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6481DE5E2880092D43F /* CountryItemCell.swift */; };
 		612BF64E1DE5F9FE0092D43F /* Array+RemoveObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF64D1DE5F9FE0092D43F /* Array+RemoveObject.swift */; };
+		612F287F1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F287E1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift */; };
+		612F28811DE77CFB0057E20B /* Regions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F28801DE77CFB0057E20B /* Regions.swift */; };
 		615665401DE322D70050AE5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156653F1DE322D70050AE5A /* AppDelegate.swift */; };
 		615665471DE322D70050AE5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 615665451DE322D70050AE5A /* Main.storyboard */; };
 		615665491DE322D70050AE5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 615665481DE322D70050AE5A /* Assets.xcassets */; };
@@ -73,6 +75,8 @@
 		612BF6401DE5E04E0092D43F /* CountriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesViewController.swift; sourceTree = "<group>"; };
 		612BF6481DE5E2880092D43F /* CountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryItemCell.swift; sourceTree = "<group>"; };
 		612BF64D1DE5F9FE0092D43F /* Array+RemoveObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+RemoveObject.swift"; sourceTree = "<group>"; };
+		612F287E1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+InverseKeysValues.swift"; sourceTree = "<group>"; };
+		612F28801DE77CFB0057E20B /* Regions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regions.swift; sourceTree = "<group>"; };
 		6156653C1DE322D60050AE5A /* Traver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6156653F1DE322D70050AE5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		615665461DE322D70050AE5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -330,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				612BF64D1DE5F9FE0092D43F /* Array+RemoveObject.swift */,
+				612F287E1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -410,8 +415,9 @@
 		615BAD5D1DE4CF7700D1478D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				615BAD5B1DE4C13000D1478D /* Countries.swift */,
 				615BAD5E1DE4CF9500D1478D /* User.swift */,
+				612F28801DE77CFB0057E20B /* Regions.swift */,
+				615BAD5B1DE4C13000D1478D /* Countries.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -716,6 +722,8 @@
 				615665401DE322D70050AE5A /* AppDelegate.swift in Sources */,
 				612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */,
 				615BAD5C1DE4C13000D1478D /* Countries.swift in Sources */,
+				612F287F1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift in Sources */,
+				612F28811DE77CFB0057E20B /* Regions.swift in Sources */,
 				6156658A1DE384920050AE5A /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

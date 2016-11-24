@@ -40,7 +40,7 @@ class ProfileViewController: UITableViewController {
     
     func colorVisitedCounties(on map: SVGKImage) {
         let countriesLayers = map.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
-        let visitedCountriesLayers = countriesLayers.filter { User.sharedInstance.visitedCountries.contains($0.name!) }
+        let visitedCountriesLayers = countriesLayers.filter { User.sharedInstance.visitedCountriesCodes.contains($0.name!) }
         
         for layer in visitedCountriesLayers {
             let color = UIColor.blue
@@ -57,24 +57,30 @@ class ProfileViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navController = segue.destination as? UINavigationController {
             if let controller = navController.viewControllers[0] as? CountriesViewController {
-                controller.selectedIndexes = Countries.codes.enumerated().filter {
-                    User.sharedInstance.visitedCountries.contains($0.element) }.map { $0.offset }
+                controller.selectedCountriesCodes = User.sharedInstance.visitedCountriesCodes
             }
         }
     }
     
     // MARK: - tableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return Regions.regions.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return User.sharedInstance.visitedCountries.count
+        let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { Regions.regions[section].countriesCodes.contains($0) }
+        return visitedCountriesInSection.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return Regions.regions[section].regionName
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
-        cell.labelCountryName.text = Countries.codesAndCountries[User.sharedInstance.visitedCountries[indexPath.row]]
+        
+        let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { Regions.regions[indexPath.section].countriesCodes.contains($0) }
+        cell.labelCountryName.text = Countries.codesAndCountries[visitedCountriesInSection[indexPath.row]]
         cell.selectionStyle = .none
         
         return cell

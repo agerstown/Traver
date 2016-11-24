@@ -15,14 +15,14 @@ class User {
     var company: String?
     var facebookID: Int?
     var vkID: Int?
-    var visitedCountries: [String]
+    var visitedCountriesCodes: [String]
     var friends: [User]?
     
     static let sharedInstance = User(id: 1)
     
     init(id: Int) {
         self.id = id
-        self.visitedCountries = [String]()
+        self.visitedCountriesCodes = [String]()
     }
     
 }
