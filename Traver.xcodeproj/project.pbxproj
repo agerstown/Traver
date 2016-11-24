@@ -26,7 +26,6 @@
 		615BAD5F1DE4CF9500D1478D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5E1DE4CF9500D1478D /* User.swift */; };
 		615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */; };
 		616E64A11DE6223300680D4F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 616E64A01DE6223300680D4F /* Info.plist */; };
-		617AA79F1DE5D953000296B6 /* DictionaryTwoWay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617AA79E1DE5D953000296B6 /* DictionaryTwoWay.swift */; };
 		61BFDA7A1DE5A8C500F49F6B /* libSVGKit-iOS.2.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BFDA791DE5A8C500F49F6B /* libSVGKit-iOS.2.0.0.a */; };
 		61BFDAFF1DE5A90200F49F6B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BFDAFE1DE5A90200F49F6B /* CoreText.framework */; };
 		61BFDB011DE5A90D00F49F6B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BFDB001DE5A90D00F49F6B /* CoreImage.framework */; };
@@ -96,7 +95,6 @@
 		615BAD5E1DE4CF9500D1478D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitedCountryItemCell.swift; sourceTree = "<group>"; };
 		616E64A01DE6223300680D4F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		617AA79E1DE5D953000296B6 /* DictionaryTwoWay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryTwoWay.swift; sourceTree = "<group>"; };
 		61BFDA791DE5A8C500F49F6B /* libSVGKit-iOS.2.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libSVGKit-iOS.2.0.0.a"; sourceTree = "<group>"; };
 		61BFDA7E1DE5A8CA00F49F6B /* AppleSucksDOMImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleSucksDOMImplementation.h; sourceTree = "<group>"; };
 		61BFDA7F1DE5A8CA00F49F6B /* Attr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attr.h; sourceTree = "<group>"; };
@@ -296,14 +294,6 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		612BF6441DE5E1B20092D43F /* Custom types */ = {
-			isa = PBXGroup;
-			children = (
-				617AA79E1DE5D953000296B6 /* DictionaryTwoWay.swift */,
-			);
-			path = "Custom types";
-			sourceTree = "<group>";
-		};
 		612BF6451DE5E1CA0092D43F /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,7 +360,6 @@
 				615BAD5D1DE4CF7700D1478D /* Model */,
 				612BF6451DE5E1CA0092D43F /* Storyboards */,
 				612BF64C1DE5F9530092D43F /* Extensions */,
-				612BF6441DE5E1B20092D43F /* Custom types */,
 				612BF6471DE5E2020092D43F /* Documents */,
 				615665481DE322D70050AE5A /* Assets.xcassets */,
 				616E64A01DE6223300680D4F /* Info.plist */,
@@ -409,7 +398,7 @@
 				61BFDB001DE5A90D00F49F6B /* CoreImage.framework */,
 				61BFDAFE1DE5A90200F49F6B /* CoreText.framework */,
 			);
-			name = "Frameworks and Libraries";
+			path = "Frameworks and Libraries";
 			sourceTree = "<group>";
 		};
 		615BAD5D1DE4CF7700D1478D /* Model */ = {
@@ -715,7 +704,6 @@
 				612BF64E1DE5F9FE0092D43F /* Array+RemoveObject.swift in Sources */,
 				615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */,
 				615665861DE3846B0050AE5A /* ProfileViewController.swift in Sources */,
-				617AA79F1DE5D953000296B6 /* DictionaryTwoWay.swift in Sources */,
 				612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */,
 				615665881DE384830050AE5A /* RecommendationsViewController.swift in Sources */,
 				615BAD5F1DE4CF9500D1478D /* User.swift in Sources */,

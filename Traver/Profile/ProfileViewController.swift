@@ -35,7 +35,11 @@ class ProfileViewController: UITableViewController {
         }
         
         colorVisitedCounties(on: mapImage)
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableViewVisitedCountries.reloadData()
+        colorVisitedCounties(on: mapImage)
     }
     
     func colorVisitedCounties(on map: SVGKImage) {
@@ -46,11 +50,6 @@ class ProfileViewController: UITableViewController {
             let color = UIColor.blue
             layer.fillColor = color.cgColor
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.tableViewVisitedCountries.reloadData()
-        colorVisitedCounties(on: mapImage)
     }
     
     // MARK: - prepare for segue

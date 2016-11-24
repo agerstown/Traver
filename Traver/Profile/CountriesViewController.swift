@@ -19,22 +19,6 @@ class CountriesViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func buttonCountryItemStateClicked(_ button: UIButton) {
-        if let cell = button.superview?.superview as? CountryItemCell {
-            guard let countryCode = Countries.countriesAndCodes[cell.labelCountryName.text!]
-                else { return }
-            var image: UIImage?
-            if !self.selectedCountriesCodes.contains(countryCode) {
-                image = UIImage(named: "item_checked")
-                self.selectedCountriesCodes.append(countryCode)
-            } else {
-                image = UIImage(named: "item_unchecked")
-                self.selectedCountriesCodes.removeObject(countryCode)
-            }
-            button.setImage(image, for: .normal)
-        }
-    }
-    
     // MARK: - tabelViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
         return Regions.regions.count
@@ -49,7 +33,6 @@ class CountriesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableViewCountries.dequeueReusableCell(withIdentifier: "CountryItemCell") as! CountryItemCell
         let regionCountriesCodes = Regions.regions[indexPath.section].countriesCodes
         cell.labelCountryName.text = Countries.codesAndCountries[regionCountriesCodes[indexPath.row]]
@@ -59,6 +42,22 @@ class CountriesViewController: UITableViewController {
         cell.selectionStyle = .none
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? CountryItemCell {
+            guard let countryCode = Countries.countriesAndCodes[cell.labelCountryName.text!]
+                else { return }
+            var image: UIImage?
+            if !self.selectedCountriesCodes.contains(countryCode) {
+                image = UIImage(named: "item_checked")
+                self.selectedCountriesCodes.append(countryCode)
+            } else {
+                image = UIImage(named: "item_unchecked")
+                self.selectedCountriesCodes.removeObject(countryCode)
+            }
+            cell.buttonItemState.setImage(image, for: .normal)
+        }
     }
     
 }
