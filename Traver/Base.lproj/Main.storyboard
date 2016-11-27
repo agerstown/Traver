@@ -21,44 +21,49 @@
                             <rect key="frame" x="0.0" y="64" width="375" height="352"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WtP-Jp-Rgl">
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="AQw-nJ-FJx">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="256"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WtP-Jp-Rgl">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="256"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="256" id="rvr-Iy-wsP"/>
+                                        <constraint firstAttribute="height" constant="256" id="k5x-cA-iMg"/>
                                     </constraints>
-                                </view>
+                                </scrollView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KFI-Fx-XOz">
                                     <rect key="frame" x="0.0" y="256" width="375" height="96"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nNs-EN-0Wt">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_photo" translatesAutoresizingMaskIntoConstraints="NO" id="nNs-EN-0Wt">
                                             <rect key="frame" x="16" y="8" width="80" height="80"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="SvD-Jp-F0n"/>
                                                 <constraint firstAttribute="height" constant="80" id="pAK-J6-Fhw"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Natalia Nikitina" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mft-2G-z8f">
-                                            <rect key="frame" x="120" y="16" width="199" height="21"/>
+                                            <rect key="frame" x="112" y="16" width="207" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App in the Air" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4L9-Zm-7fT">
-                                            <rect key="frame" x="120" y="39" width="199" height="16"/>
+                                            <rect key="frame" x="112" y="39" width="207" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120/176" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91i-Kc-IeN">
-                                            <rect key="frame" x="120" y="59" width="60.5" height="21"/>
+                                            <rect key="frame" x="112" y="59" width="61" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="countries visited" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2q-GV-5NS">
-                                            <rect key="frame" x="184.5" y="59" width="126" height="21"/>
+                                            <rect key="frame" x="177" y="59" width="126" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -69,7 +74,7 @@
                                                 <constraint firstAttribute="height" constant="16" id="JAD-SD-oHG"/>
                                                 <constraint firstAttribute="width" constant="16" id="osn-ei-6Gk"/>
                                             </constraints>
-                                            <state key="normal" title="Edit" image="edit2"/>
+                                            <state key="normal" title="Edit" image="edit"/>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -79,27 +84,27 @@
                                         <constraint firstItem="91i-Kc-IeN" firstAttribute="top" secondItem="4L9-Zm-7fT" secondAttribute="bottom" constant="4" id="FmH-uU-DPT"/>
                                         <constraint firstItem="4L9-Zm-7fT" firstAttribute="top" secondItem="Mft-2G-z8f" secondAttribute="bottom" constant="2" id="Jci-W4-7sX"/>
                                         <constraint firstItem="Mft-2G-z8f" firstAttribute="top" secondItem="KFI-Fx-XOz" secondAttribute="top" constant="16" id="KrO-I5-PKp"/>
-                                        <constraint firstItem="Mft-2G-z8f" firstAttribute="leading" secondItem="nNs-EN-0Wt" secondAttribute="trailing" constant="24" id="XWX-zl-L3Y"/>
+                                        <constraint firstItem="Mft-2G-z8f" firstAttribute="leading" secondItem="nNs-EN-0Wt" secondAttribute="trailing" constant="16" id="XWX-zl-L3Y"/>
                                         <constraint firstItem="V2q-GV-5NS" firstAttribute="top" secondItem="4L9-Zm-7fT" secondAttribute="bottom" constant="4" id="Xmx-KZ-U8S"/>
                                         <constraint firstItem="V2q-GV-5NS" firstAttribute="leading" secondItem="91i-Kc-IeN" secondAttribute="trailing" constant="4" id="Ytm-X3-mRv"/>
                                         <constraint firstItem="2oD-K0-R4N" firstAttribute="leading" secondItem="Mft-2G-z8f" secondAttribute="trailing" constant="16" id="clh-Lf-OgK"/>
                                         <constraint firstItem="2oD-K0-R4N" firstAttribute="leading" secondItem="4L9-Zm-7fT" secondAttribute="trailing" constant="16" id="cxr-gv-dbY"/>
                                         <constraint firstItem="2oD-K0-R4N" firstAttribute="centerY" secondItem="KFI-Fx-XOz" secondAttribute="centerY" id="hic-KR-OEf"/>
-                                        <constraint firstItem="91i-Kc-IeN" firstAttribute="leading" secondItem="nNs-EN-0Wt" secondAttribute="trailing" constant="24" id="jHd-mP-Rem"/>
+                                        <constraint firstItem="91i-Kc-IeN" firstAttribute="leading" secondItem="nNs-EN-0Wt" secondAttribute="trailing" constant="16" id="jHd-mP-Rem"/>
                                         <constraint firstItem="nNs-EN-0Wt" firstAttribute="centerY" secondItem="KFI-Fx-XOz" secondAttribute="centerY" id="mAC-8M-NrP"/>
                                         <constraint firstItem="nNs-EN-0Wt" firstAttribute="leading" secondItem="KFI-Fx-XOz" secondAttribute="leading" constant="16" id="mLu-4j-3i8"/>
-                                        <constraint firstItem="4L9-Zm-7fT" firstAttribute="leading" secondItem="nNs-EN-0Wt" secondAttribute="trailing" constant="24" id="wdv-N0-uHb"/>
+                                        <constraint firstItem="4L9-Zm-7fT" firstAttribute="leading" secondItem="nNs-EN-0Wt" secondAttribute="trailing" constant="16" id="wdv-N0-uHb"/>
                                     </constraints>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="WtP-Jp-Rgl" secondAttribute="trailing" id="7Yd-gT-a0S"/>
-                                <constraint firstItem="WtP-Jp-Rgl" firstAttribute="leading" secondItem="FwJ-5O-8Pc" secondAttribute="leading" id="Dfj-lB-DmE"/>
-                                <constraint firstAttribute="trailing" secondItem="KFI-Fx-XOz" secondAttribute="trailing" id="LEl-c5-nc9"/>
-                                <constraint firstItem="WtP-Jp-Rgl" firstAttribute="top" secondItem="FwJ-5O-8Pc" secondAttribute="top" id="W8P-BI-LAB"/>
-                                <constraint firstAttribute="bottom" secondItem="KFI-Fx-XOz" secondAttribute="bottom" id="cqB-Ec-N8w"/>
-                                <constraint firstItem="KFI-Fx-XOz" firstAttribute="leading" secondItem="FwJ-5O-8Pc" secondAttribute="leading" id="dlg-lF-r1g"/>
+                                <constraint firstAttribute="trailing" secondItem="AQw-nJ-FJx" secondAttribute="trailing" id="1gj-G3-f0l"/>
+                                <constraint firstItem="KFI-Fx-XOz" firstAttribute="top" secondItem="AQw-nJ-FJx" secondAttribute="bottom" id="JIe-ar-95e"/>
+                                <constraint firstItem="AQw-nJ-FJx" firstAttribute="top" secondItem="FwJ-5O-8Pc" secondAttribute="top" id="Vf9-NH-yxu"/>
+                                <constraint firstAttribute="trailing" secondItem="KFI-Fx-XOz" secondAttribute="trailing" id="m5r-4U-2Lv"/>
+                                <constraint firstItem="KFI-Fx-XOz" firstAttribute="leading" secondItem="FwJ-5O-8Pc" secondAttribute="leading" id="n2K-ZM-zvL"/>
+                                <constraint firstItem="AQw-nJ-FJx" firstAttribute="leading" secondItem="FwJ-5O-8Pc" secondAttribute="leading" id="ufm-0f-bJ0"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -178,8 +183,9 @@
                         <outlet property="labelJob" destination="4L9-Zm-7fT" id="30e-mF-8mP"/>
                         <outlet property="labelName" destination="Mft-2G-z8f" id="Sal-UK-t0t"/>
                         <outlet property="labelVisitedCountriesNumber" destination="91i-Kc-IeN" id="G4G-WH-HGp"/>
+                        <outlet property="scrollView" destination="AQw-nJ-FJx" id="8qV-CY-vxc"/>
                         <outlet property="tableViewVisitedCountries" destination="sN1-yu-5TR" id="PrF-zU-AGD"/>
-                        <outlet property="viewMap" destination="WtP-Jp-Rgl" id="JHp-eN-lK8"/>
+                        <outlet property="viewMap" destination="WtP-Jp-Rgl" id="F6O-R4-baE"/>
                         <outlet property="viewUserInfo" destination="KFI-Fx-XOz" id="uLb-xm-d4B"/>
                     </connections>
                 </tableViewController>
@@ -363,7 +369,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="0MG-RW-CId" kind="relationship" relationship="rootViewController" id="RDc-YO-OCM"/>
+                        <segue destination="0MG-RW-CId" kind="relationship" relationship="rootViewController" id="6vi-Pg-miy"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lJ1-ns-8dM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -410,7 +416,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="edit2" width="128" height="128"/>
+        <image name="default_photo" width="85" height="85"/>
+        <image name="edit" width="128" height="128"/>
         <image name="first" width="30" height="30"/>
         <image name="item_unchecked" width="25" height="25"/>
         <image name="second" width="30" height="30"/>

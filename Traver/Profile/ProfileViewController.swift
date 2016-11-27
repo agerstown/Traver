@@ -8,8 +8,37 @@
 
 import Foundation
 
+//class myScrollView: UIScrollView {
+//    override func setContentOffset(_ contentOffset: CGPoint, animated: Bool) {
+//        var contentSize = self.contentSize
+//        var scrollViewSize = self.bounds.size
+//        if (contentSize.width < scrollViewSize.width) {
+//            contentOffset.x = -(scrollViewSize.width - contentSize.width) / 2.0
+//        }
+//        if (contentSize.height < scrollViewSize.height) {
+//            contentOffset.y = -(scrollViewSize.height - contentSize.height) / 2.0
+//        }
+//        super.setContentOffset(contentOffset, animated: animated)
+////        const CGSize scrollViewSize = self.bounds.size;
+////        
+////        if (contentSize.width < scrollViewSize.width)
+////        {
+////            contentOffset.x = -(scrollViewSize.width - contentSize.width) / 2.0;
+////        }
+////        
+////        if (contentSize.height < scrollViewSize.height)
+////        {
+////            contentOffset.y = -(scrollViewSize.height - contentSize.height) / 2.0;
+////        }
+////        
+////        [super setContentOffset:contentOffset];
+//
+//    }
+//}
+
 class ProfileViewController: UITableViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var viewMap: UIView!
     @IBOutlet weak var viewUserInfo: UIView!
     @IBOutlet weak var labelName: UILabel!
@@ -24,6 +53,9 @@ class ProfileViewController: UITableViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.delegate = self
+        imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
         
         // setting up the map's size
         mapImage = SVGKImage(named: "WorldMap.svg")!
@@ -98,4 +130,24 @@ class ProfileViewController: UITableViewController {
         return cell
     }
     
+    // MARK: - scrollViewDelegate
+    override func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return viewMap
+    }
+    
+    override func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        
+      // viewMap  let subView = [scrollView.subviews objectAtIndex:0];
+        
+        let offsetX = max((scrollView.bounds.width - scrollView.contentSize.width) * 0.5, 0)
+        let offsetY = max((scrollView.bounds.height - scrollView.contentSize.height) * 0.5, 0)
+        self.scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, 0, 0)
+    }
+    
+//    override func scrollViewDidZoom(_ scrollView: UIScrollView) {
+//        <#code#>
+//    }
+    
 }
+
+
