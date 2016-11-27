@@ -21,23 +21,23 @@ class CountriesViewController: UITableViewController {
     
     // MARK: - tabelViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return Regions.regions.count
+        return Region.regions.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Regions.regions[section].countriesCodes.count
+        return Region.regions[section].countriesCodes.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Regions.regions[section].regionName
+        return Region.regions[section].name
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewCountries.dequeueReusableCell(withIdentifier: "CountryItemCell") as! CountryItemCell
-        let regionCountriesCodes = Regions.regions[indexPath.section].countriesCodes
+        let regionCountriesCodes = Region.regions[indexPath.section].countriesCodes
         cell.labelCountryName.text = Countries.codesAndCountries[regionCountriesCodes[indexPath.row]]
         
-        let image = self.selectedCountriesCodes.contains(cell.labelCountryName.text!) ? UIImage(named: "item_checked") : UIImage(named: "item_unchecked")
+        let image = self.selectedCountriesCodes.contains(regionCountriesCodes[indexPath.row]) ? UIImage(named: "item_checked") : UIImage(named: "item_unchecked")
         cell.buttonItemState.setImage(image, for: .normal)
         cell.selectionStyle = .none
         

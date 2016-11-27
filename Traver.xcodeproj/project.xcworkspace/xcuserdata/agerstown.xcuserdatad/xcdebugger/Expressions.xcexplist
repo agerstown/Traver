@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <VariablesViewState
    version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ProfileViewController.numberOfSections(in : UITableView) -&gt; Int:ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.sharedInstance.visitedRegions().count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "visitedCountriesInSection.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CountriesViewController.buttonDoneClicked(UIBarButtonItem) -&gt; ():CountriesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedCountriesCodes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.prepare(for : UIStoryboardSegue, sender : Any?) -&gt; ():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.sharedInstance.visitedCountriesCodes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CountriesViewController.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:CountriesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.labelCountryName.text">
+            </PersistentString>
+            <PersistentString
+               value = "self.selectedCountriesCodes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
 </VariablesViewState>

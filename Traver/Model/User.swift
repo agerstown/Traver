@@ -15,8 +15,21 @@ class User {
     var company: String?
     var facebookID: Int?
     var vkID: Int?
-    var visitedCountriesCodes: [String]
     var friends: [User]?
+    var visitedCountriesCodes: [String]
+    
+    var visitedRegions = {
+        Region.regions.filter { region in
+            var isRegionVisited = false
+            for countryCode in region.countriesCodes {
+                if User.sharedInstance.visitedCountriesCodes.contains(countryCode) {
+                    isRegionVisited = true
+                    break
+                }
+            }
+            return isRegionVisited
+        }
+    }
     
     static let sharedInstance = User(id: 1)
     

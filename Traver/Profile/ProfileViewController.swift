@@ -14,7 +14,9 @@ class ProfileViewController: UITableViewController {
     @IBOutlet weak var viewUserInfo: UIView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelJob: UILabel!
+    @IBOutlet weak var labelVisitedCountriesNumber: UILabel!
     @IBOutlet weak var imageViewPhoto: UIImageView!
+    @IBOutlet weak var buttonEditUserInfo: UIButton!
     @IBOutlet var tableViewVisitedCountries: UITableView!
     
     var mapImage: SVGKImage = SVGKImage(named: "WorldMap.svg")!
@@ -38,6 +40,10 @@ class ProfileViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.labelVisitedCountriesNumber.text = "\(User.sharedInstance.visitedCountriesCodes.count)/\(Countries.countriesAndCodes.count)"
+        User.sharedInstance.visitedCountriesCodes.sort {
+            Countries.codesAndCountries[$0]! < Countries.codesAndCountries[$1]!
+        }
         self.tableViewVisitedCountries.reloadData()
         colorVisitedCounties(on: mapImage)
     }
@@ -63,22 +69,29 @@ class ProfileViewController: UITableViewController {
     
     // MARK: - tableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return Regions.regions.count
+        return User.sharedInstance.visitedRegions().count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { Regions.regions[section].countriesCodes.contains($0) }
+        let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions()[section].countriesCodes.contains($0) }
         return visitedCountriesInSection.count
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Regions.regions[section].regionName
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "RegionHeaderCell") as! RegionHeaderCell
+        header.labelRegionName.text = User.sharedInstance.visitedRegions()[section].name
+        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions()[section].countriesCodes.count)"
+        return header
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 32
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
         
-        let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { Regions.regions[indexPath.section].countriesCodes.contains($0) }
+        let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions()[indexPath.section].countriesCodes.contains($0) }
         cell.labelCountryName.text = Countries.codesAndCountries[visitedCountriesInSection[indexPath.row]]
         cell.selectionStyle = .none
         

@@ -8,63 +8,38 @@
 
 import Foundation
 
-class Regions {
+class Region {
     
-    static let europe = ["AL", "AM", "AT", "AZ", "BA", "BE", "BG", "BY", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GE", "GL", "GR", "HR", "HU", "IE", "IS", "IT", "XK", "KZ", "LT", "LU", "LV", "MD", "ME", "MK", "NL", "NO", "PL", "PT", "RO", "RS", "RU", "SE", "SI", "SK", "TR", "UA", "SJ"]
-    
-    static let asia = ["AE", "AF", "BD", "BN", "BT", "CN", "ID", "IL", "IN", "IQ", "IR", "JO", "JP", "KP", "KR", "KW", "LK", "MM", "MN", "MY", "NP", "OM", "PH", "PK", "PS", "QA", "SA", "SY", "TH", "TJ", "TM", "TW", "UZ", "VN", "YE", "KG", "KH", "LA", "LB"]
-    
-    static let northAmerica = ["BS", "BZ", "CA", "CR", "CU", "DO", "GT", "HN", "HT", "JM", "MX", "NI", "PA", "PR", "SV", "TT", "US"]
-    
-    static let southAmerica = ["AR", "BO", "BR", "CL", "CO", "EC", "FK", "GF", "GY", "PE", "PY", "SR", "UY", "VE"]
-    
-    static let australia = ["AU", "FJ", "NZ", "NC", "PG", "SB", "TL", "VU"]
-    
-    static let africa = ["AO", "BF", "BI", "BJ", "BW", "CD", "CF", "CG", "CI", "CM", "DJ", "EG", "EH", "ER", "ET", "GA", "GH", "GM", "GN", "GQ", "KE", "LR", "LS", "LY", "MA", "MG", "ML", "MR", "MW", "MZ", "NA", "NE", "NG", "SD", "SL", "SN", "SO", "SS", "SZ", "TD", "TG", "TN", "TZ", "UG", "ZA", "ZM", "ZW", "DZ", "GW", "RW", "TF"]
-    
-    enum Region: Int {
+    enum RegionType: Int {
         case europe
         case asia
         case northAmerica
         case southAmerica
         case australia
         case africa
-        
-        var countriesCodes: [String] {
-            switch self {
-            case .europe:
-                return Regions.europe
-            case .asia:
-                return Regions.asia
-            case .northAmerica:
-                return Regions.northAmerica
-            case .southAmerica:
-                return Regions.southAmerica
-            case .australia:
-                return Regions.australia
-            default:
-                return Regions.africa
-            }
-        }
-        
-        var regionName: String {
-            switch self {
-            case .europe:
-                return "Europe"
-            case .asia:
-                return "Asia"
-            case .northAmerica:
-                return "North America"
-            case .southAmerica:
-                return "South America"
-            case .australia:
-                return "Australia"
-            default:
-                return "Africa"
-            }
-        }
     }
     
-    static let regions: [Region] = [.europe, .asia, .northAmerica, .southAmerica, .australia, .africa]
+    var type: RegionType
+    var name: String
+    var countriesCodes: [String]
     
+    init(type: RegionType, name: String, countriesCodes: [String]) {
+        self.type = type
+        self.name = name
+        self.countriesCodes = countriesCodes
+    }
+    
+    static let europe = Region(type: .europe, name: "Europe", countriesCodes: ["AL", "AM", "AT", "AZ", "BY", "BE", "BA", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "GE", "DE", "GR", "GL", "HU", "IS", "IE", "IT", "KZ", "XK", "LV", "LT", "LU", "MK", "MD", "ME", "NL", "NO", "PL", "PT", "RO", "RU", "RS", "SK", "SI", "ES", "SJ", "SE", "CH", "TR", "UA", "GB"])
+    
+    static let asia = Region(type: .asia, name: "Asia", countriesCodes: ["AF", "BD", "BT", "BN", "KH", "CN", "IN", "ID", "IR", "IQ", "IL", "JP", "JO", "KW", "KG", "LA", "LB", "MY", "MN", "MM", "NP", "KP", "OM", "PK", "PS", "PH", "QA", "SA", "KR", "LK", "SY", "TW", "TJ", "TH", "TM", "AE", "UZ", "VN", "YE"])
+    
+    static let northAmerica = Region(type: .northAmerica, name: "North America", countriesCodes: ["BS", "BZ", "CA", "CR", "CU", "DO", "SV", "GT", "HT", "HN", "JM", "MX", "NI", "PA", "PR", "TT", "US"])
+    
+    static let southAmerica = Region(type: .southAmerica, name: "South America", countriesCodes: ["AR", "BO", "BR", "CL", "CO", "EC", "FK", "GF", "GY", "PY", "PE", "SR", "UY", "VE"])
+    
+    static let australia = Region(type: .australia, name: "Australia", countriesCodes: ["AU", "FJ", "NC", "NZ", "PG", "SB", "TL", "VU"])
+    
+    static let africa = Region(type: .africa, name: "Africa", countriesCodes: ["DZ", "AO", "BJ", "BW", "BF", "BI", "CM", "CF", "TD", "CD", "DJ", "EG", "GQ", "ER", "ET", "TF", "GA", "GM", "GH", "GN", "GW", "CI", "KE", "LS", "LR", "LY", "MG", "MW", "ML", "MR", "MA", "MZ", "NA", "NE", "NG", "CG", "RW", "SN", "SL", "SO", "ZA", "SS", "SD", "SZ", "TZ", "TG", "TN", "UG", "EH", "ZM", "ZW"])
+    
+    static let regions = [europe, asia, northAmerica, southAmerica, australia, africa]
 }
