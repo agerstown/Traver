@@ -1,0 +1,78 @@
+
+/* Class = "UITableViewController"; title = "Profile"; ObjectID = "0MG-RW-CId"; */
+"0MG-RW-CId.title" = "Profile";
+
+/* Class = "UINavigationController"; title = "Settings"; ObjectID = "0se-Ri-gNE"; */
+"0se-Ri-gNE.title" = "Settings";
+
+/* Class = "UILabel"; text = "Region"; ObjectID = "1Vk-KV-GM8"; */
+"1Vk-KV-GM8.text" = "Region";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "2oD-K0-R4N"; */
+"2oD-K0-R4N.normalTitle" = "Edit";
+
+/* Class = "UILabel"; text = "App in the Air"; ObjectID = "4L9-Zm-7fT"; */
+"4L9-Zm-7fT.text" = "App in the Air";
+
+/* Class = "UILabel"; text = "Country"; ObjectID = "8lY-6K-MEk"; */
+"8lY-6K-MEk.text" = "Country";
+
+/* Class = "UIViewController"; title = "Recommendations"; ObjectID = "8rJ-Kc-sve"; */
+"8rJ-Kc-sve.title" = "Recommendations";
+
+/* Class = "UILabel"; text = "120/176"; ObjectID = "91i-Kc-IeN"; */
+"91i-Kc-IeN.text" = "120/176";
+
+/* Class = "UITabBarItem"; title = "Recommendations"; ObjectID = "Bja-aX-iHa"; */
+"Bja-aX-iHa.title" = "Recommendations";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "D5F-d9-96I"; */
+"D5F-d9-96I.title" = "Done";
+
+/* Class = "UINavigationItem"; title = "Recommendations"; ObjectID = "EcT-jx-tRU"; */
+"EcT-jx-tRU.title" = "Recommendations";
+
+/* Class = "UINavigationItem"; title = "Countries"; ObjectID = "Jex-7g-EWG"; */
+"Jex-7g-EWG.title" = "Countries";
+
+/* Class = "UINavigationController"; title = "Profile"; ObjectID = "Kmb-qH-VNZ"; */
+"Kmb-qH-VNZ.title" = "Profile";
+
+/* Class = "UILabel"; text = "Natalia Nikitina"; ObjectID = "Mft-2G-z8f"; */
+"Mft-2G-z8f.text" = "Natalia Nikitina";
+
+/* Class = "UILabel"; text = "Loaded by SecondViewController"; ObjectID = "NDk-cv-Gan"; */
+"NDk-cv-Gan.text" = "Loaded by SecondViewController";
+
+/* Class = "UILabel"; text = "countries visited"; ObjectID = "V2q-GV-5NS"; */
+"V2q-GV-5NS.text" = "countries visited";
+
+/* Class = "UILabel"; text = "Country"; ObjectID = "Wed-Ua-0zv"; */
+"Wed-Ua-0zv.text" = "Country";
+
+/* Class = "UILabel"; text = "Region"; ObjectID = "ZMh-5U-iUG"; */
+"ZMh-5U-iUG.text" = "Region";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "dqM-eN-s80"; */
+"dqM-eN-s80.title" = "Settings";
+
+/* Class = "UITableViewController"; title = "Settings"; ObjectID = "e5Z-EM-zze"; */
+"e5Z-EM-zze.title" = "Settings";
+
+/* Class = "UINavigationItem"; title = "Profile"; ObjectID = "e7G-zM-OFX"; */
+"e7G-zM-OFX.title" = "Profile";
+
+/* Class = "UITabBarItem"; title = "Profile"; ObjectID = "oS7-Xs-ubE"; */
+"oS7-Xs-ubE.title" = "Profile";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "u7w-nW-6Zg"; */
+"u7w-nW-6Zg.title" = "Settings";
+
+/* Class = "UINavigationController"; title = "Settings"; ObjectID = "xHb-Ap-yGB"; */
+"xHb-Ap-yGB.title" = "Settings";
+
+/* Class = "UILabel"; text = "5/20"; ObjectID = "xqR-ir-opB"; */
+"xqR-ir-opB.text" = "5/20";
+
+/* Class = "UILabel"; text = "Second View"; ObjectID = "zEq-FU-wV5"; */
+"zEq-FU-wV5.text" = "Second View";

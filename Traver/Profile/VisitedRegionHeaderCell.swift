@@ -1,5 +1,5 @@
 //
-//  RegionHeaderCell.swift
+//  VisitedRegionHeaderCell.swift
 //  Traver
 //
 //  Created by Natalia Nikitina on 11/27/16.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class RegionHeaderCell: UITableViewCell {
+class VisitedRegionHeaderCell: UITableViewCell {
     
     @IBOutlet weak var labelRegionName: UILabel!
-    
+    @IBOutlet weak var labelVisitedCountriesNumber: UILabel!
     
 }

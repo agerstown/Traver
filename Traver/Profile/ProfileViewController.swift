@@ -8,34 +8,6 @@
 
 import Foundation
 
-//class myScrollView: UIScrollView {
-//    override func setContentOffset(_ contentOffset: CGPoint, animated: Bool) {
-//        var contentSize = self.contentSize
-//        var scrollViewSize = self.bounds.size
-//        if (contentSize.width < scrollViewSize.width) {
-//            contentOffset.x = -(scrollViewSize.width - contentSize.width) / 2.0
-//        }
-//        if (contentSize.height < scrollViewSize.height) {
-//            contentOffset.y = -(scrollViewSize.height - contentSize.height) / 2.0
-//        }
-//        super.setContentOffset(contentOffset, animated: animated)
-////        const CGSize scrollViewSize = self.bounds.size;
-////        
-////        if (contentSize.width < scrollViewSize.width)
-////        {
-////            contentOffset.x = -(scrollViewSize.width - contentSize.width) / 2.0;
-////        }
-////        
-////        if (contentSize.height < scrollViewSize.height)
-////        {
-////            contentOffset.y = -(scrollViewSize.height - contentSize.height) / 2.0;
-////        }
-////        
-////        [super setContentOffset:contentOffset];
-//
-//    }
-//}
-
 class ProfileViewController: UITableViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -54,6 +26,7 @@ class ProfileViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Profile".localized()
         scrollView.delegate = self
         imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
         
@@ -72,10 +45,10 @@ class ProfileViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.labelVisitedCountriesNumber.text = "\(User.sharedInstance.visitedCountriesCodes.count)/\(Countries.countriesAndCodes.count)"
-        User.sharedInstance.visitedCountriesCodes.sort {
-            Countries.codesAndCountries[$0]! < Countries.codesAndCountries[$1]!
-        }
+        self.labelVisitedCountriesNumber.text = "%d/176 countries visited".localized(for: User.sharedInstance.visitedCountriesCodes.count)
+        
+        User.sharedInstance.visitedCountriesCodes.sort { Countries.codesAndCountries[$0]!.localized() < Countries.codesAndCountries[$1]!.localized() }
+    
         self.tableViewVisitedCountries.reloadData()
         colorVisitedCounties(on: mapImage)
     }
@@ -110,7 +83,7 @@ class ProfileViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "RegionHeaderCell") as! RegionHeaderCell
+        let header = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedRegionHeaderCell") as! VisitedRegionHeaderCell
         header.labelRegionName.text = User.sharedInstance.visitedRegions()[section].name
         header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions()[section].countriesCodes.count)"
         return header
@@ -124,7 +97,7 @@ class ProfileViewController: UITableViewController {
         let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
         
         let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions()[indexPath.section].countriesCodes.contains($0) }
-        cell.labelCountryName.text = Countries.codesAndCountries[visitedCountriesInSection[indexPath.row]]
+        cell.labelCountryName.text = Countries.codesAndCountries[visitedCountriesInSection[indexPath.row]]?.localized()
         cell.selectionStyle = .none
         
         return cell
@@ -136,18 +109,11 @@ class ProfileViewController: UITableViewController {
     }
     
     override func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        
-      // viewMap  let subView = [scrollView.subviews objectAtIndex:0];
-        
         let offsetX = max((scrollView.bounds.width - scrollView.contentSize.width) * 0.5, 0)
         let offsetY = max((scrollView.bounds.height - scrollView.contentSize.height) * 0.5, 0)
         self.scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, 0, 0)
     }
-    
-//    override func scrollViewDidZoom(_ scrollView: UIScrollView) {
-//        <#code#>
-//    }
-    
+
 }
 
 

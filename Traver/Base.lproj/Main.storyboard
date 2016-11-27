@@ -12,7 +12,7 @@
         <!--Profile-->
         <scene sceneID="Br1-Mc-zMY">
             <objects>
-                <tableViewController title="Profile" id="0MG-RW-CId" userLabel="Profile" customClass="ProfileViewController" customModule="Traver" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="0MG-RW-CId" userLabel="Profile" customClass="ProfileViewController" customModule="Traver" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="sN1-yu-5TR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,14 +56,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120/176" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91i-Kc-IeN">
-                                            <rect key="frame" x="112" y="59" width="61" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="countries visited" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2q-GV-5NS">
-                                            <rect key="frame" x="177" y="59" width="126" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120/176 countries visited" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91i-Kc-IeN">
+                                            <rect key="frame" x="112" y="59" width="191" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -85,8 +79,6 @@
                                         <constraint firstItem="4L9-Zm-7fT" firstAttribute="top" secondItem="Mft-2G-z8f" secondAttribute="bottom" constant="2" id="Jci-W4-7sX"/>
                                         <constraint firstItem="Mft-2G-z8f" firstAttribute="top" secondItem="KFI-Fx-XOz" secondAttribute="top" constant="16" id="KrO-I5-PKp"/>
                                         <constraint firstItem="Mft-2G-z8f" firstAttribute="leading" secondItem="nNs-EN-0Wt" secondAttribute="trailing" constant="16" id="XWX-zl-L3Y"/>
-                                        <constraint firstItem="V2q-GV-5NS" firstAttribute="top" secondItem="4L9-Zm-7fT" secondAttribute="bottom" constant="4" id="Xmx-KZ-U8S"/>
-                                        <constraint firstItem="V2q-GV-5NS" firstAttribute="leading" secondItem="91i-Kc-IeN" secondAttribute="trailing" constant="4" id="Ytm-X3-mRv"/>
                                         <constraint firstItem="2oD-K0-R4N" firstAttribute="leading" secondItem="Mft-2G-z8f" secondAttribute="trailing" constant="16" id="clh-Lf-OgK"/>
                                         <constraint firstItem="2oD-K0-R4N" firstAttribute="leading" secondItem="4L9-Zm-7fT" secondAttribute="trailing" constant="16" id="cxr-gv-dbY"/>
                                         <constraint firstItem="2oD-K0-R4N" firstAttribute="centerY" secondItem="KFI-Fx-XOz" secondAttribute="centerY" id="hic-KR-OEf"/>
@@ -108,7 +100,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RegionHeaderCell" id="XQb-1b-QQL" customClass="RegionHeaderCell" customModule="Traver" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VisitedRegionHeaderCell" id="XQb-1b-QQL" customClass="VisitedRegionHeaderCell" customModule="Traver" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="380" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XQb-1b-QQL" id="ByS-rQ-ote">
@@ -218,15 +210,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CountryItemCell" id="AED-ES-hHd" customClass="CountryItemCell" customModule="Traver" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RegionHeaderCell" id="cTL-XL-obb" customClass="RegionHeaderCell" customModule="Traver" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cTL-XL-obb" id="cfV-4T-jok">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Region" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMh-5U-iUG">
+                                            <rect key="frame" x="16" y="11" width="53" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ZMh-5U-iUG" firstAttribute="centerY" secondItem="cfV-4T-jok" secondAttribute="centerY" id="kha-KK-IA1"/>
+                                        <constraint firstItem="ZMh-5U-iUG" firstAttribute="leading" secondItem="cfV-4T-jok" secondAttribute="leadingMargin" constant="8" id="uaR-ac-93j"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.93656378984451294" green="0.9386104941368103" blue="0.95605641603469849" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="labelRegionName" destination="ZMh-5U-iUG" id="7dH-sx-d7g"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CountryItemCell" id="AED-ES-hHd" customClass="CountryItemCell" customModule="Traver" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AED-ES-hHd" id="eIl-Ei-jrN">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wed-Ua-0zv">
-                                            <rect key="frame" x="16" y="11" width="108" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wed-Ua-0zv">
+                                            <rect key="frame" x="16" y="11" width="61.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -266,6 +282,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonDone" destination="D5F-d9-96I" id="jvV-00-fMy"/>
                         <outlet property="tableViewCountries" destination="lq0-nj-GZ8" id="a96-z3-dj7"/>
                     </connections>
                 </tableViewController>
@@ -276,7 +293,7 @@
         <!--Recommendations-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController title="Recommendations" id="8rJ-Kc-sve" userLabel="Recommendations" customClass="RecommendationsViewController" customModule="Traver" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" userLabel="Recommendations" customClass="RecommendationsViewController" customModule="Traver" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -316,7 +333,7 @@
         <!--Settings-->
         <scene sceneID="KmD-Ss-1qY">
             <objects>
-                <navigationController title="Settings" id="xHb-Ap-yGB" sceneMemberID="viewController">
+                <navigationController id="xHb-Ap-yGB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="first" id="u7w-nW-6Zg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="We3-E3-A7Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -333,7 +350,7 @@
         <!--Settings-->
         <scene sceneID="DFV-0d-77h">
             <objects>
-                <tableViewController title="Settings" id="e5Z-EM-zze" userLabel="Settings" customClass="SettingsViewController" customModule="Traver" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="e5Z-EM-zze" userLabel="Settings" customClass="SettingsViewController" customModule="Traver" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8ml-R7-Euh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -362,7 +379,7 @@
         <!--Profile-->
         <scene sceneID="O9R-f4-fyV">
             <objects>
-                <navigationController title="Profile" id="Kmb-qH-VNZ" sceneMemberID="viewController">
+                <navigationController id="Kmb-qH-VNZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="first" id="oS7-Xs-ubE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DLi-i4-jAy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -376,10 +393,10 @@
             </objects>
             <point key="canvasLocation" x="-63" y="-349"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController id="49e-Tb-3d3" customClass="MainTabBarController" customModule="Traver" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="ZSf-Yi-MLA"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
@@ -397,10 +414,10 @@
             </objects>
             <point key="canvasLocation" x="-951" y="359"/>
         </scene>
-        <!--Settings-->
+        <!--Recommendations-->
         <scene sceneID="Jnl-Rw-MHM">
             <objects>
-                <navigationController title="Settings" id="0se-Ri-gNE" sceneMemberID="viewController">
+                <navigationController id="0se-Ri-gNE" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Recommendations" image="second" id="Bja-aX-iHa"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wyX-5j-IU7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

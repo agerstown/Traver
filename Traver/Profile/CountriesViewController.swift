@@ -10,8 +10,15 @@ import Foundation
 
 class CountriesViewController: UITableViewController {
     
+    @IBOutlet weak var buttonDone: UIBarButtonItem!
     @IBOutlet var tableViewCountries: UITableView!
     var selectedCountriesCodes = [String]()
+    
+    //MARK: - Lifecycle
+    override func viewDidLoad() {
+        self.title = "Countries".localized()
+        self.buttonDone.title = "Done".localized()
+    }
     
     // MARK: - Actions
     @IBAction func buttonDoneClicked(_ button: UIBarButtonItem) {
@@ -32,10 +39,21 @@ class CountriesViewController: UITableViewController {
         return Region.regions[section].name
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableViewCountries.dequeueReusableCell(withIdentifier: "RegionHeaderCell") as! RegionHeaderCell
+        header.labelRegionName.text = Region.regions[section].name
+        return header
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 32
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewCountries.dequeueReusableCell(withIdentifier: "CountryItemCell") as! CountryItemCell
         let regionCountriesCodes = Region.regions[indexPath.section].countriesCodes
-        cell.labelCountryName.text = Countries.codesAndCountries[regionCountriesCodes[indexPath.row]]
+        cell.labelCountryName.text = Countries.codesAndCountries[regionCountriesCodes[indexPath.row]]?.localized()
+        cell.countryCode = regionCountriesCodes[indexPath.row]
         
         let image = self.selectedCountriesCodes.contains(regionCountriesCodes[indexPath.row]) ? UIImage(named: "item_checked") : UIImage(named: "item_unchecked")
         cell.buttonItemState.setImage(image, for: .normal)
@@ -46,7 +64,7 @@ class CountriesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? CountryItemCell {
-            guard let countryCode = Countries.countriesAndCodes[cell.labelCountryName.text!]
+            guard let countryCode = cell.countryCode
                 else { return }
             var image: UIImage?
             if !self.selectedCountriesCodes.contains(countryCode) {

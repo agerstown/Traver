@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   Localizable.stringsdict.plist
+   Traver
+
+   Created by Natalia Nikitina on 11/27/16.
+   Copyright (c) 2016 Natalia Nikitina. All rights reserved.
+-->
+<plist version="1.0">
+    <dict>
+        <key>%d/176 countries visited</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@countries@</string>
+            <key>countries</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>%d страна посещена</string>
+                <key>many</key>
+                <string>%d стран посещено</string>
+                <key>other</key>
+                <string>%d страны посещено</string>
+            </dict>
+        </dict>
+
+    </dict>
+</plist>

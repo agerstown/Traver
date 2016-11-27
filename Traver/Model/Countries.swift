@@ -11,7 +11,7 @@ import Foundation
 class Countries {
     
     static let codes = Array(countriesAndCodes.values)
-    static let countries = Array(countriesAndCodes.keys)
+    static let countries = Array(countriesAndCodes.keys) 
     static let codesAndCountries = countriesAndCodes.inverseKeysValues()
     
     static let countriesAndCodes = ["Afghanistan": "AF",
@@ -189,6 +189,6 @@ class Countries {
                                     "Western Sahara": "EH",
                                     "Yemen": "YE",
                                     "Zambia": "ZM",
-                                    "Zimbabwe": "ZW"]
+                                    "Zimbabwe": "ZW"]//.sorted { $0.0.localized() < $1.0.localized() }
     
 }
