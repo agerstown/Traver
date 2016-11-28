@@ -8,17 +8,17 @@
 
 import Foundation
 
-class ProfileViewController: UITableViewController {
-
+class ProfileViewController: UIViewController {
+    
+    @IBOutlet weak var tableViewVisitedCountries: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var viewMap: UIView!
     @IBOutlet weak var viewUserInfo: UIView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelJob: UILabel!
-    @IBOutlet weak var labelVisitedCountriesNumber: UILabel!
+    @IBOutlet weak var labelVisitedCountries: UILabel!
     @IBOutlet weak var imageViewPhoto: UIImageView!
     @IBOutlet weak var buttonEditUserInfo: UIButton!
-    @IBOutlet var tableViewVisitedCountries: UITableView!
     
     var mapImage: SVGKImage = SVGKImage(named: "WorldMap.svg")!
     
@@ -27,11 +27,14 @@ class ProfileViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "Profile".localized()
+        
+        tableViewVisitedCountries.dataSource = self
+        tableViewVisitedCountries.delegate = self
         scrollView.delegate = self
+        
         imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
         
         // setting up the map's size
-        mapImage = SVGKImage(named: "WorldMap.svg")!
         let width = viewMap.frame.size.width
         let scale = width / mapImage.size.width
         let height = mapImage.size.height * scale
@@ -45,7 +48,7 @@ class ProfileViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.labelVisitedCountriesNumber.text = "%d/176 countries visited".localized(for: User.sharedInstance.visitedCountriesCodes.count)
+        self.labelVisitedCountries.text = "%d/176 countries visited".localized(for: User.sharedInstance.visitedCountriesCodes.count)
         
         User.sharedInstance.visitedCountriesCodes.sort { Countries.codesAndCountries[$0]!.localized() < Countries.codesAndCountries[$1]!.localized() }
     
@@ -71,49 +74,71 @@ class ProfileViewController: UITableViewController {
             }
         }
     }
-    
-    // MARK: - tableViewDataSource
-    override func numberOfSections(in tableView: UITableView) -> Int {
+
+}
+
+// MARK: - tableViewDataSource
+extension ProfileViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return User.sharedInstance.visitedRegions().count
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions()[section].countriesCodes.contains($0) }
         return visitedCountriesInSection.count
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedRegionHeaderCell") as! VisitedRegionHeaderCell
-        header.labelRegionName.text = User.sharedInstance.visitedRegions()[section].name
-        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions()[section].countriesCodes.count)"
-        return header
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 32
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
         
         let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions()[indexPath.section].countriesCodes.contains($0) }
         cell.labelCountryName.text = Countries.codesAndCountries[visitedCountriesInSection[indexPath.row]]?.localized()
+        cell.countryCode = visitedCountriesInSection[indexPath.row]
         cell.selectionStyle = .none
         
         return cell
     }
     
-    // MARK: - scrollViewDelegate
-    override func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return viewMap
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
-    override func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        let offsetX = max((scrollView.bounds.width - scrollView.contentSize.width) * 0.5, 0)
-        let offsetY = max((scrollView.bounds.height - scrollView.contentSize.height) * 0.5, 0)
-        self.scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, 0, 0)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            let cell = tableViewVisitedCountries.cellForRow(at: indexPath) as! VisitedCountryItemCell
+            User.sharedInstance.visitedCountriesCodes.removeObject(cell.countryCode!)
+            self.tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 
 }
 
+// MARK: - tableViewDelegate
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedRegionHeaderCell") as! VisitedRegionHeaderCell
+        header.labelRegionName.text = User.sharedInstance.visitedRegions()[section].name
+        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions()[section].countriesCodes.count)"
+        header.contentView.backgroundColor = UIColor.headerGreyColor
+        
+        return header.contentView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 32
+    }
+}
+
+// MARK: - scrollViewDelegate
+extension ProfileViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return viewMap
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        let offsetX = max((scrollView.bounds.width - scrollView.contentSize.width) * 0.5, 0)
+        let offsetY = max((scrollView.bounds.height - scrollView.contentSize.height) * 0.5, 0)
+        self.scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, 0, 0)
+    }
+}
 

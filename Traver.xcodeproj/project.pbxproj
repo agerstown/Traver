@@ -30,6 +30,7 @@
 		612F29B61DEB512D0057E20B /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F29B51DEB512D0057E20B /* String+Localized.swift */; };
 		612F29BC1DEB59BA0057E20B /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 612F29BE1DEB59BA0057E20B /* Localizable.stringsdict */; };
 		612F29C11DEB62F40057E20B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F29C01DEB62F40057E20B /* MainTabBarController.swift */; };
+		612F29C31DECB1A10057E20B /* UIColor+Traver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F29C21DECB1A00057E20B /* UIColor+Traver.swift */; };
 		615665401DE322D70050AE5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156653F1DE322D70050AE5A /* AppDelegate.swift */; };
 		615665471DE322D70050AE5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 615665451DE322D70050AE5A /* Main.storyboard */; };
 		615665491DE322D70050AE5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 615665481DE322D70050AE5A /* Assets.xcassets */; };
@@ -229,6 +230,7 @@
 		612F29BD1DEB59BA0057E20B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		612F29BF1DEB59BB0057E20B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		612F29C01DEB62F40057E20B /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		612F29C21DECB1A00057E20B /* UIColor+Traver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Traver.swift"; sourceTree = "<group>"; };
 		6156653C1DE322D60050AE5A /* Traver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6156653F1DE322D70050AE5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		615665461DE322D70050AE5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				612BF64D1DE5F9FE0092D43F /* Array+RemoveObject.swift */,
 				612F287E1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift */,
 				612F29B51DEB512D0057E20B /* String+Localized.swift */,
+				612F29C21DECB1A00057E20B /* UIColor+Traver.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -743,6 +746,7 @@
 				612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */,
 				615665881DE384830050AE5A /* RecommendationsViewController.swift in Sources */,
 				615BAD5F1DE4CF9500D1478D /* User.swift in Sources */,
+				612F29C31DECB1A10057E20B /* UIColor+Traver.swift in Sources */,
 				615665401DE322D70050AE5A /* AppDelegate.swift in Sources */,
 				612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */,
 				615BAD5C1DE4C13000D1478D /* Countries.swift in Sources */,

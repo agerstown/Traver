@@ -8,16 +8,17 @@
 
 import Foundation
 
-class CountriesViewController: UITableViewController {
+class CountriesViewController: UIViewController {
     
-    @IBOutlet weak var buttonDone: UIBarButtonItem!
-    @IBOutlet var tableViewCountries: UITableView!
+    @IBOutlet weak var tableViewCountries: UITableView!
     var selectedCountriesCodes = [String]()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         self.title = "Countries".localized()
-        self.buttonDone.title = "Done".localized()
+        
+        self.tableViewCountries.dataSource = self
+        self.tableViewCountries.delegate = self
     }
     
     // MARK: - Actions
@@ -25,31 +26,24 @@ class CountriesViewController: UITableViewController {
         User.sharedInstance.visitedCountriesCodes = selectedCountriesCodes
         self.dismiss(animated: true, completion: nil)
     }
+}
+
+// MARK: - tabelViewDataSource
+extension CountriesViewController: UITableViewDataSource {
     
-    // MARK: - tabelViewDataSource
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return Region.regions.count
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Region.regions[section].countriesCodes.count
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return Region.regions[section].name
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableViewCountries.dequeueReusableCell(withIdentifier: "RegionHeaderCell") as! RegionHeaderCell
-        header.labelRegionName.text = Region.regions[section].name
-        return header
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 32
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewCountries.dequeueReusableCell(withIdentifier: "CountryItemCell") as! CountryItemCell
         let regionCountriesCodes = Region.regions[indexPath.section].countriesCodes
         cell.labelCountryName.text = Countries.codesAndCountries[regionCountriesCodes[indexPath.row]]?.localized()
@@ -62,7 +56,21 @@ class CountriesViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+}
+
+// MARK: - tabelViewDelegate
+extension CountriesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableViewCountries.dequeueReusableCell(withIdentifier: "RegionHeaderCell") as! RegionHeaderCell
+        header.labelRegionName.text = Region.regions[section].name
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 32
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? CountryItemCell {
             guard let countryCode = cell.countryCode
                 else { return }
@@ -77,5 +85,4 @@ class CountriesViewController: UITableViewController {
             cell.buttonItemState.setImage(image, for: .normal)
         }
     }
-    
 }

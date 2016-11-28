@@ -11,5 +11,5 @@ import Foundation
 class VisitedCountryItemCell: UITableViewCell {
     
     @IBOutlet weak var labelCountryName: UILabel!
-    
+    var countryCode: String?
 }
