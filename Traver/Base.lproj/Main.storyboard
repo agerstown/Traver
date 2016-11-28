@@ -108,41 +108,8 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VisitedRegionHeaderCell" id="L1h-O9-qVz" customClass="VisitedRegionHeaderCell" customModule="Traver" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="380" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L1h-O9-qVz" id="ixG-dz-nib">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Region" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9i-6L-8d9">
-                                                    <rect key="frame" x="16" y="11" width="53" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5/20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnm-4G-9h5">
-                                                    <rect key="frame" x="323" y="11" width="36" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="qnm-4G-9h5" secondAttribute="trailing" constant="8" id="5TA-ux-q7S"/>
-                                                <constraint firstItem="r9i-6L-8d9" firstAttribute="leading" secondItem="ixG-dz-nib" secondAttribute="leadingMargin" constant="8" id="6iu-fI-Opv"/>
-                                                <constraint firstItem="r9i-6L-8d9" firstAttribute="centerY" secondItem="ixG-dz-nib" secondAttribute="centerY" id="Ddc-ut-tza"/>
-                                                <constraint firstItem="qnm-4G-9h5" firstAttribute="centerY" secondItem="ixG-dz-nib" secondAttribute="centerY" id="cQz-2l-dad"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.93656378979999999" green="0.93861049409999997" blue="0.95605641600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <outlet property="labelRegionName" destination="r9i-6L-8d9" id="LGW-AD-4WE"/>
-                                            <outlet property="labelVisitedCountriesNumber" destination="qnm-4G-9h5" id="QDh-vb-z60"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VisitedCountryItemCell" id="mUI-dh-3tL" customClass="VisitedCountryItemCell" customModule="Traver" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="424" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="380" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mUI-dh-3tL" id="tAA-aT-nIQ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -389,7 +356,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="vhQ-Bj-FRp" kind="relationship" relationship="rootViewController" id="yTh-N6-rLX"/>
+                        <segue destination="vhQ-Bj-FRp" kind="relationship" relationship="rootViewController" id="48G-fd-7A7"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lJ1-ns-8dM" userLabel="First Responder" sceneMemberID="firstResponder"/>

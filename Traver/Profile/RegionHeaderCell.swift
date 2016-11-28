@@ -12,5 +12,4 @@ class RegionHeaderCell: UITableViewCell {
     
     @IBOutlet weak var labelRegionName: UILabel!
     
-    
 }

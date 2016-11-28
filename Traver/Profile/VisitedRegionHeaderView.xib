@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="VisitedRegionHeaderView" customModule="Traver" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1K-30-4PB">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Region" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPQ-up-qTu">
+                            <rect key="frame" x="16" y="5.5" width="53" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8a-ms-J3W">
+                            <rect key="frame" x="305" y="5.5" width="54" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="QPQ-up-qTu" firstAttribute="centerY" secondItem="n1K-30-4PB" secondAttribute="centerY" id="El0-R6-Hi9"/>
+                        <constraint firstItem="L8a-ms-J3W" firstAttribute="centerY" secondItem="n1K-30-4PB" secondAttribute="centerY" id="Hb0-NQ-iJ9"/>
+                        <constraint firstItem="QPQ-up-qTu" firstAttribute="leading" secondItem="n1K-30-4PB" secondAttribute="leading" constant="16" id="LtD-4k-DqJ"/>
+                        <constraint firstAttribute="trailing" secondItem="L8a-ms-J3W" secondAttribute="trailing" constant="16" id="ogw-Jk-fc2"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="n1K-30-4PB" secondAttribute="bottom" id="JWE-DF-obq"/>
+                <constraint firstItem="n1K-30-4PB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KL6-W3-9YT"/>
+                <constraint firstItem="n1K-30-4PB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NDl-tS-0DP"/>
+                <constraint firstAttribute="trailing" secondItem="n1K-30-4PB" secondAttribute="trailing" id="nyf-WK-thy"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="labelRegionName" destination="QPQ-up-qTu" id="nCN-xX-MMZ"/>
+                <outlet property="labelVisitedCountriesNumber" destination="L8a-ms-J3W" id="wHT-rP-nVV"/>
+            </connections>
+            <point key="canvasLocation" x="22.5" y="-223.5"/>
+        </view>
+    </objects>
+</document>

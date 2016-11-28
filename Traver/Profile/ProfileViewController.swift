@@ -28,6 +28,9 @@ class ProfileViewController: UIViewController {
         
         self.title = "Profile".localized()
         
+        let nib = UINib(nibName: "VisitedRegionHeaderView", bundle: nil)
+        tableViewVisitedCountries.register(nib, forHeaderFooterViewReuseIdentifier: "VisitedRegionHeaderView")
+        
         tableViewVisitedCountries.dataSource = self
         tableViewVisitedCountries.delegate = self
         scrollView.delegate = self
@@ -48,11 +51,11 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.labelVisitedCountries.text = "%d/176 countries visited".localized(for: User.sharedInstance.visitedCountriesCodes.count)
+        labelVisitedCountries.text = "%d/176 countries visited".localized(for: User.sharedInstance.visitedCountriesCodes.count)
         
         User.sharedInstance.visitedCountriesCodes.sort { Countries.codesAndCountries[$0]!.localized() < Countries.codesAndCountries[$1]!.localized() }
     
-        self.tableViewVisitedCountries.reloadData()
+        tableViewVisitedCountries.reloadData()
         colorVisitedCounties(on: mapImage)
     }
     
@@ -106,8 +109,30 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             let cell = tableViewVisitedCountries.cellForRow(at: indexPath) as! VisitedCountryItemCell
-            User.sharedInstance.visitedCountriesCodes.removeObject(cell.countryCode!)
-            self.tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
+            let countryCode = cell.countryCode!
+            
+            User.sharedInstance.visitedCountriesCodes.removeObject(countryCode)
+            
+            let countriesLayers = mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
+            if let deletedCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
+                deletedCountryLayer.fillColor = UIColor.countryDefaultColor.cgColor
+            }
+            
+            tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
+            reloadHeaders()
+            labelVisitedCountries.text = "%d/176 countries visited".localized(for: User.sharedInstance.visitedCountriesCodes.count)
+        }
+    }
+    
+    func configureVisitedCountriesNumber(for header: VisitedRegionHeaderView, in section: Int) {
+        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions()[section].countriesCodes.count)"
+    }
+    
+    func reloadHeaders() {
+        for section in 0..<tableViewVisitedCountries.numberOfSections {
+            if let header = tableViewVisitedCountries.headerView(forSection: section) as? VisitedRegionHeaderView {
+                configureVisitedCountriesNumber(for: header, in: section)
+            }
         }
     }
 
@@ -116,12 +141,11 @@ extension ProfileViewController: UITableViewDataSource {
 // MARK: - tableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedRegionHeaderCell") as! VisitedRegionHeaderCell
+        let header = tableViewVisitedCountries.dequeueReusableHeaderFooterView(withIdentifier: "VisitedRegionHeaderView") as! VisitedRegionHeaderView
         header.labelRegionName.text = User.sharedInstance.visitedRegions()[section].name
-        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions()[section].countriesCodes.count)"
-        header.contentView.backgroundColor = UIColor.headerGreyColor
-        
-        return header.contentView
+        configureVisitedCountriesNumber(for: header, in: section)
+        header.contentView.backgroundColor = UIColor.headerColor
+        return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -138,7 +162,7 @@ extension ProfileViewController: UIScrollViewDelegate {
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         let offsetX = max((scrollView.bounds.width - scrollView.contentSize.width) * 0.5, 0)
         let offsetY = max((scrollView.bounds.height - scrollView.contentSize.height) * 0.5, 0)
-        self.scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, 0, 0)
+        scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, 0, 0)
     }
 }
 
