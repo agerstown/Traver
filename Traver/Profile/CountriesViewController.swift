@@ -10,13 +10,16 @@ import Foundation
 
 class CountriesViewController: UIViewController {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableViewCountries: UITableView!
+    var regions = Region.regions
     var selectedCountriesCodes = [String]()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         self.title = "Countries".localized()
         
+        self.searchBar.delegate = self
         self.tableViewCountries.dataSource = self
         self.tableViewCountries.delegate = self
     }
@@ -28,25 +31,25 @@ class CountriesViewController: UIViewController {
     }
 }
 
-// MARK: - tabelViewDataSource
+// MARK: - UITableViewDataSource
 extension CountriesViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Region.regions.count
+        return regions.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Region.regions[section].countriesCodes.count
+        return regions[section].countriesCodes.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Region.regions[section].name
+        return regions[section].name
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewCountries.dequeueReusableCell(withIdentifier: "CountryItemCell") as! CountryItemCell
-        let regionCountriesCodes = Region.regions[indexPath.section].countriesCodes
-        cell.labelCountryName.text = Countries.codesAndCountries[regionCountriesCodes[indexPath.row]]?.localized()
+        let regionCountriesCodes = regions[indexPath.section].countriesCodes
+        cell.labelCountryName.text = Countries.codesAndNames[regionCountriesCodes[indexPath.row]]?.localized()
         cell.countryCode = regionCountriesCodes[indexPath.row]
         
         let image = self.selectedCountriesCodes.contains(regionCountriesCodes[indexPath.row]) ? UIImage(named: "item_checked") : UIImage(named: "item_unchecked")
@@ -58,7 +61,7 @@ extension CountriesViewController: UITableViewDataSource {
     
 }
 
-// MARK: - tabelViewDelegate
+// MARK: - UITableViewDelegate
 extension CountriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableViewCountries.dequeueReusableCell(withIdentifier: "RegionHeaderCell") as! RegionHeaderCell
@@ -84,5 +87,44 @@ extension CountriesViewController: UITableViewDelegate {
             }
             cell.buttonItemState.setImage(image, for: .normal)
         }
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension CountriesViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: true)
+        regions = Region.regions
+        tableViewCountries.reloadData()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        regions = filterRegionsAndCountries(with: searchText)
+        tableViewCountries.reloadData()
+    }
+    
+    func filterRegionsAndCountries(with filter: String) -> [Region] {
+        if filter.isEmpty {
+            return Region.regions
+        }
+        
+        let filteredCountriesCodes = Countries.codes.filter { Countries.codesAndNames[$0]!.range(of: filter) != nil }
+        
+        var filteredRegions = [Region]()
+        for region in Region.regions {
+            let filteredCountriesForRegion = region.countriesCodes.filter { filteredCountriesCodes.contains($0) }
+            if filteredCountriesForRegion.count != 0 {
+                let filteredRegion = Region(type: region.type, name: region.name)
+                filteredRegion.countriesCodes = filteredCountriesForRegion
+                filteredRegions.append(filteredRegion)
+            }
+        }
+        return filteredRegions
     }
 }

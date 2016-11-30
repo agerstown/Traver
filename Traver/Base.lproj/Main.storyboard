@@ -112,7 +112,7 @@
                                         <rect key="frame" x="0.0" y="380" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mUI-dh-3tL" id="tAA-aT-nIQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcm-1s-YE6">
@@ -187,9 +187,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lq0-nj-GZ8">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="c5S-xk-lf0">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lq0-nj-GZ8">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RegionHeaderCell" id="cTL-XL-obb" customClass="RegionHeaderCell" customModule="Traver" customModuleProvider="target">
@@ -206,6 +209,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="ZMh-5U-iUG" firstAttribute="centerY" secondItem="cfV-4T-jok" secondAttribute="centerY" id="kha-KK-IA1"/>
                                                 <constraint firstItem="ZMh-5U-iUG" firstAttribute="leading" secondItem="cfV-4T-jok" secondAttribute="leadingMargin" constant="8" id="uaR-ac-93j"/>
@@ -254,6 +258,15 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lq0-nj-GZ8" firstAttribute="leading" secondItem="VWJ-jT-23J" secondAttribute="leading" id="0es-Df-UsW"/>
+                            <constraint firstAttribute="trailing" secondItem="c5S-xk-lf0" secondAttribute="trailing" id="5ij-6t-K8N"/>
+                            <constraint firstItem="8a7-4k-y2J" firstAttribute="top" secondItem="lq0-nj-GZ8" secondAttribute="bottom" id="6CC-Ug-8i2"/>
+                            <constraint firstItem="c5S-xk-lf0" firstAttribute="leading" secondItem="VWJ-jT-23J" secondAttribute="leading" id="D0e-Hb-blI"/>
+                            <constraint firstAttribute="trailing" secondItem="lq0-nj-GZ8" secondAttribute="trailing" id="IRE-Ft-rAg"/>
+                            <constraint firstItem="lq0-nj-GZ8" firstAttribute="top" secondItem="c5S-xk-lf0" secondAttribute="bottom" id="Li2-lx-cWH"/>
+                            <constraint firstItem="c5S-xk-lf0" firstAttribute="top" secondItem="Cfd-46-ia0" secondAttribute="bottom" id="P9N-cw-QPB"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kKd-Ed-Bed">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="yzX-Pj-iQz">
@@ -263,12 +276,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="c5S-xk-lf0" id="wt5-KM-9Zd"/>
                         <outlet property="tableViewCountries" destination="lq0-nj-GZ8" id="5ze-QL-eCZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hv-yB-nJr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2322" y="-349"/>
+            <point key="canvasLocation" x="2320.8000000000002" y="-349.47526236881561"/>
         </scene>
         <!--Recommendations-->
         <scene sceneID="wg7-f3-ORb">

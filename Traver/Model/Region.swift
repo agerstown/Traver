@@ -29,8 +29,14 @@ class Region {
         self.countriesCodes = countriesCodes
     }
     
+    init(type: RegionType, name: String) {
+        self.type = type
+        self.name = name
+        self.countriesCodes = [String]()
+    }
+    
     static func sortCodesByLocilizedCountryName(codes: [String]) -> [String] {
-        return codes.sorted { Countries.codesAndCountries[$0]!.localized() < Countries.codesAndCountries[$1]!.localized() }
+        return codes.sorted { Countries.codesAndNames[$0]!.localized() < Countries.codesAndNames[$1]!.localized() }
     }
     
     static let europe = Region(type: .europe, name: "Europe".localized(), countriesCodes: sortCodesByLocilizedCountryName(codes: ["AL", "AM", "AT", "AZ", "BY", "BE", "BA", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "GE", "DE", "GR", "GL", "HU", "IS", "IE", "IT", "KZ", "XK", "LV", "LT", "LU", "MK", "MD", "ME", "NL", "NO", "PL", "PT", "RO", "RU", "RS", "SK", "SI", "ES", "SJ", "SE", "CH", "TR", "UA", "GB"]))

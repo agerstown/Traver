@@ -22,6 +22,8 @@ class ProfileViewController: UIViewController {
     
     var mapImage: SVGKImage = SVGKImage(named: "WorldMap.svg")!
     
+    let visitedCountriesText = "%d/176 countries visited"
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +53,9 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        labelVisitedCountries.text = "%d/176 countries visited".localized(for: User.sharedInstance.visitedCountriesCodes.count)
+        labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
         
-        User.sharedInstance.visitedCountriesCodes.sort { Countries.codesAndCountries[$0]!.localized() < Countries.codesAndCountries[$1]!.localized() }
+        User.sharedInstance.visitedCountriesCodes.sort { Countries.codesAndNames[$0]!.localized() < Countries.codesAndNames[$1]!.localized() }
     
         tableViewVisitedCountries.reloadData()
         colorVisitedCounties(on: mapImage)
@@ -69,7 +71,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    // MARK: - prepare for segue
+    // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navController = segue.destination as? UINavigationController {
             if let controller = navController.viewControllers[0] as? CountriesViewController {
@@ -80,7 +82,7 @@ class ProfileViewController: UIViewController {
 
 }
 
-// MARK: - tableViewDataSource
+// MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return User.sharedInstance.visitedRegions().count
@@ -95,7 +97,7 @@ extension ProfileViewController: UITableViewDataSource {
         let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
         
         let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions()[indexPath.section].countriesCodes.contains($0) }
-        cell.labelCountryName.text = Countries.codesAndCountries[visitedCountriesInSection[indexPath.row]]?.localized()
+        cell.labelCountryName.text = Countries.codesAndNames[visitedCountriesInSection[indexPath.row]]?.localized()
         cell.countryCode = visitedCountriesInSection[indexPath.row]
         cell.selectionStyle = .none
         
@@ -120,7 +122,7 @@ extension ProfileViewController: UITableViewDataSource {
             
             tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
             reloadHeaders()
-            labelVisitedCountries.text = "%d/176 countries visited".localized(for: User.sharedInstance.visitedCountriesCodes.count)
+            labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
         }
     }
     
@@ -138,13 +140,13 @@ extension ProfileViewController: UITableViewDataSource {
 
 }
 
-// MARK: - tableViewDelegate
+// MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableViewVisitedCountries.dequeueReusableHeaderFooterView(withIdentifier: "VisitedRegionHeaderView") as! VisitedRegionHeaderView
         header.labelRegionName.text = User.sharedInstance.visitedRegions()[section].name
         configureVisitedCountriesNumber(for: header, in: section)
-        header.contentView.backgroundColor = UIColor.headerColor
+        //header.contentView.backgroundColor = UIColor.headerColor
         return header
     }
     
@@ -153,7 +155,7 @@ extension ProfileViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - scrollViewDelegate
+// MARK: - UIScrollViewDelegate
 extension ProfileViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return viewMap
