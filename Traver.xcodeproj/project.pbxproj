@@ -32,6 +32,8 @@
 		612F29BC1DEB59BA0057E20B /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 612F29BE1DEB59BA0057E20B /* Localizable.stringsdict */; };
 		612F29C11DEB62F40057E20B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F29C01DEB62F40057E20B /* MainTabBarController.swift */; };
 		612F29C31DECB1A10057E20B /* UIColor+Traver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F29C21DECB1A00057E20B /* UIColor+Traver.swift */; };
+		613C54DC1DF0CF7C006660B9 /* VisitedCountriesImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C54DB1DF0CF7C006660B9 /* VisitedCountriesImporter.swift */; };
+		613C54DE1DF0D0C3006660B9 /* Double+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C54DD1DF0D0C3006660B9 /* Double+Round.swift */; };
 		615665401DE322D70050AE5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156653F1DE322D70050AE5A /* AppDelegate.swift */; };
 		615665471DE322D70050AE5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 615665451DE322D70050AE5A /* Main.storyboard */; };
 		615665491DE322D70050AE5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 615665481DE322D70050AE5A /* Assets.xcassets */; };
@@ -233,6 +235,8 @@
 		612F29BF1DEB59BB0057E20B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		612F29C01DEB62F40057E20B /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		612F29C21DECB1A00057E20B /* UIColor+Traver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Traver.swift"; sourceTree = "<group>"; };
+		613C54DB1DF0CF7C006660B9 /* VisitedCountriesImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitedCountriesImporter.swift; sourceTree = "<group>"; };
+		613C54DD1DF0D0C3006660B9 /* Double+Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Round.swift"; sourceTree = "<group>"; };
 		6156653C1DE322D60050AE5A /* Traver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6156653F1DE322D70050AE5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		615665461DE322D70050AE5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -362,6 +366,7 @@
 				612F287E1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift */,
 				612F29B51DEB512D0057E20B /* String+Localized.swift */,
 				612F29C21DECB1A00057E20B /* UIColor+Traver.swift */,
+				613C54DD1DF0D0C3006660B9 /* Double+Round.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -543,6 +548,14 @@
 			path = Localizations;
 			sourceTree = "<group>";
 		};
+		613C54DA1DF0CF3A006660B9 /* Import */ = {
+			isa = PBXGroup;
+			children = (
+				613C54DB1DF0CF7C006660B9 /* VisitedCountriesImporter.swift */,
+			);
+			path = Import;
+			sourceTree = "<group>";
+		};
 		615665331DE322D60050AE5A = {
 			isa = PBXGroup;
 			children = (
@@ -571,6 +584,7 @@
 				612BF63F1DE5E0360092D43F /* Profile */,
 				612BF6421DE5E05E0092D43F /* Recommendations */,
 				612BF6431DE5E06A0092D43F /* Settings */,
+				613C54DA1DF0CF3A006660B9 /* Import */,
 				615BAD5D1DE4CF7700D1478D /* Model */,
 				612BF6451DE5E1CA0092D43F /* Storyboards */,
 				612BF64C1DE5F9530092D43F /* Extensions */,
@@ -759,6 +773,7 @@
 				615665881DE384830050AE5A /* RecommendationsViewController.swift in Sources */,
 				615BAD5F1DE4CF9500D1478D /* User.swift in Sources */,
 				612F29C31DECB1A10057E20B /* UIColor+Traver.swift in Sources */,
+				613C54DE1DF0D0C3006660B9 /* Double+Round.swift in Sources */,
 				615665401DE322D70050AE5A /* AppDelegate.swift in Sources */,
 				612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */,
 				615BAD5C1DE4C13000D1478D /* Countries.swift in Sources */,
@@ -767,6 +782,7 @@
 				612F287F1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift in Sources */,
 				612F29AB1DEB4D020057E20B /* RegionHeaderCell.swift in Sources */,
 				612F28811DE77CFB0057E20B /* Region.swift in Sources */,
+				613C54DC1DF0CF7C006660B9 /* VisitedCountriesImporter.swift in Sources */,
 				6156658A1DE384920050AE5A /* SettingsViewController.swift in Sources */,
 				612F29A91DEB27430057E20B /* VisitedRegionHeaderView.swift in Sources */,
 			);

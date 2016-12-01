@@ -12,8 +12,11 @@ class CountriesViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableViewCountries: UITableView!
+    
     var regions = Region.regions
     var selectedCountriesCodes = [String]()
+    
+    var currentOperation: Operation?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -63,16 +66,6 @@ extension CountriesViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension CountriesViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableViewCountries.dequeueReusableCell(withIdentifier: "RegionHeaderCell") as! RegionHeaderCell
-        header.labelRegionName.text = Region.regions[section].name
-        return header
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 32
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? CountryItemCell {
             guard let countryCode = cell.countryCode
@@ -105,9 +98,25 @@ extension CountriesViewController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        //filterRegionsAndCountriesInBackground(with: searchText)
         regions = filterRegionsAndCountries(with: searchText)
         tableViewCountries.reloadData()
     }
+    
+//    func filterRegionsAndCountriesInBackground(with filter: String) {
+//        currentOperation?.cancel()
+//        currentOperation = BlockOperation { [weak self] in
+//            let regions = self?.filterRegionsAndCountries(with: filter)
+//            DispatchQueue.main.async {
+//                if let regions = regions {
+//                    self?.regions = regions
+//                    self?.tableViewCountries.reloadData()
+//                    self?.currentOperation = nil
+//                }
+//            }
+//        }
+//        currentOperation?.start()
+//    }
     
     func filterRegionsAndCountries(with filter: String) -> [Region] {
         if filter.isEmpty {

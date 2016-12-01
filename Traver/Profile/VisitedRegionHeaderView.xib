@@ -11,26 +11,26 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="VisitedRegionHeaderView" customModule="Traver" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1K-30-4PB">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Region" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPQ-up-qTu">
-                            <rect key="frame" x="16" y="5.5" width="53" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <rect key="frame" x="16" y="3.5" width="54.5" height="21"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8a-ms-J3W">
-                            <rect key="frame" x="305" y="5.5" width="54" height="21"/>
+                            <rect key="frame" x="305" y="3.5" width="54" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="backgroundColor" red="0.96853548288345337" green="0.96869391202926636" blue="0.9685017466545105" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="QPQ-up-qTu" firstAttribute="centerY" secondItem="n1K-30-4PB" secondAttribute="centerY" id="El0-R6-Hi9"/>
                         <constraint firstItem="L8a-ms-J3W" firstAttribute="centerY" secondItem="n1K-30-4PB" secondAttribute="centerY" id="Hb0-NQ-iJ9"/>
@@ -50,7 +50,7 @@
                 <outlet property="labelRegionName" destination="QPQ-up-qTu" id="nCN-xX-MMZ"/>
                 <outlet property="labelVisitedCountriesNumber" destination="L8a-ms-J3W" id="wHT-rP-nVV"/>
             </connections>
-            <point key="canvasLocation" x="22.5" y="-223.5"/>
+            <point key="canvasLocation" x="-264.5" y="-231"/>
         </view>
     </objects>
 </document>

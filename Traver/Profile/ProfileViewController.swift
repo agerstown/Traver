@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Photos
 
 class ProfileViewController: UIViewController {
     
@@ -50,6 +51,16 @@ class ProfileViewController: UIViewController {
         }
         
         colorVisitedCounties(on: mapImage)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.CountryCodeImportedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(importFinished(notification:)), name: VisitedCountriesImporter.ImportFinishedNotification, object: nil)
+    
+        // TODO: проверка на то, что это первый раз делается (NSUserDefaults)
+        PHPhotoLibrary.requestAuthorization({ (status) -> Void in
+            if status == .authorized {
+                VisitedCountriesImporter.sharedInstance.fetchVisitedCountriesCodesFromPhotos()
+            }
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +82,10 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navController = segue.destination as? UINavigationController {
@@ -80,6 +95,21 @@ class ProfileViewController: UIViewController {
         }
     }
 
+    // MARK: - Notifications
+    func countryCodeImported(notification: NSNotification) {
+        if let countryCode = notification.userInfo?[VisitedCountriesImporter.CountryCodeInfoKey] as? String {
+            User.sharedInstance.visitedCountriesCodes.append(countryCode)
+            tableViewVisitedCountries.reloadData()
+            // TODO: апдйт общего кол-ва
+        }
+    }
+    
+    func importFinished(notification: NSNotification) {
+        if let countriesCodes = notification.userInfo?[VisitedCountriesImporter.ImportedCountriesInfoKey] as? [String] {
+            print(countriesCodes)
+            // TODO: алерт? что импорт окончен
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -120,7 +150,11 @@ extension ProfileViewController: UITableViewDataSource {
                 deletedCountryLayer.fillColor = UIColor.countryDefaultColor.cgColor
             }
             
-            tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
+            if tableViewVisitedCountries.numberOfRows(inSection: indexPath.section) == 1 {
+                tableViewVisitedCountries.deleteSections([indexPath.section], with: .automatic)
+            } else {
+                tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
+            }
             reloadHeaders()
             labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
         }
@@ -146,12 +180,12 @@ extension ProfileViewController: UITableViewDelegate {
         let header = tableViewVisitedCountries.dequeueReusableHeaderFooterView(withIdentifier: "VisitedRegionHeaderView") as! VisitedRegionHeaderView
         header.labelRegionName.text = User.sharedInstance.visitedRegions()[section].name
         configureVisitedCountriesNumber(for: header, in: section)
-        //header.contentView.backgroundColor = UIColor.headerColor
+        header.contentView.backgroundColor = UIColor.headerColor
         return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 32
+        return 28
     }
 }
 
