@@ -98,25 +98,9 @@ extension CountriesViewController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //filterRegionsAndCountriesInBackground(with: searchText)
         regions = filterRegionsAndCountries(with: searchText)
         tableViewCountries.reloadData()
     }
-    
-//    func filterRegionsAndCountriesInBackground(with filter: String) {
-//        currentOperation?.cancel()
-//        currentOperation = BlockOperation { [weak self] in
-//            let regions = self?.filterRegionsAndCountries(with: filter)
-//            DispatchQueue.main.async {
-//                if let regions = regions {
-//                    self?.regions = regions
-//                    self?.tableViewCountries.reloadData()
-//                    self?.currentOperation = nil
-//                }
-//            }
-//        }
-//        currentOperation?.start()
-//    }
     
     func filterRegionsAndCountries(with filter: String) -> [Region] {
         if filter.isEmpty {

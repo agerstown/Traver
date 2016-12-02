@@ -55,19 +55,24 @@ class ProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.CountryCodeImportedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(importFinished(notification:)), name: VisitedCountriesImporter.ImportFinishedNotification, object: nil)
     
-        // TODO: проверка на то, что это первый раз делается (NSUserDefaults)
-        PHPhotoLibrary.requestAuthorization({ (status) -> Void in
-            if status == .authorized {
-                VisitedCountriesImporter.sharedInstance.fetchVisitedCountriesCodesFromPhotos()
-            }
-        })
+        //if !UserDefaults.standard.bool(forKey: VisitedCountriesImporter.isAlreadyImported) { // сделать onboarding
+            PHPhotoLibrary.requestAuthorization({ (status) -> Void in
+                if status == .authorized {
+                    VisitedCountriesImporter.sharedInstance.fetchVisitedCountriesCodesFromPhotos()
+                }
+            })
+        //}
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        updateData()
+    }
+    
+    func updateData() {
         labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
         
         User.sharedInstance.visitedCountriesCodes.sort { Countries.codesAndNames[$0]!.localized() < Countries.codesAndNames[$1]!.localized() }
-    
+        
         tableViewVisitedCountries.reloadData()
         colorVisitedCounties(on: mapImage)
     }
@@ -98,16 +103,16 @@ class ProfileViewController: UIViewController {
     // MARK: - Notifications
     func countryCodeImported(notification: NSNotification) {
         if let countryCode = notification.userInfo?[VisitedCountriesImporter.CountryCodeInfoKey] as? String {
-            User.sharedInstance.visitedCountriesCodes.append(countryCode)
-            tableViewVisitedCountries.reloadData()
-            // TODO: апдйт общего кол-ва
+            if !User.sharedInstance.visitedCountriesCodes.contains(countryCode) {
+                User.sharedInstance.visitedCountriesCodes.append(countryCode)
+                updateData()
+            }
         }
     }
     
     func importFinished(notification: NSNotification) {
         if let countriesCodes = notification.userInfo?[VisitedCountriesImporter.ImportedCountriesInfoKey] as? [String] {
-            print(countriesCodes)
-            // TODO: алерт? что импорт окончен
+            StatusBarHelper.sharedInstance.showCustomStatusBar(with: "Import from Photos is finished: %d countries were found".localized(for: countriesCodes.count))
         }
     }
 }
@@ -155,21 +160,15 @@ extension ProfileViewController: UITableViewDataSource {
             } else {
                 tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
             }
-            reloadHeaders()
+            if let header = tableViewVisitedCountries.headerView(forSection: indexPath.section) as? VisitedRegionHeaderView {
+                configureVisitedCountriesNumber(for: header, in: indexPath.section)
+            }
             labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
         }
     }
     
     func configureVisitedCountriesNumber(for header: VisitedRegionHeaderView, in section: Int) {
         header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions()[section].countriesCodes.count)"
-    }
-    
-    func reloadHeaders() {
-        for section in 0..<tableViewVisitedCountries.numberOfSections {
-            if let header = tableViewVisitedCountries.headerView(forSection: section) as? VisitedRegionHeaderView {
-                configureVisitedCountriesNumber(for: header, in: section)
-            }
-        }
     }
 
 }

@@ -1,0 +1,12 @@
+PODS:
+  - CWStatusBarNotification (2.3.5)
+
+DEPENDENCIES:
+  - CWStatusBarNotification (~> 2.3.5)
+
+SPEC CHECKSUMS:
+  CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
+
+PODFILE CHECKSUM: 22a8c0f8cbc4cf0a90ba314a87fc75c0aab226f8
+
+COCOAPODS: 1.2.0.beta.1
