@@ -4,4 +4,3 @@
 
 #import "SVGKit.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
-#import "CWStatusBarNotification.h"

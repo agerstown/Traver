@@ -18,8 +18,8 @@ class User {
     var friends: [User]?
     var visitedCountriesCodes: [String]
     
-    var visitedRegions = {
-        Region.regions.filter { region in
+    var visitedRegions: [Region] {
+        return Region.regions.filter { region in
             var isRegionVisited = false
             for countryCode in region.countriesCodes {
                 if User.sharedInstance.visitedCountriesCodes.contains(countryCode) {
@@ -29,6 +29,10 @@ class User {
             }
             return isRegionVisited
         }
+    }
+    
+    func visitedCountriesCodes(in region: Region) -> [String] {
+        return User.sharedInstance.visitedCountriesCodes.filter { region.countriesCodes.contains($0) }
     }
     
     static let sharedInstance = User(id: 1)

@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Traver
+
+  Created by Natalia Nikitina on 12/4/16.
+  Copyright © 2016 Natalia Nikitina. All rights reserved.
+*/
+
+"NSPhotoLibraryUsageDescription" = "We need it to import visited countries from your Photos locations";

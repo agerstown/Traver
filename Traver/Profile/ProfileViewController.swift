@@ -30,6 +30,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Profile".localized()
+        buttonEditUserInfo.setTitle(" Edit".localized(), for: .normal)
         
         let nib = UINib(nibName: "VisitedRegionHeaderView", bundle: nil)
         tableViewVisitedCountries.register(nib, forHeaderFooterViewReuseIdentifier: "VisitedRegionHeaderView")
@@ -53,38 +54,20 @@ class ProfileViewController: UIViewController {
         colorVisitedCounties(on: mapImage)
         
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.CountryCodeImportedNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(importFinished(notification:)), name: VisitedCountriesImporter.ImportFinishedNotification, object: nil)
     
         //if !UserDefaults.standard.bool(forKey: VisitedCountriesImporter.isAlreadyImported) { // сделать onboarding
-            PHPhotoLibrary.requestAuthorization({ (status) -> Void in
-                if status == .authorized {
-                    VisitedCountriesImporter.sharedInstance.fetchVisitedCountriesCodesFromPhotos()
-                }
-            })
+//            PHPhotoLibrary.requestAuthorization({ (status) -> Void in
+//                if status == .authorized {
+//                    VisitedCountriesImporter.sharedInstance.fetchVisitedCountriesCodesFromPhotos()
+//                }
+//            })
         //}
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        updateData()
-    }
-    
-    func updateData() {
-        labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
-        
-        User.sharedInstance.visitedCountriesCodes.sort { Countries.codesAndNames[$0]!.localized() < Countries.codesAndNames[$1]!.localized() }
-        
-        tableViewVisitedCountries.reloadData()
         colorVisitedCounties(on: mapImage)
-    }
-    
-    func colorVisitedCounties(on map: SVGKImage) {
-        let countriesLayers = map.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
-        let visitedCountriesLayers = countriesLayers.filter { User.sharedInstance.visitedCountriesCodes.contains($0.name!) }
-        
-        for layer in visitedCountriesLayers {
-            let color = UIColor.blue
-            layer.fillColor = color.cgColor
-        }
+        tableViewVisitedCountries.reloadData()
+        labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
     }
     
     deinit {
@@ -104,15 +87,40 @@ class ProfileViewController: UIViewController {
     func countryCodeImported(notification: NSNotification) {
         if let countryCode = notification.userInfo?[VisitedCountriesImporter.CountryCodeInfoKey] as? String {
             if !User.sharedInstance.visitedCountriesCodes.contains(countryCode) {
-                User.sharedInstance.visitedCountriesCodes.append(countryCode)
-                updateData()
+                
+                let region = Region.regions.filter { $0.countriesCodes.contains(countryCode) }[0]
+                
+                let existingSection = User.sharedInstance.visitedRegions.contains(region)
+                
+                User.sharedInstance.visitedCountriesCodes.append(countryCode, using: { Countries.codesAndNames[$0]!.localized() < Countries.codesAndNames[$1]!.localized() } )
+                
+                let countriesLayers = mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
+                if let newCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
+                    newCountryLayer.fillColor = UIColor.blue.cgColor
+                }
+                
+                let visitedRegions = User.sharedInstance.visitedRegions
+                let visitedCountriesInRegion = User.sharedInstance.visitedCountriesCodes(in: region)
+                
+                if existingSection {
+                    tableViewVisitedCountries.insertRows(at: [IndexPath(row: visitedCountriesInRegion.index(of: countryCode)!, section: visitedRegions.index(of: region)!)], with: .automatic)
+                } else {
+                    tableViewVisitedCountries.insertSections(IndexSet(integer: visitedRegions.index(of: region)!), with: .automatic)
+                }
+                
+                labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
             }
         }
     }
     
-    func importFinished(notification: NSNotification) {
-        if let countriesCodes = notification.userInfo?[VisitedCountriesImporter.ImportedCountriesInfoKey] as? [String] {
-            StatusBarHelper.sharedInstance.showCustomStatusBar(with: "Import from Photos is finished: %d countries were found".localized(for: countriesCodes.count))
+    // MARK: - Work with the map
+    func colorVisitedCounties(on map: SVGKImage) {
+        let countriesLayers = map.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
+        let visitedCountriesLayers = countriesLayers.filter { User.sharedInstance.visitedCountriesCodes.contains($0.name!) }
+        
+        for layer in visitedCountriesLayers {
+            let color = UIColor.blue
+            layer.fillColor = color.cgColor
         }
     }
 }
@@ -120,18 +128,18 @@ class ProfileViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return User.sharedInstance.visitedRegions().count
+        return User.sharedInstance.visitedRegions.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions()[section].countriesCodes.contains($0) }
+        let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions[section].countriesCodes.contains($0) }
         return visitedCountriesInSection.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
         
-        let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions()[indexPath.section].countriesCodes.contains($0) }
+        let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions[indexPath.section].countriesCodes.contains($0) }
         cell.labelCountryName.text = Countries.codesAndNames[visitedCountriesInSection[indexPath.row]]?.localized()
         cell.countryCode = visitedCountriesInSection[indexPath.row]
         cell.selectionStyle = .none
@@ -160,15 +168,17 @@ extension ProfileViewController: UITableViewDataSource {
             } else {
                 tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
             }
+            
             if let header = tableViewVisitedCountries.headerView(forSection: indexPath.section) as? VisitedRegionHeaderView {
                 configureVisitedCountriesNumber(for: header, in: indexPath.section)
             }
+            
             labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
         }
     }
     
     func configureVisitedCountriesNumber(for header: VisitedRegionHeaderView, in section: Int) {
-        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions()[section].countriesCodes.count)"
+        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions[section].countriesCodes.count)"
     }
 
 }
@@ -177,7 +187,7 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableViewVisitedCountries.dequeueReusableHeaderFooterView(withIdentifier: "VisitedRegionHeaderView") as! VisitedRegionHeaderView
-        header.labelRegionName.text = User.sharedInstance.visitedRegions()[section].name
+        header.labelRegionName.text = User.sharedInstance.visitedRegions[section].name
         configureVisitedCountriesNumber(for: header, in: section)
         header.contentView.backgroundColor = UIColor.headerColor
         return header

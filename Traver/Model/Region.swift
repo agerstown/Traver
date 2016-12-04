@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Region {
+class Region: NSObject {
     
     enum RegionType: Int {
         case europe

@@ -6,6 +6,7 @@
   Copyright © 2016 Natalia Nikitina. All rights reserved.
 */
 
+// Countries names
 "Afghanistan" = "Афганистан";
 "Albania" = "Албания";
 "Algeria" = "Алгерия";
@@ -183,6 +184,7 @@
 "Zambia" = "Замбия";
 "Zimbabwe" = "Зимбабве";
 
+// Regions names
 "Europe" = "Европа";
 "Asia" = "Азия";
 "North America" = "Северная Америка";
@@ -190,8 +192,24 @@
 "Australia and Oceania" = "Австралия и Океания";
 "Africa" = "Африка";
 
+// Controllers titles
 "Profile" = "Профиль";
 "Recommendations" = "Рекоммендации";
 "Friends" = "Друзья";
 "Settings" = "Настройки";
 "Countries" = "Страны";
+
+" Edit" = " Изменить";
+
+// Import
+"Import countries from Photos" = "Импортировать страны из Фото";
+"Import" = "Импорт";
+"It may take some time, just wait a little." = "Это может занять некоторое время, просто подождите немного.";
+"Import has been started" = "Импорт начался";
+"Import is impossible" = "Импорт невозможен";
+"Please allow Traver to access Photos" = "Пожалуйста, разрешите \"Traver\" иметь доступ к Вашим Фото";
+"Go to Settings" = "Настройки";
+"Don't Allow" = "Запретить";
+"Access to Photos is restricted" = "Доступ к Фото ограничен";
+"We can't import visited countries from your Photos as parental controls or institutional configuration profiles restrict your ability to grant photo library access to apps" = "Мы не может импортировать посещенные Вами страны из Фото, т.к. родительский контроль не позволяет Вам давать доступ к своим Фото для приложений";
+"OK" = "OK";

@@ -13,9 +13,17 @@ class VisitedCountriesImporter {
     
     static let sharedInstance = VisitedCountriesImporter()
     
-    static let isAlreadyImported = "isAlreadyImported"
+    //static let isAlreadyImported = "isAlreadyImported"
+    
+    // MARK: - Notifications
+    static let CountryCodeImportedNotification = NSNotification.Name(rawValue: "CountryCodeImportedNotification")
+    static let CountryCodeInfoKey = "CountryCodeInfoKey"
     
     // MARK: - Import from Photos
+    private var locationsCounter = 0
+    private var locations = [CLLocation]()
+    private var countriesCodes = [String]()
+    
     func fetchVisitedCountriesCodesFromPhotos() {
         DispatchQueue.global().async { [weak self] in
             var momentsLocations = [CLLocation]()
@@ -41,49 +49,41 @@ class VisitedCountriesImporter {
         }
     }
     
-    private var locationsCounter = 0
-    private var locations = [CLLocation]()
-    private var countriesCodes = [String]()
-    
-    // only one reverseGeocodeLocation:completionHandler: request can be initiated at a time so the the sequence of requests is initiated using recursion
+    // Only one geocoding request can be initiated at a time so the the sequence of requests is initiated using recursion
     private func getCountriesCodesFromLocations(using geocoder: CLGeocoder) {
         if locationsCounter == locations.count {
-            NotificationCenter.default.post(name: VisitedCountriesImporter.ImportFinishedNotification,
-                                            object: nil,
-                                            userInfo: [VisitedCountriesImporter.ImportedCountriesInfoKey : countriesCodes])
-            UserDefaults.standard.set(true, forKey: VisitedCountriesImporter.isAlreadyImported)
+            StatusBarManager.sharedInstance.showCustomStatusBar(with: "Import from Photos is finished: %d countries were found".localized(for: countriesCodes.count))
+            locationsCounter = 0
+            locations.removeAll()
+            countriesCodes.removeAll()
+            //UserDefaults.standard.set(true, forKey: VisitedCountriesImporter.isAlreadyImported)
             return
         }
-        geocoder.reverseGeocodeLocation(locations[locationsCounter], completionHandler: { [weak self] (placemarks, error) in
+        
+        // Geocoding requests are rate-limited for each app, so making too many requests in a short period of time may cause some of the requests to fail. There is a forced delay for that reason
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             
-            if error != nil {
-                return
-            }
-            
-            if let placemarks = placemarks {
-                if let code = placemarks[0].isoCountryCode {
-                    if let existingCode = self?.countriesCodes.contains(code) {
-                        if !existingCode {
-                            self?.countriesCodes.append(code)
-                            NotificationCenter.default.post(name: VisitedCountriesImporter.CountryCodeImportedNotification,
-                                                            object: nil,
-                                                            userInfo: [VisitedCountriesImporter.CountryCodeInfoKey : code])
+            geocoder.reverseGeocodeLocation((self?.locations[(self?.locationsCounter)!])!, completionHandler: { [weak self] (placemarks, error) in
+                
+                if let code = placemarks?[0].isoCountryCode {
+                    if Countries.codes.contains(code) {
+                        if let duplicated = self?.countriesCodes.contains(code) {
+                            if !duplicated {
+                                self?.countriesCodes.append(code)
+                                NotificationCenter.default.post(name: VisitedCountriesImporter.CountryCodeImportedNotification,
+                                                                object: nil,
+                                                                userInfo: [VisitedCountriesImporter.CountryCodeInfoKey : code])
+                            }
                         }
                     }
                 }
-            }
-            
-            self?.locationsCounter += 1
-            
-            _ = self?.getCountriesCodesFromLocations(using: geocoder)
-        })
+                
+                self?.locationsCounter += 1
+                
+                _ = self?.getCountriesCodesFromLocations(using: geocoder)
+            })
+        }
+        
     }
-
-    // MARK: - Notifications
-    static let CountryCodeImportedNotification = NSNotification.Name(rawValue: "CountryCodeImportedNotification")
-    static let ImportFinishedNotification = NSNotification.Name(rawValue:"ImportFinishedNotification")
-    
-    static let CountryCodeInfoKey = "CountryCodeInfoKey"
-    static let ImportedCountriesInfoKey = "ImportedCountriesInfoKey"
     
 }
