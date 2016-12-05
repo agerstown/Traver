@@ -61,26 +61,25 @@ class VisitedCountriesImporter {
         }
         
         // Geocoding requests are rate-limited for each app, so making too many requests in a short period of time may cause some of the requests to fail. There is a forced delay for that reason
-        DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
             
-            geocoder.reverseGeocodeLocation((self?.locations[(self?.locationsCounter)!])!, completionHandler: { [weak self] (placemarks, error) in
+            geocoder.reverseGeocodeLocation((self.locations[(self.locationsCounter)]),
+                                            completionHandler: { (placemarks, error) in
                 
                 if let code = placemarks?[0].isoCountryCode {
                     if Countries.codes.contains(code) {
-                        if let duplicated = self?.countriesCodes.contains(code) {
-                            if !duplicated {
-                                self?.countriesCodes.append(code)
-                                NotificationCenter.default.post(name: VisitedCountriesImporter.CountryCodeImportedNotification,
-                                                                object: nil,
-                                                                userInfo: [VisitedCountriesImporter.CountryCodeInfoKey : code])
-                            }
+                        if !self.countriesCodes.contains(code) {
+                            self.countriesCodes.append(code)
+                            NotificationCenter.default.post(name: VisitedCountriesImporter.CountryCodeImportedNotification,
+                                                            object: nil,
+                                                            userInfo: [VisitedCountriesImporter.CountryCodeInfoKey : code])
                         }
                     }
                 }
                 
-                self?.locationsCounter += 1
+                self.locationsCounter += 1
                 
-                _ = self?.getCountriesCodesFromLocations(using: geocoder)
+                _ = self.getCountriesCodesFromLocations(using: geocoder)
             })
         }
         

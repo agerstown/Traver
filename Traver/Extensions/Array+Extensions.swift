@@ -16,7 +16,7 @@ extension Array where Element: Equatable {
     }
 }
 
-extension Array where Element: Comparable {
+extension Array {
     mutating func append(_ element: Element, using condition: (Element, Element) -> Bool) {
         var index: Int?
         var lo = 0

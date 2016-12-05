@@ -12,6 +12,7 @@ import Photos
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var tableViewVisitedCountries: UITableView!
+    @IBOutlet weak var viewTableViewHeader: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var viewMap: UIView!
     @IBOutlet weak var viewUserInfo: UIView!
@@ -21,9 +22,12 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var imageViewPhoto: UIImageView!
     @IBOutlet weak var buttonEditUserInfo: UIButton!
     
+    @IBOutlet weak var constraintScrollViewHeight: NSLayoutConstraint!
+    
     var mapImage: SVGKImage = SVGKImage(named: "WorldMap.svg")!
     
     let visitedCountriesText = "%d/176 countries visited"
+    let mapHeightToWidthRatio: CGFloat = 1.5
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -41,8 +45,17 @@ class ProfileViewController: UIViewController {
         
         imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
         
+        labelName.adjustsFontSizeToFitWidth = true
+        labelJob.adjustsFontSizeToFitWidth = true
+        labelVisitedCountries.adjustsFontSizeToFitWidth = true
+        
+        // setting up the scroll view and table view header sizes
+        scrollView.frame.size.width = UIScreen.main.bounds.width
+        constraintScrollViewHeight.constant = scrollView.frame.size.width / mapHeightToWidthRatio
+        viewTableViewHeader.frame.size.height = constraintScrollViewHeight.constant + viewUserInfo.frame.size.height
+        
         // setting up the map's size
-        let width = viewMap.frame.size.width
+        let width = scrollView.frame.size.width
         let scale = width / mapImage.size.width
         let height = mapImage.size.height * scale
         mapImage.size = CGSize(width: width, height: height)
@@ -65,6 +78,7 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         colorVisitedCounties(on: mapImage)
         tableViewVisitedCountries.reloadData()
         labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
@@ -92,7 +106,7 @@ class ProfileViewController: UIViewController {
                 
                 let existingSection = User.sharedInstance.visitedRegions.contains(region)
                 
-                User.sharedInstance.visitedCountriesCodes.append(countryCode, using: { Countries.codesAndNames[$0]!.localized() < Countries.codesAndNames[$1]!.localized() } )
+                User.sharedInstance.visitedCountriesCodes.append(countryCode) { Countries.codesAndNames[$0]!.localized() < Countries.codesAndNames[$1]!.localized() } 
                 
                 let countriesLayers = mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
                 if let newCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
@@ -101,14 +115,19 @@ class ProfileViewController: UIViewController {
                 
                 let visitedRegions = User.sharedInstance.visitedRegions
                 let visitedCountriesInRegion = User.sharedInstance.visitedCountriesCodes(in: region)
+                let section = visitedRegions.index(of: region)!
                 
                 if existingSection {
-                    tableViewVisitedCountries.insertRows(at: [IndexPath(row: visitedCountriesInRegion.index(of: countryCode)!, section: visitedRegions.index(of: region)!)], with: .automatic)
+                    tableViewVisitedCountries.insertRows(at: [IndexPath(row: visitedCountriesInRegion.index(of: countryCode)!, section: section)], with: .automatic)
                 } else {
-                    tableViewVisitedCountries.insertSections(IndexSet(integer: visitedRegions.index(of: region)!), with: .automatic)
+                    tableViewVisitedCountries.insertSections(IndexSet(integer: section), with: .automatic)
                 }
                 
                 labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
+                
+                if let header = tableViewVisitedCountries.headerView(forSection: section) as? VisitedRegionHeaderView {
+                    configureVisitedCountriesNumber(for: header, in: section)
+                }
             }
         }
     }

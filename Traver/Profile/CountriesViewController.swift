@@ -20,6 +20,8 @@ class CountriesViewController: UIViewController {
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
+        super.viewDidLoad()
+    
         self.title = "Countries".localized()
         
         self.searchBar.delegate = self
@@ -73,7 +75,7 @@ extension CountriesViewController: UITableViewDelegate {
             var image: UIImage?
             if !self.selectedCountriesCodes.contains(countryCode) {
                 image = UIImage(named: "item_checked")
-                self.selectedCountriesCodes.append(countryCode)
+                self.selectedCountriesCodes.append(countryCode) { Countries.codesAndNames[$0]!.localized() < Countries.codesAndNames[$1]!.localized() }
             } else {
                 image = UIImage(named: "item_unchecked")
                 self.selectedCountriesCodes.removeObject(countryCode)

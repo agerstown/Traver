@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		610D86FF1DECE0C40030C153 /* VisitedRegionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 610D86FE1DECE0C40030C153 /* VisitedRegionHeaderView.xib */; };
 		610FCA2B1DF4A5FE00046546 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 610FCA2D1DF4A5FE00046546 /* InfoPlist.strings */; };
+		611EB3081DF5ED5E002960A8 /* Share.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611EB3071DF5ED5E002960A8 /* Share.xib */; };
 		612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6401DE5E04E0092D43F /* CountriesViewController.swift */; };
 		612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6481DE5E2880092D43F /* CountryItemCell.swift */; };
 		612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */; };
@@ -90,6 +91,7 @@
 		610D86FE1DECE0C40030C153 /* VisitedRegionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisitedRegionHeaderView.xib; sourceTree = "<group>"; };
 		610FCA2C1DF4A5FE00046546 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		610FCA2E1DF4A60000046546 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		611EB3071DF5ED5E002960A8 /* Share.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Share.xib; sourceTree = "<group>"; };
 		612BF6401DE5E04E0092D43F /* CountriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesViewController.swift; sourceTree = "<group>"; };
 		612BF6481DE5E2880092D43F /* CountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryItemCell.swift; sourceTree = "<group>"; };
 		612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -321,6 +323,14 @@
 				612F29AA1DEB4D020057E20B /* RegionHeaderCell.swift */,
 			);
 			name = Countries;
+			sourceTree = "<group>";
+		};
+		611EB3061DF5ED30002960A8 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				611EB3071DF5ED5E002960A8 /* Share.xib */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 		612BF63F1DE5E0360092D43F /* Profile */ = {
@@ -607,6 +617,7 @@
 				612BF63F1DE5E0360092D43F /* Profile */,
 				612BF6421DE5E05E0092D43F /* Recommendations */,
 				612BF6431DE5E06A0092D43F /* Settings */,
+				611EB3061DF5ED30002960A8 /* Share */,
 				613C54DA1DF0CF3A006660B9 /* Helpers */,
 				615BAD5D1DE4CF7700D1478D /* Model */,
 				612BF6451DE5E1CA0092D43F /* Storyboards */,
@@ -769,6 +780,7 @@
 				615665491DE322D70050AE5A /* Assets.xcassets in Resources */,
 				615665471DE322D70050AE5A /* Main.storyboard in Resources */,
 				610D86FF1DECE0C40030C153 /* VisitedRegionHeaderView.xib in Resources */,
+				611EB3081DF5ED5E002960A8 /* Share.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

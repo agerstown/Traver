@@ -68,12 +68,16 @@ class SettingsViewController: UITableViewController {
     func showAlertAllowAccessToPhotos() {
         let alert = UIAlertController(title: "Import is impossible".localized(), message: "Please allow Traver to access Photos".localized(), preferredStyle: UIAlertControllerStyle.alert)
         let settingsAction = UIAlertAction(title: "Go to Settings".localized(), style: .default) { (action) in
-            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+            DispatchQueue.main.async {
+                if let appSettingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                    UIApplication.shared.openURL(appSettingsURL)
+                }
+            }
         }
         let dontAllowAction = UIAlertAction(title: "Don't Allow".localized(), style: .cancel)
         alert.addAction(dontAllowAction)
         alert.addAction(settingsAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     func showAlertRestrictedAccess() {
