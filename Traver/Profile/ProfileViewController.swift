@@ -54,7 +54,7 @@ class ProfileViewController: UIViewController {
         constraintScrollViewHeight.constant = scrollView.frame.size.width / mapHeightToWidthRatio
         viewTableViewHeader.frame.size.height = constraintScrollViewHeight.constant + viewUserInfo.frame.size.height
         
-        // setting up the map's size
+        // setting up the map and it's size
         let width = scrollView.frame.size.width
         let scale = width / mapImage.size.width
         let height = mapImage.size.height * scale
@@ -67,14 +67,6 @@ class ProfileViewController: UIViewController {
         colorVisitedCounties(on: mapImage)
         
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.CountryCodeImportedNotification, object: nil)
-    
-        //if !UserDefaults.standard.bool(forKey: VisitedCountriesImporter.isAlreadyImported) { // сделать onboarding
-//            PHPhotoLibrary.requestAuthorization({ (status) -> Void in
-//                if status == .authorized {
-//                    VisitedCountriesImporter.sharedInstance.fetchVisitedCountriesCodesFromPhotos()
-//                }
-//            })
-        //}
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,16 +115,16 @@ class ProfileViewController: UIViewController {
                     tableViewVisitedCountries.insertSections(IndexSet(integer: section), with: .automatic)
                 }
                 
-                labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
+                updateNumberOfVisitedCountriesAnimated()
                 
                 if let header = tableViewVisitedCountries.headerView(forSection: section) as? VisitedRegionHeaderView {
-                    configureVisitedCountriesNumber(for: header, in: section)
+                    configureVisitedCountriesNumberAnimated(for: header, in: section)
                 }
             }
         }
     }
     
-    // MARK: - Work with the map
+    // MARK: - UI updates
     func colorVisitedCounties(on map: SVGKImage) {
         let countriesLayers = map.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
         let visitedCountriesLayers = countriesLayers.filter { User.sharedInstance.visitedCountriesCodes.contains($0.name!) }
@@ -141,6 +133,28 @@ class ProfileViewController: UIViewController {
             let color = UIColor.blue
             layer.fillColor = color.cgColor
         }
+    }
+    
+    func updateNumberOfVisitedCountriesAnimated() {
+        UIView.transition(with: labelVisitedCountries,
+                                  duration: 0.25,
+                                  options: [.transitionCrossDissolve],
+                                  animations: {
+                                    self.labelVisitedCountries.text = self.visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
+        }, completion: nil)
+    }
+    
+    func configureVisitedCountriesNumber(for header: VisitedRegionHeaderView, in section: Int) {
+        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions[section].countriesCodes.count)"
+    }
+    
+    func configureVisitedCountriesNumberAnimated(for header: VisitedRegionHeaderView, in section: Int) {
+        UIView.transition(with: header.labelVisitedCountriesNumber,
+                          duration: 0.25,
+                          options: [.transitionCrossDissolve],
+                          animations: {
+                            self.configureVisitedCountriesNumber(for: header, in: section)
+        }, completion: nil)
     }
 }
 
@@ -189,15 +203,11 @@ extension ProfileViewController: UITableViewDataSource {
             }
             
             if let header = tableViewVisitedCountries.headerView(forSection: indexPath.section) as? VisitedRegionHeaderView {
-                configureVisitedCountriesNumber(for: header, in: indexPath.section)
+                configureVisitedCountriesNumberAnimated(for: header, in: indexPath.section)
             }
             
-            labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
+            updateNumberOfVisitedCountriesAnimated()
         }
-    }
-    
-    func configureVisitedCountriesNumber(for header: VisitedRegionHeaderView, in section: Int) {
-        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions[section].countriesCodes.count)"
     }
 
 }

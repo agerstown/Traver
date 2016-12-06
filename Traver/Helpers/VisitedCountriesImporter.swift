@@ -13,8 +13,6 @@ class VisitedCountriesImporter {
     
     static let sharedInstance = VisitedCountriesImporter()
     
-    //static let isAlreadyImported = "isAlreadyImported"
-    
     // MARK: - Notifications
     static let CountryCodeImportedNotification = NSNotification.Name(rawValue: "CountryCodeImportedNotification")
     static let CountryCodeInfoKey = "CountryCodeInfoKey"
@@ -56,7 +54,6 @@ class VisitedCountriesImporter {
             locationsCounter = 0
             locations.removeAll()
             countriesCodes.removeAll()
-            //UserDefaults.standard.set(true, forKey: VisitedCountriesImporter.isAlreadyImported)
             return
         }
         
