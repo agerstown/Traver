@@ -59,8 +59,7 @@ class ProfileViewController: UIViewController {
         let scale = width / mapImage.size.width
         let height = mapImage.size.height * scale
         mapImage.size = CGSize(width: width, height: height)
-        let SVGLayeredImageView = SVGKLayeredImageView(svgkImage: mapImage)
-        if let imageView = SVGLayeredImageView {
+        if let imageView = SVGKLayeredImageView(svgkImage: mapImage) {
             viewMap.addSubview(imageView)
         }
         
@@ -78,6 +77,26 @@ class ProfileViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Actions
+    @IBAction func buttonShareTapped(_ sender: Any) {
+        switch (PHPhotoLibrary.authorizationStatus()) {
+        case .authorized:
+            ShareManager.sharedInstance.saveProfileSharePicture()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({ (status) -> Void in
+                if status ==  .authorized {
+                    ShareManager.sharedInstance.saveProfileSharePicture()
+                } else {
+                    PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: self, withTitle: "Impossible to save a picture to Photos")
+                }
+            })
+        case .denied:
+            PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: self, withTitle: "Impossible to save a picture to Photos")
+        case .restricted:
+            PhotosAccessManager.sharedInstance.showAlertRestrictedAccess(on: self, withMessage: "We can't save a picture with your Profile to Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.")
+        }
     }
     
     // MARK: - Segue
@@ -137,7 +156,7 @@ class ProfileViewController: UIViewController {
     
     func updateNumberOfVisitedCountriesAnimated() {
         UIView.transition(with: labelVisitedCountries,
-                                  duration: 0.25,
+                                  duration: 0.3,
                                   options: [.transitionCrossDissolve],
                                   animations: {
                                     self.labelVisitedCountries.text = self.visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
@@ -150,7 +169,7 @@ class ProfileViewController: UIViewController {
     
     func configureVisitedCountriesNumberAnimated(for header: VisitedRegionHeaderView, in section: Int) {
         UIView.transition(with: header.labelVisitedCountriesNumber,
-                          duration: 0.25,
+                          duration: 0.3,
                           options: [.transitionCrossDissolve],
                           animations: {
                             self.configureVisitedCountriesNumber(for: header, in: section)

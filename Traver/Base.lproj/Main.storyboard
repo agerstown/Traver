@@ -92,6 +92,9 @@
                                                         <constraint firstAttribute="height" constant="30" id="kKu-Vf-QGV"/>
                                                     </constraints>
                                                     <state key="normal" image="share"/>
+                                                    <connections>
+                                                        <action selector="buttonShareTapped:" destination="vhQ-Bj-FRp" eventType="touchUpInside" id="ZV7-3L-Fam"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

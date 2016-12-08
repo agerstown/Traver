@@ -27,6 +27,23 @@
             </dict>
         </dict>
         
+        <key>%d countries visited</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@countries@</string>
+            <key>countries</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>%d country visited</string>
+                <key>other</key>
+                <string>%d countries visited</string>
+            </dict>
+        </dict>
+        
         <key>Import from Photos is finished: %d countries were found</key>
         <dict>
             <key>NSStringLocalizedFormatKey</key>

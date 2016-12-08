@@ -27,6 +27,25 @@
                 <string>%d/176 страны посещено</string>
             </dict>
         </dict>
+        
+        <key>%d countries visited</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@countries@</string>
+            <key>countries</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>%d страна посещена</string>
+                <key>many</key>
+                <string>%d стран посещено</string>
+                <key>other</key>
+                <string>%d страны посещено</string>
+            </dict>
+        </dict>
 
         <key>Import from Photos is finished: %d countries were found</key>
         <dict>

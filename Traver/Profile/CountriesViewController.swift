@@ -16,8 +16,6 @@ class CountriesViewController: UIViewController {
     var regions = Region.regions
     var selectedCountriesCodes = [String]()
     
-    var currentOperation: Operation?
-    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

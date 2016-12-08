@@ -52,38 +52,16 @@ class SettingsViewController: UITableViewController {
                             VisitedCountriesImporter.sharedInstance.fetchVisitedCountriesCodesFromPhotos()
                             StatusBarManager.sharedInstance.showCustomStatusBar(with: "Import has been started".localized())
                         } else {
-                            self.showAlertAllowAccessToPhotos()
+                            PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: self, withTitle: "Import is impossible")
                         }
                     })
                 case .denied:
-                    showAlertAllowAccessToPhotos()
+                    PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: self, withTitle: "Import is impossible")
                 case .restricted:
-                    showAlertRestrictedAccess()
+                    PhotosAccessManager.sharedInstance.showAlertRestrictedAccess(on: self, withMessage: "We can't import visited countries from your Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.")
                 }
             default: ()
             }
         }
-    }
-    
-    func showAlertAllowAccessToPhotos() {
-        let alert = UIAlertController(title: "Import is impossible".localized(), message: "Please allow Traver to access Photos".localized(), preferredStyle: UIAlertControllerStyle.alert)
-        let settingsAction = UIAlertAction(title: "Go to Settings".localized(), style: .default) { (action) in
-            DispatchQueue.main.async {
-                if let appSettingsURL = URL(string: UIApplicationOpenSettingsURLString) {
-                    UIApplication.shared.openURL(appSettingsURL)
-                }
-            }
-        }
-        let dontAllowAction = UIAlertAction(title: "Don't Allow".localized(), style: .cancel)
-        alert.addAction(dontAllowAction)
-        alert.addAction(settingsAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func showAlertRestrictedAccess() {
-        let alert = UIAlertController(title: "Access to Photos is restricted", message: "We can't import visited countries from your Photos as parental controls or institutional configuration profiles restrict your ability to grant photo library access to apps".localized(), preferredStyle: UIAlertControllerStyle.alert)
-        let OKAction = UIAlertAction(title: "OK".localized(), style: .cancel)
-        alert.addAction(OKAction)
-        self.present(alert, animated: true, completion: nil)
     }
 }

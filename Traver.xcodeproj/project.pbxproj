@@ -50,6 +50,9 @@
 		615BAD5C1DE4C13000D1478D /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5B1DE4C13000D1478D /* Countries.swift */; };
 		615BAD5F1DE4CF9500D1478D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5E1DE4CF9500D1478D /* User.swift */; };
 		615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */; };
+		61B2765D1DF9D475008AA44B /* PhotosAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2765C1DF9D475008AA44B /* PhotosAccessManager.swift */; };
+		61B2765F1DF9E327008AA44B /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2765E1DF9E327008AA44B /* ShareManager.swift */; };
+		61B276611DF9E8C2008AA44B /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B276601DF9E8C2008AA44B /* ShareView.swift */; };
 		7A0BEC0BBA0044F0F8E5AAB8 /* Pods_Traver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F4E412FDA318635091FA2E /* Pods_Traver.framework */; };
 /* End PBXBuildFile section */
 
@@ -266,6 +269,9 @@
 		615BAD5E1DE4CF9500D1478D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitedCountryItemCell.swift; sourceTree = "<group>"; };
 		616E64A01DE6223300680D4F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61B2765C1DF9D475008AA44B /* PhotosAccessManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosAccessManager.swift; sourceTree = "<group>"; };
+		61B2765E1DF9E327008AA44B /* ShareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
+		61B276601DF9E8C2008AA44B /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		61BFDB101DE5ABB700F49F6B /* Traver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Traver-Bridging-Header.h"; sourceTree = "<group>"; };
 		D9F4E412FDA318635091FA2E /* Pods_Traver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Traver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -328,6 +334,8 @@
 		611EB3061DF5ED30002960A8 /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				61B2765E1DF9E327008AA44B /* ShareManager.swift */,
+				61B276601DF9E8C2008AA44B /* ShareView.swift */,
 				611EB3071DF5ED5E002960A8 /* Share.xib */,
 			);
 			path = Share;
@@ -584,6 +592,7 @@
 			children = (
 				613C54DB1DF0CF7C006660B9 /* VisitedCountriesImporter.swift */,
 				613C54DF1DF18C3B006660B9 /* StatusBarManager.swift */,
+				61B2765C1DF9D475008AA44B /* PhotosAccessManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -855,11 +864,14 @@
 			files = (
 				612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */,
 				615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */,
+				61B276611DF9E8C2008AA44B /* ShareView.swift in Sources */,
 				615665861DE3846B0050AE5A /* ProfileViewController.swift in Sources */,
+				61B2765F1DF9E327008AA44B /* ShareManager.swift in Sources */,
 				612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */,
 				615665881DE384830050AE5A /* RecommendationsViewController.swift in Sources */,
 				615BAD5F1DE4CF9500D1478D /* User.swift in Sources */,
 				612F29C31DECB1A10057E20B /* UIColor+Traver.swift in Sources */,
+				61B2765D1DF9D475008AA44B /* PhotosAccessManager.swift in Sources */,
 				613C54DE1DF0D0C3006660B9 /* Double+Round.swift in Sources */,
 				615665401DE322D70050AE5A /* AppDelegate.swift in Sources */,
 				612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */,
