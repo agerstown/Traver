@@ -199,7 +199,7 @@
 "Settings" = "Настройки";
 "Countries" = "Страны";
 
-" Edit" = " Изменить";
+"Edit" = " Изменить";
 
 // Import
 "Import countries from Photos" = "Импортировать страны из Фото";
@@ -220,3 +220,11 @@
 "Error" = "Ошибка";
 "Success" = "Успех";
 "A picture with your Profile has been saved to Photos." = "Картинка с Вашим Профилем была сохранена в Фото.";
+
+// Accounts
+"Accounts" = "Аккаунты";
+"Facebook" = "Facebook";
+"Do you want to disconnect your account?" = "Вы хотите отключить свой аккаунт?";
+"Yes" = "Да";
+"No" = "Нет";
+"Please contact the developer" = "Пожалуйста, свяжитесь с разработчиком";

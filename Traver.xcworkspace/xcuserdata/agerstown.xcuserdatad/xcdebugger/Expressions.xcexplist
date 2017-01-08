@@ -3,6 +3,22 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "SettingsViewController.(tableView(UITableView, didSelectRowAt : IndexPath) -&gt; ()).(closure #2):SettingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.sharedInstance.facebookEmail">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FacebookHelper.(login(with : () -&gt; ()) -&gt; ()).(closure #1).(closure #1):FacebookHelper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.sharedInstance.facebookEmail">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "VisitedCountriesImporter.getCountriesCodesFromLocations(using : CLGeocoder) -&gt; ():VisitedCountriesImporter.swift">
          <PersistentStrings>
             <PersistentString

@@ -8,14 +8,17 @@
 
 import Foundation
 import Photos
+import FacebookCore
+import FacebookLogin
 
 class SettingsViewController: UITableViewController {
     
     @IBOutlet weak var tableViewSettings: UITableView!
     @IBOutlet weak var cellImportFromPhotos: UITableViewCell!
+    @IBOutlet weak var cellFacebook: UITableViewCell!
     
-    let sectionsHeaders = ["Import".localized()];
-    let sectionsFooters = ["It may take some time, just wait a little.".localized()];
+    let sectionsHeaders = ["Import".localized(), "Accounts".localized()];
+    let sectionsFooters = ["It may take some time, just wait a little.".localized(), ""];
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -23,10 +26,12 @@ class SettingsViewController: UITableViewController {
         
         self.title = "Settings".localized()
         cellImportFromPhotos.textLabel?.text = "Import countries from Photos".localized()
+        cellFacebook.textLabel?.text = "Facebook".localized()
+        cellFacebook.detailTextLabel?.text?.removeAll()
         
         tableViewSettings.delegate = self
     }
-
+    
     // MARK: - UITableViewDataSource
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionsHeaders[section]
@@ -42,23 +47,11 @@ class SettingsViewController: UITableViewController {
         if let cell = tableViewSettings.cellForRow(at: indexPath) {
             switch (cell) {
             case cellImportFromPhotos:
-                switch (PHPhotoLibrary.authorizationStatus()) {
-                case .authorized:
-                    VisitedCountriesImporter.sharedInstance.fetchVisitedCountriesCodesFromPhotos()
-                    StatusBarManager.sharedInstance.showCustomStatusBar(with: "Import has been started".localized())
-                case .notDetermined:
-                    PHPhotoLibrary.requestAuthorization({ (status) -> Void in
-                        if status ==  .authorized {
-                            VisitedCountriesImporter.sharedInstance.fetchVisitedCountriesCodesFromPhotos()
-                            StatusBarManager.sharedInstance.showCustomStatusBar(with: "Import has been started".localized())
-                        } else {
-                            PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: self, withTitle: "Import is impossible")
-                        }
-                    })
-                case .denied:
-                    PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: self, withTitle: "Import is impossible")
-                case .restricted:
-                    PhotosAccessManager.sharedInstance.showAlertRestrictedAccess(on: self, withMessage: "We can't import visited countries from your Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.")
+                PhotosAccessManager.sharedInstance.importVisitedCountries(controller: self)
+            case cellFacebook:
+                FacebookHelper.sharedInstance.login() {
+                    cell.detailTextLabel?.text = User.sharedInstance.facebookEmail
+                    self.tableViewSettings.reloadData()
                 }
             default: ()
             }

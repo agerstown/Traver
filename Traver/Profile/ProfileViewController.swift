@@ -17,10 +17,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var viewMap: UIView!
     @IBOutlet weak var viewUserInfo: UIView!
     @IBOutlet weak var labelName: UILabel!
-    @IBOutlet weak var labelJob: UILabel!
+    @IBOutlet weak var labelLocation: UILabel!
     @IBOutlet weak var labelVisitedCountries: UILabel!
     @IBOutlet weak var imageViewPhoto: UIImageView!
     @IBOutlet weak var buttonEditUserInfo: UIButton!
+    @IBOutlet weak var buttonFillInfo: UIButton!
     
     @IBOutlet weak var constraintScrollViewHeight: NSLayoutConstraint!
     
@@ -34,7 +35,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Profile".localized()
-        buttonEditUserInfo.setTitle(" Edit".localized(), for: .normal)
+        buttonEditUserInfo.setTitle(" " + "Edit".localized(), for: .normal)
         
         let nib = UINib(nibName: "VisitedRegionHeaderView", bundle: nil)
         tableViewVisitedCountries.register(nib, forHeaderFooterViewReuseIdentifier: "VisitedRegionHeaderView")
@@ -43,11 +44,15 @@ class ProfileViewController: UIViewController {
         tableViewVisitedCountries.delegate = self
         scrollView.delegate = self
         
-        imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
-        
         labelName.adjustsFontSizeToFitWidth = true
-        labelJob.adjustsFontSizeToFitWidth = true
+        labelLocation.adjustsFontSizeToFitWidth = true
         labelVisitedCountries.adjustsFontSizeToFitWidth = true
+        
+        buttonFillInfo.layer.cornerRadius = 5
+        buttonFillInfo.layer.borderWidth = 1
+        buttonFillInfo.layer.borderColor = UIColor.black.cgColor
+        
+        imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
         
         // setting up the scroll view and table view header sizes
         scrollView.frame.size.width = UIScreen.main.bounds.width
@@ -63,16 +68,22 @@ class ProfileViewController: UIViewController {
             viewMap.addSubview(imageView)
         }
         
-        colorVisitedCounties(on: mapImage)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.CountryCodeImportedNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        colorVisitedCounties(on: mapImage)
+        
+        buttonFillInfo.isHidden = User.sharedInstance.name != nil
+        
+        mapImage.colorVisitedCounties()
         tableViewVisitedCountries.reloadData()
         labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
+        
+        labelName.text = User.sharedInstance.name
+        labelLocation.text = User.sharedInstance.facebookLocation
+        
+        imageViewPhoto.image = User.sharedInstance.photo
     }
     
     deinit {
@@ -80,23 +91,8 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @IBAction func buttonShareTapped(_ sender: Any) {
-        switch (PHPhotoLibrary.authorizationStatus()) {
-        case .authorized:
-            ShareManager.sharedInstance.saveProfileSharePicture()
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization({ (status) -> Void in
-                if status ==  .authorized {
-                    ShareManager.sharedInstance.saveProfileSharePicture()
-                } else {
-                    PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: self, withTitle: "Impossible to save a picture to Photos")
-                }
-            })
-        case .denied:
-            PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: self, withTitle: "Impossible to save a picture to Photos")
-        case .restricted:
-            PhotosAccessManager.sharedInstance.showAlertRestrictedAccess(on: self, withMessage: "We can't save a picture with your Profile to Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.")
-        }
+    @IBAction func buttonShareTapped(_ sender: UIButton) {
+        PhotosAccessManager.sharedInstance.shareToPhotoAlbum(controller: self)
     }
     
     // MARK: - Segue
@@ -144,16 +140,6 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - UI updates
-    func colorVisitedCounties(on map: SVGKImage) {
-        let countriesLayers = map.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
-        let visitedCountriesLayers = countriesLayers.filter { User.sharedInstance.visitedCountriesCodes.contains($0.name!) }
-        
-        for layer in visitedCountriesLayers {
-            let color = UIColor.blue
-            layer.fillColor = color.cgColor
-        }
-    }
-    
     func updateNumberOfVisitedCountriesAnimated() {
         UIView.transition(with: labelVisitedCountries,
                                   duration: 0.3,

@@ -12,9 +12,11 @@ class User {
     
     var id: Int
     var name: String?
-    var company: String?
-    var facebookID: Int?
-    var vkID: Int?
+    var photo = UIImage(named: "default_photo")
+    var facebookID: String?
+    var facebookEmail: String?
+    var facebookLocation: String?
+    var vkID: String?
     var friends: [User]?
     var visitedCountriesCodes: [String]
     

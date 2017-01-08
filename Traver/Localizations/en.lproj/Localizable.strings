@@ -199,7 +199,7 @@
 "Settings" = "Settings";
 "Countries" = "Countries";
 
-" Edit" = " Edit";
+"Edit" = "Edit";
 
 // Import
 "Import countries from Photos" = "Import countries from Photos";
@@ -220,3 +220,11 @@
 "Error" = "Error";
 "Success" = "Success";
 "A picture with your Profile has been saved to Photos." = "A picture with your Profile has been saved to Photos.";
+
+// Accounts
+"Accounts" = "Accounts";
+"Facebook" = "Facebook";
+"Do you want to disconnect your account?" = "Do you want to disconnect your account?";
+"Yes" = "Yes";
+"No" = "No";
+"Please contact the developer" = "Please contact the developer";

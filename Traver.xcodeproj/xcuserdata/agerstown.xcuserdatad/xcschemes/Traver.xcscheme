@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2E7170B2E2DBE17AFF25D8E51E826D0E"
+               BlueprintIdentifier = "B31A34B83D0AB01F4A8ED5513C4DBAD4"
                BuildableName = "Pods_Traver.framework"
                BlueprintName = "Pods-Traver"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">

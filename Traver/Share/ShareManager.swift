@@ -22,7 +22,7 @@ class ShareManager: NSObject {
         image.size = CGSize(width: width, height: height)
         if let imageView = SVGKLayeredImageView(svgkImage: image) {
             shareView.viewMap.addSubview(imageView)
-            colorVisitedCounties(on: image)
+            image.colorVisitedCounties()
         }
         
         shareView.labelCountriesVisited.text = "%d countries visited".localized(for: User.sharedInstance.visitedCountriesCodes.count)
@@ -49,15 +49,5 @@ class ShareManager: NSObject {
         let alert = UIAlertController(title: title.localized(), message: message.localized(), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK".localized(), style: .default))
         UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
-    }
-    
-    private func colorVisitedCounties(on map: SVGKImage) {
-        let countriesLayers = map.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
-        let visitedCountriesLayers = countriesLayers.filter { User.sharedInstance.visitedCountriesCodes.contains($0.name!) }
-        
-        for layer in visitedCountriesLayers {
-            let color = UIColor.blue
-            layer.fillColor = color.cgColor
-        }
     }
 }
