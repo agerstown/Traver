@@ -228,3 +228,7 @@
 "Yes" = "Да";
 "No" = "Нет";
 "Please contact the developer" = "Пожалуйста, свяжитесь с разработчиком";
+
+// Profile edit
+"Name" = "Имя";
+"Location" = "Город, страна";

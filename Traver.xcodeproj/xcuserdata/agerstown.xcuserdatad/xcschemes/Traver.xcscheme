@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B31A34B83D0AB01F4A8ED5513C4DBAD4"
+               BlueprintIdentifier = "2A0E69E46F60458B4F20EB6515D43AD9"
                BuildableName = "Pods_Traver.framework"
                BlueprintName = "Pods-Traver"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -95,6 +95,12 @@
             ReferencedContainer = "container:Traver.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-com.apple.CoreData.SQLDebug 1"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

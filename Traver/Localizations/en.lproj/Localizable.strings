@@ -228,3 +228,7 @@
 "Yes" = "Yes";
 "No" = "No";
 "Please contact the developer" = "Please contact the developer";
+
+// Profile edit
+"Name" = "Name";
+"Location" = "Location";

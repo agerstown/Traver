@@ -13,5 +13,6 @@ class CountryItemCell: UITableViewCell {
     @IBOutlet weak var labelCountryName: UILabel!
     @IBOutlet weak var buttonItemState: UIButton!
     var countryCode: String?
+    var country: Codes.Country?
 
 }

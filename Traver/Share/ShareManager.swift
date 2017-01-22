@@ -25,7 +25,8 @@ class ShareManager: NSObject {
             image.colorVisitedCounties()
         }
         
-        shareView.labelCountriesVisited.text = "%d countries visited".localized(for: User.sharedInstance.visitedCountriesCodes.count)
+        //shareView.labelCountriesVisited.text = "%d countries visited".localized(for: User.sharedInstance.visitedCountriesCodes.count)
+        shareView.labelCountriesVisited.text = "%d countries visited".localized(for: User.sharedInstance.visitedCountries.count)
         
         UIGraphicsBeginImageContext(shareView.bounds.size)
         if let context = UIGraphicsGetCurrentContext() {
