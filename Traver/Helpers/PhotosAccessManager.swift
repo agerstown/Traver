@@ -58,7 +58,7 @@ class PhotosAccessManager {
         let settingsAction = UIAlertAction(title: "Go to Settings".localized(), style: .default) { (action) in
             DispatchQueue.main.async {
                 if let appSettingsURL = URL(string: UIApplicationOpenSettingsURLString) {
-                    UIApplication.shared.openURL(appSettingsURL)
+                    UIApplication.shared.open(appSettingsURL, options: [:], completionHandler: nil)
                 }
             }
         }

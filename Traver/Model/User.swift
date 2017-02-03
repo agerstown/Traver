@@ -19,8 +19,6 @@ class User {
     var facebookEmail: String?
     var location: String?
     
-    //var visitedCountriesCodes = [String]()
-    //var visitedCountries: [Codes.Country] = []
     var visitedRegions = [Region]()
     
     var visitedCountries: [Country] {
@@ -48,47 +46,26 @@ class User {
         var country: Country?
         if !User.sharedInstance.visitedCountries.contains(where: { $0.code == code }) {
             country = Country(code: code, region: region)
-            region.visitedCountries.append(country!)
+            region.visitedCountries.append(country!) { $0.code.localized() < $1.code.localized() }
         }
         return country
     }
     
     private func findOrCreateRegion(for countryCode: String) -> Region {
-        let region: Region?
-        let regionCode = Codes.countryToRegion[countryCode]!
-        if User.sharedInstance.visitedRegions.contains(where: { $0.code == regionCode }) {
+        let regionObject: Region?
+        let region = Codes.countryToRegion[countryCode]!
+        if User.sharedInstance.visitedRegions.contains(where: { $0.code == region.code }) {
             let visitedRegions = User.sharedInstance.visitedRegions
-            region = visitedRegions.filter { $0.code == regionCode }.first
+            regionObject = visitedRegions.filter { $0.code == region.code }.first
         } else {
-            region = Region(code: regionCode)
-            User.sharedInstance.visitedRegions.append(region!)
+            regionObject = Region(code: region.code, index: Codes.Region.all.index(of: region)!)
+            User.sharedInstance.visitedRegions.append(regionObject!) { $0.index < $1.index }
         }
-        return region!
+        return regionObject!
     }
     
     private func findRegion(for country: Country) -> Region {
         return User.sharedInstance.visitedRegions.filter { $0.visitedCountries.contains(country) }.first!
     }
-    
-//    var visitedRegions: [Region] {
-//        return Region.regions.filter { region in
-//            var isRegionVisited = false
-//            for countryCode in region.countriesCodes {
-//                if User.sharedInstance.visitedCountriesCodes.contains(countryCode) {
-//                    isRegionVisited = true
-//                    break
-//                }
-//            }
-//            return isRegionVisited
-//        }
-//    }
-    
-//    var visitedRegions: [Codes.Region] {
-//        return [Codes.Region.EU]
-//    }
-    
-//    func visitedCountriesCodes(in region: Region) -> [String] {
-//        return User.sharedInstance.visitedCountries.filter { region.countriesCodes.contains($0) }
-//    }
     
 }

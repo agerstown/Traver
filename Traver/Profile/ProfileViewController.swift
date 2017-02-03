@@ -36,6 +36,7 @@ class ProfileViewController: UIViewController {
         
         self.title = "Profile".localized()
         buttonEditUserInfo.setTitle(" " + "Edit".localized(), for: .normal)
+        buttonFillInfo.setTitle("Fill profile info".localized(), for: .normal)
         
         let nib = UINib(nibName: "VisitedRegionHeaderView", bundle: nil)
         tableViewVisitedCountries.register(nib, forHeaderFooterViewReuseIdentifier: "VisitedRegionHeaderView")
@@ -47,6 +48,7 @@ class ProfileViewController: UIViewController {
         labelName.adjustsFontSizeToFitWidth = true
         labelLocation.adjustsFontSizeToFitWidth = true
         labelVisitedCountries.adjustsFontSizeToFitWidth = true
+        buttonEditUserInfo.titleLabel?.adjustsFontSizeToFitWidth = true
         
         buttonFillInfo.layer.cornerRadius = 5
         buttonFillInfo.layer.borderWidth = 1
@@ -69,11 +71,6 @@ class ProfileViewController: UIViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.CountryCodeImportedNotification, object: nil)
-        
-        //print(String())
-        //let bla = String(describing: Codes.Country.AE)
-        //print(bla)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,7 +81,6 @@ class ProfileViewController: UIViewController {
         mapImage.colorVisitedCounties()
         tableViewVisitedCountries.reloadData()
         labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountries.count)
-        //labelVisitedCountries.text = visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
     }
     
     deinit {
@@ -97,13 +93,13 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func buttonFillInfoTapped(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Profile info".localized(), message: "How do you want to fill your info?".localized(), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: "How do you want to fill your info?".localized(), preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Connect Facebook".localized(), style: .default) { _ in
             FacebookHelper.sharedInstance.login() {
                 self.updateProfileInfo()
             }
         })
-        alert.addAction(UIAlertAction(title: "Manually".localized(), style: .default) { _ in
+        alert.addAction(UIAlertAction(title: "Fill manually".localized(), style: .default) { _ in
             self.performSegue(withIdentifier: "segueToEditProfile", sender: nil)
         })
         alert.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel))
@@ -127,8 +123,6 @@ class ProfileViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navController = segue.destination as? UINavigationController {
             if let controller = navController.viewControllers[0] as? CountriesViewController {
-                //controller.selectedCountriesCodes = User.sharedInstance.visitedCountriesCodes
-                //controller.selectedCountries = User.sharedInstance.visitedCountries
                 controller.selectedCountries = Codes.Country.all.filter { (country) in
                     User.sharedInstance.visitedCountries.contains(where: { $0.code == country.code } )
                 }
@@ -140,16 +134,12 @@ class ProfileViewController: UIViewController {
     func countryCodeImported(notification: NSNotification) {
         if let countryCode = notification.userInfo?[VisitedCountriesImporter.CountryCodeInfoKey] as? String {
             if !User.sharedInstance.visitedCountries.contains(where: { $0.code == countryCode }) {
-            //if !User.sharedInstance.visitedCountriesCodes.contains(countryCode) {
                 
                 let country = User.sharedInstance.saveCountryVisit(code: countryCode)!
                 
-                //let region = Region.regions.filter { $0.countriesCodes.contains(countryCode) }[0]
                 let region = country.region
                 
-                let existingSection = User.sharedInstance.visitedRegions.contains(region)
-                
-                //User.sharedInstance.visitedCountriesCodes.append(countryCode) { Countries.codesAndNames[$0]!.localized() < Countries.codesAndNames[$1]!.localized() }
+                let isExistingSection = User.sharedInstance.visitedRegions.contains(region)
                 
                 let countriesLayers = mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
                 if let newCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
@@ -157,12 +147,10 @@ class ProfileViewController: UIViewController {
                 }
                 
                 let visitedRegions = User.sharedInstance.visitedRegions
-                let visitedCountriesInRegion = region.visitedCountries//User.sharedInstance.visitedCountriesCodes(in: region)
+                let visitedCountriesInRegion = region.visitedCountries
                 let section = visitedRegions.index(of: region)!
                 
-                if existingSection {
-                    //tableViewVisitedCountries.insertRows(at: [IndexPath(row: visitedCountriesInRegion.index(of: countryCode)!, section: section)], with: .automatic)
-                    //let indexPath = IndexPath(row: visitedCountriesInRegion.index, section: <#T##Int#>)
+                if isExistingSection {
                     tableViewVisitedCountries.insertRows(at: [IndexPath(row: visitedCountriesInRegion.index(of: country)!, section: section)], with: .automatic)
                 } else {
                     tableViewVisitedCountries.insertSections(IndexSet(integer: section), with: .automatic)
@@ -183,13 +171,11 @@ class ProfileViewController: UIViewController {
                                   duration: 0.3,
                                   options: [.transitionCrossDissolve],
                                   animations: {
-                                    //self.labelVisitedCountries.text = self.visitedCountriesText.localized(for: User.sharedInstance.visitedCountriesCodes.count)
                                     self.labelVisitedCountries.text = self.visitedCountriesText.localized(for: User.sharedInstance.visitedCountries.count)
         }, completion: nil)
     }
     
     func configureVisitedCountriesNumber(for header: VisitedRegionHeaderView, in section: Int) {
-        //header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions[section].countriesCodes.count)"
         header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.sharedInstance.visitedRegions[section].visitedCountries.count)"
     }
     
@@ -211,20 +197,16 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions[section].countriesCodes.contains($0) }
-        //return visitedCountriesInSection.count
         return User.sharedInstance.visitedRegions[section].visitedCountries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
         
-        //let visitedCountriesInSection = User.sharedInstance.visitedCountriesCodes.filter { User.sharedInstance.visitedRegions[indexPath.section].countriesCodes.contains($0) }
         let visitedCountriesInSection = User.sharedInstance.visitedRegions[indexPath.section].visitedCountries
         let country = visitedCountriesInSection[indexPath.row]
-        //cell.labelCountryName.text = Countries.codesAndNames[visitedCountriesInSection[indexPath.row]]?.localized()
+        
         cell.labelCountryName.text = country.code.localized()
-        //cell.countryCode = visitedCountriesInSection[indexPath.row]
         cell.country = country
         cell.selectionStyle = .none
         
@@ -238,15 +220,12 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             let cell = tableViewVisitedCountries.cellForRow(at: indexPath) as! VisitedCountryItemCell
-            //let countryCode = cell.countryCode!
+            
             let country = cell.country!
             
-            //User.sharedInstance.visitedCountriesCodes.removeObject(countryCode)
-            //User.sharedInstance.visitedCountries.removeObject(country)
             User.sharedInstance.removeCountryVisit(country: country)
             
             let countriesLayers = mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
-            //if let deletedCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
             if let deletedCountryLayer = countriesLayers.first(where: { $0.name! == country.code } ) {
                 deletedCountryLayer.fillColor = UIColor.countryDefaultColor.cgColor
             }
@@ -271,7 +250,7 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableViewVisitedCountries.dequeueReusableHeaderFooterView(withIdentifier: "VisitedRegionHeaderView") as! VisitedRegionHeaderView
-        header.labelRegionName.text = User.sharedInstance.visitedRegions[section].code.localized() //User.sharedInstance.visitedRegions[section].name
+        header.labelRegionName.text = User.sharedInstance.visitedRegions[section].code.localized()
         configureVisitedCountriesNumber(for: header, in: section)
         header.contentView.backgroundColor = UIColor.headerColor
         return header

@@ -65,7 +65,6 @@ class VisitedCountriesImporter {
                 
                 if let code = placemarks?[0].isoCountryCode {
                     if Codes.Country.all.contains(where: { $0.code == code } ) {
-                    //if Countries.codes.contains(code) {
                         if !self.countriesCodes.contains(code) {
                             self.countriesCodes.append(code)
                             NotificationCenter.default.post(name: VisitedCountriesImporter.CountryCodeImportedNotification,

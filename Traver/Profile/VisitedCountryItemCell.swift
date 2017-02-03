@@ -11,6 +11,9 @@ import Foundation
 class VisitedCountryItemCell: UITableViewCell {
     
     @IBOutlet weak var labelCountryName: UILabel!
-    //var countryCode: String?
     var country: Country?
+    
+    override func layoutSubviews() {
+        labelCountryName.adjustsFontSizeToFitWidth = true
+    }
 }
