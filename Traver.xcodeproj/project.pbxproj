@@ -51,7 +51,7 @@
 		615665881DE384830050AE5A /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665871DE384830050AE5A /* RecommendationsViewController.swift */; };
 		6156658A1DE384920050AE5A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665891DE384920050AE5A /* SettingsViewController.swift */; };
 		615BAD161DE3A05D00D1478D /* WorldMap.svg in Resources */ = {isa = PBXBuildFile; fileRef = 615BAD151DE3A05D00D1478D /* WorldMap.svg */; };
-		615BAD5C1DE4C13000D1478D /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5B1DE4C13000D1478D /* Countries.swift */; };
+		615BAD5C1DE4C13000D1478D /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5B1DE4C13000D1478D /* Country.swift */; };
 		615BAD5F1DE4CF9500D1478D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5E1DE4CF9500D1478D /* User.swift */; };
 		615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */; };
 		616E0ED31E34BC0700044A4C /* Codes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616E0ED21E34BC0700044A4C /* Codes.swift */; };
@@ -275,7 +275,7 @@
 		615665871DE384830050AE5A /* RecommendationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		615665891DE384920050AE5A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		615BAD151DE3A05D00D1478D /* WorldMap.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WorldMap.svg; sourceTree = "<group>"; };
-		615BAD5B1DE4C13000D1478D /* Countries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
+		615BAD5B1DE4C13000D1478D /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		615BAD5E1DE4CF9500D1478D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitedCountryItemCell.swift; sourceTree = "<group>"; };
 		616E0ED21E34BC0700044A4C /* Codes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Codes.swift; sourceTree = "<group>"; };
@@ -686,7 +686,7 @@
 			children = (
 				615BAD5E1DE4CF9500D1478D /* User.swift */,
 				612F28801DE77CFB0057E20B /* Region.swift */,
-				615BAD5B1DE4C13000D1478D /* Countries.swift */,
+				615BAD5B1DE4C13000D1478D /* Country.swift */,
 				616E0ED21E34BC0700044A4C /* Codes.swift */,
 				6133945D1E31485D0001CF2A /* Traver.xcdatamodeld */,
 			);
@@ -902,7 +902,7 @@
 				613C54DE1DF0D0C3006660B9 /* Double+Round.swift in Sources */,
 				615665401DE322D70050AE5A /* AppDelegate.swift in Sources */,
 				612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */,
-				615BAD5C1DE4C13000D1478D /* Countries.swift in Sources */,
+				615BAD5C1DE4C13000D1478D /* Country.swift in Sources */,
 				612F29B61DEB512D0057E20B /* String+Localized.swift in Sources */,
 				613394591E21B4810001CF2A /* FacebookHelper.swift in Sources */,
 				612F29C11DEB62F40057E20B /* MainTabBarController.swift in Sources */,

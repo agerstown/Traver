@@ -8,6 +8,7 @@
 
 import Foundation
 import Photos
+import CoreData
 
 class ProfileViewController: UIViewController {
     
@@ -71,6 +72,7 @@ class ProfileViewController: UIViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.CountryCodeImportedNotification, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +98,7 @@ class ProfileViewController: UIViewController {
         let alert = UIAlertController(title: nil, message: "How do you want to fill your info?".localized(), preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Connect Facebook".localized(), style: .default) { _ in
             FacebookHelper.sharedInstance.login() {
+                CoreDataStack.sharedInstance.saveContext()
                 self.updateProfileInfo()
             }
         })

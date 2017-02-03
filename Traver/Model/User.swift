@@ -7,17 +7,30 @@
 //
 
 import Foundation
+import CoreData
 
-class User {
+@objc(User)
+class User: NSManagedObject {
     
-    static let sharedInstance = User()
-
+    static var sharedInstance: User {
+        do {
+            let result = try CoreDataStack.sharedInstance.persistentContainer.viewContext.fetch(fetchUsersRequest)
+            if result.count > 0 {
+                return result.first
+            } else {
+                return User(context: CoreDataStack.sharedInstance.persistentContainer.viewContext)
+            }
+        } catch {
+            return User(context: CoreDataStack.sharedInstance.persistentContainer.viewContext)
+        }
+    }
+    
     var token: String?
-    var name: String?
+    @NSManaged var name: String?
     var photo: UIImage?
-    var facebookID: String?
-    var facebookEmail: String?
-    var location: String?
+    @NSManaged var facebookID: String?
+    @NSManaged var facebookEmail: String?
+    @NSManaged var location: String?
     
     var visitedRegions = [Region]()
     
@@ -28,6 +41,8 @@ class User {
         }
         return countries
     }
+    
+    static let fetchUsersRequest = NSFetchRequest<User>(entityName: "User")
     
     func saveCountryVisit(code: String) -> Country? {
         let region = findOrCreateRegion(for: code)

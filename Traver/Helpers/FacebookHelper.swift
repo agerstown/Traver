@@ -82,8 +82,8 @@ class FacebookHelper {
                                                 ]
                                                 
                                                 Alamofire.request("http://127.0.0.1:8000/visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).response { response in
-                                                    print(response.error)
-                                                    print(response.response)
+                                                    //print(response.error)
+                                                    //print(response.response)
                                                 }
                                             }
                                             

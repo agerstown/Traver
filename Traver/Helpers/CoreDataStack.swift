@@ -11,7 +11,9 @@ import CoreData
 
 class CoreDataStack {
     
-    lazy var persistentContainer: NSPersistentContainer = {
+    static let sharedInstance = CoreDataStack()
+    
+    var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
@@ -37,6 +39,8 @@ class CoreDataStack {
         })
         return container
     }()
+    
+    
     
     // MARK: - Core Data Saving support
     

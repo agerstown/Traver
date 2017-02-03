@@ -1,5 +1,5 @@
 //
-//  Regions.swift
+//  Region.swift
 //  Traver
 //
 //  Created by Natalia Nikitina on 11/24/16.
@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class Region: NSObject {
     

@@ -1,5 +1,5 @@
 //
-//  Countries.swift
+//  Country.swift
 //  Traver
 //
 //  Created by Natalia Nikitina on 11/22/16.
@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class Country: NSObject {
     
