@@ -34,9 +34,8 @@ class CountriesViewController: UIViewController {
     }
     
     func saveVisitedCountries() {
-        for country in selectedCountries {
-            _ = User.shared.saveCountryVisit(code: country.code)
-        }
+        let selectedCountriesCodes = selectedCountries.map { $0.code }
+        _ = User.shared.saveCountryVisits(codes: selectedCountriesCodes)
     }
 }
 
@@ -124,7 +123,7 @@ extension CountriesViewController: UISearchBarDelegate {
         for region in Codes.regions {
             let filteredCountriesForRegion = region.1.filter { filteredCountriesCodes.contains($0) }
             if filteredCountriesForRegion.count != 0 {
-                filteredRegions.append((region.0, filteredCountriesForRegion)) //[region.key] = filteredCountriesForRegion
+                filteredRegions.append((region.0, filteredCountriesForRegion))
             }
         }
         

@@ -3,10 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "CountriesViewController.numberOfSections(in : UITableView) -&gt; Int:CountriesViewController.swift">
+         contextName = "User.findOrCreateRegion(for : String) -&gt; Region:User.swift">
          <PersistentStrings>
             <PersistentString
-               value = "regions.count">
+               value = "region">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -21,6 +21,30 @@
             </PersistentString>
             <PersistentString
                value = "Codes.Region(rawValue: section)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.createCountryIfNeeded(for : String, in : Region) -&gt; Country?:User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "code.localized()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CountriesViewController.numberOfSections(in : UITableView) -&gt; Int:CountriesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "regions.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.saveCountryVisit(code : String) -&gt; Country?:User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "region.code">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -73,9 +73,13 @@ class FacebookHelper {
                                                     let json = JSON(value)
                                                     User.shared.token = json["token"].stringValue
                                                 }
+                                                
+                                                let visitedCountriesCodes = User.shared.visitedCountries.map{ $0.code }
+                                                
                                                 let params: Parameters = [
                                                     //"countries_codes": User.shared.visitedCountriesCodes
-                                                    "countries_codes": User.shared.visitedCountries
+                                                    
+                                                    "countries_codes": visitedCountriesCodes
                                                 ]
                                                 
                                                 let headers: HTTPHeaders = [

@@ -2,12 +2,12 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Country" representedClassName="Country" syncable="YES">
         <attribute name="code" attributeType="String" syncable="YES"/>
-        <relationship name="region" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="visitedCountries" inverseEntity="Region" syncable="YES"/>
+        <relationship name="region" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="visitedCountries" inverseEntity="Region" syncable="YES"/>
     </entity>
     <entity name="Region" representedClassName="Region" syncable="YES">
         <attribute name="code" attributeType="String" syncable="YES"/>
         <attribute name="index" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="visitedCountries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Country" inverseName="region" inverseEntity="Country" syncable="YES"/>
+        <relationship name="visitedCountries" toMany="YES" deletionRule="Cascade" destinationEntity="Country" inverseName="region" inverseEntity="Country" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="facebookEmail" optional="YES" attributeType="String" syncable="YES"/>

@@ -13,12 +13,17 @@ import CoreData
 class Region: NSManagedObject {
     
     @NSManaged var code: String
-    @NSManaged var index: Int
-    @NSManaged var visitedCountries: NSOrderedSet?
+    @NSManaged var index: Int16
+    @NSManaged var visitedCountries: NSOrderedSet
     
-    init(code: String, index: Int) {
+    lazy var sortedVisitedCountries: [Country] = {
+        let array = Array(self.visitedCountries) as! [Country]
+        return array.sorted { $0.code.localized() < $1.code.localized() }
+    }()
+    
+    convenience init(code: String, index: Int16) {
         let entity = NSEntityDescription.entity(forEntityName: "Region", in: CoreDataStack.shared.mainContext)!
-        super.init(entity: entity, insertInto: CoreDataStack.shared.mainContext)
+        self.init(entity: entity, insertInto: CoreDataStack.shared.mainContext)
         self.code = code
         self.index = index
     }

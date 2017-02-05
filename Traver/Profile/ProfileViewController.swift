@@ -138,7 +138,7 @@ class ProfileViewController: UIViewController {
         if let countryCode = notification.userInfo?[VisitedCountriesImporter.CountryCodeInfoKey] as? String {
             if !User.shared.visitedCountries.contains(where: { $0.code == countryCode }) {
                 
-                let country = User.shared.saveCountryVisit(code: countryCode)!
+                let country = User.shared.saveCountryVisits(codes: [countryCode]).first!// .saveCountryVisit(code: countryCode)!
                 
                 let region = country.region
                 
@@ -150,7 +150,7 @@ class ProfileViewController: UIViewController {
                 }
                 
                 let visitedRegions = User.shared.visitedRegions
-                let visitedCountriesInRegion = region.visitedCountries
+                let visitedCountriesInRegion = region.sortedVisitedCountries//.visitedCountries
                 let section = visitedRegions.index(of: region)!
                 
                 if isExistingSection {
@@ -179,7 +179,8 @@ class ProfileViewController: UIViewController {
     }
     
     func configureVisitedCountriesNumber(for header: VisitedRegionHeaderView, in section: Int) {
-        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.shared.visitedRegions[section].visitedCountries.count)"
+        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.shared.visitedRegions[section].sortedVisitedCountries.count)"
+
     }
     
     func configureVisitedCountriesNumberAnimated(for header: VisitedRegionHeaderView, in section: Int) {
@@ -200,13 +201,13 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return User.shared.visitedRegions[section].visitedCountries.count
+        return User.shared.visitedRegions[section].sortedVisitedCountries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
         
-        let visitedCountriesInSection = User.shared.visitedRegions[indexPath.section].visitedCountries
+        let visitedCountriesInSection = User.shared.visitedRegions[indexPath.section].sortedVisitedCountries
         let country = visitedCountriesInSection[indexPath.row]
         
         cell.labelCountryName.text = country.code.localized()
@@ -226,12 +227,12 @@ extension ProfileViewController: UITableViewDataSource {
             
             let country = cell.country!
             
-            User.shared.removeCountryVisit(country: country)
-            
             let countriesLayers = mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
             if let deletedCountryLayer = countriesLayers.first(where: { $0.name! == country.code } ) {
                 deletedCountryLayer.fillColor = UIColor.countryDefaultColor.cgColor
             }
+            
+            User.shared.removeCountryVisit(country: country)
             
             if tableViewVisitedCountries.numberOfRows(inSection: indexPath.section) == 1 {
                 tableViewVisitedCountries.deleteSections([indexPath.section], with: .automatic)
