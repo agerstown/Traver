@@ -11,7 +11,7 @@ import Photos
 
 class PhotosAccessManager {
     
-    static let sharedInstance = PhotosAccessManager()
+    static let shared = PhotosAccessManager()
     
     func shareToPhotoAlbum(controller: UIViewController) {
         switch (PHPhotoLibrary.authorizationStatus()) {
@@ -22,34 +22,34 @@ class PhotosAccessManager {
                 if status ==  .authorized {
                     ShareManager.sharedInstance.saveProfileSharePicture()
                 } else {
-                    PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: controller, withTitle: "Impossible to save a picture to Photos")
+                    PhotosAccessManager.shared.showAlertAllowAccessToPhotos(on: controller, withTitle: "Impossible to save a picture to Photos")
                 }
             })
         case .denied:
-            PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: controller, withTitle: "Impossible to save a picture to Photos")
+            PhotosAccessManager.shared.showAlertAllowAccessToPhotos(on: controller, withTitle: "Impossible to save a picture to Photos")
         case .restricted:
-            PhotosAccessManager.sharedInstance.showAlertRestrictedAccess(on: controller, withMessage: "We can't save a picture with your Profile to Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.")
+            PhotosAccessManager.shared.showAlertRestrictedAccess(on: controller, withMessage: "We can't save a picture with your Profile to Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.")
         }
     }
     
     func importVisitedCountries(controller: UIViewController) {
         switch (PHPhotoLibrary.authorizationStatus()) {
         case .authorized:
-            VisitedCountriesImporter.sharedInstance.fetchVisitedCountriesCodesFromPhotos()
-            StatusBarManager.sharedInstance.showCustomStatusBar(with: "Import has been started".localized())
+            VisitedCountriesImporter.shared.fetchVisitedCountriesCodesFromPhotos()
+            StatusBarManager.shared.showCustomStatusBar(with: "Import has been started".localized())
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization({ (status) -> Void in
                 if status ==  .authorized {
-                    VisitedCountriesImporter.sharedInstance.fetchVisitedCountriesCodesFromPhotos()
-                    StatusBarManager.sharedInstance.showCustomStatusBar(with: "Import has been started".localized())
+                    VisitedCountriesImporter.shared.fetchVisitedCountriesCodesFromPhotos()
+                    StatusBarManager.shared.showCustomStatusBar(with: "Import has been started".localized())
                 } else {
-                    PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: controller, withTitle: "Import is impossible")
+                    PhotosAccessManager.shared.showAlertAllowAccessToPhotos(on: controller, withTitle: "Import is impossible")
                 }
             })
         case .denied:
-            PhotosAccessManager.sharedInstance.showAlertAllowAccessToPhotos(on: controller, withTitle: "Import is impossible")
+            PhotosAccessManager.shared.showAlertAllowAccessToPhotos(on: controller, withTitle: "Import is impossible")
         case .restricted:
-            PhotosAccessManager.sharedInstance.showAlertRestrictedAccess(on: controller, withMessage: "We can't import visited countries from your Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.")
+            PhotosAccessManager.shared.showAlertRestrictedAccess(on: controller, withMessage: "We can't import visited countries from your Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.")
         }
     }
     

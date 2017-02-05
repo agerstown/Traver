@@ -47,10 +47,10 @@ class SettingsViewController: UITableViewController {
         if let cell = tableViewSettings.cellForRow(at: indexPath) {
             switch (cell) {
             case cellImportFromPhotos:
-                PhotosAccessManager.sharedInstance.importVisitedCountries(controller: self)
+                PhotosAccessManager.shared.importVisitedCountries(controller: self)
             case cellFacebook:
-                FacebookHelper.sharedInstance.login() {
-                    cell.detailTextLabel?.text = User.sharedInstance.facebookEmail
+                FacebookHelper.shared.login() {
+                    cell.detailTextLabel?.text = User.shared.facebookEmail
                     self.tableViewSettings.reloadData()
                 }
             default: ()

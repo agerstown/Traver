@@ -9,12 +9,15 @@
 import Foundation
 import CoreData
 
+@objc(Country)
 class Country: NSObject {
     
-    var code: String
-    var region: Region
-    
+    @NSManaged var code: String
+    @NSManaged var region: Region
+
     init(code: String, region: Region) {
+        let entity = NSEntityDescription.entity(forEntityName: "Region", in: CoreDataStack.shared.mainContext)!
+        super.init(entity: entity, insertInto: CoreDataStack.shared.mainContext)
         self.code = code
         self.region = region
     }

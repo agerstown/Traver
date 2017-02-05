@@ -35,7 +35,7 @@ class CountriesViewController: UIViewController {
     
     func saveVisitedCountries() {
         for country in selectedCountries {
-            _ = User.sharedInstance.saveCountryVisit(code: country.code)
+            _ = User.shared.saveCountryVisit(code: country.code)
         }
     }
 }

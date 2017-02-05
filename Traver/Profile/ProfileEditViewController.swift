@@ -23,15 +23,15 @@ class ProfileEditViewController: UITableViewController {
         textFieldName.placeholder = "Name".localized()
         textFieldLocation.placeholder = "Location".localized()
         
-        if User.sharedInstance.photo != nil {
+        if User.shared.photo != nil {
             buttonPhoto.imageView?.layer.cornerRadius = buttonPhoto.frame.height / 2
-            buttonPhoto.setImage(User.sharedInstance.photo, for: .normal)
+            buttonPhoto.setImage(User.shared.photo, for: .normal)
         } else {
             buttonPhoto.setImage(UIImage(named: "default_photo"), for: .normal)
         }
         
-        textFieldName.text = User.sharedInstance.name
-        textFieldLocation.text = User.sharedInstance.location
+        textFieldName.text = User.shared.name
+        textFieldLocation.text = User.shared.location
     }
     
     // MARK: - Actions
@@ -40,9 +40,9 @@ class ProfileEditViewController: UITableViewController {
     }
     
     @IBAction func buttonSaveTapped(_ sender: UIBarButtonItem) {
-        User.sharedInstance.name = textFieldName.text
-        User.sharedInstance.location = textFieldLocation.text
-        CoreDataStack.sharedInstance.saveContext()
+        User.shared.name = textFieldName.text
+        User.shared.location = textFieldLocation.text
+        CoreDataStack.shared.saveContext()
         self.dismiss(animated: true, completion: nil)
     }
     

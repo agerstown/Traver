@@ -15,7 +15,7 @@ import SwiftyJSON
 
 class FacebookHelper {
     
-    static let sharedInstance = FacebookHelper()
+    static let shared = FacebookHelper()
     
     let loginManager = LoginManager()
     
@@ -40,24 +40,25 @@ class FacebookHelper {
                             self.showErrorAlert(for: error)
                         case .success(let graphResponse):
                             if let responseDictionary = graphResponse.dictionaryValue {
-                                User.sharedInstance.facebookID = responseDictionary["id"] as! String?
-                                User.sharedInstance.name = responseDictionary["name"] as! String?
-                                User.sharedInstance.facebookEmail = responseDictionary["email"] as! String?
+                                User.shared.facebookID = responseDictionary["id"] as! String?
+                                User.shared.name = responseDictionary["name"] as! String?
+                                User.shared.facebookEmail = responseDictionary["email"] as! String?
                                 let location = responseDictionary["location"] as! NSDictionary
-                                User.sharedInstance.location = location["name"] as! String?
+                                User.shared.location = location["name"] as! String?
                                 
-                                if let url = URL(string:"https://graph.facebook.com/\(User.sharedInstance.facebookID!)/picture?width=160&height=160") {
+                                if let url = URL(string:"https://graph.facebook.com/\(User.shared.facebookID!)/picture?width=160&height=160") {
                                     Alamofire.request(url).responseImage { response in
                                         if let image = response.result.value {
-                                            User.sharedInstance.photo = image
+                                            //User.shared.photo = image
+                                            User.shared.photoData = UIImagePNGRepresentation(image) as Data?
                                             
                                             let parameters: Parameters = [
-                                                "username": "fb\(User.sharedInstance.facebookID!)",
+                                                "username": "fb\(User.shared.facebookID!)",
                                                 "profile": [
-                                                    "name": User.sharedInstance.name!,
-                                                    "facebook_id": User.sharedInstance.facebookID!,
-                                                    "facebook_email": User.sharedInstance.facebookEmail!,
-                                                    "location": User.sharedInstance.location!
+                                                    "name": User.shared.name!,
+                                                    "facebook_id": User.shared.facebookID!,
+                                                    "facebook_email": User.shared.facebookEmail!,
+                                                    "location": User.shared.location!
                                                 ]
                                             ]
                                             
@@ -70,15 +71,15 @@ class FacebookHelper {
                                                 if let value = response.result.value {
                                                     print(value)
                                                     let json = JSON(value)
-                                                    User.sharedInstance.token = json["token"].stringValue
+                                                    User.shared.token = json["token"].stringValue
                                                 }
                                                 let params: Parameters = [
-                                                    //"countries_codes": User.sharedInstance.visitedCountriesCodes
-                                                    "countries_codes": User.sharedInstance.visitedCountries
+                                                    //"countries_codes": User.shared.visitedCountriesCodes
+                                                    "countries_codes": User.shared.visitedCountries
                                                 ]
                                                 
                                                 let headers: HTTPHeaders = [
-                                                    "Authorization": "Token \(User.sharedInstance.token!)"
+                                                    "Authorization": "Token \(User.shared.token!)"
                                                 ]
                                                 
                                                 Alamofire.request("http://127.0.0.1:8000/visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).response { response in

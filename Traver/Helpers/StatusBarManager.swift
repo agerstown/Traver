@@ -11,7 +11,7 @@ import CWStatusBarNotification
 
 class StatusBarManager {
 
-    static let sharedInstance = StatusBarManager()
+    static let shared = StatusBarManager()
     
     func showCustomStatusBar(with text: String) {
         let notification = CWStatusBarNotification()
