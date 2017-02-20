@@ -30,8 +30,14 @@ class SettingsViewController: UITableViewController {
         cellFacebook.detailTextLabel?.text?.removeAll()
         
         tableViewSettings.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(profileInfoUpdated), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // MARK: - UITableViewDataSource
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionsHeaders[section]
@@ -49,12 +55,15 @@ class SettingsViewController: UITableViewController {
             case cellImportFromPhotos:
                 PhotosAccessManager.shared.importVisitedCountries(controller: self)
             case cellFacebook:
-                FacebookHelper.shared.login() {
-                    cell.detailTextLabel?.text = User.shared.facebookEmail
-                    self.tableViewSettings.reloadData()
-                }
+                FacebookHelper.shared.login()
             default: ()
             }
         }
+    }
+    
+    // MARK: - Notifications
+    func profileInfoUpdated() {
+        cellFacebook.detailTextLabel?.text = User.shared.facebookEmail
+        self.tableViewSettings.reloadData()
     }
 }

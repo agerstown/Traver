@@ -9,4 +9,5 @@ target 'Traver' do
 	pod 'Alamofire', '~> 4.0'
 	pod 'AlamofireImage'
 	pod 'SwiftyJSON'
+	pod 'SwiftKeychainWrapper'
 end

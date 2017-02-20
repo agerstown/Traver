@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftKeychainWrapper
 
 @objc(User)
 class User: NSManagedObject {
@@ -17,12 +18,21 @@ class User: NSManagedObject {
         let users = try! CoreDataStack.shared.mainContext.fetch(frUser)
         if users.count > 0 {
             let user = users.first!
+            
             let frRegion = NSFetchRequest<Region>(entityName: "Region")
             let visitedRegions = try! CoreDataStack.shared.mainContext.fetch(frRegion)
             user.visitedRegions = visitedRegions.sorted { $0.index < $1.index }
+            
+            user.token = KeychainWrapper.standard.string(forKey: "token")
+            if let token = user.token {
+                if !token.isEmpty {
+                    UserApiManager.shared.getUserInfo(user: user)
+                }
+            }
+            
             return user
         } else {
-            return User(context: CoreDataStack.shared.persistentContainer.viewContext)
+            return User(context: CoreDataStack.shared.mainContext)
         }
     }()
     
@@ -30,7 +40,7 @@ class User: NSManagedObject {
     @NSManaged var name: String?
     @NSManaged var photoData: Data?
     var photo: UIImage? {
-        if let data = photoData {
+        if let data = self.photoData {
             return UIImage(data: data)
         } else {
             return nil
@@ -71,6 +81,10 @@ class User: NSManagedObject {
             CoreDataStack.shared.mainContext.delete(country)
             region.sortedVisitedCountries.removeObject(country)
         }
+        CoreDataStack.shared.saveContext()
+    }
+    
+    func updateInfo() {
         CoreDataStack.shared.saveContext()
     }
     

@@ -19,7 +19,7 @@ class FacebookHelper {
     
     let loginManager = LoginManager()
     
-    func login(completion: @escaping () -> Void) {
+    func login() {
         if AccessToken.current != nil {
             let alert = UIAlertController(title: "Facebook".localized(), message: "Do you want to disconnect your account?".localized(), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "No".localized(), style: .cancel))
@@ -41,60 +41,26 @@ class FacebookHelper {
                         case .success(let graphResponse):
                             if let responseDictionary = graphResponse.dictionaryValue {
                                 User.shared.facebookID = responseDictionary["id"] as! String?
-                                User.shared.name = responseDictionary["name"] as! String?
                                 User.shared.facebookEmail = responseDictionary["email"] as! String?
-                                let location = responseDictionary["location"] as! NSDictionary
-                                User.shared.location = location["name"] as! String?
+                                
+                                if User.shared.name == nil || (User.shared.name?.isEmpty)! {
+                                    User.shared.name = responseDictionary["name"] as! String?
+                                }
+                                if User.shared.location == nil || (User.shared.location?.isEmpty)! {
+                                    let location = responseDictionary["location"] as! NSDictionary
+                                    User.shared.location = location["name"] as! String?
+                                }
                                 
                                 if let url = URL(string:"https://graph.facebook.com/\(User.shared.facebookID!)/picture?width=160&height=160") {
                                     Alamofire.request(url).responseImage { response in
                                         if let image = response.result.value {
-                                            //User.shared.photo = image
                                             User.shared.photoData = UIImagePNGRepresentation(image) as Data?
-                                            
-                                            let parameters: Parameters = [
-                                                "username": "fb\(User.shared.facebookID!)",
-                                                "profile": [
-                                                    "name": User.shared.name!,
-                                                    "facebook_id": User.shared.facebookID!,
-                                                    "facebook_email": User.shared.facebookEmail!,
-                                                    "location": User.shared.location!
-                                                ]
-                                            ]
-                                            
-                                            
-                                            
-                                            // http://127.0.0.1:8000/
-                                            // http://django-env.g6jwzu7n6j.us-east-1.elasticbeanstalk.com/
-                                            
-                                            Alamofire.request("http://127.0.0.1:8000/users/", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-                                                if let value = response.result.value {
-                                                    print(value)
-                                                    let json = JSON(value)
-                                                    User.shared.token = json["token"].stringValue
-                                                }
-                                                
-                                                let visitedCountriesCodes = User.shared.visitedCountries.map{ $0.code }
-                                                
-                                                let params: Parameters = [
-                                                    //"countries_codes": User.shared.visitedCountriesCodes
-                                                    
-                                                    "countries_codes": visitedCountriesCodes
-                                                ]
-                                                
-                                                let headers: HTTPHeaders = [
-                                                    "Authorization": "Token \(User.shared.token!)"
-                                                ]
-                                                
-                                                Alamofire.request("http://127.0.0.1:8000/visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).response { response in
-                                                    //print(response.error)
-                                                    //print(response.response)
-                                                }
-                                            }
-                                            
-                                            completion()
                                         }
+                                        
+                                        UserApiManager.shared.getOrCreateUserWithFacebook(id: User.shared.facebookID!)
+                                        //completion()
                                     }
+                                    
                                 }
                             }
                         }

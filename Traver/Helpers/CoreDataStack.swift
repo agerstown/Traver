@@ -19,9 +19,9 @@ class CoreDataStack {
         return container
     }()
     
-    var mainContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
+    lazy var mainContext: NSManagedObjectContext = {
+        return self.persistentContainer.viewContext
+    }()
     
     func saveContext () {
         try? mainContext.save()

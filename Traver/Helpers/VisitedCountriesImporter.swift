@@ -14,8 +14,8 @@ class VisitedCountriesImporter {
     static let shared = VisitedCountriesImporter()
     
     // MARK: - Notifications
-    static let CountryCodeImportedNotification = NSNotification.Name(rawValue: "CountryCodeImportedNotification")
-    static let CountryCodeInfoKey = "CountryCodeInfoKey"
+    let CountryCodeImportedNotification = NSNotification.Name(rawValue: "CountryCodeImportedNotification")
+    let CountryCodeInfoKey = "CountryCodeInfoKey"
     
     // MARK: - Import from Photos
     private var locationsCounter = 0
@@ -67,9 +67,9 @@ class VisitedCountriesImporter {
                     if Codes.Country.all.contains(where: { $0.code == code } ) {
                         if !self.countriesCodes.contains(code) {
                             self.countriesCodes.append(code)
-                            NotificationCenter.default.post(name: VisitedCountriesImporter.CountryCodeImportedNotification,
+                            NotificationCenter.default.post(name: self.CountryCodeImportedNotification,
                                                             object: nil,
-                                                            userInfo: [VisitedCountriesImporter.CountryCodeInfoKey : code])
+                                                            userInfo: [self.CountryCodeInfoKey : code])
                         }
                     }
                 }

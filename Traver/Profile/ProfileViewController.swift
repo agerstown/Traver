@@ -9,6 +9,7 @@
 import Foundation
 import Photos
 import CoreData
+import Alamofire
 
 class ProfileViewController: UIViewController {
     
@@ -71,7 +72,9 @@ class ProfileViewController: UIViewController {
             viewMap.addSubview(imageView)
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.CountryCodeImportedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: UserApiManager.shared.CountriesUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(profileInfoUpdated), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
         
     }
     
@@ -79,10 +82,7 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         
         updateProfileInfo()
-        
-        mapImage.colorVisitedCounties()
-        tableViewVisitedCountries.reloadData()
-        labelVisitedCountries.text = visitedCountriesText.localized(for: User.shared.visitedCountries.count)
+        updateCountriesRelatedInfo()
     }
     
     deinit {
@@ -97,10 +97,7 @@ class ProfileViewController: UIViewController {
     @IBAction func buttonFillInfoTapped(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: "How do you want to fill your info?".localized(), preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Connect Facebook".localized(), style: .default) { _ in
-            FacebookHelper.shared.login() {
-                CoreDataStack.shared.saveContext()
-                self.updateProfileInfo()
-            }
+            FacebookHelper.shared.login()
         })
         alert.addAction(UIAlertAction(title: "Fill manually".localized(), style: .default) { _ in
             self.performSegue(withIdentifier: "segueToEditProfile", sender: nil)
@@ -116,6 +113,12 @@ class ProfileViewController: UIViewController {
         labelLocation.text = User.shared.location
         
         imageViewPhoto.image = User.shared.photo != nil ? User.shared.photo : UIImage(named: "default_photo")
+    }
+    
+    func updateCountriesRelatedInfo() {
+        mapImage.colorVisitedCounties()
+        tableViewVisitedCountries.reloadData()
+        labelVisitedCountries.text = visitedCountriesText.localized(for: User.shared.visitedCountries.count)
     }
     
     @IBAction func buttonEditTapped(_ sender: UIButton) {
@@ -135,7 +138,7 @@ class ProfileViewController: UIViewController {
 
     // MARK: - Notifications
     func countryCodeImported(notification: NSNotification) {
-        if let countryCode = notification.userInfo?[VisitedCountriesImporter.CountryCodeInfoKey] as? String {
+        if let countryCode = notification.userInfo?[VisitedCountriesImporter.shared.CountryCodeInfoKey] as? String {
             if !User.shared.visitedCountries.contains(where: { $0.code == countryCode }) {
                 
                 let country = User.shared.saveCountryVisits(codes: [countryCode]).first!// .saveCountryVisit(code: countryCode)!
@@ -166,6 +169,14 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func countriesUpdated() {
+        updateCountriesRelatedInfo()
+    }
+    
+    func profileInfoUpdated() {
+        updateProfileInfo()
     }
     
     // MARK: - UI updates

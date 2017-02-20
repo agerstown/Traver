@@ -42,7 +42,7 @@ class ProfileEditViewController: UITableViewController {
     @IBAction func buttonSaveTapped(_ sender: UIBarButtonItem) {
         User.shared.name = textFieldName.text
         User.shared.location = textFieldLocation.text
-        CoreDataStack.shared.saveContext()
+        UserApiManager.shared.updateUserInfo()
         self.dismiss(animated: true, completion: nil)
     }
     

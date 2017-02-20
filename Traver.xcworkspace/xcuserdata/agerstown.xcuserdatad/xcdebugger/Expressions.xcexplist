@@ -3,24 +3,26 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "User.findOrCreateRegion(for : String) -&gt; Region:User.swift">
+         contextName = "UserApiManager.getUser() -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "region">
+               value = "User.shared.token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CountriesViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CountriesViewController.swift">
+         contextName = "User.saveCountryVisit(code : String) -&gt; Country?:User.swift">
          <PersistentStrings>
             <PersistentString
-               value = "regions">
+               value = "region.code">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.findOrCreateRegion(for : String) -&gt; Region:User.swift">
+         <PersistentStrings>
             <PersistentString
-               value = "regionsWithCountries">
-            </PersistentString>
-            <PersistentString
-               value = "Codes.Region(rawValue: section)">
+               value = "region">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -33,6 +35,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "static User.(shared).(variable initialization expression).(closure #1):User.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CountriesViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CountriesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "regions">
+            </PersistentString>
+            <PersistentString
+               value = "Codes.Region(rawValue: section)">
+            </PersistentString>
+            <PersistentString
+               value = "regionsWithCountries">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "CountriesViewController.numberOfSections(in : UITableView) -&gt; Int:CountriesViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -41,10 +60,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "User.saveCountryVisit(code : String) -&gt; Country?:User.swift">
+         contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "region.code">
+               value = "user.location">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.facebookEmail">
+            </PersistentString>
+            <PersistentString
+               value = "user.facebookID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
