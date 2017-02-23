@@ -19,6 +19,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2):ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "country.code">
+            </PersistentString>
+            <PersistentString
+               value = "region.code">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.visitedCountries">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.visitedRegions">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "User.findOrCreateRegion(for : String) -&gt; Region:User.swift">
          <PersistentStrings>
             <PersistentString
@@ -36,6 +53,14 @@
       </ContextState>
       <ContextState
          contextName = "static User.(shared).(variable initialization expression).(closure #1):User.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CountriesViewController.buttonDoneClicked(UIBarButtonItem) -&gt; ():CountriesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedCountries">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "CountriesViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CountriesViewController.swift">
@@ -70,6 +95,14 @@
             </PersistentString>
             <PersistentString
                value = "user.facebookID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2).(closure #1):ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "country">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

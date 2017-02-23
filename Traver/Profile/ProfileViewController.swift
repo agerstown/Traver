@@ -140,32 +140,38 @@ class ProfileViewController: UIViewController {
     func countryCodeImported(notification: NSNotification) {
         if let countryCode = notification.userInfo?[VisitedCountriesImporter.shared.CountryCodeInfoKey] as? String {
             if !User.shared.visitedCountries.contains(where: { $0.code == countryCode }) {
-                
-                let country = User.shared.saveCountryVisits(codes: [countryCode]).first!// .saveCountryVisit(code: countryCode)!
-                
-                let region = country.region
-                
-                let isExistingSection = User.shared.visitedRegions.contains(region)
-                
-                let countriesLayers = mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
-                if let newCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
-                    newCountryLayer.fillColor = UIColor.blue.cgColor
-                }
-                
-                let visitedRegions = User.shared.visitedRegions
-                let visitedCountriesInRegion = region.sortedVisitedCountries//.visitedCountries
-                let section = visitedRegions.index(of: region)!
-                
-                if isExistingSection {
-                    tableViewVisitedCountries.insertRows(at: [IndexPath(row: visitedCountriesInRegion.index(of: country)!, section: section)], with: .automatic)
-                } else {
-                    tableViewVisitedCountries.insertSections(IndexSet(integer: section), with: .automatic)
-                }
-                
-                updateNumberOfVisitedCountriesAnimated()
-                
-                if let header = tableViewVisitedCountries.headerView(forSection: section) as? VisitedRegionHeaderView {
-                    configureVisitedCountriesNumberAnimated(for: header, in: section)
+                var visitedCountriesCodes = User.shared.visitedCountries.map { $0.code }
+                visitedCountriesCodes.append(countryCode)
+                UserApiManager.shared.updateCountryVisits(codes: visitedCountriesCodes) {
+                    let country = User.shared.visitedCountries.filter { $0.code == countryCode }.first!
+                //if let country = User.shared.updateCountryVisits(codes: [countryCode]).first {
+                    let region = country.region
+                    
+                    //let isExistingSection = User.shared.visitedRegions.contains(region)
+                    
+                    let countriesLayers = self.mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
+                    if let newCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
+                        newCountryLayer.fillColor = UIColor.blue.cgColor
+                    }
+                    
+                    let visitedRegions = User.shared.visitedRegions
+                    let visitedCountriesInRegion = region.sortedVisitedCountries//.visitedCountries
+                    
+                    let isExistingSection = visitedCountriesInRegion.count == 1 ? false : true
+                    
+                    let section = visitedRegions.index(of: region)!
+                    
+                    if isExistingSection {
+                        self.tableViewVisitedCountries.insertRows(at: [IndexPath(row: visitedCountriesInRegion.index(of: country)!, section: section)], with: .automatic)
+                    } else {
+                        self.tableViewVisitedCountries.insertSections(IndexSet(integer: section), with: .automatic)
+                    }
+                    
+                    self.updateNumberOfVisitedCountriesAnimated()
+                    
+                    if let header = self.tableViewVisitedCountries.headerView(forSection: section) as? VisitedRegionHeaderView {
+                        self.configureVisitedCountriesNumberAnimated(for: header, in: section)
+                    }
                 }
             }
         }

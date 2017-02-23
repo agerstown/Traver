@@ -61,15 +61,20 @@ class User: NSManagedObject {
         return countries
     }
     
-    func saveCountryVisits(codes: [String]) -> [Country] {
-        var countries: [Country] = []
-        for code in codes {
-            if let country = saveCountryVisit(code: code) {
-                countries.append(country)
+    func updateCountryVisits(codes: [String]) {
+        let currentCountryVisits = User.shared.visitedCountries
+
+        for country in currentCountryVisits {
+            if !codes.contains(country.code) {
+                removeCountryVisit(country: country)
             }
         }
+        
+        for code in codes {
+            saveCountryVisit(code: code)
+        }
+        
         CoreDataStack.shared.saveContext()
-        return countries
     }
     
     func removeCountryVisit(country: Country) {
@@ -88,20 +93,22 @@ class User: NSManagedObject {
         CoreDataStack.shared.saveContext()
     }
     
-    private func saveCountryVisit(code: String) -> Country? {
+    private func saveCountryVisit(code: String) {
         let region = findOrCreateRegion(for: code)
-        return createCountryIfNeeded(for: code, in: region)
+        createCountryIfNeeded(for: code, in: region)
     }
     
-    private func createCountryIfNeeded(for code: String, in region: Region) -> Country? {
-        var country: Country?
+    private func createCountryIfNeeded(for code: String, in region: Region) {
         if !User.shared.visitedCountries.contains(where: { $0.code == code }) {
-            country = Country(code: code, region: region)
-            if !region.sortedVisitedCountries.contains(country!) {
-                region.sortedVisitedCountries.append(country!) { $0.code.localized() < $1.code.localized() }
+            let country = Country(code: code, region: region)
+            if !region.sortedVisitedCountries.contains(country) {
+                region.sortedVisitedCountries.append(country) { $0.code.localized() < $1.code.localized() }
             }
+            //CoreDataStack.shared.saveContext()
+//            if !region.visitedCountries.contains(country!) {
+//                region.visitedCountries.append(country!) { $0.code.localized() < $1.code.localized() }
+//            }
         }
-        return country
     }
     
     private func findOrCreateRegion(for countryCode: String) -> Region {
@@ -113,6 +120,7 @@ class User: NSManagedObject {
         } else {
             regionObject = Region(code: region.code, index: Int16(Codes.Region.all.index(of: region)!))
             User.shared.visitedRegions.append(regionObject!) { $0.index < $1.index }
+            //CoreDataStack.shared.saveContext()
         }
         return regionObject!
     }

@@ -29,14 +29,16 @@ class CountriesViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func buttonDoneClicked(_ button: UIBarButtonItem) {
-        saveVisitedCountries()
+        UserApiManager.shared.updateCountryVisits(codes: selectedCountries.map { $0.code }, completion: nil)
+        //updateVisitedCountries()
         self.dismiss(animated: true, completion: nil)
     }
     
-    func saveVisitedCountries() {
-        let selectedCountriesCodes = selectedCountries.map { $0.code }
-        _ = User.shared.saveCountryVisits(codes: selectedCountriesCodes)
-    }
+//    func updateVisitedCountries() {
+//        //let selectedCountriesCodes = selectedCountries.map { $0.code }
+//        UserApiManager.shared.updateCountryVisits()
+//        //_ = User.shared.updateCountryVisits(codes: selectedCountriesCodes)
+//    }
 }
 
 // MARK: - UITableViewDataSource

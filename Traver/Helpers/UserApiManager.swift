@@ -94,14 +94,53 @@ class UserApiManager {
                 if response.response?.statusCode == 200 {
                     User.shared.updateInfo()
                 } else {
-                    let alert = UIAlertController(title: "Error".localized(), message: "Check your Internet connection. Status code" + ": \(response.response?.statusCode)", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK".localized(), style: .default))
-                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
+                    self.showNoInternetErrorAlert(response: response)
                 }
             }
         } else {
             User.shared.updateInfo()
         }
+    }
+    
+    func updateCountryVisits(codes: [String], completion: (() -> Void)?) {
+        //if !User.shared.visitedRegions.isEmpty {
+            //let visitedCountriesCodes = User.shared.visitedCountries.map{ $0.code }
+        
+            if User.shared.token != nil && !User.shared.token!.isEmpty {
+                let params: Parameters = [
+                    "countries_codes": codes
+                ]
+                
+                let headers: HTTPHeaders = [
+                    "Authorization": "Token \(User.shared.token!)"
+                ]
+                
+                _ = Alamofire.request("http://127.0.0.1:8000/visits/update-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                    if response.response?.statusCode == 200 {
+                        User.shared.updateCountryVisits(codes: codes)
+                        if let completion = completion {
+                            completion()
+                        }
+                        //NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
+                    } else {
+                        self.showNoInternetErrorAlert(response: response)
+                    }
+                }
+            } else {
+                User.shared.updateCountryVisits(codes: codes)
+                if let completion = completion {
+                    completion()
+                }
+                
+                //NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
+            }
+        //}
+    }
+    
+    private func showNoInternetErrorAlert(response: DataResponse<Any>) {
+        let alert = UIAlertController(title: "Error".localized(), message: "Check your Internet connection. Status code" + ": \(response.response?.statusCode)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK".localized(), style: .default))
+        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
     }
     
     private func parseAndSaveUser(user: User, from responseValue: Any) {
@@ -135,7 +174,7 @@ class UserApiManager {
                     visitedCountriesCodes.append(code)
                 }
                 
-                _ = user.saveCountryVisits(codes: visitedCountriesCodes)
+                user.updateCountryVisits(codes: visitedCountriesCodes)
                 NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
             }
         }
@@ -144,20 +183,26 @@ class UserApiManager {
     
     private func createUser(parameters: Parameters) {
         Alamofire.request("http://127.0.0.1:8000/users/", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-            if let value = response.result.value {
-                let json = JSON(value)
-                
-                let token = json["token"].stringValue
-                KeychainWrapper.standard.set(token, forKey: "token")
-                User.shared.token = json["token"].stringValue
-                
-                self.createCountryVisits(completion: nil)
+            if response.response?.statusCode == 201 {
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    
+                    let token = json["token"].stringValue
+                    KeychainWrapper.standard.set(token, forKey: "token")
+                    User.shared.token = json["token"].stringValue
+                    
+                    NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
+                    
+                    self.createCountryVisits()
+                }
+            } else {
+                self.showNoInternetErrorAlert(response: response)
             }
         }
     }
     
-    private func createCountryVisits(completion: (() -> Void)?) {
-        if !User.shared.visitedRegions.isEmpty {
+    private func createCountryVisits() {
+        //if !User.shared.visitedRegions.isEmpty {
             let visitedCountriesCodes = User.shared.visitedCountries.map{ $0.code }
             
             let params: Parameters = [
@@ -168,12 +213,14 @@ class UserApiManager {
                 "Authorization": "Token \(User.shared.token!)"
             ]
             
-            _ = Alamofire.request("http://127.0.0.1:8000/visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).response { _ in
-                if let completion = completion {
-                    completion()
+            _ = Alamofire.request("http://127.0.0.1:8000/visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                if response.response?.statusCode == 201 {
+                    User.shared.updateCountryVisits(codes: visitedCountriesCodes)
+                } else {
+                    self.showNoInternetErrorAlert(response: response)
                 }
             }
-        }
+        //}
     }
     
     private func updateUser(token: String, completion: (() -> Void)?) {
@@ -194,7 +241,10 @@ class UserApiManager {
                     completion()
                 }
             } else {
-                self.createCountryVisits(completion: completion)
+                self.updateCountryVisits(codes: User.shared.visitedCountries.map{ $0.code }) {
+                    NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
+                }
+                //self.createCountryVisits(completion: completion)
             }
         }
     }
