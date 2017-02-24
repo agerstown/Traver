@@ -144,10 +144,7 @@ class ProfileViewController: UIViewController {
                 visitedCountriesCodes.append(countryCode)
                 UserApiManager.shared.updateCountryVisits(codes: visitedCountriesCodes) {
                     let country = User.shared.visitedCountries.filter { $0.code == countryCode }.first!
-                //if let country = User.shared.updateCountryVisits(codes: [countryCode]).first {
                     let region = country.region
-                    
-                    //let isExistingSection = User.shared.visitedRegions.contains(region)
                     
                     let countriesLayers = self.mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
                     if let newCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
@@ -155,7 +152,7 @@ class ProfileViewController: UIViewController {
                     }
                     
                     let visitedRegions = User.shared.visitedRegions
-                    let visitedCountriesInRegion = region.sortedVisitedCountries//.visitedCountries
+                    let visitedCountriesInRegion = region.sortedVisitedCountries
                     
                     let isExistingSection = visitedCountriesInRegion.count == 1 ? false : true
                     
@@ -243,25 +240,27 @@ extension ProfileViewController: UITableViewDataSource {
             let cell = tableViewVisitedCountries.cellForRow(at: indexPath) as! VisitedCountryItemCell
             
             let country = cell.country!
+            let code = country.code
             
-            let countriesLayers = mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
-            if let deletedCountryLayer = countriesLayers.first(where: { $0.name! == country.code } ) {
-                deletedCountryLayer.fillColor = UIColor.countryDefaultColor.cgColor
+            UserApiManager.shared.deleteCountryVisit(country: country) {
+                
+                let countriesLayers = self.mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
+                if let deletedCountryLayer = countriesLayers.first(where: { $0.name! == code } ) {
+                    deletedCountryLayer.fillColor = UIColor.countryDefaultColor.cgColor
+                }
+                
+                if self.tableViewVisitedCountries.numberOfRows(inSection: indexPath.section) == 1 {
+                    self.tableViewVisitedCountries.deleteSections([indexPath.section], with: .automatic)
+                } else {
+                    self.tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
+                }
+                
+                if let header = self.tableViewVisitedCountries.headerView(forSection: indexPath.section) as? VisitedRegionHeaderView {
+                    self.configureVisitedCountriesNumberAnimated(for: header, in: indexPath.section)
+                }
+                
+                self.updateNumberOfVisitedCountriesAnimated()
             }
-            
-            User.shared.removeCountryVisit(country: country)
-            
-            if tableViewVisitedCountries.numberOfRows(inSection: indexPath.section) == 1 {
-                tableViewVisitedCountries.deleteSections([indexPath.section], with: .automatic)
-            } else {
-                tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
-            }
-            
-            if let header = tableViewVisitedCountries.headerView(forSection: indexPath.section) as? VisitedRegionHeaderView {
-                configureVisitedCountriesNumberAnimated(for: header, in: indexPath.section)
-            }
-            
-            updateNumberOfVisitedCountriesAnimated()
         }
     }
 

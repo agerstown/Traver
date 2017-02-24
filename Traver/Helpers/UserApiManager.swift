@@ -103,38 +103,59 @@ class UserApiManager {
     }
     
     func updateCountryVisits(codes: [String], completion: (() -> Void)?) {
-        //if !User.shared.visitedRegions.isEmpty {
-            //let visitedCountriesCodes = User.shared.visitedCountries.map{ $0.code }
-        
-            if User.shared.token != nil && !User.shared.token!.isEmpty {
-                let params: Parameters = [
-                    "countries_codes": codes
-                ]
-                
-                let headers: HTTPHeaders = [
-                    "Authorization": "Token \(User.shared.token!)"
-                ]
-                
-                _ = Alamofire.request("http://127.0.0.1:8000/visits/update-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                    if response.response?.statusCode == 200 {
-                        User.shared.updateCountryVisits(codes: codes)
-                        if let completion = completion {
-                            completion()
-                        }
-                        //NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
-                    } else {
-                        self.showNoInternetErrorAlert(response: response)
+        if User.shared.token != nil && !User.shared.token!.isEmpty {
+            let params: Parameters = [
+                "countries_codes": codes
+            ]
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(User.shared.token!)"
+            ]
+            
+            _ = Alamofire.request("http://127.0.0.1:8000/visits/update-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                if response.response?.statusCode == 200 {
+                    User.shared.updateCountryVisits(codes: codes)
+                    if let completion = completion {
+                        completion()
                     }
+                } else {
+                    self.showNoInternetErrorAlert(response: response)
                 }
-            } else {
-                User.shared.updateCountryVisits(codes: codes)
-                if let completion = completion {
-                    completion()
-                }
-                
-                //NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
             }
-        //}
+        } else {
+            User.shared.updateCountryVisits(codes: codes)
+            if let completion = completion {
+                completion()
+            }
+        }
+    }
+    
+    func deleteCountryVisit(country: Country, completion: (() -> Void)?) {
+        if User.shared.token != nil && !User.shared.token!.isEmpty {
+            let params: Parameters = [
+                "code": country.code
+            ]
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(User.shared.token!)"
+            ]
+            
+            _ = Alamofire.request("http://127.0.0.1:8000/visits/delete-country-visit/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                if response.response?.statusCode == 200 {
+                    User.shared.removeCountryVisit(country: country)
+                    if let completion = completion {
+                        completion()
+                    }
+                } else {
+                    self.showNoInternetErrorAlert(response: response)
+                }
+            }
+        } else {
+            User.shared.removeCountryVisit(country: country)
+            if let completion = completion {
+                completion()
+            }
+        }
     }
     
     private func showNoInternetErrorAlert(response: DataResponse<Any>) {
@@ -202,25 +223,23 @@ class UserApiManager {
     }
     
     private func createCountryVisits() {
-        //if !User.shared.visitedRegions.isEmpty {
-            let visitedCountriesCodes = User.shared.visitedCountries.map{ $0.code }
-            
-            let params: Parameters = [
-                "countries_codes": visitedCountriesCodes
-            ]
-            
-            let headers: HTTPHeaders = [
-                "Authorization": "Token \(User.shared.token!)"
-            ]
-            
-            _ = Alamofire.request("http://127.0.0.1:8000/visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                if response.response?.statusCode == 201 {
-                    User.shared.updateCountryVisits(codes: visitedCountriesCodes)
-                } else {
-                    self.showNoInternetErrorAlert(response: response)
-                }
+        let visitedCountriesCodes = User.shared.visitedCountries.map{ $0.code }
+        
+        let params: Parameters = [
+            "countries_codes": visitedCountriesCodes
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+        
+        _ = Alamofire.request("http://127.0.0.1:8000/visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            if response.response?.statusCode == 201 {
+                User.shared.updateCountryVisits(codes: visitedCountriesCodes)
+            } else {
+                self.showNoInternetErrorAlert(response: response)
             }
-        //}
+        }
     }
     
     private func updateUser(token: String, completion: (() -> Void)?) {
@@ -244,7 +263,6 @@ class UserApiManager {
                 self.updateCountryVisits(codes: User.shared.visitedCountries.map{ $0.code }) {
                     NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
                 }
-                //self.createCountryVisits(completion: completion)
             }
         }
     }

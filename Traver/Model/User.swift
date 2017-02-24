@@ -104,10 +104,6 @@ class User: NSManagedObject {
             if !region.sortedVisitedCountries.contains(country) {
                 region.sortedVisitedCountries.append(country) { $0.code.localized() < $1.code.localized() }
             }
-            //CoreDataStack.shared.saveContext()
-//            if !region.visitedCountries.contains(country!) {
-//                region.visitedCountries.append(country!) { $0.code.localized() < $1.code.localized() }
-//            }
         }
     }
     
@@ -120,7 +116,6 @@ class User: NSManagedObject {
         } else {
             regionObject = Region(code: region.code, index: Int16(Codes.Region.all.index(of: region)!))
             User.shared.visitedRegions.append(regionObject!) { $0.index < $1.index }
-            //CoreDataStack.shared.saveContext()
         }
         return regionObject!
     }
