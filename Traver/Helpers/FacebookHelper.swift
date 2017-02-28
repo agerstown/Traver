@@ -40,25 +40,17 @@ class FacebookHelper {
                             self.showErrorAlert(for: error)
                         case .success(let graphResponse):
                             if let responseDictionary = graphResponse.dictionaryValue {
-                                User.shared.facebookID = responseDictionary["id"] as! String?
-                                User.shared.facebookEmail = responseDictionary["email"] as! String?
+                                let id = responseDictionary["id"] as! String
+                                let email = responseDictionary["email"] as! String
+                                let name = responseDictionary["name"] as! String
+                                let locationDict = responseDictionary["location"] as! NSDictionary
+                                let location = locationDict["name"] as! String
                                 
-                                if User.shared.name == nil || (User.shared.name?.isEmpty)! {
-                                    User.shared.name = responseDictionary["name"] as! String?
-                                }
-                                if User.shared.location == nil || (User.shared.location?.isEmpty)! {
-                                    let location = responseDictionary["location"] as! NSDictionary
-                                    User.shared.location = location["name"] as! String?
-                                }
-                                
-                                if let url = URL(string:"https://graph.facebook.com/\(User.shared.facebookID!)/picture?width=160&height=160") {
+                                if let url = URL(string:"https://graph.facebook.com/\(id)/picture?width=160&height=160") {
                                     Alamofire.request(url).responseImage { response in
                                         if let image = response.result.value {
-                                            User.shared.photoData = UIImagePNGRepresentation(image) as Data?
+                                            UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: image)
                                         }
-                                        
-                                        UserApiManager.shared.getOrCreateUserWithFacebook(id: User.shared.facebookID!)
-                                        //completion()
                                     }
                                     
                                 }

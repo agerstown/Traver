@@ -12,7 +12,7 @@ import CoreData
 import Alamofire
 
 class ProfileViewController: UIViewController {
-    
+
     @IBOutlet weak var tableViewVisitedCountries: UITableView!
     @IBOutlet weak var viewTableViewHeader: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -75,6 +75,7 @@ class ProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: UserApiManager.shared.CountriesUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(profileInfoUpdated), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
         
     }
     
@@ -107,7 +108,7 @@ class ProfileViewController: UIViewController {
     }
     
     func updateProfileInfo() {
-        buttonFillInfo.isHidden = User.shared.name != nil
+        buttonFillInfo.isHidden = User.shared.name != nil && User.shared.name != ""
         
         labelName.text = User.shared.name
         labelLocation.text = User.shared.location
@@ -119,6 +120,10 @@ class ProfileViewController: UIViewController {
         mapImage.colorVisitedCounties()
         tableViewVisitedCountries.reloadData()
         labelVisitedCountries.text = visitedCountriesText.localized(for: User.shared.visitedCountries.count)
+    }
+    
+    func updatePhoto() {
+        imageViewPhoto.image = User.shared.photo != nil ? User.shared.photo : UIImage(named: "default_photo")
     }
     
     @IBAction func buttonEditTapped(_ sender: UIButton) {
@@ -180,6 +185,10 @@ class ProfileViewController: UIViewController {
     
     func profileInfoUpdated() {
         updateProfileInfo()
+    }
+    
+    func photoUpdated() {
+        updatePhoto()
     }
     
     // MARK: - UI updates

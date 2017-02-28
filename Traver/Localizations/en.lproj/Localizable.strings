@@ -240,6 +240,8 @@
 // Profile edit
 "Name" = "Name";
 "Location" = "Location";
+"Fill info" = "Fill info";
+"Please fill your name" = "Please fill your name";
 
 // Server
 "Check your Internet connection. Status code" = "Check your Internet connection. Status code";

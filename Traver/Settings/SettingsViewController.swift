@@ -27,7 +27,7 @@ class SettingsViewController: UITableViewController {
         self.title = "Settings".localized()
         cellImportFromPhotos.textLabel?.text = "Import countries from Photos".localized()
         cellFacebook.textLabel?.text = "Facebook".localized()
-        cellFacebook.detailTextLabel?.text?.removeAll()
+        cellFacebook.detailTextLabel?.text = User.shared.facebookEmail ?? ""
         
         tableViewSettings.delegate = self
         

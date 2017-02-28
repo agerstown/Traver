@@ -11,21 +11,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "static User.(shared).(variable initialization expression).(closure #1):User.swift">
+      </ContextState>
+      <ContextState
          contextName = "User.createCountryIfNeeded(for : String, in : Region) -&gt; Country?:User.swift">
          <PersistentStrings>
             <PersistentString
                value = "code.localized()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static User.(shared).(variable initialization expression).(closure #1):User.swift">
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.getUser() -&gt; ():UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -38,16 +30,35 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "UserApiManager.getUser() -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.token">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "user.location">
             </PersistentString>
             <PersistentString
-               value = "User.shared.facebookEmail">
+               value = "user.facebookID">
             </PersistentString>
             <PersistentString
-               value = "user.facebookID">
+               value = "User.shared.facebookEmail">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileEditViewController.buttonSaveTapped(UIBarButtonItem) -&gt; ():ProfileEditViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.location">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -111,6 +122,14 @@
             </PersistentString>
             <PersistentString
                value = "regionsWithCountries">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileEditViewController.setPhoto() -&gt; ():ProfileEditViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.photo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
