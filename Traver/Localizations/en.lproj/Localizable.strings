@@ -226,10 +226,13 @@
 // Accounts
 "Accounts" = "Accounts";
 "Facebook" = "Facebook";
+"iCloud" = "iCloud";
 "Do you want to disconnect your account?" = "Do you want to disconnect your account?";
 "Yes" = "Yes";
 "No" = "No";
 "Please contact the developer" = "Please contact the developer";
+"Connected" = "Connected";
+"Not connected" = "Not connected";
 
 // Profile fill info
 "Fill profile info" = "Fill profile info";
@@ -245,4 +248,4 @@
 
 // Server
 "Check your Internet connection. Status code" = "Check your Internet connection. Status code";
-
+"Check your Internet connection. Error" = "Check your Internet connection. Error";

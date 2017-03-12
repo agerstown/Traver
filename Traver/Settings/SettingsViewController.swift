@@ -16,6 +16,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var tableViewSettings: UITableView!
     @IBOutlet weak var cellImportFromPhotos: UITableViewCell!
     @IBOutlet weak var cellFacebook: UITableViewCell!
+    @IBOutlet weak var celliCloud: UITableViewCell!
     
     let sectionsHeaders = ["Import".localized(), "Accounts".localized()];
     let sectionsFooters = ["It may take some time, just wait a little.".localized(), ""];
@@ -25,9 +26,14 @@ class SettingsViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "Settings".localized()
+        
         cellImportFromPhotos.textLabel?.text = "Import countries from Photos".localized()
+        
         cellFacebook.textLabel?.text = "Facebook".localized()
-        cellFacebook.detailTextLabel?.text = User.shared.facebookEmail ?? ""
+        cellFacebook.detailTextLabel?.text = User.shared.facebookID != nil ? "Connected" : "Not connected"
+        
+        celliCloud.textLabel?.text = "iCloud".localized()
+        celliCloud.detailTextLabel?.text = User.shared.iCloudID != nil ? "Connected" : "Not connected"
         
         tableViewSettings.delegate = self
         
@@ -56,6 +62,8 @@ class SettingsViewController: UITableViewController {
                 PhotosAccessManager.shared.importVisitedCountries(controller: self)
             case cellFacebook:
                 FacebookHelper.shared.login()
+            case celliCloud:
+                CloudKitHelper.shared.login()
             default: ()
             }
         }
@@ -63,7 +71,8 @@ class SettingsViewController: UITableViewController {
     
     // MARK: - Notifications
     func profileInfoUpdated() {
-        cellFacebook.detailTextLabel?.text = User.shared.facebookEmail
+        cellFacebook.detailTextLabel?.text = User.shared.facebookID != nil ? "Connected" : "Not connected"
+        celliCloud.detailTextLabel?.text = User.shared.iCloudID != nil ? "Connected" : "Not connected"
         self.tableViewSettings.reloadData()
     }
 }

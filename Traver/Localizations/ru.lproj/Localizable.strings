@@ -226,10 +226,13 @@
 // Accounts
 "Accounts" = "Аккаунты";
 "Facebook" = "Facebook";
+"iCloud" = "iCloud";
 "Do you want to disconnect your account?" = "Вы хотите отключить свой аккаунт?";
 "Yes" = "Да";
 "No" = "Нет";
 "Please contact the developer" = "Пожалуйста, свяжитесь с разработчиком";
+"Connected" = "Подключен";
+"Not connected" = "Не подключен";
 
 // Profile fill info
 "Fill profile info" = "Заполнить инфо";
@@ -245,3 +248,4 @@
 
 // Server
 "Check your Internet connection. Status code" = "Проверьте, есть ли соединение с Интернетом. Статус-код";
+"Check your Internet connection. Error" = "Проверьте, есть ли соединение с Интернетом. Ошибка";

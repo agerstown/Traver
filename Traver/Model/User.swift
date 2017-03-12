@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftKeychainWrapper
+//import SwiftKeychainWrapper
 
 @objc(User)
 class User: NSManagedObject {
@@ -23,20 +23,28 @@ class User: NSManagedObject {
             let visitedRegions = try! CoreDataStack.shared.mainContext.fetch(frRegion)
             user.visitedRegions = visitedRegions.sorted { $0.index < $1.index }
             
-            user.token = KeychainWrapper.standard.string(forKey: "token")
+            //user.token = KeychainWrapper.standard.string(forKey: "token")
             if let token = user.token {
-                if !token.isEmpty {
-                    UserApiManager.shared.getUserInfo(user: user)
+                UserApiManager.shared.getUserInfo(user: user) {
+                    if user.iCloudID == nil {
+                        //connectICloud()
+                        CloudKitHelper.shared.login()
+                    }
                 }
+            } else {
+                //connectICloud()
+                CloudKitHelper.shared.login()
             }
             
             return user
         } else {
+            //connectICloud()
+            CloudKitHelper.shared.login()
             return User(context: CoreDataStack.shared.mainContext)
         }
     }()
     
-    var token: String?
+    @NSManaged var token: String?
     @NSManaged var name: String?
     @NSManaged var photoData: Data?
     var photo: UIImage? {
@@ -49,6 +57,7 @@ class User: NSManagedObject {
     @NSManaged var facebookID: String?
     @NSManaged var facebookEmail: String?
     @NSManaged var location: String?
+    @NSManaged var iCloudID: String?
     
     var visitedRegions: [Region] = []
     
@@ -60,6 +69,14 @@ class User: NSManagedObject {
         }
         return countries
     }
+    
+//    static func connectICloud() {
+//        CloudKitHelper.shared.getUserID { id in
+//            if let id = id {
+//                UserApiManager.shared.getOrCreateUserWithICloud(id: id, name: User.shared.name, location: User.shared.location, photo: User.shared.photo)
+//            }
+//        }
+//    }
     
     func updateCountryVisits(codes: [String]) {
         let currentCountryVisits = User.shared.visitedCountries

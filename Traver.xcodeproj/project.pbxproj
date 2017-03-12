@@ -56,6 +56,8 @@
 		616E0ED31E34BC0700044A4C /* Codes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616E0ED21E34BC0700044A4C /* Codes.swift */; };
 		61732B231E491AFC00A0C952 /* UserApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61732B221E491AFC00A0C952 /* UserApiManager.swift */; };
 		61732B251E491EFB00A0C952 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61732B241E491EFB00A0C952 /* Main.storyboard */; };
+		617C17391E6B0AFC008576E4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617C17381E6B0AFC008576E4 /* CloudKit.framework */; };
+		61A16E301E69A82700184C7F /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A16E2F1E69A82700184C7F /* CloudKitHelper.swift */; };
 		61B2765D1DF9D475008AA44B /* PhotosAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2765C1DF9D475008AA44B /* PhotosAccessManager.swift */; };
 		61B2765F1DF9E327008AA44B /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2765E1DF9E327008AA44B /* ShareManager.swift */; };
 		61B276611DF9E8C2008AA44B /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B276601DF9E8C2008AA44B /* ShareView.swift */; };
@@ -281,6 +283,9 @@
 		616E64A01DE6223300680D4F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61732B221E491AFC00A0C952 /* UserApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserApiManager.swift; sourceTree = "<group>"; };
 		61732B241E491EFB00A0C952 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		617C17371E6B0AEE008576E4 /* Traver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Traver.entitlements; sourceTree = "<group>"; };
+		617C17381E6B0AFC008576E4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		61A16E2F1E69A82700184C7F /* CloudKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
 		61B2765C1DF9D475008AA44B /* PhotosAccessManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosAccessManager.swift; sourceTree = "<group>"; };
 		61B2765E1DF9E327008AA44B /* ShareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 		61B276601DF9E8C2008AA44B /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
@@ -299,6 +304,7 @@
 				612F299D1DE7A7070057E20B /* QuartzCore.framework in Frameworks */,
 				612F299B1DE7A7000057E20B /* libxml2.tbd in Frameworks */,
 				612F29A61DE7A7640057E20B /* CocoaLumberjack.framework in Frameworks */,
+				617C17391E6B0AFC008576E4 /* CloudKit.framework in Frameworks */,
 				612F29A71DE7A7840057E20B /* libSVGKit-iOS.2.0.0.a in Frameworks */,
 				612F29991DE7A6F70057E20B /* CoreImage.framework in Frameworks */,
 				612F29971DE7A6F00057E20B /* CoreText.framework in Frameworks */,
@@ -426,6 +432,7 @@
 		612F290E1DE7A6810057E20B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				617C17381E6B0AFC008576E4 /* CloudKit.framework */,
 				612F29A31DE7A7250057E20B /* CocoaLumberjack.framework */,
 				612F29A01DE7A7110057E20B /* UIKit.framework */,
 				612F299E1DE7A70D0057E20B /* CoreGraphics.framework */,
@@ -619,6 +626,7 @@
 				613394581E21B4810001CF2A /* FacebookHelper.swift */,
 				613394621E3163220001CF2A /* CoreDataStack.swift */,
 				61732B221E491AFC00A0C952 /* UserApiManager.swift */,
+				61A16E2F1E69A82700184C7F /* CloudKitHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -660,6 +668,7 @@
 				612BF6471DE5E2020092D43F /* Documents */,
 				612F29AE1DEB4F870057E20B /* Localizations */,
 				615665481DE322D70050AE5A /* Assets.xcassets */,
+				617C17371E6B0AEE008576E4 /* Traver.entitlements */,
 				616E64A01DE6223300680D4F /* Info.plist */,
 			);
 			path = Traver;
@@ -770,6 +779,14 @@
 						DevelopmentTeam = 5H72FC97K4;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					615665511DE322D70050AE5A = {
 						CreatedOnToolsVersion = 8.1;
@@ -900,6 +917,7 @@
 				61732B231E491AFC00A0C952 /* UserApiManager.swift in Sources */,
 				613394631E3163220001CF2A /* CoreDataStack.swift in Sources */,
 				615BAD5F1DE4CF9500D1478D /* User.swift in Sources */,
+				61A16E301E69A82700184C7F /* CloudKitHelper.swift in Sources */,
 				612F29C31DECB1A10057E20B /* UIColor+Traver.swift in Sources */,
 				61B2765D1DF9D475008AA44B /* PhotosAccessManager.swift in Sources */,
 				613C54DE1DF0D0C3006660B9 /* Double+Round.swift in Sources */,
@@ -1104,6 +1122,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Traver/Traver.entitlements;
 				DEVELOPMENT_TEAM = 5H72FC97K4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1132,6 +1151,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Traver/Traver.entitlements;
 				DEVELOPMENT_TEAM = 5H72FC97K4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
