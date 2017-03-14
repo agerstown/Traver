@@ -19,12 +19,23 @@ class FacebookHelper {
     
     let loginManager = LoginManager()
     
+    // MARK: Notifications
+    let AccountsUpdatedNotification = NSNotification.Name(rawValue: "AccountsUpdatedNotification")
+    
+    func isConnected() -> Bool {
+        return AccessToken.current != nil
+    }
+    
     func login() {
         if AccessToken.current != nil {
             let alert = UIAlertController(title: "Facebook".localized(), message: "Do you want to disconnect your account?".localized(), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "No".localized(), style: .cancel))
             alert.addAction(UIAlertAction(title: "Yes".localized(), style: .default) { _ in
                 self.loginManager.logOut()
+                if User.shared.iCloudID != nil {
+                    UserApiManager.shared.disconnectFacebook()
+                }
+                NotificationCenter.default.post(name: self.AccountsUpdatedNotification, object: nil)
             })
             UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
         } else {
@@ -65,7 +76,7 @@ class FacebookHelper {
     
     private func showErrorAlert(for error: Error) {
         let alert = UIAlertController(title: "Error".localized(), message: "Please contact the developer".localized()+"\n\(error.localizedDescription)", preferredStyle: .alert)
-        // todo открывать форму отправки фидбека
+        //todo открывать форму отправки фидбека
         alert.addAction(UIAlertAction(title: "OK".localized(), style: .cancel))
         UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
     }

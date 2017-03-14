@@ -21,6 +21,7 @@ class UserApiManager {
     let CountriesUpdatedNotification = NSNotification.Name(rawValue: "CountriesUpdatedNotification")
     let ProfileInfoUpdatedNotification = NSNotification.Name(rawValue: "ProfileInfoUpdatedNotification")
     let PhotoUpdatedNotification = NSNotification.Name(rawValue: "PhotoUpdatedNotification")
+//    let AccountsUpdatedNotification = NSNotification.Name(rawValue: "AccountsUpdatedNotification")
     
     // MARK: - GET methods
     func getOrCreateUserWithFacebook(id: String, email: String, name: String, location: String, photo: UIImage) {
@@ -34,8 +35,7 @@ class UserApiManager {
                 if User.shared.iCloudID != nil {
                     self.updateFacebookInfo(id: id, email: email, name: name, location: location, photo: photo)
                 } else {
-//                    self.createUserWithFacebook(id: id, email: email, name: name, location: location, photo: photo)
-                    self.createUserWithFacebook(id: id, email: email, name: User.shared.name != nil ? User.shared.name! : name, location: User.shared.location != nil ? User.shared.location! : location, photo: User.shared.photo != nil ? User.shared.photo! : photo) // check about photo: у юзера мб стоит дефолтное всегда? что если из фб пришло nil фото?
+                    self.createUserWithFacebook(id: id, email: email, name: User.shared.name != nil ? User.shared.name! : name, location: User.shared.location != nil ? User.shared.location! : location, photo: User.shared.photo != nil ? User.shared.photo! : photo) //todo check about photo: что если из фб пришло nil фото?
                 }
             } else if let value = response.result.value {
                 
@@ -67,9 +67,6 @@ class UserApiManager {
             if response.response?.statusCode == 404 {
                 if User.shared.facebookID != nil {
                     self.updateICloudInfo(id: id)
-//                    self.updateFacebookInfo(id: id, email: email, name: name, location: location, photo: photo) {
-//                        NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
-//                    }
                 } else {
                     self.createUserWithICloud(id: id, name: User.shared.name != nil ? User.shared.name! : name, location: User.shared.location != nil ? User.shared.location! : location, photo: User.shared.photo != nil ? User.shared.photo! : photo)
                 }
@@ -191,7 +188,6 @@ class UserApiManager {
                     User.shared.facebookEmail = email
                     User.shared.name = name
                     User.shared.location = location
-                    //User.shared.updateInfo()
                     
                     NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
                     
@@ -234,7 +230,6 @@ class UserApiManager {
                     User.shared.iCloudID = id
                     User.shared.name = name
                     User.shared.location = location
-                    //User.shared.updateInfo()
                     
                     NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
                     
@@ -357,8 +352,6 @@ class UserApiManager {
             if response.response?.statusCode == 200 {
                 User.shared.iCloudID = id
                 User.shared.updateInfo()
-                
-                NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
             } else {
                 self.showNoInternetErrorAlert(response: response)
             }
@@ -433,14 +426,6 @@ class UserApiManager {
             "icloud_id": User.shared.iCloudID != nil ? User.shared.iCloudID! : ""
         ]
         
-//        let parameters: Parameters = [
-//            "facebook_id": facebookID != nil ? facebookID! : "",
-//            "facebook_email": facebookEmail != nil ? facebookEmail! : "",
-//            "name": name != nil ? name! : "",
-//            "location": location != nil ? location! : "",
-//            "icloud_id": iCloudID != nil ? iCloudID! : ""
-//        ]
-        
         _ = Alamofire.request(host + "/users/update-user/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 200 {
                 if let photo = User.shared.photo {
@@ -494,6 +479,21 @@ class UserApiManager {
             User.shared.removeCountryVisit(country: country)
             if let completion = completion {
                 completion()
+            }
+        }
+    }
+    
+    func disconnectFacebook() {
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+        
+        _ = Alamofire.request(host + "/users/disconnect-facebook/", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            if response.response?.statusCode == 200 {
+                User.shared.disconnectFacebook()
+                //NotificationCenter.default.post(name: self.AccountsUpdatedNotification, object: nil)
+            } else {
+                self.showNoInternetErrorAlert(response: response)
             }
         }
     }

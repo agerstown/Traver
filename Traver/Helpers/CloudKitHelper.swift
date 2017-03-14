@@ -13,24 +13,14 @@ class CloudKitHelper {
     
     static let shared = CloudKitHelper()
     
-    var defaultContainer: CKContainer?
-    
-    init() {
-        defaultContainer = CKContainer.default()
-    }
+    let defaultContainer = CKContainer.default()
     
     func login() {
-        defaultContainer?.fetchUserRecordID { recordID, _ in
+        defaultContainer.fetchUserRecordID { recordID, _ in
             if let id = recordID?.recordName {
                 UserApiManager.shared.getOrCreateUserWithICloud(id: id, name: User.shared.name, location: User.shared.location, photo: User.shared.photo)
             }
         }
     }
-    
-//    func getUserID(completion: @escaping (_ id: String?) -> Void) {
-//        defaultContainer?.fetchUserRecordID { recordID, error in
-//            completion(recordID?.recordName)
-//        }
-//    }
     
 }

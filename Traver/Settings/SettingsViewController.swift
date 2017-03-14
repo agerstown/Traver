@@ -16,7 +16,6 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var tableViewSettings: UITableView!
     @IBOutlet weak var cellImportFromPhotos: UITableViewCell!
     @IBOutlet weak var cellFacebook: UITableViewCell!
-    @IBOutlet weak var celliCloud: UITableViewCell!
     
     let sectionsHeaders = ["Import".localized(), "Accounts".localized()];
     let sectionsFooters = ["It may take some time, just wait a little.".localized(), ""];
@@ -30,14 +29,12 @@ class SettingsViewController: UITableViewController {
         cellImportFromPhotos.textLabel?.text = "Import countries from Photos".localized()
         
         cellFacebook.textLabel?.text = "Facebook".localized()
-        cellFacebook.detailTextLabel?.text = User.shared.facebookID != nil ? "Connected" : "Not connected"
-        
-        celliCloud.textLabel?.text = "iCloud".localized()
-        celliCloud.detailTextLabel?.text = User.shared.iCloudID != nil ? "Connected" : "Not connected"
+        cellFacebook.detailTextLabel?.text = FacebookHelper.shared.isConnected() ? "Connected".localized() : "Not connected".localized()
         
         tableViewSettings.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(profileInfoUpdated), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAccountsInfo), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAccountsInfo), name: FacebookHelper.shared.AccountsUpdatedNotification, object: nil)
     }
     
     deinit {
@@ -62,17 +59,14 @@ class SettingsViewController: UITableViewController {
                 PhotosAccessManager.shared.importVisitedCountries(controller: self)
             case cellFacebook:
                 FacebookHelper.shared.login()
-            case celliCloud:
-                CloudKitHelper.shared.login()
             default: ()
             }
         }
     }
     
     // MARK: - Notifications
-    func profileInfoUpdated() {
-        cellFacebook.detailTextLabel?.text = User.shared.facebookID != nil ? "Connected" : "Not connected"
-        celliCloud.detailTextLabel?.text = User.shared.iCloudID != nil ? "Connected" : "Not connected"
+    func updateAccountsInfo() {
+        cellFacebook.detailTextLabel?.text = FacebookHelper.shared.isConnected() ? "Connected".localized() : "Not connected".localized()
         self.tableViewSettings.reloadData()
     }
 }
