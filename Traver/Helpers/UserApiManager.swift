@@ -146,13 +146,14 @@ class UserApiManager {
             if let value = response.result.value {
                 let json = JSON(value)
                 let path = json["path"].stringValue
-                
-                if let url = URL(string: self.host + "/site-media/media/" + path) {
-                    Alamofire.request(url).responseImage { response in
-                        if let image = response.result.value {
-                            User.shared.photoData = UIImagePNGRepresentation(image) as Data?
-                            User.shared.updateInfo()
-                            NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
+                if path != User.shared.photoPath {
+                    if let url = URL(string: self.host + "/site-media/media/" + path) {
+                        Alamofire.request(url).responseImage { response in
+                            if let image = response.result.value {
+                                User.shared.photoData = UIImagePNGRepresentation(image) as Data?
+                                User.shared.updateInfo()
+                                NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
+                            }
                         }
                     }
                 }
@@ -291,6 +292,7 @@ class UserApiManager {
                     self.updateUserInfoInCoreData(name: name, location: location, completion: completion)
                 } else {
                     self.showNoInternetErrorAlert(response: response)
+                    completion()
                 }
             }
         } else {
@@ -402,7 +404,15 @@ class UserApiManager {
                              headers: headers,
                              encodingCompletion: { result in
                                 switch result {
-                                case .success(_, _, _):
+                                case .success(let upload, _, _):
+                                    upload.responseJSON { response in
+                                        if let value = response.result.value {
+                                            let json = JSON(value)
+                                            let path = json["path"].stringValue
+                                            User.shared.photoPath = path
+                                            User.shared.updateInfo()
+                                        }
+                                    }
                                     completion()
                                 case .failure(let error):
                                     self.showNoInternetErrorAlert(error: error)

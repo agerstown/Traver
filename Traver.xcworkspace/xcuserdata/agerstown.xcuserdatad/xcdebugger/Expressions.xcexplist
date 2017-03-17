@@ -62,6 +62,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "UserApiManager.(getPhoto() -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.photoPath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ProfileViewController.updatePhoto() -&gt; ():ProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -81,13 +89,13 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
+               value = "user.location">
+            </PersistentString>
+            <PersistentString
                value = "User.shared.facebookEmail">
             </PersistentString>
             <PersistentString
                value = "user.facebookID">
-            </PersistentString>
-            <PersistentString
-               value = "user.location">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -105,6 +113,14 @@
             </PersistentString>
             <PersistentString
                value = "User.shared.visitedRegions">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileEditViewController.setPhoto() -&gt; ():ProfileEditViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.photo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -139,18 +155,10 @@
                value = "regions">
             </PersistentString>
             <PersistentString
-               value = "regionsWithCountries">
-            </PersistentString>
-            <PersistentString
                value = "Codes.Region(rawValue: section)">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfileEditViewController.setPhoto() -&gt; ():ProfileEditViewController.swift">
-         <PersistentStrings>
             <PersistentString
-               value = "User.shared.photo">
+               value = "regionsWithCountries">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

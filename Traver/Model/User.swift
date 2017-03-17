@@ -51,6 +51,7 @@ class User: NSManagedObject {
             return nil
         }
     }
+    @NSManaged var photoPath: String?
     @NSManaged var facebookID: String?
     @NSManaged var facebookEmail: String?
     @NSManaged var location: String?
