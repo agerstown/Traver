@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "UserApiManager.(updatePhoto(photo : UIImage, completion : () -&gt; ()) -&gt; ()).(closure #2):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "upload.responseJSON">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.getUser() -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -31,6 +39,14 @@
          <PersistentStrings>
             <PersistentString
                value = "selectedCountries">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -65,7 +81,26 @@
          contextName = "UserApiManager.(getPhoto() -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+            <PersistentString
                value = "User.shared.photoPath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(updatePhoto(photo : UIImage, completion : () -&gt; ()) -&gt; ()).(closure #2).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.createCountryVisits() -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.visitedCountries.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -89,13 +124,13 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "user.location">
+               value = "user.facebookID">
             </PersistentString>
             <PersistentString
                value = "User.shared.facebookEmail">
             </PersistentString>
             <PersistentString
-               value = "user.facebookID">
+               value = "user.location">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -117,10 +152,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ProfileEditViewController.setPhoto() -&gt; ():ProfileEditViewController.swift">
+         contextName = "UserApiManager.(updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "User.shared.photo">
+               value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.saveCountryVisit(code : String) -&gt; Country?:User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "region.code">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -141,24 +184,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "User.saveCountryVisit(code : String) -&gt; Country?:User.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "region.code">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "CountriesViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CountriesViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "regions">
             </PersistentString>
             <PersistentString
-               value = "Codes.Region(rawValue: section)">
+               value = "regionsWithCountries">
             </PersistentString>
             <PersistentString
-               value = "regionsWithCountries">
+               value = "Codes.Region(rawValue: section)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileEditViewController.setPhoto() -&gt; ():ProfileEditViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.photo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

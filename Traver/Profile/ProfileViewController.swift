@@ -76,7 +76,6 @@ class ProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: UserApiManager.shared.CountriesUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(profileInfoUpdated), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

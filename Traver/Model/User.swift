@@ -56,6 +56,9 @@ class User: NSManagedObject {
     @NSManaged var facebookEmail: String?
     @NSManaged var location: String?
     @NSManaged var iCloudID: String?
+    var username: String {
+        return facebookID != nil ? "fb" + facebookID! : iCloudID != nil ? "ic" + iCloudID! : ""
+    }
     
     var visitedRegions: [Region] = []
     

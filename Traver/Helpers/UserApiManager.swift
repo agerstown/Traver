@@ -15,7 +15,10 @@ class UserApiManager {
     
     static let shared = UserApiManager()
     
-    let host = "http://127.0.0.1:8000" // http://django-env.g6jwzu7n6j.us-east-1.elasticbeanstalk.com/
+    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com"
+    let photosHost = "https://s3.amazonaws.com/traver-media/"
+    //let host = "http://127.0.0.1:8000"
+    //let phost = "http://127.0.0.1:8000/site-media/media/"
     
     // MARK: - Notifications
     let CountriesUpdatedNotification = NSNotification.Name(rawValue: "CountriesUpdatedNotification")
@@ -142,12 +145,12 @@ class UserApiManager {
             "Authorization": "Token \(User.shared.token!)"
         ]
         
-        Alamofire.request(host + "/users/get-user-photo/", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        Alamofire.request(host + "/users/get-user-photo-path/", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if let value = response.result.value {
                 let json = JSON(value)
                 let path = json["path"].stringValue
                 if path != User.shared.photoPath {
-                    if let url = URL(string: self.host + "/site-media/media/" + path) {
+                    if let url = URL(string: self.photosHost + path) {
                         Alamofire.request(url).responseImage { response in
                             if let image = response.result.value {
                                 User.shared.photoData = UIImagePNGRepresentation(image) as Data?
@@ -251,21 +254,23 @@ class UserApiManager {
     }
     
     private func createCountryVisits() {
-        let visitedCountriesCodes = User.shared.visitedCountries.map{ $0.code }
-        
-        let params: Parameters = [
-            "countries_codes": visitedCountriesCodes
-        ]
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Token \(User.shared.token!)"
-        ]
-        
-        _ = Alamofire.request(host + "/visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            if response.response?.statusCode == 201 {
-                User.shared.updateCountryVisits(codes: visitedCountriesCodes)
-            } else {
-                self.showNoInternetErrorAlert(response: response)
+        if User.shared.visitedCountries.count != 0 {
+            let visitedCountriesCodes = User.shared.visitedCountries.map{ $0.code }
+            
+            let params: Parameters = [
+                "countries_codes": visitedCountriesCodes
+            ]
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(User.shared.token!)"
+            ]
+            
+            _ = Alamofire.request(host + "/visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                if response.response?.statusCode == 201 {
+                    User.shared.updateCountryVisits(codes: visitedCountriesCodes)
+                } else {
+                    self.showNoInternetErrorAlert(response: response)
+                }
             }
         }
     }
@@ -391,14 +396,22 @@ class UserApiManager {
     func updatePhoto(photo: UIImage, completion: @escaping () -> Void) {
         if User.shared.token != nil && !User.shared.token!.isEmpty {
             
-            let photoData = UIImagePNGRepresentation(photo)!
+            var reducedPhoto = photo
+            
+            if let photo = photo.reduced() {
+                reducedPhoto = photo
+            }
+            
+            let photoData = UIImagePNGRepresentation(reducedPhoto)!
             
             let headers: HTTPHeaders = [
                 "Authorization": "Token \(User.shared.token!)"
             ]
             
+            let name = User.shared.username + String(Date().timeIntervalSince1970) + ".png"
+            
             Alamofire.upload(multipartFormData: { multipartFormData in
-                multipartFormData.append(photoData, withName: "photo", fileName: "photo.png", mimeType: "image/png")
+                multipartFormData.append(photoData, withName: "photo", fileName: name, mimeType: "image/png")
             },
                              to: host + "/users/update-user-photo/",
                              headers: headers,

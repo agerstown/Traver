@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		610B2F651E92D01400000006 /* UIImage+SizeReduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610B2F641E92D01400000006 /* UIImage+SizeReduction.swift */; };
 		610D86FF1DECE0C40030C153 /* VisitedRegionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 610D86FE1DECE0C40030C153 /* VisitedRegionHeaderView.xib */; };
 		610FCA2B1DF4A5FE00046546 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 610FCA2D1DF4A5FE00046546 /* InfoPlist.strings */; };
 		611EB3081DF5ED5E002960A8 /* Share.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611EB3071DF5ED5E002960A8 /* Share.xib */; };
@@ -100,6 +101,7 @@
 /* Begin PBXFileReference section */
 		07B92020C7E7AF58CBFB4054 /* Pods-Traver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Traver.release.xcconfig"; path = "Pods/Target Support Files/Pods-Traver/Pods-Traver.release.xcconfig"; sourceTree = "<group>"; };
 		0DB2C7BE694343C1EA8CAF81 /* Pods-Traver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Traver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Traver/Pods-Traver.debug.xcconfig"; sourceTree = "<group>"; };
+		610B2F641E92D01400000006 /* UIImage+SizeReduction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SizeReduction.swift"; sourceTree = "<group>"; };
 		610D86FE1DECE0C40030C153 /* VisitedRegionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisitedRegionHeaderView.xib; sourceTree = "<group>"; };
 		610FCA2C1DF4A5FE00046546 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		610FCA2E1DF4A60000046546 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				612F29C21DECB1A00057E20B /* UIColor+Traver.swift */,
 				613C54DD1DF0D0C3006660B9 /* Double+Round.swift */,
 				61C4F1B61DFAD5380070158E /* SVGKImage+Extensions.swift */,
+				610B2F641E92D01400000006 /* UIImage+SizeReduction.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -917,6 +920,7 @@
 				61732B231E491AFC00A0C952 /* UserApiManager.swift in Sources */,
 				613394631E3163220001CF2A /* CoreDataStack.swift in Sources */,
 				615BAD5F1DE4CF9500D1478D /* User.swift in Sources */,
+				610B2F651E92D01400000006 /* UIImage+SizeReduction.swift in Sources */,
 				61A16E301E69A82700184C7F /* CloudKitHelper.swift in Sources */,
 				612F29C31DECB1A10057E20B /* UIColor+Traver.swift in Sources */,
 				61B2765D1DF9D475008AA44B /* PhotosAccessManager.swift in Sources */,
