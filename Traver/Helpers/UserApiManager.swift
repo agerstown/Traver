@@ -9,22 +9,20 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-//import SwiftKeychainWrapper
 
 class UserApiManager {
     
     static let shared = UserApiManager()
     
-    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com"
-    let photosHost = "https://s3.amazonaws.com/traver-media/"
-    //let host = "http://127.0.0.1:8000"
-    //let phost = "http://127.0.0.1:8000/site-media/media/"
+    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com/"
+    let photosHost = "https://s3.amazonaws.com/"
+//    let host = "http://127.0.0.1:8000/"
+//    let photosHost = "http://127.0.0.1:8000/"
     
     // MARK: - Notifications
     let CountriesUpdatedNotification = NSNotification.Name(rawValue: "CountriesUpdatedNotification")
     let ProfileInfoUpdatedNotification = NSNotification.Name(rawValue: "ProfileInfoUpdatedNotification")
     let PhotoUpdatedNotification = NSNotification.Name(rawValue: "PhotoUpdatedNotification")
-//    let AccountsUpdatedNotification = NSNotification.Name(rawValue: "AccountsUpdatedNotification")
     
     // MARK: - GET methods
     func getOrCreateUserWithFacebook(id: String, email: String, name: String, location: String, photo: UIImage) {
@@ -32,8 +30,8 @@ class UserApiManager {
         let parameters: Parameters = [
             "facebook_id": id
         ]
-    
-        Alamofire.request(host + "/users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
+        
+        Alamofire.request(host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
             if response.response?.statusCode == 404 {
                 if User.shared.iCloudID != nil {
                     self.updateFacebookInfo(id: id, email: email, name: name, location: location, photo: photo)
@@ -45,11 +43,10 @@ class UserApiManager {
                 let json = JSON(value)
                 
                 let token = json["token"].stringValue
-                //KeychainWrapper.standard.set(token, forKey: "token")
                 User.shared.token = token
                 
                 self.updateUser(token: token) {
-                    Alamofire.request(self.host + "/users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
+                    Alamofire.request(self.host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
                         if let resultValue = response.result.value {
                             self.parseAndSaveUser(user: User.shared, from: resultValue)
                         }
@@ -66,7 +63,7 @@ class UserApiManager {
             "icloud_id": id
         ]
         
-        Alamofire.request(host + "/users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
+        Alamofire.request(host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
             if response.response?.statusCode == 404 {
                 if User.shared.facebookID != nil {
                     self.updateICloudInfo(id: id)
@@ -78,11 +75,10 @@ class UserApiManager {
                 let json = JSON(value)
                 
                 let token = json["token"].stringValue
-                //KeychainWrapper.standard.set(token, forKey: "token")
                 User.shared.token = token
                 
                 self.updateUser(token: token) {
-                    Alamofire.request(self.host + "/users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
+                    Alamofire.request(self.host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
                         if let resultValue = response.result.value {
                             self.parseAndSaveUser(user: User.shared, from: resultValue)
                         }
@@ -99,7 +95,7 @@ class UserApiManager {
                 "facebook_id": facebookID
             ]
             
-            Alamofire.request(host + "/users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
+            Alamofire.request(host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
                 if let value = response.result.value {
                     self.parseAndSaveUser(user: user, from: value)
                     completion()
@@ -110,7 +106,7 @@ class UserApiManager {
                 "icloud_id": iCloudID
             ]
             
-            Alamofire.request(host + "/users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
+            Alamofire.request(host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
                 if let value = response.result.value {
                     self.parseAndSaveUser(user: user, from: value)
                     completion()
@@ -124,7 +120,7 @@ class UserApiManager {
             "Authorization": "Token \(user.token!)"
         ]
         
-        Alamofire.request(host + "/visits/get-user-country-visits/", headers: headers).responseJSON { response in
+        Alamofire.request(host + "visits/get-user-country-visits/", headers: headers).responseJSON { response in
             if let value = response.result.value {
                 var visitedCountriesCodes: [String] = []
                 let countryVisits = JSON(value)
@@ -145,12 +141,12 @@ class UserApiManager {
             "Authorization": "Token \(User.shared.token!)"
         ]
         
-        Alamofire.request(host + "/users/get-user-photo-path/", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        Alamofire.request(host + "users/get-user-photo-path/", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if let value = response.result.value {
                 let json = JSON(value)
                 let path = json["path"].stringValue
                 if path != User.shared.photoPath {
-                    if let url = URL(string: self.photosHost + path) {
+                    if let url = URL(string: self.photosHost + "traver-media/" + path) {
                         Alamofire.request(url).responseImage { response in
                             if let image = response.result.value {
                                 User.shared.photoData = UIImagePNGRepresentation(image) as Data?
@@ -179,7 +175,7 @@ class UserApiManager {
             ]
         ]
         
-        Alamofire.request(host + "/users/", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+        Alamofire.request(host + "users/", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
             if response.response?.statusCode == 201 {
                 if let value = response.result.value {
                     let json = JSON(value)
@@ -222,8 +218,8 @@ class UserApiManager {
             ]
         ]
         
-        Alamofire.request(host + "/users/", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-            if response.response?.statusCode == 201 {
+        Alamofire.request(host + "users/create-user/", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            if response.response?.statusCode == 200 { //201
                 if let value = response.result.value {
                     let json = JSON(value)
                     
@@ -265,7 +261,7 @@ class UserApiManager {
                 "Authorization": "Token \(User.shared.token!)"
             ]
             
-            _ = Alamofire.request(host + "/visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            _ = Alamofire.request(host + "visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                 if response.response?.statusCode == 201 {
                     User.shared.updateCountryVisits(codes: visitedCountriesCodes)
                 } else {
@@ -292,7 +288,7 @@ class UserApiManager {
                 "Authorization": "Token \(User.shared.token!)"
             ]
             
-            _ = Alamofire.request(host + "/users/update-user-info/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            _ = Alamofire.request(host + "users/update-user-info/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                 if response.response?.statusCode == 200 {
                     self.updateUserInfoInCoreData(name: name, location: location, completion: completion)
                 } else {
@@ -321,7 +317,7 @@ class UserApiManager {
             "Authorization": "Token \(User.shared.token!)"
         ]
         
-        _ = Alamofire.request(host + "/users/update-facebook-info/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        _ = Alamofire.request(host + "users/update-facebook-info/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 200 {
                 if User.shared.photo == nil {
                     self.updatePhoto(photo: photo) {
@@ -355,7 +351,7 @@ class UserApiManager {
             "Authorization": "Token \(User.shared.token!)"
         ]
         
-        _ = Alamofire.request(host + "/users/update-icloud-info/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        _ = Alamofire.request(host + "users/update-icloud-info/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 200 {
                 User.shared.iCloudID = id
                 User.shared.updateInfo()
@@ -375,7 +371,7 @@ class UserApiManager {
                 "Authorization": "Token \(User.shared.token!)"
             ]
             
-            _ = Alamofire.request(host + "/visits/update-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            _ = Alamofire.request(host + "visits/update-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                 if response.response?.statusCode == 200 {
                     User.shared.updateCountryVisits(codes: codes)
                     if let completion = completion {
@@ -413,7 +409,7 @@ class UserApiManager {
             Alamofire.upload(multipartFormData: { multipartFormData in
                 multipartFormData.append(photoData, withName: "photo", fileName: name, mimeType: "image/png")
             },
-                             to: host + "/users/update-user-photo/",
+                             to: host + "users/update-user-photo/",
                              headers: headers,
                              encodingCompletion: { result in
                                 switch result {
@@ -449,7 +445,7 @@ class UserApiManager {
             "icloud_id": User.shared.iCloudID != nil ? User.shared.iCloudID! : ""
         ]
         
-        _ = Alamofire.request(host + "/users/update-user/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        _ = Alamofire.request(host + "users/update-user/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 200 {
                 if let photo = User.shared.photo {
                     self.updatePhoto(photo: photo) {
@@ -488,7 +484,7 @@ class UserApiManager {
                 "Authorization": "Token \(User.shared.token!)"
             ]
             
-            _ = Alamofire.request(host + "/visits/delete-country-visit/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            _ = Alamofire.request(host + "visits/delete-country-visit/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                 if response.response?.statusCode == 200 {
                     User.shared.removeCountryVisit(country: country)
                     if let completion = completion {
@@ -511,7 +507,7 @@ class UserApiManager {
             "Authorization": "Token \(User.shared.token!)"
         ]
         
-        _ = Alamofire.request(host + "/users/disconnect-facebook/", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        _ = Alamofire.request(host + "users/disconnect-facebook/", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 200 {
                 User.shared.disconnectFacebook()
                 //NotificationCenter.default.post(name: self.AccountsUpdatedNotification, object: nil)
@@ -534,9 +530,6 @@ class UserApiManager {
         user.name = stringOrNilIfEmpty(profile["name"].stringValue)
         user.iCloudID = stringOrNilIfEmpty(profile["icloud_id"].stringValue)
         
-//        let token = json["token"].stringValue
-//        KeychainWrapper.standard.set(token, forKey: "token")
-//        user.token = token
         user.token = json["token"].stringValue
         
         user.updateInfo()
@@ -556,7 +549,8 @@ class UserApiManager {
     }
     
     private func showNoInternetErrorAlert(response: DataResponse<Any>) {
-        let alert = UIAlertController(title: "Error".localized(), message: "Check your Internet connection. Status code".localized() + ": \(response.response?.statusCode)", preferredStyle: .alert)
+        let codeString = response.response?.statusCode != nil ? ": \(response.response!.statusCode)" : ": undefined"
+        let alert = UIAlertController(title: "Error".localized(), message: "Check your Internet connection. Status code".localized() + codeString, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK".localized(), style: .default))
         UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
     }

@@ -32,6 +32,8 @@ class ProfileViewController: UIViewController {
     let visitedCountriesText = "%d/176 countries visited"
     let mapHeightToWidthRatio: CGFloat = 1.5
     
+    let refreshControl = UIRefreshControl()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +74,9 @@ class ProfileViewController: UIViewController {
             viewMap.addSubview(imageView)
         }
         
+        refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
+        tableViewVisitedCountries.addSubview(refreshControl)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: UserApiManager.shared.CountriesUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(profileInfoUpdated), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
@@ -91,7 +96,7 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func buttonShareTapped(_ sender: UIButton) {
-        PhotosAccessManager.shared.shareToPhotoAlbum(controller: self)
+        ShareManager.shared.shareProfile(controller: self)
     }
 
     @IBAction func buttonFillInfoTapped(_ sender: UIButton) {
@@ -128,6 +133,13 @@ class ProfileViewController: UIViewController {
     @IBAction func buttonEditTapped(_ sender: UIButton) {
         self.performSegue(withIdentifier: "segueToEditProfile", sender: nil)
     }
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        UserApiManager.shared.getUserInfo(user: User.shared) {
+            refreshControl.endRefreshing()
+        }
+    }
+
     
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -13,25 +13,6 @@ class PhotosAccessManager {
     
     static let shared = PhotosAccessManager()
     
-    func shareToPhotoAlbum(controller: UIViewController) {
-        switch (PHPhotoLibrary.authorizationStatus()) {
-        case .authorized:
-            ShareManager.sharedInstance.saveProfileSharePicture()
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization({ (status) -> Void in
-                if status ==  .authorized {
-                    ShareManager.sharedInstance.saveProfileSharePicture()
-                } else {
-                    PhotosAccessManager.shared.showAlertAllowAccessToPhotos(on: controller, withTitle: "Impossible to save a picture to Photos")
-                }
-            })
-        case .denied:
-            PhotosAccessManager.shared.showAlertAllowAccessToPhotos(on: controller, withTitle: "Impossible to save a picture to Photos")
-        case .restricted:
-            PhotosAccessManager.shared.showAlertRestrictedAccess(on: controller, withMessage: "We can't save a picture with your Profile to Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.")
-        }
-    }
-    
     func importVisitedCountries(controller: UIViewController) {
         switch (PHPhotoLibrary.authorizationStatus()) {
         case .authorized:

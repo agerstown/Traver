@@ -10,9 +10,9 @@ import Foundation
 
 class ShareManager: NSObject {
     
-    static let sharedInstance = ShareManager()
+    static let shared = ShareManager()
     
-    func saveProfileSharePicture() {
+    func shareProfile(controller: UIViewController) {
         let shareView = Bundle.main.loadNibNamed("Share", owner: nil, options: nil)![0] as! ShareView
         
         let image = SVGKImage(named: "WorldMap.svg")!
@@ -25,15 +25,17 @@ class ShareManager: NSObject {
             image.colorVisitedCounties()
         }
         
-        //shareView.labelCountriesVisited.text = "%d countries visited".localized(for: User.shared.visitedCountriesCodes.count)
         shareView.labelCountriesVisited.text = "%d countries visited".localized(for: User.shared.visitedCountries.count)
         
         UIGraphicsBeginImageContext(shareView.bounds.size)
         if let context = UIGraphicsGetCurrentContext() {
             shareView.layer.render(in: context)
-            if let screenShot = UIGraphicsGetImageFromCurrentImageContext() {
+            if let picture = UIGraphicsGetImageFromCurrentImageContext() {
                 UIGraphicsEndImageContext()
-                UIImageWriteToSavedPhotosAlbum(screenShot, self, #selector(shareSavingCompleted(image:error:contextInfo:)), nil)
+                
+                let activityViewController = UIActivityViewController(activityItems: [picture], applicationActivities: nil)
+                // activityViewController.popoverPresentationController?.sourceView = controller.view // so that iPads won't crash
+                controller.present(activityViewController, animated: true, completion: nil)
             }
         }
     }

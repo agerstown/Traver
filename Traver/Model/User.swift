@@ -23,7 +23,6 @@ class User: NSManagedObject {
             let visitedRegions = try! CoreDataStack.shared.mainContext.fetch(frRegion)
             user.visitedRegions = visitedRegions.sorted { $0.index < $1.index }
             
-            //user.token = KeychainWrapper.standard.string(forKey: "token")
             if let token = user.token {
                 UserApiManager.shared.getUserInfo(user: user) {
                     if user.iCloudID == nil {
