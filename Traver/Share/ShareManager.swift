@@ -12,7 +12,7 @@ class ShareManager: NSObject {
     
     static let shared = ShareManager()
     
-    func shareProfile(controller: UIViewController) {
+    func getSharePicture() -> UIImage? {
         let shareView = Bundle.main.loadNibNamed("Share", owner: nil, options: nil)![0] as! ShareView
         
         let image = SVGKImage(named: "WorldMap.svg")!
@@ -32,25 +32,20 @@ class ShareManager: NSObject {
             shareView.layer.render(in: context)
             if let picture = UIGraphicsGetImageFromCurrentImageContext() {
                 UIGraphicsEndImageContext()
-                
-                let activityViewController = UIActivityViewController(activityItems: [picture], applicationActivities: nil)
-                // activityViewController.popoverPresentationController?.sourceView = controller.view // so that iPads won't crash
-                controller.present(activityViewController, animated: true, completion: nil)
+                return picture
             }
         }
+        
+        return nil
     }
     
-    @objc private func shareSavingCompleted(image: UIImage, error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            showSimpleAlert(withTitle: "Error", withMessage: error.localizedDescription)
-        } else {
-            showSimpleAlert(withTitle: "Success", withMessage: "A picture with your Profile has been saved to Photos.")
+    func shareProfile(picture: UIImage, controller: UIViewController) {
+        let activityViewController = UIActivityViewController(activityItems: [picture], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = { activity, success, items, error in
+            controller.dismiss(animated: true, completion: nil)
         }
+        // activityViewController.popoverPresentationController?.sourceView = controller.view // so that iPads won't crash
+        controller.present(activityViewController, animated: true, completion: nil)
     }
     
-    private func showSimpleAlert(withTitle title: String, withMessage message: String) {
-        let alert = UIAlertController(title: title.localized(), message: message.localized(), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK".localized(), style: .default))
-        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
-    }
 }

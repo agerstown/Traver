@@ -24,8 +24,10 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var imageViewPhoto: UIImageView!
     @IBOutlet weak var buttonEditUserInfo: UIButton!
     @IBOutlet weak var buttonFillInfo: UIButton!
+    @IBOutlet weak var buttonShare: UIButton!
     
     @IBOutlet weak var constraintScrollViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var constraintButtonFillInfo: NSLayoutConstraint!
     
     var mapImage: SVGKImage = SVGKImage(named: "WorldMap.svg")!
     
@@ -93,12 +95,8 @@ class ProfileViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
-    // MARK: - Actions
-    @IBAction func buttonShareTapped(_ sender: UIButton) {
-        ShareManager.shared.shareProfile(controller: self)
-    }
 
+    // MARK: - Actions
     @IBAction func buttonFillInfoTapped(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: "How do you want to fill your info?".localized(), preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Connect Facebook".localized(), style: .default) { _ in
@@ -112,7 +110,15 @@ class ProfileViewController: UIViewController {
     }
     
     func updateProfileInfo() {
-        buttonFillInfo.isHidden = User.shared.name != nil && User.shared.name != ""
+        if User.shared.name != nil && User.shared.name != "" {
+            buttonFillInfo.isHidden = true
+            buttonShare.isHidden = false
+            constraintButtonFillInfo.constant = 66
+        } else {
+            buttonFillInfo.isHidden = false
+            buttonShare.isHidden = true
+            constraintButtonFillInfo.constant = 16
+        }
         
         labelName.text = User.shared.name
         labelLocation.text = User.shared.location
@@ -149,6 +155,8 @@ class ProfileViewController: UIViewController {
                     User.shared.visitedCountries.contains(where: { $0.code == country.code } )
                 }
             }
+        } else if let controller = segue.destination as? SharePreviewController {
+            controller.backgroundController = self
         }
     }
 

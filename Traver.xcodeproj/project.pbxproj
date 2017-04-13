@@ -11,6 +11,8 @@
 		610D86FF1DECE0C40030C153 /* VisitedRegionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 610D86FE1DECE0C40030C153 /* VisitedRegionHeaderView.xib */; };
 		610FCA2B1DF4A5FE00046546 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 610FCA2D1DF4A5FE00046546 /* InfoPlist.strings */; };
 		611EB3081DF5ED5E002960A8 /* Share.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611EB3071DF5ED5E002960A8 /* Share.xib */; };
+		612A0B3B1E9FA902005BDCA6 /* SharePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3A1E9FA902005BDCA6 /* SharePreviewController.swift */; };
+		612A0B3D1E9FB4D0005BDCA6 /* UIImage+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3C1E9FB4D0005BDCA6 /* UIImage+Effects.swift */; };
 		612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6401DE5E04E0092D43F /* CountriesViewController.swift */; };
 		612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6481DE5E2880092D43F /* CountryItemCell.swift */; };
 		612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */; };
@@ -106,6 +108,8 @@
 		610FCA2C1DF4A5FE00046546 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		610FCA2E1DF4A60000046546 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		611EB3071DF5ED5E002960A8 /* Share.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Share.xib; sourceTree = "<group>"; };
+		612A0B3A1E9FA902005BDCA6 /* SharePreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePreviewController.swift; sourceTree = "<group>"; };
+		612A0B3C1E9FB4D0005BDCA6 /* UIImage+Effects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Effects.swift"; sourceTree = "<group>"; };
 		612BF6401DE5E04E0092D43F /* CountriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesViewController.swift; sourceTree = "<group>"; };
 		612BF6481DE5E2880092D43F /* CountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryItemCell.swift; sourceTree = "<group>"; };
 		612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 			children = (
 				61B2765E1DF9E327008AA44B /* ShareManager.swift */,
 				61B276601DF9E8C2008AA44B /* ShareView.swift */,
+				612A0B3A1E9FA902005BDCA6 /* SharePreviewController.swift */,
 				611EB3071DF5ED5E002960A8 /* Share.xib */,
 			);
 			path = Share;
@@ -428,6 +433,7 @@
 				613C54DD1DF0D0C3006660B9 /* Double+Round.swift */,
 				61C4F1B61DFAD5380070158E /* SVGKImage+Extensions.swift */,
 				610B2F641E92D01400000006 /* UIImage+SizeReduction.swift */,
+				612A0B3C1E9FB4D0005BDCA6 /* UIImage+Effects.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -913,12 +919,14 @@
 				612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */,
 				615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */,
 				61B276611DF9E8C2008AA44B /* ShareView.swift in Sources */,
+				612A0B3B1E9FA902005BDCA6 /* SharePreviewController.swift in Sources */,
 				615665861DE3846B0050AE5A /* ProfileViewController.swift in Sources */,
 				61B2765F1DF9E327008AA44B /* ShareManager.swift in Sources */,
 				612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */,
 				615665881DE384830050AE5A /* RecommendationsViewController.swift in Sources */,
 				61732B231E491AFC00A0C952 /* UserApiManager.swift in Sources */,
 				613394631E3163220001CF2A /* CoreDataStack.swift in Sources */,
+				612A0B3D1E9FB4D0005BDCA6 /* UIImage+Effects.swift in Sources */,
 				615BAD5F1DE4CF9500D1478D /* User.swift in Sources */,
 				610B2F651E92D01400000006 /* UIImage+SizeReduction.swift in Sources */,
 				61A16E301E69A82700184C7F /* CloudKitHelper.swift in Sources */,

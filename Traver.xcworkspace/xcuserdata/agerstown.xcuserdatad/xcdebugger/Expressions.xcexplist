@@ -140,6 +140,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "SharePreviewController.viewDidLoad() -&gt; ():SharePreviewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "backgroundController?.tabBarController">
+            </PersistentString>
+            <PersistentString
+               value = "self.navigationController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -175,6 +186,28 @@
          <PersistentStrings>
             <PersistentString
                value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.prepare(for : UIStoryboardSegue, sender : Any?) -&gt; ():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "segue.destination">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SharePreviewController.handleTap(recognizer : UIGestureRecognizer) -&gt; ():SharePreviewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageViewSharePicture.frame.size.height">
+            </PersistentString>
+            <PersistentString
+               value = "imageViewSharePicture.frame.origin.y">
+            </PersistentString>
+            <PersistentString
+               value = "view?.hitTest(location, with: nil)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
