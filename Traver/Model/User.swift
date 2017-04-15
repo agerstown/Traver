@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData
-//import SwiftKeychainWrapper
 
 @objc(User)
 class User: NSManagedObject {
@@ -22,10 +21,10 @@ class User: NSManagedObject {
             let frRegion = NSFetchRequest<Region>(entityName: "Region")
             let visitedRegions = try! CoreDataStack.shared.mainContext.fetch(frRegion)
             user.visitedRegions = visitedRegions.sorted { $0.index < $1.index }
-            
+
             if let token = user.token {
-                UserApiManager.shared.getUserInfo(user: user) {
-                    if user.iCloudID == nil {
+                UserApiManager.shared.getUserInfo(user: user) { success in
+                    if success && user.iCloudID == nil {
                         CloudKitHelper.shared.login()
                     }
                 }
@@ -83,6 +82,11 @@ class User: NSManagedObject {
             saveCountryVisit(code: code)
         }
         
+        CoreDataStack.shared.saveContext()
+    }
+    
+    func addCountryVisit(code: String) {
+        saveCountryVisit(code: code)
         CoreDataStack.shared.saveContext()
     }
     

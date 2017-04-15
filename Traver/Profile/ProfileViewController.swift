@@ -77,7 +77,7 @@ class ProfileViewController: UIViewController {
         }
         
         refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
-        tableViewVisitedCountries.addSubview(refreshControl)
+        tableViewVisitedCountries.refreshControl = refreshControl
         
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: UserApiManager.shared.CountriesUpdatedNotification, object: nil)
@@ -141,7 +141,11 @@ class ProfileViewController: UIViewController {
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {
-        UserApiManager.shared.getUserInfo(user: User.shared) {
+        if User.shared.token != nil && User.shared.token != "" {
+            UserApiManager.shared.getUserInfo(user: User.shared) { _ in
+                refreshControl.endRefreshing()
+            }
+        } else {
             refreshControl.endRefreshing()
         }
     }
@@ -164,9 +168,7 @@ class ProfileViewController: UIViewController {
     func countryCodeImported(notification: NSNotification) {
         if let countryCode = notification.userInfo?[VisitedCountriesImporter.shared.CountryCodeInfoKey] as? String {
             if !User.shared.visitedCountries.contains(where: { $0.code == countryCode }) {
-                var visitedCountriesCodes = User.shared.visitedCountries.map { $0.code }
-                visitedCountriesCodes.append(countryCode)
-                UserApiManager.shared.updateCountryVisits(codes: visitedCountriesCodes) {
+                UserApiManager.shared.addCountryVisit(code: countryCode) {
                     let country = User.shared.visitedCountries.filter { $0.code == countryCode }.first!
                     let region = country.region
                     
@@ -221,8 +223,7 @@ class ProfileViewController: UIViewController {
     }
     
     func configureVisitedCountriesNumber(for header: VisitedRegionHeaderView, in section: Int) {
-        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(User.shared.visitedRegions[section].sortedVisitedCountries.count)"
-
+        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(Codes.regions[section].1.count)"
     }
     
     func configureVisitedCountriesNumberAnimated(for header: VisitedRegionHeaderView, in section: Int) {

@@ -19,9 +19,6 @@ class FacebookHelper {
     
     let loginManager = LoginManager()
     
-    // MARK: Notifications
-    let AccountsUpdatedNotification = NSNotification.Name(rawValue: "AccountsUpdatedNotification")
-    
     func isConnected() -> Bool {
         return AccessToken.current != nil
     }
@@ -35,7 +32,6 @@ class FacebookHelper {
                 if User.shared.iCloudID != nil {
                     UserApiManager.shared.disconnectFacebook()
                 }
-                NotificationCenter.default.post(name: self.AccountsUpdatedNotification, object: nil)
             })
             UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
         } else {

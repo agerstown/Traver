@@ -499,7 +499,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="358"/>
+            <point key="canvasLocation" x="854" y="1173"/>
         </scene>
         <!--Share Preview Controller-->
         <scene sceneID="4zh-q7-yOy">
@@ -566,7 +566,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1BH-Gv-Kxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-63" y="1228"/>
+            <point key="canvasLocation" x="-63" y="1970"/>
         </scene>
         <!--Settings-->
         <scene sceneID="tkB-QB-sSC">
@@ -641,7 +641,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="be3-RB-fVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="1229"/>
+            <point key="canvasLocation" x="854" y="1970"/>
         </scene>
         <!--Profile-->
         <scene sceneID="O9R-f4-fyV">
@@ -673,13 +673,79 @@
                     </tabBar>
                     <connections>
                         <segue destination="Kmb-qH-VNZ" kind="relationship" relationship="viewControllers" id="wqX-e1-UkN"/>
-                        <segue destination="0se-Ri-gNE" kind="relationship" relationship="viewControllers" id="0jp-Cf-W7J"/>
+                        <segue destination="amc-Rz-Bgl" kind="relationship" relationship="viewControllers" id="LUX-AL-hLP"/>
                         <segue destination="xHb-Ap-yGB" kind="relationship" relationship="viewControllers" id="icN-bT-IcK"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1274" y="359"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="JeY-mc-3qI">
+            <objects>
+                <navigationController id="amc-Rz-Bgl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Friends" image="first" id="BuD-sd-vCs"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="07d-bG-Yir">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Wg0-l4-vfx" kind="relationship" relationship="rootViewController" id="nry-53-f0A"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hh6-1Y-P6W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-63" y="358"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="YL6-5u-8Kw">
+            <objects>
+                <tableViewController id="Wg0-l4-vfx" customClass="FriendsViewController" customModule="Traver" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dwq-4J-cda">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="8c1-iE-e2s">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="uO5-mR-jHm">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uO5-mR-jHm" id="4Du-Ju-phw">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="fAw-mQ-iBf">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fAw-mQ-iBf" id="QHd-Md-QYB">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UAC-mV-BBf">
+                                        <rect key="frame" x="0.0" y="88" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UAC-mV-BBf" id="dTA-9C-ie1">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Wg0-l4-vfx" id="qSc-2J-bVW"/>
+                            <outlet property="delegate" destination="Wg0-l4-vfx" id="9e5-5a-7cd"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Friends" id="2Wd-im-ffs"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yZR-MJ-wRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="854" y="358"/>
         </scene>
         <!--Recommendations-->
         <scene sceneID="Jnl-Rw-MHM">
@@ -696,7 +762,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8pN-rz-Eql" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-63" y="359"/>
+            <point key="canvasLocation" x="-63" y="1174"/>
         </scene>
     </scenes>
     <resources>

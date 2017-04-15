@@ -34,7 +34,6 @@ class SettingsViewController: UITableViewController {
         tableViewSettings.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateAccountsInfo), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateAccountsInfo), name: FacebookHelper.shared.AccountsUpdatedNotification, object: nil)
     }
     
     deinit {

@@ -14,6 +14,7 @@ class VisitedCountryItemCell: UITableViewCell {
     var country: Country?
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         labelCountryName.adjustsFontSizeToFitWidth = true
     }
 }

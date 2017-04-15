@@ -219,9 +219,7 @@
 "We can't import visited countries from your Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it." = "Мы не можем импортировать посещенные Вами страны из Фото, т.к. родительский контроль не позволяет Вам давать доступ к своим Фото для приложений. Попросите владельца разрешить доступ.";
 
 // Share
-"We can't save a picture with your Profile to Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it." = "Мы не можем сохранить картинку с Вашим Профилем, т.к. родительский контроль не позволяет Вам давать доступ к своим Фото для приложений. Попросите владельца разрешить доступ.";
-"Impossible to save a picture to Photos" = "Невозможно сохранить картинку в Фото";
-"A picture with your Profile has been saved to Photos." = "Картинка с Вашим Профилем была сохранена в Фото.";
+"Share" = "Поделиться";
 
 // Accounts
 "Accounts" = "Аккаунты";
@@ -248,3 +246,4 @@
 // Server
 "Check your Internet connection. Status code" = "Проверьте, есть ли соединение с Интернетом. Статус-код";
 "Check your Internet connection. Error" = "Проверьте, есть ли соединение с Интернетом. Ошибка";
+": No Internet." = ": Нет Интернета.";

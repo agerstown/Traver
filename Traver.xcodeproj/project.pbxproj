@@ -13,6 +13,7 @@
 		611EB3081DF5ED5E002960A8 /* Share.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611EB3071DF5ED5E002960A8 /* Share.xib */; };
 		612A0B3B1E9FA902005BDCA6 /* SharePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3A1E9FA902005BDCA6 /* SharePreviewController.swift */; };
 		612A0B3D1E9FB4D0005BDCA6 /* UIImage+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3C1E9FB4D0005BDCA6 /* UIImage+Effects.swift */; };
+		612A0B401EA28430005BDCA6 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3F1EA2842F005BDCA6 /* FriendsViewController.swift */; };
 		612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6401DE5E04E0092D43F /* CountriesViewController.swift */; };
 		612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6481DE5E2880092D43F /* CountryItemCell.swift */; };
 		612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */; };
@@ -110,6 +111,7 @@
 		611EB3071DF5ED5E002960A8 /* Share.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Share.xib; sourceTree = "<group>"; };
 		612A0B3A1E9FA902005BDCA6 /* SharePreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePreviewController.swift; sourceTree = "<group>"; };
 		612A0B3C1E9FB4D0005BDCA6 /* UIImage+Effects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Effects.swift"; sourceTree = "<group>"; };
+		612A0B3F1EA2842F005BDCA6 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		612BF6401DE5E04E0092D43F /* CountriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesViewController.swift; sourceTree = "<group>"; };
 		612BF6481DE5E2880092D43F /* CountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryItemCell.swift; sourceTree = "<group>"; };
 		612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -365,6 +367,14 @@
 				611EB3071DF5ED5E002960A8 /* Share.xib */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		612A0B3E1EA28406005BDCA6 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				612A0B3F1EA2842F005BDCA6 /* FriendsViewController.swift */,
+			);
+			name = Friends;
 			sourceTree = "<group>";
 		};
 		612BF63F1DE5E0360092D43F /* Profile */ = {
@@ -667,6 +677,7 @@
 			children = (
 				612BF6461DE5E1E60092D43F /* Main */,
 				612BF63F1DE5E0360092D43F /* Profile */,
+				612A0B3E1EA28406005BDCA6 /* Friends */,
 				612BF6421DE5E05E0092D43F /* Recommendations */,
 				612BF6431DE5E06A0092D43F /* Settings */,
 				611EB3061DF5ED30002960A8 /* Share */,
@@ -927,6 +938,7 @@
 				61732B231E491AFC00A0C952 /* UserApiManager.swift in Sources */,
 				613394631E3163220001CF2A /* CoreDataStack.swift in Sources */,
 				612A0B3D1E9FB4D0005BDCA6 /* UIImage+Effects.swift in Sources */,
+				612A0B401EA28430005BDCA6 /* FriendsViewController.swift in Sources */,
 				615BAD5F1DE4CF9500D1478D /* User.swift in Sources */,
 				610B2F651E92D01400000006 /* UIImage+SizeReduction.swift in Sources */,
 				61A16E301E69A82700184C7F /* CloudKitHelper.swift in Sources */,

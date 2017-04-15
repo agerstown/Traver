@@ -89,7 +89,7 @@ class UserApiManager {
         }
     }
     
-    func getUserInfo(user: User, completion: @escaping () -> Void) {
+    func getUserInfo(user: User, completion: @escaping (_ success: Bool) -> Void) {
         if let facebookID = user.facebookID {
             let parameters: Parameters = [
                 "facebook_id": facebookID
@@ -98,7 +98,9 @@ class UserApiManager {
             Alamofire.request(host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
                 if let value = response.result.value {
                     self.parseAndSaveUser(user: user, from: value)
-                    completion()
+                    completion(true)
+                } else {
+                    completion(false)
                 }
             }
         } else if let iCloudID = user.iCloudID {
@@ -109,7 +111,9 @@ class UserApiManager {
             Alamofire.request(host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
                 if let value = response.result.value {
                     self.parseAndSaveUser(user: user, from: value)
-                    completion()
+                    completion(true)
+                } else {
+                    completion(false)
                 }
             }
         }
@@ -389,6 +393,35 @@ class UserApiManager {
         }
     }
     
+    func addCountryVisit(code: String, completion: (() -> Void)?) {
+        if User.shared.token != nil && !User.shared.token!.isEmpty {
+            let params: Parameters = [
+                "country_code": code
+            ]
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(User.shared.token!)"
+            ]
+            
+            _ = Alamofire.request(host + "visits/add-country-visit/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                if response.response?.statusCode == 201 {
+                    User.shared.addCountryVisit(code: code)
+                    if let completion = completion {
+                        completion()
+                    }
+                }
+//                } else {
+//                    self.showNoInternetErrorAlert(response: response)
+//                }
+            }
+        } else {
+            User.shared.addCountryVisit(code: code) //.updateCountryVisits(codes: codes)
+            if let completion = completion {
+                completion()
+            }
+        }
+    }
+    
     func updatePhoto(photo: UIImage, completion: @escaping () -> Void) {
         if User.shared.token != nil && !User.shared.token!.isEmpty {
             
@@ -469,6 +502,9 @@ class UserApiManager {
         } else {
             self.updateCountryVisits(codes: User.shared.visitedCountries.map{ $0.code }) {
                 NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
+                if let completion = completion {
+                    completion()
+                }
             }
         }
     }
@@ -510,10 +546,8 @@ class UserApiManager {
         _ = Alamofire.request(host + "users/disconnect-facebook/", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 200 {
                 User.shared.disconnectFacebook()
-                //NotificationCenter.default.post(name: self.AccountsUpdatedNotification, object: nil)
-            } else {
-                self.showNoInternetErrorAlert(response: response)
             }
+            NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
         }
     }
     
@@ -549,7 +583,7 @@ class UserApiManager {
     }
     
     private func showNoInternetErrorAlert(response: DataResponse<Any>) {
-        let codeString = response.response?.statusCode != nil ? ": \(response.response!.statusCode)" : ": undefined"
+        let codeString = response.response?.statusCode != nil ? ": \(response.response!.statusCode)" : ": No Internet.".localized()
         let alert = UIAlertController(title: "Error".localized(), message: "Check your Internet connection. Status code".localized() + codeString, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK".localized(), style: .default))
         UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)

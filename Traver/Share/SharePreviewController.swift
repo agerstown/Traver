@@ -19,6 +19,7 @@ class SharePreviewController: UIViewController {
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
+        super.viewDidLoad()
         
         if let backgroundController = backgroundController {
             backgroundController.tabBarController?.tabBar.isHidden = true
@@ -33,6 +34,7 @@ class SharePreviewController: UIViewController {
             view.backgroundColor = UIColor(patternImage: snapshot)
         }
         
+        buttonShare.setTitle("Share".localized(), for: .normal)
         buttonShare.layer.cornerRadius = 5
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
@@ -45,6 +47,8 @@ class SharePreviewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         if let tabBar = self.backgroundController?.tabBarController?.tabBar {
             tabBar.frame.origin.y += tabBar.frame.size.height
             self.backgroundController?.tabBarController?.tabBar.isHidden = false

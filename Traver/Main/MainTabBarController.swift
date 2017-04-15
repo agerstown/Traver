@@ -12,7 +12,7 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         self.tabBar.items?[0].title = "Profile".localized()
-        self.tabBar.items?[1].title = "Recommendations".localized()
+        self.tabBar.items?[1].title = "Friends".localized()
         self.tabBar.items?[2].title = "Settings".localized()
     }
 }

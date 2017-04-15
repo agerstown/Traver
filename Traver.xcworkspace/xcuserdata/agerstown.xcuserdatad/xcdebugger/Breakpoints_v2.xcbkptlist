@@ -2,4 +2,70 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Traver/Helpers/UserApiManager.swift"
+            timestampString = "513980230.762557"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
+            landmarkName = "updateFacebookInfo(id:email:name:location:photo:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Traver.UserApiManager.updateFacebookInfo (id : Swift.String, email : Swift.String, name : Swift.String, location : Swift.String, photo : __ObjC.UIImage) -&gt; ()"
+                  moduleName = "Traver"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/agerstown/Dropbox/HSE_4/Traver/Traver/Helpers/UserApiManager.swift"
+                  timestampString = "513981284.246103"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "324"
+                  endingLineNumber = "324"
+                  offsetFromSymbolStart = "3519">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Traver.UserApiManager.(updateFacebookInfo (id : Swift.String, email : Swift.String, name : Swift.String, location : Swift.String, photo : __ObjC.UIImage) -&gt; ()).(closure #1)"
+                  moduleName = "Traver"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/agerstown/Dropbox/HSE_4/Traver/Traver/Helpers/UserApiManager.swift"
+                  timestampString = "513981284.257936"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "325"
+                  endingLineNumber = "325"
+                  offsetFromSymbolStart = "149">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Traver/Helpers/UserApiManager.swift"
+            timestampString = "513980231.828112"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "325"
+            endingLineNumber = "325"
+            landmarkName = "updateFacebookInfo(id:email:name:location:photo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

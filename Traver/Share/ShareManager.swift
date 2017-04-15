@@ -15,18 +15,6 @@ class ShareManager: NSObject {
     func getSharePicture() -> UIImage? {
         let shareView = Bundle.main.loadNibNamed("Share", owner: nil, options: nil)![0] as! ShareView
         
-        let image = SVGKImage(named: "WorldMap.svg")!
-        let width = shareView.bounds.width
-        let scale = width / image.size.width
-        let height = image.size.height * scale
-        image.size = CGSize(width: width, height: height)
-        if let imageView = SVGKLayeredImageView(svgkImage: image) {
-            shareView.viewMap.addSubview(imageView)
-            image.colorVisitedCounties()
-        }
-        
-        shareView.labelCountriesVisited.text = "%d countries visited".localized(for: User.shared.visitedCountries.count)
-        
         UIGraphicsBeginImageContext(shareView.bounds.size)
         if let context = UIGraphicsGetCurrentContext() {
             shareView.layer.render(in: context)
