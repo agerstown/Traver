@@ -738,6 +738,7 @@
 				615665841DE323680050AE5A /* Embed Frameworks */,
 				637F1AF029CD75FC3609C1DB /* [CP] Embed Pods Frameworks */,
 				1049375134269E1AAD0D2D80 /* [CP] Copy Pods Resources */,
+				619AE8851EA3DD17005FCC46 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -889,6 +890,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Traver/Pods-Traver-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		619AE8851EA3DD17005FCC46 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" dcff0ad61720d4a4d3dadc1aaf21769d14fb9e51 3d6cf7226ec4aa1d1fc820be42ab68b82e0377bdfe1b0095f15640bdc8b5fd39";
 		};
 		637F1AF029CD75FC3609C1DB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

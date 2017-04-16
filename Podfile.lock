@@ -8,7 +8,10 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - Crashlytics (3.8.3):
+    - Fabric (~> 1.6.3)
   - CWStatusBarNotification (2.3.5)
+  - Fabric (1.6.11)
   - FacebookCore (0.2.0):
     - Bolts (~> 1.8)
     - FBSDKCoreKit (~> 4.15)
@@ -34,7 +37,9 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AlamofireImage
+  - Crashlytics
   - CWStatusBarNotification (~> 2.3.5)
+  - Fabric
   - FacebookCore
   - FacebookLogin
   - FacebookShare
@@ -45,7 +50,9 @@ SPEC CHECKSUMS:
   Alamofire: e266cf991b933498df791e645e0d8ac294492153
   AlamofireImage: bb8c8351c51cb1633bb6be69b6dbbaff37ce65b7
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FacebookShare: 8e9ee8ea06505e6a1d3d719b0cc63e840fb8aaeb
@@ -55,6 +62,6 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: ca339014a8395f1eaabe1f1518cd5fd060bad648
+PODFILE CHECKSUM: eb9fd6c3f463a86448e790eeb603f67068dbdf13
 
 COCOAPODS: 1.2.0.beta.1

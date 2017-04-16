@@ -10,4 +10,6 @@ target 'Traver' do
 	pod 'AlamofireImage'
 	pod 'SwiftyJSON'
 	pod 'SwiftKeychainWrapper'
+	pod 'Fabric'
+	pod 'Crashlytics'
 end
