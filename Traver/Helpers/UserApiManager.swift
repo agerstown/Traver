@@ -27,65 +27,69 @@ class UserApiManager {
     // MARK: - GET methods
     func getOrCreateUserWithFacebook(id: String, email: String, name: String, location: String, photo: UIImage) {
         
-        let parameters: Parameters = [
-            "facebook_id": id
-        ]
+        if User.shared.iCloudID != nil {
+            self.updateFacebookInfo(id: id, email: email, name: name, location: location, photo: photo)
+        } else {
         
-        Alamofire.request(host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
-            if response.response?.statusCode == 404 {
-                if User.shared.iCloudID != nil {
-                    self.updateFacebookInfo(id: id, email: email, name: name, location: location, photo: photo)
-                } else {
+            let parameters: Parameters = [
+                "facebook_id": id
+            ]
+            
+            Alamofire.request(host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
+                if response.response?.statusCode == 404 {
                     self.createUserWithFacebook(id: id, email: email, name: User.shared.name != nil ? User.shared.name! : name, location: User.shared.location != nil ? User.shared.location! : location, photo: User.shared.photo != nil ? User.shared.photo! : photo) //todo check about photo: что если из фб пришло nil фото?
-                }
-            } else if let value = response.result.value {
-                
-                let json = JSON(value)
-                
-                let token = json["token"].stringValue
-                User.shared.token = token
-                
-                self.updateUser(token: token) {
-                    Alamofire.request(self.host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
-                        if let resultValue = response.result.value {
-                            self.parseAndSaveUser(user: User.shared, from: resultValue)
+                } else if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    
+                    let token = json["token"].stringValue
+                    User.shared.token = token
+                    
+                    self.updateUser(token: token) {
+                        Alamofire.request(self.host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
+                            if let resultValue = response.result.value {
+                                self.parseAndSaveUser(user: User.shared, from: resultValue)
+                            }
                         }
                     }
-                }
 
+                }
             }
+            
         }
     }
     
     func getOrCreateUserWithICloud(id: String, name: String?, location: String?, photo: UIImage?) {
         
-        let parameters: Parameters = [
-            "icloud_id": id
-        ]
+        if User.shared.facebookID != nil {
+            self.updateICloudInfo(id: id)
+        } else {
         
-        Alamofire.request(host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
-            if response.response?.statusCode == 404 {
-                if User.shared.facebookID != nil {
-                    self.updateICloudInfo(id: id)
-                } else {
+            let parameters: Parameters = [
+                "icloud_id": id
+            ]
+            
+            Alamofire.request(host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
+                if response.response?.statusCode == 404 {
                     self.createUserWithICloud(id: id, name: User.shared.name != nil ? User.shared.name! : name, location: User.shared.location != nil ? User.shared.location! : location, photo: User.shared.photo != nil ? User.shared.photo! : photo)
-                }
-            } else if let value = response.result.value {
-                
-                let json = JSON(value)
-                
-                let token = json["token"].stringValue
-                User.shared.token = token
-                
-                self.updateUser(token: token) {
-                    Alamofire.request(self.host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
-                        if let resultValue = response.result.value {
-                            self.parseAndSaveUser(user: User.shared, from: resultValue)
+                } else if let value = response.result.value {
+                    
+                    let json = JSON(value)
+                    
+                    let token = json["token"].stringValue
+                    User.shared.token = token
+                    
+                    self.updateUser(token: token) {
+                        Alamofire.request(self.host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
+                            if let resultValue = response.result.value {
+                                self.parseAndSaveUser(user: User.shared, from: resultValue)
+                            }
                         }
                     }
+                    
                 }
-                
             }
+            
         }
     }
     
@@ -183,9 +187,7 @@ class UserApiManager {
             if response.response?.statusCode == 201 {
                 if let value = response.result.value {
                     let json = JSON(value)
-                    
-//                    let token = json["token"].stringValue
-//                    KeychainWrapper.standard.set(token, forKey: "token")
+
                     User.shared.token = json["token"].stringValue
                     
                     User.shared.facebookID = id
@@ -227,8 +229,6 @@ class UserApiManager {
                 if let value = response.result.value {
                     let json = JSON(value)
                     
-//                    let token = json["token"].stringValue
-//                    KeychainWrapper.standard.set(token, forKey: "token")
                     User.shared.token = json["token"].stringValue
                     
                     User.shared.iCloudID = id
@@ -410,9 +410,6 @@ class UserApiManager {
                         completion()
                     }
                 }
-//                } else {
-//                    self.showNoInternetErrorAlert(response: response)
-//                }
             }
         } else {
             User.shared.addCountryVisit(code: code) //.updateCountryVisits(codes: codes)

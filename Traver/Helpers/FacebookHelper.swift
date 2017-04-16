@@ -47,6 +47,7 @@ class FacebookHelper {
                             self.showErrorAlert(for: error)
                         case .success(let graphResponse):
                             if let responseDictionary = graphResponse.dictionaryValue {
+                                print(responseDictionary)
                                 let id = responseDictionary["id"] as! String
                                 let email = responseDictionary["email"] as! String
                                 let name = responseDictionary["name"] as! String
@@ -59,7 +60,6 @@ class FacebookHelper {
                                             UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: image)
                                         }
                                     }
-                                    
                                 }
                             }
                         }

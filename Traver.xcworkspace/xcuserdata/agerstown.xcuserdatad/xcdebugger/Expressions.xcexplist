@@ -46,6 +46,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "MainTabBarController.viewDidLoad() -&gt; ():MainTabBarController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tabBarController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "CountriesViewController.buttonDoneClicked(UIBarButtonItem) -&gt; ():CountriesViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -62,11 +70,33 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "UserApiManager.(getPhoto() -&gt; ()).(closure #1).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+            <PersistentString
+               value = "url">
+            </PersistentString>
+            <PersistentString
+               value = "URL(string: self.photosHost + &quot;traver-media/&quot; + path)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.(getOrCreateUserWithFacebook(id : String, email : String, name : String, location : String, photo : UIImage) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "response.response?.statusCode">
             </PersistentString>
+            <PersistentString
+               value = "User.shared.photo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(updateUser(token : String, completion : () -&gt; ()?) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
             <PersistentString
                value = "User.shared.photo">
             </PersistentString>
