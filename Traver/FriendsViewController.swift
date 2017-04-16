@@ -8,10 +8,11 @@
 
 import Foundation
 
-class FriendsViewController: UITableViewController {
+class FriendsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.title = "Friends".localized()
     }
     

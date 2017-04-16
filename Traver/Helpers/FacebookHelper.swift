@@ -40,7 +40,7 @@ class FacebookHelper {
                 case .failed(let error):
                     self.showErrorAlert(for: error)
                 case .success(_, _, let accessToken):
-                    let getUserDataRequest = GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, friends, location"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
+                    let getUserDataRequest = GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, friends, picture.width(100).height(100), location"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
                     getUserDataRequest.start { (response, result) in
                         switch result {
                         case .failed(let error):
@@ -51,19 +51,21 @@ class FacebookHelper {
                                 print(responseDictionary)
                                 
                                 let id = responseDictionary["id"] as! String
-                                let email = responseDictionary["email"] as! String
+                                let email = responseDictionary["email"] as? String
                                 let name = responseDictionary["name"] as! String
-                                //let locationDict = responseDictionary["location"] as! NSDictionary
-                                //let location = locationDict["name"] as! String
-                                let location = ""
                                 
-//                                let request = GraphRequest(graphPath: "/\(id)/friends")
-//                                request.start() { response, result in
-//                                    print(response)
-//                                    print(result)
-//                                }
+                                let locationDict = responseDictionary["location"] as? NSDictionary
+                                let location = locationDict?["name"] as? String
                                 
-                                if let url = URL(string:"https://graph.facebook.com/\(id)/picture?width=160&height=160") {
+                                let picture = responseDictionary["picture"] as! NSDictionary
+                                let pictureData = picture["data"] as! NSDictionary
+                                
+                                let isSilhouette = pictureData["is_silhouette"] as! Bool
+                                
+                                if isSilhouette {
+                                    UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: nil)
+                                } else {
+                                    let url = pictureData["url"] as! String
                                     Alamofire.request(url).responseImage { response in
                                         if let image = response.result.value {
                                             UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: image)
@@ -87,19 +89,3 @@ class FacebookHelper {
     }
     
 }
-
-
-//print(responseDictionary)
-//                                        let getUserDataRequest = GraphRequest(graphPath: "me/friends", parameters: ["fields": "id, name, picture"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
-//                                        getUserDataRequest.start { (response, result) in
-//                                            switch result {
-//                                            case .failed(let error):
-//                                                print("error in graph request:", error)
-//                                            case .success(let graphResponse):
-//                                                if let responseDictionary = graphResponse.dictionaryValue {
-//                                                    if let friends: Array<String> = responseDictionary["data"] as? Array<String> {
-//                                                        print(friends.count)
-//                                                    }
-//                                                }
-//                                            }
-//                                        }

@@ -25,7 +25,7 @@ class UserApiManager {
     let PhotoUpdatedNotification = NSNotification.Name(rawValue: "PhotoUpdatedNotification")
     
     // MARK: - GET methods
-    func getOrCreateUserWithFacebook(id: String, email: String, name: String, location: String, photo: UIImage) {
+    func getOrCreateUserWithFacebook(id: String, email: String?, name: String, location: String?, photo: UIImage?) {
         
         if User.shared.iCloudID != nil {
             self.updateFacebookInfo(id: id, email: email, name: name, location: location, photo: photo)
@@ -37,7 +37,7 @@ class UserApiManager {
             
             Alamofire.request(host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
                 if response.response?.statusCode == 404 {
-                    self.createUserWithFacebook(id: id, email: email, name: User.shared.name != nil ? User.shared.name! : name, location: User.shared.location != nil ? User.shared.location! : location, photo: User.shared.photo != nil ? User.shared.photo! : photo) //todo check about photo: что если из фб пришло nil фото?
+                    self.createUserWithFacebook(id: id, email: email, name: name, location: location, photo: photo)
                 } else if let value = response.result.value {
                     
                     let json = JSON(value)
@@ -71,7 +71,7 @@ class UserApiManager {
             
             Alamofire.request(host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
                 if response.response?.statusCode == 404 {
-                    self.createUserWithICloud(id: id, name: User.shared.name != nil ? User.shared.name! : name, location: User.shared.location != nil ? User.shared.location! : location, photo: User.shared.photo != nil ? User.shared.photo! : photo)
+                    self.createUserWithICloud(id: id, name: name, location: location, photo: photo)
                 } else if let value = response.result.value {
                     
                     let json = JSON(value)
@@ -171,20 +171,30 @@ class UserApiManager {
     
     
     // MARK: - CREATE methods
-    private func createUserWithFacebook(id: String, email: String, name: String, location: String, photo: UIImage) {
+    private func createUserWithFacebook(id: String, email: String?, name: String, location: String?, photo: UIImage?) {
         
-        let parameters: Parameters = [
-            "username": "fb\(id)",
-            "profile": [
-                "name": name,
-                "facebook_id": id,
-                "facebook_email": email,
-                "location": location
-            ]
-        ]
+        let name = User.shared.name != nil ? User.shared.name! : name
+        let location = User.shared.location != nil ? User.shared.location! : location
+        let photo = User.shared.photo != nil ? User.shared.photo! : photo
+        
+        var parameters = Parameters()
+        parameters["username"] = "fb\(id)"
+        
+        var profileParameters = Parameters()
+        profileParameters["name"] = name
+        profileParameters["facebook_id"] = id
+        
+        if let email = email {
+            profileParameters["facebook_email"] = email
+        }
+        if let location = location {
+            profileParameters["location"] = location
+        }
+        
+        parameters["profile"] = profileParameters
         
         Alamofire.request(host + "users/create-user/", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-            if response.response?.statusCode == 200 { //201 {
+            if response.response?.statusCode == 200 { 
                 if let value = response.result.value {
                     let json = JSON(value)
 
@@ -197,12 +207,14 @@ class UserApiManager {
                     
                     NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
                     
-                    self.updatePhoto(photo: photo) {
-                        let photoData = UIImagePNGRepresentation(photo)
-                        User.shared.photoData = photoData
-                        User.shared.updateInfo()
-                        
-                        NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
+                    if let photo = photo {
+                        self.updatePhoto(photo: photo) {
+                            let photoData = UIImagePNGRepresentation(photo)
+                            User.shared.photoData = photoData
+                            User.shared.updateInfo()
+                            
+                            NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
+                        }
                     }
                     
                     self.createCountryVisits()
@@ -215,17 +227,26 @@ class UserApiManager {
 
     private func createUserWithICloud(id: String, name: String?, location: String?, photo: UIImage?) {
         
-        let parameters: Parameters = [
-            "username": "ic\(id)",
-            "profile": [
-                "name": name ?? "",
-                "location": location ?? "",
-                "icloud_id": id
-            ]
-        ]
+        let name = User.shared.name != nil ? User.shared.name! : name
+        let location = User.shared.location != nil ? User.shared.location! : location
+        let photo = User.shared.photo != nil ? User.shared.photo! : photo
+        
+        var parameters = Parameters()
+        parameters["username"] = "ic\(id)"
+        
+        var profileParameters = Parameters()
+        profileParameters["icloud_id"] = id
+        if let name = name {
+            profileParameters["name"] = name
+        }
+        if let location = location {
+            profileParameters["location"] = location
+        }
+        
+        parameters["profile"] = profileParameters
         
         Alamofire.request(host + "users/create-user/", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-            if response.response?.statusCode == 200 { //201
+            if response.response?.statusCode == 200 {
                 if let value = response.result.value {
                     let json = JSON(value)
                     
@@ -305,17 +326,21 @@ class UserApiManager {
         }
     }
     
-    func updateFacebookInfo(id: String, email: String, name: String, location: String, photo: UIImage) {
+    func updateFacebookInfo(id: String, email: String?, name: String, location: String?, photo: UIImage?) {
         
         let name = User.shared.name != nil ? User.shared.name! : name
         let location = User.shared.location != nil ? User.shared.location! : location
         
-        let parameters: Parameters = [
-            "facebook_id": id,
-            "facebook_email": email,
-            "name": name,
-            "location": location
-        ]
+        var parameters = Parameters()
+        parameters["facebook_id"] = id
+        parameters["name"] = name
+        
+        if let email = email {
+            parameters["facebook_email"] = email
+        }
+        if let location = location {
+            parameters["location"] = location
+        }
         
         let headers: HTTPHeaders = [
             "Authorization": "Token \(User.shared.token!)"
@@ -324,11 +349,13 @@ class UserApiManager {
         _ = Alamofire.request(host + "users/update-facebook-info/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 200 {
                 if User.shared.photo == nil {
-                    self.updatePhoto(photo: photo) {
-                        let photoData = UIImagePNGRepresentation(photo)
-                        User.shared.photoData = photoData
-                        User.shared.updateInfo()
-                        NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
+                    if let photo = photo {
+                        self.updatePhoto(photo: photo) {
+                            let photoData = UIImagePNGRepresentation(photo)
+                            User.shared.photoData = photoData
+                            User.shared.updateInfo()
+                            NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
+                        }
                     }
                 }
                 
@@ -467,13 +494,23 @@ class UserApiManager {
             "Authorization": "Token \(token)"
         ]
         
-        let parameters: Parameters = [
-            "facebook_id": User.shared.facebookID != nil ? User.shared.facebookID! : "",
-            "facebook_email": User.shared.facebookEmail != nil ? User.shared.facebookEmail! : "",
-            "name": User.shared.name != nil ? User.shared.name! : "",
-            "location": User.shared.location != nil ? User.shared.location! : "",
-            "icloud_id": User.shared.iCloudID != nil ? User.shared.iCloudID! : ""
-        ]
+        var parameters = Parameters()
+        
+        if let facebookId = User.shared.facebookID {
+            parameters["facebook_id"] = facebookId
+        }
+        if let facebookEmail = User.shared.facebookEmail {
+            parameters["facebook_email"] = facebookEmail
+        }
+        if let name = User.shared.name {
+            parameters["name"] = name
+        }
+        if let location = User.shared.location {
+            parameters["location"] = location
+        }
+        if let iCloudId = User.shared.iCloudID {
+            parameters["icloud_id"] = iCloudId
+        }
         
         _ = Alamofire.request(host + "users/update-user/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 200 {
