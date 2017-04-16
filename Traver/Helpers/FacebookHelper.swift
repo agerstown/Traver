@@ -53,14 +53,15 @@ class FacebookHelper {
                                 let id = responseDictionary["id"] as! String
                                 let email = responseDictionary["email"] as! String
                                 let name = responseDictionary["name"] as! String
-                                let locationDict = responseDictionary["location"] as! NSDictionary
-                                let location = locationDict["name"] as! String
+                                //let locationDict = responseDictionary["location"] as! NSDictionary
+                                //let location = locationDict["name"] as! String
+                                let location = ""
                                 
-                                let request = GraphRequest(graphPath: "/\(id)/friends")
-                                request.start() { response, result in
-                                    print(response)
-                                    print(result)
-                                }
+//                                let request = GraphRequest(graphPath: "/\(id)/friends")
+//                                request.start() { response, result in
+//                                    print(response)
+//                                    print(result)
+//                                }
                                 
                                 if let url = URL(string:"https://graph.facebook.com/\(id)/picture?width=160&height=160") {
                                     Alamofire.request(url).responseImage { response in

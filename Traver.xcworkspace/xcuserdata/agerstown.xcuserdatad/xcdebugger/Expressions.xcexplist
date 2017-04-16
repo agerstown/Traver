@@ -219,10 +219,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "UserApiManager.(createUserWithFacebook(id : String, email : String, name : String, location : String, photo : UIImage) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.(getOrCreateUserWithICloud(id : String, name : String?, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.getOrCreateUserWithFacebook(id : String, email : String, name : String, location : String, photo : UIImage) -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.iCloudID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -183,8 +183,8 @@ class UserApiManager {
             ]
         ]
         
-        Alamofire.request(host + "users/", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-            if response.response?.statusCode == 201 {
+        Alamofire.request(host + "users/create-user/", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            if response.response?.statusCode == 200 { //201 {
                 if let value = response.result.value {
                     let json = JSON(value)
 
