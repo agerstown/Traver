@@ -52,7 +52,7 @@ class ProfileEditViewController: UITableViewController {
     
     @IBAction func buttonSaveTapped(_ sender: UIBarButtonItem) {
         let name = textFieldName.text ?? ""
-        let location = textFieldLocation.text ?? ""
+        let location = textFieldLocation.text
         if location != "" && name == "" {
             let alert = UIAlertController(title: "Fill info".localized(), message: "Please fill your name".localized(), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK".localized(), style: .default))

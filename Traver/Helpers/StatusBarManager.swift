@@ -13,11 +13,18 @@ class StatusBarManager {
 
     static let shared = StatusBarManager()
     
-    func showCustomStatusBar(with text: String) {
+    private func showCustomStatusBar(text: String, color: UIColor) {
         let notification = CWStatusBarNotification()
         notification.notificationAnimationType = .overlay
         notification.notificationAnimationInStyle = .top
-        notification.notificationLabelBackgroundColor = UIColor.blue
         notification.display(withMessage: text, forDuration: TimeInterval(3))
+    }
+    
+    func showCustomStatusBarNeutral(text: String) {
+        showCustomStatusBar(text: text, color: UIColor.blue)
+    }
+    
+    func showCustomStatusBarError(text: String) {
+        showCustomStatusBar(text: text, color: UIColor.red)
     }
 }

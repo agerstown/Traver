@@ -17,12 +17,12 @@ class PhotosAccessManager {
         switch (PHPhotoLibrary.authorizationStatus()) {
         case .authorized:
             VisitedCountriesImporter.shared.fetchVisitedCountriesCodesFromPhotos()
-            StatusBarManager.shared.showCustomStatusBar(with: "Import has been started".localized())
+            StatusBarManager.shared.showCustomStatusBarNeutral(text: "Import has been started".localized())
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization({ (status) -> Void in
                 if status ==  .authorized {
                     VisitedCountriesImporter.shared.fetchVisitedCountriesCodesFromPhotos()
-                    StatusBarManager.shared.showCustomStatusBar(with: "Import has been started".localized())
+                    StatusBarManager.shared.showCustomStatusBarNeutral(text: "Import has been started".localized())
                 } else {
                     PhotosAccessManager.shared.showAlertAllowAccessToPhotos(on: controller, withTitle: "Import is impossible")
                 }

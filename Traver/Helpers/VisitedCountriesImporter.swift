@@ -50,7 +50,7 @@ class VisitedCountriesImporter {
     // Only one geocoding request can be initiated at a time so the the sequence of requests is initiated using recursion
     private func getCountriesCodesFromLocations(using geocoder: CLGeocoder) {
         if locationsCounter == locations.count {
-            StatusBarManager.shared.showCustomStatusBar(with: "Import from Photos is finished: %d countries were found".localized(for: countriesCodes.count))
+            StatusBarManager.shared.showCustomStatusBarNeutral(text: "Import from Photos is finished: %d countries were found".localized(for: countriesCodes.count))
             locationsCounter = 0
             locations.removeAll()
             countriesCodes.removeAll()

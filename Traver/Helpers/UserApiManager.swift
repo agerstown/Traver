@@ -14,10 +14,10 @@ class UserApiManager {
     
     static let shared = UserApiManager()
     
-    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com/"
-    let photosHost = "https://s3.amazonaws.com/"
-//    let host = "http://127.0.0.1:8000/"
-//    let photosHost = "http://127.0.0.1:8000/"
+//    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com/"
+//    let photosHost = "https://s3.amazonaws.com/"
+    let host = "http://127.0.0.1:8000/"
+    let photosHost = "http://127.0.0.1:8000/"
     
     // MARK: - Notifications
     let CountriesUpdatedNotification = NSNotification.Name(rawValue: "CountriesUpdatedNotification")
@@ -62,7 +62,7 @@ class UserApiManager {
     func getOrCreateUserWithICloud(id: String, name: String?, location: String?, photo: UIImage?) {
         
         if User.shared.facebookID != nil {
-            self.updateICloudInfo(id: id)
+            self.updateICloudInfo(id: id, location: location)
         } else {
         
             let parameters: Parameters = [
@@ -176,7 +176,7 @@ class UserApiManager {
         let name = User.shared.name != nil ? User.shared.name! : name
         let location = User.shared.location != nil ? User.shared.location! : location
         let photo = User.shared.photo != nil ? User.shared.photo! : photo
-        
+    
         var parameters = Parameters()
         parameters["username"] = "fb\(id)"
         
@@ -302,12 +302,13 @@ class UserApiManager {
     // if a token is not nil and not empty - a person is logged in
     // then info in CoreData is updated only if post request was successful
     // if a user is not logged in - data is just saved in CoreData
-    func updateUserInfo(name: String, location: String, completion: @escaping () -> Void) {
+    func updateUserInfo(name: String, location: String?, completion: @escaping () -> Void) {
         if User.shared.token != nil && !User.shared.token!.isEmpty {
-            let parameters: Parameters = [
-                "name": name,
-                "location": location
-            ]
+            var parameters = Parameters()
+            parameters["name"] = name
+            if let location = location {
+                parameters["location"] = location
+            }
             
             let headers: HTTPHeaders = [
                 "Authorization": "Token \(User.shared.token!)"
@@ -347,7 +348,7 @@ class UserApiManager {
         ]
         
         _ = Alamofire.request(host + "users/update-facebook-info/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            if response.response?.statusCode == 200 {
+            if response.response?.statusCode == 202 {
                 if User.shared.photo == nil {
                     if let photo = photo {
                         self.updatePhoto(photo: photo) {
@@ -366,26 +367,62 @@ class UserApiManager {
                 User.shared.updateInfo()
                 
                 NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
+            } else if response.response?.statusCode == 200 {
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    
+                    let token = json["token"].stringValue
+                    User.shared.token = token
+                    
+                    let parameters: Parameters = [
+                        "facebook_id": id
+                    ]
+                    
+                    Alamofire.request(self.host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
+                        if let resultValue = response.result.value {
+                            self.parseAndSaveUser(user: User.shared, from: resultValue)
+                        }
+                    }
+                }
             } else {
                 self.showNoInternetErrorAlert(response: response)
             }
         }
     }
     
-    func updateICloudInfo(id: String) {
+    func updateICloudInfo(id: String, location: String?) {
         
-        let parameters: Parameters = [
-            "icloud_id": id
-        ]
+        var parameters = Parameters()
+        parameters["icloud_id"] = id
+        if let location = location {
+            parameters["location"] = location
+        }
         
         let headers: HTTPHeaders = [
             "Authorization": "Token \(User.shared.token!)"
         ]
         
         _ = Alamofire.request(host + "users/update-icloud-info/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            if response.response?.statusCode == 200 {
+            if response.response?.statusCode == 202 {
                 User.shared.iCloudID = id
                 User.shared.updateInfo()
+            } else if response.response?.statusCode == 200 {
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    
+                    let token = json["token"].stringValue
+                    User.shared.token = token
+                    
+                    let parameters: Parameters = [
+                        "icloud_id": id
+                    ]
+                    
+                    Alamofire.request(self.host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
+                        if let resultValue = response.result.value {
+                            self.parseAndSaveUser(user: User.shared, from: resultValue)
+                        }
+                    }
+                }
             } else {
                 self.showNoInternetErrorAlert(response: response)
             }
@@ -617,21 +654,19 @@ class UserApiManager {
     }
     
     private func showNoInternetErrorAlert(response: DataResponse<Any>) {
-        let codeString = response.response?.statusCode != nil ? ": \(response.response!.statusCode)" : ": No Internet.".localized()
-        let alert = UIAlertController(title: "Error".localized(), message: "Check your Internet connection. Status code".localized() + codeString, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK".localized(), style: .default))
-        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
+        let codeString = response.response?.statusCode != nil ? "\(response.response!.statusCode)" : "No Internet.".localized()
+        StatusBarManager.shared.showCustomStatusBarError(text: "Error".localized() + ". " + "Check your Internet connection.".localized() + "Status code".localized() + ": " + codeString)
     }
     
     private func showNoInternetErrorAlert(error: Error) {
-        let alert = UIAlertController(title: "Error".localized(), message: "Check your Internet connection. Error".localized() + ": " + error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK".localized(), style: .default))
-        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
+        StatusBarManager.shared.showCustomStatusBarError(text: "Check your Internet connection.".localized() + "Error".localized() + ": " + error.localizedDescription)
     }
     
-    private func updateUserInfoInCoreData(name: String, location: String, completion: @escaping () -> Void) {
+    private func updateUserInfoInCoreData(name: String, location: String?, completion: @escaping () -> Void) {
         User.shared.name = name.isEmpty ? nil : name
-        User.shared.location = location.isEmpty ? nil : location
+        if let location = location {
+            User.shared.location = location
+        }
         User.shared.updateInfo()
         completion()
     }

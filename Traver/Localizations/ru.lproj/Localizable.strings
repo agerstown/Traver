@@ -244,6 +244,10 @@
 "Please fill your name" = "Пожалуйста, заполните свое имя";
 
 // Server
-"Check your Internet connection. Status code" = "Проверьте, есть ли соединение с Интернетом. Статус-код";
-"Check your Internet connection. Error" = "Проверьте, есть ли соединение с Интернетом. Ошибка";
-": No Internet." = ": Нет Интернета.";
+//"Check your Internet connection. Status code" = "Проверьте, есть ли соединение с Интернетом. Статус-код";
+//"Check your Internet connection. Error" = "Проверьте, есть ли соединение с Интернетом. Ошибка";
+//": No Internet." = ": Нет Интернета.";
+
+"No Internet." = "Нет Интернета.";
+"Check your Internet connection." = "Проверьте, есть ли соединение с Интернетом.";
+"Status code" = "Статус-код";
