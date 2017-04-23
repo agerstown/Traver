@@ -48,7 +48,7 @@ class FacebookHelper {
                         case .success(let graphResponse):
                             if let responseDictionary = graphResponse.dictionaryValue {
                                 
-                                print(responseDictionary)
+                                //print(responseDictionary)
                                 
                                 let id = responseDictionary["id"] as! String
                                 let email = responseDictionary["email"] as? String
@@ -57,18 +57,27 @@ class FacebookHelper {
                                 let locationDict = responseDictionary["location"] as? NSDictionary
                                 let location = locationDict?["name"] as? String
                                 
+                                let friendsDict = responseDictionary["friends"] as! NSDictionary
+                                let friendsData = friendsDict["data"] as! NSArray
+                                
+                                var friendsIDs: [String] = []
+                                for friend in friendsData {
+                                    let friend = friend as! NSDictionary
+                                    friendsIDs.append(friend["id"] as! String)
+                                }
+                                
                                 let picture = responseDictionary["picture"] as! NSDictionary
                                 let pictureData = picture["data"] as! NSDictionary
                                 
                                 let isSilhouette = pictureData["is_silhouette"] as! Bool
                                 
                                 if isSilhouette {
-                                    UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: nil)
+                                    UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: nil, friendsIDs: friendsIDs.count > 0 ? friendsIDs : nil)
                                 } else {
                                     let url = pictureData["url"] as! String
                                     Alamofire.request(url).responseImage { response in
                                         if let image = response.result.value {
-                                            UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: image)
+                                            UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: image, friendsIDs: friendsIDs.count > 0 ? friendsIDs : nil)
                                         }
                                     }
                                 }

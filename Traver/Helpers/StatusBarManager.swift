@@ -17,6 +17,7 @@ class StatusBarManager {
         let notification = CWStatusBarNotification()
         notification.notificationAnimationType = .overlay
         notification.notificationAnimationInStyle = .top
+        notification.notificationLabelBackgroundColor = color
         notification.display(withMessage: text, forDuration: TimeInterval(3))
     }
     

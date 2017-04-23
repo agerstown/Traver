@@ -62,9 +62,9 @@ class ProfileEditViewController: UITableViewController {
                 self.dismiss(animated: true, completion: nil)
             }
             if let image = selectedImage {
-                UserApiManager.shared.updatePhoto(photo: image) {
+                UserApiManager.shared.updatePhoto(user: User.shared, photo: image) {
                     User.shared.photoData = UIImagePNGRepresentation(image)
-                    User.shared.updateInfo()
+                    CoreDataStack.shared.saveContext()
                 }
             }
         }

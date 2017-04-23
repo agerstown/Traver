@@ -244,10 +244,6 @@
 "Please fill your name" = "Please fill your name";
 
 // Server
-//"Check your Internet connection. Status code" = "Check your Internet connection. Status code";
-//"Check your Internet connection. Error" = "Check your Internet connection. Error";
-//": No Internet." = ": No Internet.";
-
 "No Internet." = "No Internet.";
 "Check your Internet connection." = "Check your Internet connection.";
 "Status code" = "Status code";

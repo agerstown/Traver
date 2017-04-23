@@ -30,6 +30,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "UserApiManager.(updateFriends(friendsIDs : [String]) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.(getUserInfo(user : User, completion : () -&gt; ()) -&gt; ()).(closure #2):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -50,6 +58,17 @@
          <PersistentStrings>
             <PersistentString
                value = "code.localized()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(updateFacebookInfo(id : String, email : String?, name : String, location : String?, photo : UIImage?, friendsIDs : [String]?) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+            <PersistentString
+               value = "friendsIDs">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -149,10 +168,10 @@
                value = "regions">
             </PersistentString>
             <PersistentString
-               value = "Codes.Region(rawValue: section)">
+               value = "regionsWithCountries">
             </PersistentString>
             <PersistentString
-               value = "regionsWithCountries">
+               value = "Codes.Region(rawValue: section)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -243,6 +262,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "specialized UserApiManager.(updateFacebookInfo(id : String, email : String?, name : String, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2):ProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -260,14 +287,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2).(closure #1):ProfileViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "country">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "UserApiManager.(createUserWithICloud(id : String, name : String?, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -279,10 +298,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "specialized UserApiManager.(updateFacebookInfo(id : String, email : String?, name : String, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
+         contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2).(closure #1):ProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "response.response?.statusCode">
+               value = "country">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -333,13 +352,13 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "user.location">
+               value = "user.facebookID">
             </PersistentString>
             <PersistentString
                value = "User.shared.facebookEmail">
             </PersistentString>
             <PersistentString
-               value = "user.facebookID">
+               value = "user.location">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

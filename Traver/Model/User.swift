@@ -25,17 +25,18 @@ class User: NSManagedObject {
             if let token = user.token {
                 UserApiManager.shared.getUserInfo(user: user) { success in
                     if success && user.iCloudID == nil {
-                        CloudKitHelper.shared.login()
+                        CloudKitHelper.shared.login(user: user)
                     }
                 }
             } else {
-                CloudKitHelper.shared.login()
+                CloudKitHelper.shared.login(user: user)
             }
             
             return user
         } else {
-            CloudKitHelper.shared.login()
-            return User(context: CoreDataStack.shared.mainContext)
+            let user = User(context: CoreDataStack.shared.mainContext)
+            CloudKitHelper.shared.login(user: user)
+            return user
         }
     }()
     
@@ -54,6 +55,8 @@ class User: NSManagedObject {
     @NSManaged var facebookEmail: String?
     @NSManaged var location: String?
     @NSManaged var iCloudID: String?
+    @NSManaged var friends: NSMutableSet
+    
     var username: String {
         return facebookID != nil ? "fb" + facebookID! : iCloudID != nil ? "ic" + iCloudID! : ""
     }
@@ -108,9 +111,9 @@ class User: NSManagedObject {
         CoreDataStack.shared.saveContext()
     }
     
-    func updateInfo() {
-        CoreDataStack.shared.saveContext()
-    }
+//    func updateInfo() {
+//        CoreDataStack.shared.saveContext()
+//    }
     
     private func saveCountryVisit(code: String) {
         let region = findOrCreateRegion(for: code)

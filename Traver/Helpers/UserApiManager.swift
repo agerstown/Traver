@@ -25,72 +25,76 @@ class UserApiManager {
     let PhotoUpdatedNotification = NSNotification.Name(rawValue: "PhotoUpdatedNotification")
     
     // MARK: - GET methods
-    func getOrCreateUserWithFacebook(id: String, email: String?, name: String, location: String?, photo: UIImage?) {
+    func getOrCreateUserWithFacebook(id: String, email: String?, name: String, location: String?, photo: UIImage?, friendsIDs: [String]?) {
         
-        if User.shared.iCloudID != nil {
-            self.updateFacebookInfo(id: id, email: email, name: name, location: location, photo: photo)
-        } else {
-        
-            let parameters: Parameters = [
-                "facebook_id": id
-            ]
+        if User.shared.facebookID == nil {
+            if User.shared.iCloudID != nil {
+                self.updateFacebookInfo(id: id, email: email, name: name, location: location, photo: photo, friendsIDs: friendsIDs)
+            } else {
             
-            Alamofire.request(host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
-                if response.response?.statusCode == 404 {
-                    self.createUserWithFacebook(id: id, email: email, name: name, location: location, photo: photo)
-                } else if let value = response.result.value {
-                    
-                    let json = JSON(value)
-                    
-                    let token = json["token"].stringValue
-                    User.shared.token = token
-                    
-                    self.updateUser(token: token) {
-                        Alamofire.request(self.host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
-                            if let resultValue = response.result.value {
-                                self.parseAndSaveUser(user: User.shared, from: resultValue)
+                let parameters: Parameters = [
+                    "facebook_id": id
+                ]
+                
+                Alamofire.request(host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
+                    if response.response?.statusCode == 404 {
+                        self.createUserWithFacebook(id: id, email: email, name: name, location: location, photo: photo)
+                    } else if let value = response.result.value {
+                        
+                        let json = JSON(value)
+                        
+                        let token = json["token"].stringValue
+                        User.shared.token = token
+                        
+                        self.updateUser(user: User.shared) {
+                            Alamofire.request(self.host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
+                                if let resultValue = response.result.value {
+                                    self.parseAndSaveUser(user: User.shared, from: resultValue)
+                                }
                             }
                         }
-                    }
 
+                    }
                 }
             }
-            
         }
     }
     
-    func getOrCreateUserWithICloud(id: String, name: String?, location: String?, photo: UIImage?) {
+    func getOrCreateUserWithICloud(user: User, id: String) {
         
-        if User.shared.facebookID != nil {
-            self.updateICloudInfo(id: id, location: location)
-        } else {
-        
-            let parameters: Parameters = [
-                "icloud_id": id
-            ]
-            
-            Alamofire.request(host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
-                if response.response?.statusCode == 404 {
-                    self.createUserWithICloud(id: id, name: name, location: location, photo: photo)
-                } else if let value = response.result.value {
-                    
-                    let json = JSON(value)
-                    
-                    let token = json["token"].stringValue
-                    User.shared.token = token
-                    
-                    self.updateUser(token: token) {
-                        Alamofire.request(self.host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
-                            if let resultValue = response.result.value {
-                                self.parseAndSaveUser(user: User.shared, from: resultValue)
+        if user.iCloudID == nil {
+            if user.facebookID != nil {
+                self.updateICloudInfo(user: user, id: id)
+            } else {
+                
+                let parameters: Parameters = [
+                    "icloud_id": id
+                ]
+                
+                Alamofire.request(host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
+                    if response.response?.statusCode == 404 {
+                        self.createUserWithICloud(user: user, id: id)
+                    } else if let value = response.result.value {
+                        
+                        let json = JSON(value)
+                        
+                        let token = json["token"].stringValue
+                        user.token = token
+                        
+                        self.updateUser(user: user) {
+                            Alamofire.request(self.host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
+                                if let resultValue = response.result.value {
+                                    self.parseAndSaveUser(user: user, from: resultValue)
+                                }
                             }
                         }
+                        
                     }
-                    
                 }
             }
-            
         }
+
+        
     }
     
     func getUserInfo(user: User, completion: @escaping (_ success: Bool) -> Void) {
@@ -139,27 +143,34 @@ class UserApiManager {
                 }
                 
                 user.updateCountryVisits(codes: visitedCountriesCodes)
-                NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
+                
+                if user == User.shared {
+                    NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
+                } else {
+                    print(User.shared.friends)
+                }
             }
         }
     }
     
-    func getPhoto() {
+    func getPhoto(user: User) {
         let headers: HTTPHeaders = [
-            "Authorization": "Token \(User.shared.token!)"
+            "Authorization": "Token \(user.token!)"
         ]
         
         Alamofire.request(host + "users/get-user-photo-path/", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if let value = response.result.value {
                 let json = JSON(value)
                 let path = json["path"].stringValue
-                if path != User.shared.photoPath {
+                if path != user.photoPath {
                     if let url = URL(string: self.photosHost + "traver-media/" + path) {
                         Alamofire.request(url).responseImage { response in
                             if let image = response.result.value {
-                                User.shared.photoData = UIImagePNGRepresentation(image) as Data?
-                                User.shared.updateInfo()
-                                NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
+                                user.photoData = UIImagePNGRepresentation(image) as Data?
+                                CoreDataStack.shared.saveContext()
+                                if user == User.shared {
+                                    NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
+                                }
                             }
                         }
                     }
@@ -208,16 +219,16 @@ class UserApiManager {
                     NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
                     
                     if let photo = photo {
-                        self.updatePhoto(photo: photo) {
+                        self.updatePhoto(user: User.shared, photo: photo) {
                             let photoData = UIImagePNGRepresentation(photo)
                             User.shared.photoData = photoData
-                            User.shared.updateInfo()
+                            CoreDataStack.shared.saveContext()
                             
                             NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
                         }
                     }
                     
-                    self.createCountryVisits()
+                    self.createCountryVisits(user: User.shared)
                 }
             } else {
                 self.showNoInternetErrorAlert(response: response)
@@ -225,21 +236,17 @@ class UserApiManager {
         }
     }
 
-    private func createUserWithICloud(id: String, name: String?, location: String?, photo: UIImage?) {
-        
-        let name = User.shared.name != nil ? User.shared.name! : name
-        let location = User.shared.location != nil ? User.shared.location! : location
-        let photo = User.shared.photo != nil ? User.shared.photo! : photo
-        
+    private func createUserWithICloud(user: User, id: String) {
+    
         var parameters = Parameters()
         parameters["username"] = "ic\(id)"
         
         var profileParameters = Parameters()
         profileParameters["icloud_id"] = id
-        if let name = name {
+        if let name = user.name {
             profileParameters["name"] = name
         }
-        if let location = location {
+        if let location = user.location {
             profileParameters["location"] = location
         }
         
@@ -250,45 +257,40 @@ class UserApiManager {
                 if let value = response.result.value {
                     let json = JSON(value)
                     
-                    User.shared.token = json["token"].stringValue
+                    user.token = json["token"].stringValue
                     
-                    User.shared.iCloudID = id
-                    User.shared.name = name
-                    User.shared.location = location
+                    user.iCloudID = id
+                    CoreDataStack.shared.saveContext()
                     
                     NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
                     
-                    if let photo = photo {
-                        self.updatePhoto(photo: photo) {
-                            let photoData = UIImagePNGRepresentation(photo)
-                            User.shared.photoData = photoData
-                            User.shared.updateInfo()
-                            
+                    if let photo = user.photo {
+                        self.updatePhoto(user: user, photo: photo) {
                             NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
                         }
                     }
                     
-                    self.createCountryVisits()
+                    self.createCountryVisits(user: user)
                 }
             }
         }
     }
     
-    private func createCountryVisits() {
-        if User.shared.visitedCountries.count != 0 {
-            let visitedCountriesCodes = User.shared.visitedCountries.map{ $0.code }
+    private func createCountryVisits(user: User) {
+        if user.visitedCountries.count != 0 {
+            let visitedCountriesCodes = user.visitedCountries.map{ $0.code }
             
             let params: Parameters = [
                 "countries_codes": visitedCountriesCodes
             ]
             
             let headers: HTTPHeaders = [
-                "Authorization": "Token \(User.shared.token!)"
+                "Authorization": "Token \(user.token!)"
             ]
             
             _ = Alamofire.request(host + "visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                 if response.response?.statusCode == 201 {
-                    User.shared.updateCountryVisits(codes: visitedCountriesCodes)
+                    user.updateCountryVisits(codes: visitedCountriesCodes)
                 } else {
                     self.showNoInternetErrorAlert(response: response)
                 }
@@ -327,7 +329,8 @@ class UserApiManager {
         }
     }
     
-    func updateFacebookInfo(id: String, email: String?, name: String, location: String?, photo: UIImage?) {
+    func updateFacebookInfo(id: String, email: String?, name: String,
+                            location: String?, photo: UIImage?, friendsIDs: [String]?) {
         
         let name = User.shared.name != nil ? User.shared.name! : name
         let location = User.shared.location != nil ? User.shared.location! : location
@@ -351,20 +354,24 @@ class UserApiManager {
             if response.response?.statusCode == 202 {
                 if User.shared.photo == nil {
                     if let photo = photo {
-                        self.updatePhoto(photo: photo) {
+                        self.updatePhoto(user: User.shared, photo: photo) {
                             let photoData = UIImagePNGRepresentation(photo)
                             User.shared.photoData = photoData
-                            User.shared.updateInfo()
+                            CoreDataStack.shared.saveContext()
                             NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
                         }
                     }
+                }
+                
+                if let friendsIDs = friendsIDs {
+                    self.updateFriends(friendsIDs: friendsIDs)
                 }
                 
                 User.shared.facebookID = id
                 User.shared.facebookEmail = email
                 User.shared.name = name
                 User.shared.location = location
-                User.shared.updateInfo()
+                CoreDataStack.shared.saveContext()
                 
                 NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
             } else if response.response?.statusCode == 200 {
@@ -390,36 +397,30 @@ class UserApiManager {
         }
     }
     
-    func updateICloudInfo(id: String, location: String?) {
-        
-        var parameters = Parameters()
-        parameters["icloud_id"] = id
-        if let location = location {
-            parameters["location"] = location
-        }
+    func updateICloudInfo(user: User, id: String) {
+    
+        let parameters: Parameters = [
+            "icloud_id": id
+        ]
         
         let headers: HTTPHeaders = [
-            "Authorization": "Token \(User.shared.token!)"
+            "Authorization": "Token \(user.token!)"
         ]
         
         _ = Alamofire.request(host + "users/update-icloud-info/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 202 {
-                User.shared.iCloudID = id
-                User.shared.updateInfo()
+                user.iCloudID = id
+                CoreDataStack.shared.saveContext()
             } else if response.response?.statusCode == 200 {
                 if let value = response.result.value {
                     let json = JSON(value)
                     
                     let token = json["token"].stringValue
-                    User.shared.token = token
-                    
-                    let parameters: Parameters = [
-                        "icloud_id": id
-                    ]
+                    user.token = token
                     
                     Alamofire.request(self.host + "users/get-user-with-icloud/", parameters: parameters).responseJSON { response in
                         if let resultValue = response.result.value {
-                            self.parseAndSaveUser(user: User.shared, from: resultValue)
+                            self.parseAndSaveUser(user: user, from: resultValue)
                         }
                     }
                 }
@@ -429,19 +430,19 @@ class UserApiManager {
         }
     }
     
-    func updateCountryVisits(codes: [String], completion: (() -> Void)?) {
-        if User.shared.token != nil && !User.shared.token!.isEmpty {
+    func updateCountryVisits(user: User, codes: [String], completion: (() -> Void)?) {
+        if user.token != nil && !user.token!.isEmpty {
             let params: Parameters = [
                 "countries_codes": codes
             ]
             
             let headers: HTTPHeaders = [
-                "Authorization": "Token \(User.shared.token!)"
+                "Authorization": "Token \(user.token!)"
             ]
             
             _ = Alamofire.request(host + "visits/update-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                 if response.response?.statusCode == 200 {
-                    User.shared.updateCountryVisits(codes: codes)
+                    user.updateCountryVisits(codes: codes)
                     if let completion = completion {
                         completion()
                     }
@@ -450,7 +451,7 @@ class UserApiManager {
                 }
             }
         } else {
-            User.shared.updateCountryVisits(codes: codes)
+            user.updateCountryVisits(codes: codes)
             if let completion = completion {
                 completion()
             }
@@ -476,14 +477,14 @@ class UserApiManager {
                 }
             }
         } else {
-            User.shared.addCountryVisit(code: code) //.updateCountryVisits(codes: codes)
+            User.shared.addCountryVisit(code: code)
             if let completion = completion {
                 completion()
             }
         }
     }
     
-    func updatePhoto(photo: UIImage, completion: @escaping () -> Void) {
+    func updatePhoto(user: User, photo: UIImage, completion: @escaping () -> Void) {
         if User.shared.token != nil && !User.shared.token!.isEmpty {
             
             var reducedPhoto = photo
@@ -513,7 +514,7 @@ class UserApiManager {
                                             let json = JSON(value)
                                             let path = json["path"].stringValue
                                             User.shared.photoPath = path
-                                            User.shared.updateInfo()
+                                            CoreDataStack.shared.saveContext()
                                         }
                                     }
                                     completion()
@@ -526,38 +527,38 @@ class UserApiManager {
         }
     }
     
-    private func updateUser(token: String, completion: (() -> Void)?) {
+    private func updateUser(user: User, completion: (() -> Void)?) {
         let headers = [
-            "Authorization": "Token \(token)"
+            "Authorization": "Token \(user.token!)"
         ]
         
         var parameters = Parameters()
         
-        if let facebookId = User.shared.facebookID {
+        if let facebookId = user.facebookID {
             parameters["facebook_id"] = facebookId
         }
-        if let facebookEmail = User.shared.facebookEmail {
+        if let facebookEmail = user.facebookEmail {
             parameters["facebook_email"] = facebookEmail
         }
-        if let name = User.shared.name {
+        if let name = user.name {
             parameters["name"] = name
         }
-        if let location = User.shared.location {
+        if let location = user.location {
             parameters["location"] = location
         }
-        if let iCloudId = User.shared.iCloudID {
+        if let iCloudId = user.iCloudID {
             parameters["icloud_id"] = iCloudId
         }
         
         _ = Alamofire.request(host + "users/update-user/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 200 {
                 if let photo = User.shared.photo {
-                    self.updatePhoto(photo: photo) {
+                    self.updatePhoto(user: user, photo: photo) {
                         NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
-                        self.updateCountryVisistsIfNeeded(completion: completion)
+                        self.updateCountryVisistsIfNeeded(user: user, completion: completion)
                     }
                 } else {
-                    self.updateCountryVisistsIfNeeded(completion: completion)
+                    self.updateCountryVisistsIfNeeded(user: user, completion: completion)
                 }
             } else {
                 self.showNoInternetErrorAlert(response: response)
@@ -565,16 +566,48 @@ class UserApiManager {
         }
     }
     
-    func updateCountryVisistsIfNeeded(completion: (() -> Void)?) {
-        if User.shared.visitedCountries.count == 0 {
+    func updateCountryVisistsIfNeeded(user: User, completion: (() -> Void)?) {
+        if user.visitedCountries.count == 0 {
             if let completion = completion {
                 completion()
             }
         } else {
-            self.updateCountryVisits(codes: User.shared.visitedCountries.map{ $0.code }) {
+            self.updateCountryVisits(user: user, codes: user.visitedCountries.map{ $0.code }) {
                 NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
                 if let completion = completion {
                     completion()
+                }
+            }
+        }
+    }
+    
+    func updateFriends(friendsIDs: [String]) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+        
+        let parameters: Parameters = [
+            "friends_ids": friendsIDs
+        ]
+        
+        _ = Alamofire.request(host + "users/update-friends/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            if let friends = response.result.value as? NSArray {
+                for friendJSON in friends {
+                    //let friend = JSON(friendJSON)
+                    
+//                    let user = User(context: CoreDataStack.shared.mainContext)
+//                    User.shared.friends.add(user)
+////                    User.shared.updateInfo()
+////                    user.updateInfo()
+//                    CoreDataStack.shared.saveContext()
+//                    self.parseAndSaveUser(user: user, from: friendJSON)
+                    
+//                    user.facebookID = friend["facebook_id"].stringValue
+//                    user.facebookEmail = friend["facebook_email"].stringValue
+//                    
+                    
+                    //print(friend)
+                    
                 }
             }
         }
@@ -637,11 +670,13 @@ class UserApiManager {
         
         user.token = json["token"].stringValue
         
-        user.updateInfo()
+        CoreDataStack.shared.saveContext()
         
-        NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
+        if user == User.shared {
+            NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
+        }
         
-        getPhoto()
+        getPhoto(user: user)
         getUserCountryVisits(user: user)
     }
     
@@ -655,11 +690,11 @@ class UserApiManager {
     
     private func showNoInternetErrorAlert(response: DataResponse<Any>) {
         let codeString = response.response?.statusCode != nil ? "\(response.response!.statusCode)" : "No Internet.".localized()
-        StatusBarManager.shared.showCustomStatusBarError(text: "Error".localized() + ". " + "Check your Internet connection.".localized() + "Status code".localized() + ": " + codeString)
+        StatusBarManager.shared.showCustomStatusBarError(text: "Error".localized() + ". " + "Check your Internet connection.".localized() + " " + "Status code".localized() + ": " + codeString)
     }
     
     private func showNoInternetErrorAlert(error: Error) {
-        StatusBarManager.shared.showCustomStatusBarError(text: "Check your Internet connection.".localized() + "Error".localized() + ": " + error.localizedDescription)
+        StatusBarManager.shared.showCustomStatusBarError(text: "Check your Internet connection.".localized() + " " + "Error".localized() + ": " + error.localizedDescription)
     }
     
     private func updateUserInfoInCoreData(name: String, location: String?, completion: @escaping () -> Void) {
@@ -667,7 +702,7 @@ class UserApiManager {
         if let location = location {
             User.shared.location = location
         }
-        User.shared.updateInfo()
+        CoreDataStack.shared.saveContext()
         completion()
     }
     

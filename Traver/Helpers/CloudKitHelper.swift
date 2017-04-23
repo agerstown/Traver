@@ -15,10 +15,10 @@ class CloudKitHelper {
     
     let defaultContainer = CKContainer.default()
     
-    func login() {
+    func login(user: User) {
         defaultContainer.fetchUserRecordID { recordID, _ in
             if let id = recordID?.recordName {
-                UserApiManager.shared.getOrCreateUserWithICloud(id: id, name: User.shared.name, location: User.shared.location, photo: User.shared.photo)
+                UserApiManager.shared.getOrCreateUserWithICloud(user: user, id: id)
             }
         }
     }
