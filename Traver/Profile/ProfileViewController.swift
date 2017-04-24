@@ -36,6 +36,8 @@ class ProfileViewController: UIViewController {
     
     let refreshControl = UIRefreshControl()
     
+    var fetchedResultsController: NSFetchedResultsController<Country>?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +80,18 @@ class ProfileViewController: UIViewController {
         
         refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
         tableViewVisitedCountries.refreshControl = refreshControl
+        
+        let predicate = NSPredicate(format: "ANY users = %@", User.shared)
+        let fetchRequest = NSFetchRequest<Country> (entityName: "Country")
+        fetchRequest.predicate = predicate
+        let regionSortDescriptor = NSSortDescriptor(key: "region.index", ascending: true)
+        let countrySortDescriptor = NSSortDescriptor(key: "name", ascending: true) //, selector: bla)
+        fetchRequest.sortDescriptors = [regionSortDescriptor, countrySortDescriptor]
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "region.index", cacheName: nil)
+        
+        try! fetchedResultsController!.performFetch()
+        
+        fetchedResultsController?.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: UserApiManager.shared.CountriesUpdatedNotification, object: nil)
@@ -156,7 +170,7 @@ class ProfileViewController: UIViewController {
         if let navController = segue.destination as? UINavigationController {
             if let controller = navController.viewControllers[0] as? CountriesViewController {
                 controller.selectedCountries = Codes.Country.all.filter { (country) in
-                    User.shared.visitedCountries.contains(where: { $0.code == country.code } )
+                    User.shared.visitedCountriesArray.contains(where: { $0.code == country.code })
                 }
             }
         } else if let controller = segue.destination as? SharePreviewController {
@@ -167,34 +181,14 @@ class ProfileViewController: UIViewController {
     // MARK: - Notifications
     func countryCodeImported(notification: NSNotification) {
         if let countryCode = notification.userInfo?[VisitedCountriesImporter.shared.CountryCodeInfoKey] as? String {
-            if !User.shared.visitedCountries.contains(where: { $0.code == countryCode }) {
+            if !User.shared.visitedCountriesArray.contains(where: { $0.code == countryCode }) {
                 UserApiManager.shared.addCountryVisit(code: countryCode) {
-                    let country = User.shared.visitedCountries.filter { $0.code == countryCode }.first!
-                    let region = country.region
-                    
                     let countriesLayers = self.mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
                     if let newCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
                         newCountryLayer.fillColor = UIColor.blue.cgColor
                     }
                     
-                    let visitedRegions = User.shared.visitedRegions
-                    let visitedCountriesInRegion = region.sortedVisitedCountries
-                    
-                    let isExistingSection = visitedCountriesInRegion.count == 1 ? false : true
-                    
-                    let section = visitedRegions.index(of: region)!
-                    
-                    if isExistingSection {
-                        self.tableViewVisitedCountries.insertRows(at: [IndexPath(row: visitedCountriesInRegion.index(of: country)!, section: section)], with: .automatic)
-                    } else {
-                        self.tableViewVisitedCountries.insertSections(IndexSet(integer: section), with: .automatic)
-                    }
-                    
                     self.updateNumberOfVisitedCountriesAnimated()
-                    
-                    if let header = self.tableViewVisitedCountries.headerView(forSection: section) as? VisitedRegionHeaderView {
-                        self.configureVisitedCountriesNumberAnimated(for: header, in: section)
-                    }
                 }
             }
         }
@@ -223,7 +217,10 @@ class ProfileViewController: UIViewController {
     }
     
     func configureVisitedCountriesNumber(for header: VisitedRegionHeaderView, in section: Int) {
-        header.labelVisitedCountriesNumber.text = "\(tableViewVisitedCountries.numberOfRows(inSection: section))/\(Codes.regions[section].1.count)"
+        let numberOfCountriesInSection = fetchedResultsController?.sections?[section].numberOfObjects
+        if let numberOfCountriesInSection = numberOfCountriesInSection {
+            header.labelVisitedCountriesNumber.text = "\(numberOfCountriesInSection)/\(Codes.regions[section].1.count)"
+        }
     }
     
     func configureVisitedCountriesNumberAnimated(for header: VisitedRegionHeaderView, in section: Int) {
@@ -240,18 +237,17 @@ class ProfileViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return User.shared.visitedRegions.count
+        return fetchedResultsController?.sections?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return User.shared.visitedRegions[section].sortedVisitedCountries.count
+        return fetchedResultsController?.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
         
-        let visitedCountriesInSection = User.shared.visitedRegions[indexPath.section].sortedVisitedCountries
-        let country = visitedCountriesInSection[indexPath.row]
+        let country =  fetchedResultsController!.object(at: indexPath)
         
         cell.labelCountryName.text = country.code.localized()
         cell.country = country
@@ -278,16 +274,6 @@ extension ProfileViewController: UITableViewDataSource {
                     deletedCountryLayer.fillColor = UIColor.countryDefaultColor.cgColor
                 }
                 
-                if self.tableViewVisitedCountries.numberOfRows(inSection: indexPath.section) == 1 {
-                    self.tableViewVisitedCountries.deleteSections([indexPath.section], with: .automatic)
-                } else {
-                    self.tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
-                }
-                
-                if let header = self.tableViewVisitedCountries.headerView(forSection: indexPath.section) as? VisitedRegionHeaderView {
-                    self.configureVisitedCountriesNumberAnimated(for: header, in: indexPath.section)
-                }
-                
                 self.updateNumberOfVisitedCountriesAnimated()
             }
         }
@@ -299,8 +285,14 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableViewVisitedCountries.dequeueReusableHeaderFooterView(withIdentifier: "VisitedRegionHeaderView") as! VisitedRegionHeaderView
-        header.labelRegionName.text = User.shared.visitedRegions[section].code.localized()
         configureVisitedCountriesNumber(for: header, in: section)
+        if let sections = fetchedResultsController?.sections {
+            if let regionIndex = Int(sections[section].name) {
+                if let region = Codes.Region(rawValue: regionIndex) {
+                    header.labelRegionName.text = region.code.localized()
+                }
+            }
+        }
         header.contentView.backgroundColor = UIColor.headerColor
         return header
     }
@@ -321,5 +313,53 @@ extension ProfileViewController: UIScrollViewDelegate {
         let offsetY = max((scrollView.bounds.height - scrollView.contentSize.height) * 0.5, 0)
         scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, 0, 0)
     }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+extension ProfileViewController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch(type) {
+        case .insert:
+            tableViewVisitedCountries.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
+        case .delete:
+            tableViewVisitedCountries.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
+        default: ()
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch (type) {
+        case .insert:
+            if let newPath = newIndexPath {
+                tableViewVisitedCountries.insertRows(at: [newPath], with: .automatic)
+                
+                if let header = self.tableViewVisitedCountries.headerView(forSection: newPath.section) as? VisitedRegionHeaderView {
+                    configureVisitedCountriesNumberAnimated(for: header, in: newPath.section)
+                }
+
+                
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
+                
+                if let header = self.tableViewVisitedCountries.headerView(forSection: indexPath.section) as? VisitedRegionHeaderView {
+                    configureVisitedCountriesNumberAnimated(for: header, in: indexPath.section)
+                }
+                
+            }
+        default: ()
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableViewVisitedCountries.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableViewVisitedCountries.endUpdates()
+    }
+
 }
 

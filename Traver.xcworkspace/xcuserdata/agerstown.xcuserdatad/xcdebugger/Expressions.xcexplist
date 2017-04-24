@@ -38,10 +38,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.(getUserInfo(user : User, completion : () -&gt; ()) -&gt; ()).(closure #2):UserApiManager.swift">
+         contextName = "ProfileViewController.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:ProfileViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(updateFacebookInfo(id : String, email : String?, name : String, location : String?, photo : UIImage?, friendsIDs : [String]?) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "response.response?.statusCode">
+            </PersistentString>
+            <PersistentString
+               value = "friendsIDs">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -54,21 +60,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "User.createCountryIfNeeded(for : String, in : Region) -&gt; Country?:User.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "code.localized()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(updateFacebookInfo(id : String, email : String?, name : String, location : String?, photo : UIImage?, friendsIDs : [String]?) -&gt; ()).(closure #1):UserApiManager.swift">
+         contextName = "UserApiManager.(getUserInfo(user : User, completion : () -&gt; ()) -&gt; ()).(closure #2):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "response.response?.statusCode">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.createCountryIfNeeded(for : String, in : Region) -&gt; Country?:User.swift">
+         <PersistentStrings>
             <PersistentString
-               value = "friendsIDs">
+               value = "code.localized()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -114,6 +117,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "User.saveCountry(for : String, in : Region) -&gt; ():User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "country.code">
+            </PersistentString>
+            <PersistentString
+               value = "self.visitedCountries.count">
+            </PersistentString>
+            <PersistentString
+               value = "region.code">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.(updateUser(token : String, completion : () -&gt; ()?) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -130,10 +147,43 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ProfileViewController.numberOfSections(in : UITableView) -&gt; Int:ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "fetchedResultsController?.sections?.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.viewDidLoad() -&gt; ():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.controller(NSFetchedResultsController&lt;NSFetchRequestResult&gt;, didChange : Any, at : IndexPath?, for : NSFetchedResultsChangeType, newIndexPath : IndexPath?) -&gt; ():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableViewVisitedCountries.numberOfRows(inSection: newPath.section)">
+            </PersistentString>
+            <PersistentString
+               value = "fetchedResultsController?.sections?[path.section].numberOfObjects">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "User.findOrCreateRegion(for : String) -&gt; Region:User.swift">
          <PersistentStrings>
             <PersistentString
                value = "region">
+            </PersistentString>
+            <PersistentString
+               value = "">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -246,6 +296,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "User.saveCountryVisit(code : String) -&gt; ():User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "region.code">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.(getOrCreateUserWithICloud(id : String, name : String?, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -262,10 +320,37 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ProfileViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "fetchedResultsController?.sections?[section].numberOfObjects">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2).(closure #1):ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "country">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "specialized UserApiManager.(updateFacebookInfo(id : String, email : String?, name : String, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(createUserWithICloud(id : String, name : String?, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -283,25 +368,6 @@
             </PersistentString>
             <PersistentString
                value = "User.shared.visitedRegions">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(createUserWithICloud(id : String, name : String?, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.response?.statusCode">
-            </PersistentString>
-            <PersistentString
-               value = "User.shared.token">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2).(closure #1):ProfileViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "country">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -352,10 +418,10 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "user.facebookID">
+               value = "User.shared.facebookEmail">
             </PersistentString>
             <PersistentString
-               value = "User.shared.facebookEmail">
+               value = "user.facebookID">
             </PersistentString>
             <PersistentString
                value = "user.location">
@@ -373,6 +439,12 @@
       <ContextState
          contextName = "static User.(shared).(variable initialization expression).(closure #1):User.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "User.shared.locale">
+            </PersistentString>
+            <PersistentString
+               value = "self.locale">
+            </PersistentString>
             <PersistentString
                value = "user.token">
             </PersistentString>

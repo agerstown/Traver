@@ -18,7 +18,8 @@ extension SVGKImage {
         }
         
         let visitedCountriesLayers = countriesLayers.filter { (layer) in
-            User.shared.visitedCountries.contains(where: { $0.code == layer.name! })
+            User.shared.visitedCountriesArray.contains(where: { $0.code == layer.name! })
+            //User.shared.visitedCountries.contains(where: { $0.code == layer.name! })
         }
         
         for layer in visitedCountriesLayers {

@@ -14,10 +14,16 @@ class Region: NSManagedObject {
     
     @NSManaged var code: String
     @NSManaged var index: Int16
-    @NSManaged var visitedCountries: NSOrderedSet
+//    @NSManaged var visitedCountries: NSOrderedSet
+    @NSManaged var countries: NSSet
+    
+//    lazy var sortedVisitedCountries: [Country] = {
+//        let array = Array(self.visitedCountries) as! [Country]
+//        return array.sorted { $0.code.localized() < $1.code.localized() }
+//    }()
     
     lazy var sortedVisitedCountries: [Country] = {
-        let array = Array(self.visitedCountries) as! [Country]
+        let array = Array(self.countries) as! [Country]
         return array.sorted { $0.code.localized() < $1.code.localized() }
     }()
     

@@ -13,12 +13,15 @@ import CoreData
 class Country: NSManagedObject {
     
     @NSManaged var code: String
+    @NSManaged var name: String
     @NSManaged var region: Region
+    @NSManaged var users: NSSet
 
     convenience init(code: String, region: Region) {
         let entity = NSEntityDescription.entity(forEntityName: "Country", in: CoreDataStack.shared.mainContext)!
         self.init(entity: entity, insertInto: CoreDataStack.shared.mainContext)
         self.code = code
+        self.name = code.localized()
         self.region = region
     }
 }

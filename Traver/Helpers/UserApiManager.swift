@@ -278,7 +278,10 @@ class UserApiManager {
     
     private func createCountryVisits(user: User) {
         if user.visitedCountries.count != 0 {
-            let visitedCountriesCodes = user.visitedCountries.map{ $0.code }
+            
+            let visitedCountriesCodes = user.visitedCountriesArray.map { $0.code }
+            
+            //let visitedCountriesCodes = user.visitedCountries.map{ $0.code }
             
             let params: Parameters = [
                 "countries_codes": visitedCountriesCodes
@@ -572,7 +575,8 @@ class UserApiManager {
                 completion()
             }
         } else {
-            self.updateCountryVisits(user: user, codes: user.visitedCountries.map{ $0.code }) {
+//            self.updateCountryVisits(user: user, codes: user.visitedCountries.map{ $0.code }) {
+            self.updateCountryVisits(user: user, codes: user.visitedCountriesArray.map{ $0.code }) {
                 NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
                 if let completion = completion {
                     completion()
@@ -649,7 +653,9 @@ class UserApiManager {
         
         _ = Alamofire.request(host + "users/disconnect-facebook/", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 200 {
-                User.shared.disconnectFacebook()
+                User.shared.facebookID = nil
+                User.shared.facebookEmail = nil
+                CoreDataStack.shared.saveContext()
             }
             NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
         }

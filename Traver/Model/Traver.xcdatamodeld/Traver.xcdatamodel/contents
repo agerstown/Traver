@@ -2,27 +2,31 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Country" representedClassName="Country" syncable="YES">
         <attribute name="code" attributeType="String" syncable="YES"/>
-        <relationship name="region" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="visitedCountries" inverseEntity="Region" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="region" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="countries" inverseEntity="Region" syncable="YES"/>
+        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="visitedCountries" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Region" representedClassName="Region" syncable="YES">
         <attribute name="code" attributeType="String" syncable="YES"/>
         <attribute name="index" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="visitedCountries" toMany="YES" deletionRule="Cascade" destinationEntity="Country" inverseName="region" inverseEntity="Country" syncable="YES"/>
+        <relationship name="countries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Country" inverseName="region" inverseEntity="Country" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="facebookEmail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="facebookID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iCloudID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locale" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="photoPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="friends" inverseEntity="User" syncable="YES"/>
+        <relationship name="visitedCountries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Country" inverseName="users" inverseEntity="Country" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Country" positionX="-45" positionY="45" width="128" height="75"/>
-        <element name="Region" positionX="-54" positionY="36" width="128" height="90"/>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="Country" positionX="-45" positionY="45" width="128" height="105"/>
+        <element name="Region" positionX="-54" positionY="36" width="128" height="88"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="210"/>
     </elements>
 </model>
