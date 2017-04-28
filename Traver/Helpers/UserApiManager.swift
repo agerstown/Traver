@@ -181,7 +181,7 @@ class UserApiManager {
         
     }
     
-    func getFriends(user: User) {
+    func getFriends(user: User, completion: (() -> Void)? = nil) {
         
         let headers: HTTPHeaders = [
             "Authorization": "Token \(user.token!)"
@@ -205,6 +205,9 @@ class UserApiManager {
                     //NotificationCenter.default.post(name: self.FriendsUpdatedNotification, object: nil)
                 }
                 
+                if let completion = completion {
+                    completion()
+                }
                 NotificationCenter.default.post(name: self.FriendsUpdatedNotification, object: nil)
             }
         }

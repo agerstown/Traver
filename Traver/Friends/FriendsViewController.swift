@@ -21,6 +21,8 @@ class FriendsViewController: UIViewController {
     
     var fetchedResultsController: NSFetchedResultsController<User>?
     
+    let refreshControl = UIRefreshControl()
+    
     let visitedCountriesText = "%d countries visited"
     
     // MARK: - Lifecycle
@@ -43,6 +45,9 @@ class FriendsViewController: UIViewController {
         
         fetchedResultsController?.delegate = self
         
+        refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
+        tableViewFriends.refreshControl = refreshControl
+        
         configureView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(facebookConnected), name: UserApiManager.shared.FriendsUpdatedNotification, object: nil)
@@ -55,6 +60,13 @@ class FriendsViewController: UIViewController {
     // MARK: - Actions
     @IBAction func buttonConnectFacebookTapped(_ sender: Any) {
         FacebookHelper.shared.login()
+    }
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        
+        UserApiManager.shared.getFriends(user: User.shared) {
+            refreshControl.endRefreshing()
+        }
     }
     
     // MARK: - Notifications
@@ -127,11 +139,11 @@ extension FriendsViewController: NSFetchedResultsControllerDelegate {
         switch (type) {
         case .insert:
             if let newPath = newIndexPath {
-                tableViewFriends.insertRows(at: [newPath], with: .automatic)
+                tableViewFriends.insertRows(at: [newPath], with: .fade)
             }
         case .delete:
             if let indexPath = indexPath {
-                tableViewFriends.deleteRows(at: [indexPath], with: .automatic)
+                tableViewFriends.deleteRows(at: [indexPath], with: .fade)
             }
         case .update:
             if let indexPath = indexPath {
