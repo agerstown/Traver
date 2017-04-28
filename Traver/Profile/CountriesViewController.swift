@@ -34,6 +34,10 @@ class CountriesViewController: UIViewController {
         }
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func buttonCancelTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDataSource

@@ -446,6 +446,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kKd-Ed-Bed">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="keh-c7-Zgc">
+                            <connections>
+                                <action selector="buttonCancelTapped:" destination="kcS-J7-Mvn" id="0og-OH-2wn"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="yzX-Pj-iQz">
                             <connections>
                                 <action selector="buttonDoneClicked:" destination="kcS-J7-Mvn" id="hDs-xo-Dal"/>
