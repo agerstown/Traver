@@ -85,7 +85,7 @@ class ProfileViewController: UIViewController {
         let fetchRequest = NSFetchRequest<Country> (entityName: "Country")
         fetchRequest.predicate = predicate
         let regionSortDescriptor = NSSortDescriptor(key: "region.index", ascending: true)
-        let countrySortDescriptor = NSSortDescriptor(key: "name", ascending: true) //, selector: bla)
+        let countrySortDescriptor = NSSortDescriptor(key: "name", ascending: true) 
         fetchRequest.sortDescriptors = [regionSortDescriptor, countrySortDescriptor]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "region.index", cacheName: nil)
         
@@ -93,10 +93,10 @@ class ProfileViewController: UIViewController {
         
         fetchedResultsController?.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: UserApiManager.shared.CountriesUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(profileInfoUpdated), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: UserApiManager.shared.CountriesUpdatedNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -217,8 +217,7 @@ class ProfileViewController: UIViewController {
     }
     
     func configureVisitedCountriesNumber(for header: VisitedRegionHeaderView, in section: Int) {
-        let numberOfCountriesInSection = fetchedResultsController?.sections?[section].numberOfObjects
-        if let numberOfCountriesInSection = numberOfCountriesInSection {
+        if let numberOfCountriesInSection = fetchedResultsController?.sections?[section].numberOfObjects {
             header.labelVisitedCountriesNumber.text = "\(numberOfCountriesInSection)/\(Codes.regions[section].1.count)"
         }
     }
@@ -333,21 +332,10 @@ extension ProfileViewController: NSFetchedResultsControllerDelegate {
         case .insert:
             if let newPath = newIndexPath {
                 tableViewVisitedCountries.insertRows(at: [newPath], with: .automatic)
-                
-                if let header = self.tableViewVisitedCountries.headerView(forSection: newPath.section) as? VisitedRegionHeaderView {
-                    configureVisitedCountriesNumberAnimated(for: header, in: newPath.section)
-                }
-
-                
             }
         case .delete:
             if let indexPath = indexPath {
                 tableViewVisitedCountries.deleteRows(at: [indexPath], with: .automatic)
-                
-                if let header = self.tableViewVisitedCountries.headerView(forSection: indexPath.section) as? VisitedRegionHeaderView {
-                    configureVisitedCountriesNumberAnimated(for: header, in: indexPath.section)
-                }
-                
             }
         default: ()
         }
@@ -359,6 +347,14 @@ extension ProfileViewController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableViewVisitedCountries.endUpdates()
+        
+        if let sections = fetchedResultsController?.sections {
+            for index in 0..<sections.count {
+                if let header = self.tableViewVisitedCountries.headerView(forSection: index) as? VisitedRegionHeaderView {
+                    configureVisitedCountriesNumberAnimated(for: header, in: index)
+                }
+            }
+        }
     }
 
 }

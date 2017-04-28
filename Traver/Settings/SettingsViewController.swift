@@ -33,7 +33,7 @@ class SettingsViewController: UITableViewController {
         
         tableViewSettings.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateAccountsInfo), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAccountsInfo), name: FacebookHelper.shared.AccountInfoUpdatedNotification, object: nil)
     }
     
     deinit {
@@ -65,7 +65,16 @@ class SettingsViewController: UITableViewController {
     
     // MARK: - Notifications
     func updateAccountsInfo() {
-        cellFacebook.detailTextLabel?.text = FacebookHelper.shared.isConnected() ? "Connected".localized() : "Not connected".localized()
-        self.tableViewSettings.reloadData()
+        
+        UIView.transition(with: cellFacebook.detailTextLabel!,
+                          duration: 0.3,
+                          options: [.transitionCrossDissolve],
+                          animations: {
+                            self.cellFacebook.detailTextLabel?.text = FacebookHelper.shared.isConnected() ? "Connected".localized() : "Not connected".localized()
+        }, completion: nil)
+//
+//        
+//        cellFacebook.detailTextLabel?.text = FacebookHelper.shared.isConnected() ? "Connected".localized() : "Not connected".localized()
+//        self.tableViewSettings.reloadData()
     }
 }

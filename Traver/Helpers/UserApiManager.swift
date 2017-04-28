@@ -14,15 +14,16 @@ class UserApiManager {
     
     static let shared = UserApiManager()
     
-//    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com/"
-//    let photosHost = "https://s3.amazonaws.com/"
-    let host = "http://127.0.0.1:8000/"
-    let photosHost = "http://127.0.0.1:8000/"
+    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com/"
+    let photosHost = "https://s3.amazonaws.com/"
+//    let host = "http://127.0.0.1:8000/"
+//    let photosHost = "http://127.0.0.1:8000/"
     
     // MARK: - Notifications
-    let CountriesUpdatedNotification = NSNotification.Name(rawValue: "CountriesUpdatedNotification")
     let ProfileInfoUpdatedNotification = NSNotification.Name(rawValue: "ProfileInfoUpdatedNotification")
     let PhotoUpdatedNotification = NSNotification.Name(rawValue: "PhotoUpdatedNotification")
+    let CountriesUpdatedNotification = NSNotification.Name(rawValue: "CountriesUpdatedNotification")
+    let FriendsUpdatedNotification = NSNotification.Name(rawValue: "FriendsUpdatedNotification")
     
     // MARK: - GET methods
     func getOrCreateUserWithFacebook(id: String, email: String?, name: String, location: String?, photo: UIImage?, friendsIDs: [String]?) {
@@ -38,7 +39,7 @@ class UserApiManager {
                 
                 Alamofire.request(host + "users/get-user-with-facebook/", parameters: parameters).responseJSON { response in
                     if response.response?.statusCode == 404 {
-                        self.createUserWithFacebook(id: id, email: email, name: name, location: location, photo: photo)
+                        self.createUserWithFacebook(id: id, email: email, name: name, location: location, photo: photo, friendsIDs: friendsIDs)
                     } else if let value = response.result.value {
                         
                         let json = JSON(value)
@@ -57,6 +58,8 @@ class UserApiManager {
                     }
                 }
             }
+        } else {
+            getFriends(user: User.shared)
         }
     }
     
@@ -146,8 +149,6 @@ class UserApiManager {
                 
                 if user == User.shared {
                     NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
-                } else {
-                    print(User.shared.friends)
                 }
             }
         }
@@ -180,9 +181,39 @@ class UserApiManager {
         
     }
     
+    func getFriends(user: User) {
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(user.token!)"
+        ]
+        
+        Alamofire.request(host + "users/get-friends/", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            if let friends = response.result.value as? NSArray {
+                if friends.count > 0 {
+                    var friendsArray: [User] = []
+                    
+                    for friend in friends {
+                        
+                        let user = User(context: CoreDataStack.shared.mainContext)
+                        friendsArray.append(user)
+                        
+                        self.parseAndSaveUser(user: user, from: friend, withCountries: false)
+                    }
+                    User.shared.friends = NSOrderedSet(array: friendsArray)
+                    CoreDataStack.shared.saveContext()
+                    
+                    //NotificationCenter.default.post(name: self.FriendsUpdatedNotification, object: nil)
+                }
+                
+                NotificationCenter.default.post(name: self.FriendsUpdatedNotification, object: nil)
+            }
+        }
+
+    }
+    
     
     // MARK: - CREATE methods
-    private func createUserWithFacebook(id: String, email: String?, name: String, location: String?, photo: UIImage?) {
+    private func createUserWithFacebook(id: String, email: String?, name: String, location: String?, photo: UIImage?, friendsIDs: [String]?) {
         
         let name = User.shared.name != nil ? User.shared.name! : name
         let location = User.shared.location != nil ? User.shared.location! : location
@@ -226,6 +257,10 @@ class UserApiManager {
                             
                             NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
                         }
+                    }
+                    
+                    if let friendsIDs = friendsIDs {
+                        self.updateFriends(friendsIDs: friendsIDs)
                     }
                     
                     self.createCountryVisits(user: User.shared)
@@ -596,23 +631,20 @@ class UserApiManager {
         
         _ = Alamofire.request(host + "users/update-friends/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if let friends = response.result.value as? NSArray {
-                for friendJSON in friends {
-                    //let friend = JSON(friendJSON)
+                
+                var friendsArray: [User] = []
+                
+                for friend in friends {
                     
-//                    let user = User(context: CoreDataStack.shared.mainContext)
-//                    User.shared.friends.add(user)
-////                    User.shared.updateInfo()
-////                    user.updateInfo()
-//                    CoreDataStack.shared.saveContext()
-//                    self.parseAndSaveUser(user: user, from: friendJSON)
+                    let user = User(context: CoreDataStack.shared.mainContext)
+                    friendsArray.append(user)
                     
-//                    user.facebookID = friend["facebook_id"].stringValue
-//                    user.facebookEmail = friend["facebook_email"].stringValue
-//                    
-                    
-                    //print(friend)
-                    
+                    self.parseAndSaveUser(user: user, from: friend, withCountries: false, withFriends: false)
                 }
+                User.shared.friends = NSOrderedSet(array: friendsArray)
+                CoreDataStack.shared.saveContext()
+                
+                NotificationCenter.default.post(name: self.FriendsUpdatedNotification, object: nil)
             }
         }
     }
@@ -657,13 +689,13 @@ class UserApiManager {
                 User.shared.facebookEmail = nil
                 CoreDataStack.shared.saveContext()
             }
-            NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
+            //NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
         }
     }
     
     
     // MARK: - Helper methods
-    private func parseAndSaveUser(user: User, from responseValue: Any) {
+    private func parseAndSaveUser(user: User, from responseValue: Any, withCountries: Bool = true, withFriends: Bool = true) {
         let json = JSON(responseValue)
         
         let profile = json["profile"]
@@ -674,6 +706,10 @@ class UserApiManager {
         user.name = stringOrNilIfEmpty(profile["name"].stringValue)
         user.iCloudID = stringOrNilIfEmpty(profile["icloud_id"].stringValue)
         
+        if json["num_countries"].int != nil {
+            user.numberOfVisitedCountries = json["num_countries"].stringValue
+        }
+        
         user.token = json["token"].stringValue
         
         CoreDataStack.shared.saveContext()
@@ -683,7 +719,14 @@ class UserApiManager {
         }
         
         getPhoto(user: user)
-        getUserCountryVisits(user: user)
+        
+        if withCountries {
+            getUserCountryVisits(user: user)
+        }
+        
+        if withFriends {
+            getFriends(user: user)
+        }
     }
     
     private func stringOrNilIfEmpty(_ string: String) -> String? {

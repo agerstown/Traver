@@ -19,6 +19,9 @@ class FacebookHelper {
     
     let loginManager = LoginManager()
     
+    // MARK: - Notifications
+    let AccountInfoUpdatedNotification = NSNotification.Name(rawValue: "AccountInfoUpdatedNotification")
+    
     func isConnected() -> Bool {
         return AccessToken.current != nil
     }
@@ -29,6 +32,7 @@ class FacebookHelper {
             alert.addAction(UIAlertAction(title: "No".localized(), style: .cancel))
             alert.addAction(UIAlertAction(title: "Yes".localized(), style: .default) { _ in
                 self.loginManager.logOut()
+                NotificationCenter.default.post(name: self.AccountInfoUpdatedNotification, object: nil)
                 if User.shared.iCloudID != nil {
                     UserApiManager.shared.disconnectFacebook()
                 }
@@ -48,7 +52,7 @@ class FacebookHelper {
                         case .success(let graphResponse):
                             if let responseDictionary = graphResponse.dictionaryValue {
                                 
-                                //print(responseDictionary)
+                                NotificationCenter.default.post(name: self.AccountInfoUpdatedNotification, object: nil)
                                 
                                 let id = responseDictionary["id"] as! String
                                 let email = responseDictionary["email"] as? String
@@ -60,10 +64,13 @@ class FacebookHelper {
                                 let friendsDict = responseDictionary["friends"] as! NSDictionary
                                 let friendsData = friendsDict["data"] as! NSArray
                                 
-                                var friendsIDs: [String] = []
-                                for friend in friendsData {
-                                    let friend = friend as! NSDictionary
-                                    friendsIDs.append(friend["id"] as! String)
+                                var friendsIDs: [String]?
+                                if friendsData.count != 0 {
+                                    friendsIDs = [String]()
+                                    for friend in friendsData {
+                                        let friend = friend as! NSDictionary
+                                        friendsIDs!.append(friend["id"] as! String)
+                                    }
                                 }
                                 
                                 let picture = responseDictionary["picture"] as! NSDictionary
@@ -72,12 +79,12 @@ class FacebookHelper {
                                 let isSilhouette = pictureData["is_silhouette"] as! Bool
                                 
                                 if isSilhouette {
-                                    UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: nil, friendsIDs: friendsIDs.count > 0 ? friendsIDs : nil)
+                                    UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: nil, friendsIDs: friendsIDs)
                                 } else {
                                     let url = pictureData["url"] as! String
                                     Alamofire.request(url).responseImage { response in
                                         if let image = response.result.value {
-                                            UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: image, friendsIDs: friendsIDs.count > 0 ? friendsIDs : nil)
+                                            UserApiManager.shared.getOrCreateUserWithFacebook(id: id, email: email, name: name, location: location, photo: image, friendsIDs: friendsIDs)
                                         }
                                     }
                                 }

@@ -247,3 +247,9 @@
 "No Internet." = "No Internet.";
 "Check your Internet connection." = "Check your Internet connection.";
 "Status code" = "Status code";
+
+//Friends
+"Nobody's here :(" = "Nobody's here :(";
+"Connect your Facebook to see your friends" = "Connect your Facebook to see your friends";
+"Connect" = "Connect";
+"Invite your friends to use Traver!" = "Invite your friends to use Traver!";

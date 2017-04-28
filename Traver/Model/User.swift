@@ -17,10 +17,6 @@ class User: NSManagedObject {
         let users = try! CoreDataStack.shared.mainContext.fetch(frUser)
         if users.count > 0 {
             let user = users.first!
-            
-            //let frRegion = NSFetchRequest<Region>(entityName: "Region")
-            //let visitedRegions = try! CoreDataStack.shared.mainContext.fetch(frRegion)
-            //user.visitedRegions = visitedRegions.sorted { $0.index < $1.index }
 
             if user.locale != nil && user.locale != Locale.current.languageCode {
                 let frCountries = NSFetchRequest<Country>(entityName: "Country")
@@ -68,10 +64,11 @@ class User: NSManagedObject {
     @NSManaged var location: String?
     @NSManaged var iCloudID: String?
     @NSManaged var locale: String?
+    @NSManaged var numberOfVisitedCountries: String?
     
-    @NSManaged var friends: NSMutableSet
-//    @NSManaged var visitedCountries: NSMutableSet
+    @NSManaged var friends: NSOrderedSet
     @NSManaged var visitedCountries: NSSet
+    
     
     var username: String {
         return facebookID != nil ? "fb" + facebookID! : iCloudID != nil ? "ic" + iCloudID! : ""
@@ -80,19 +77,6 @@ class User: NSManagedObject {
     var visitedCountriesArray: [Country] {
         return visitedCountries.allObjects as! [Country]
     }
-    
-    
-    
-//    var visitedRegions: [Region] = []
-//    
-//    var visitedCountries: [Country] {
-//        var countries: [Country] = []
-//        for region in visitedRegions {
-//            let countriesInRegion = Array(region.visitedCountries) as! [Country]
-//            countries.append(contentsOf: countriesInRegion)
-//        }
-//        return countries
-//    }
     
     func updateCountryVisits(codes: [String]) {
         
@@ -109,20 +93,6 @@ class User: NSManagedObject {
         }
         
         CoreDataStack.shared.saveContext()
-        
-//        let currentCountryVisits = User.shared.visitedCountries
-//
-//        for country in currentCountryVisits {
-//            if !codes.contains(country.code) {
-//                removeCountryVisit(country: country)
-//            }
-//        }
-//
-//        for code in codes {
-//            saveCountryVisit(code: code)
-//        }
-//        
-//        CoreDataStack.shared.saveContext()
     }
     
     func addCountryVisit(code: String) {
@@ -131,30 +101,12 @@ class User: NSManagedObject {
     }
     
     func removeCountryVisit(country: Country) {
-//        
-        //self.visitedCountries.remove(country)
-        
         let allVisitedCountries = NSMutableSet(set: self.visitedCountries)
         allVisitedCountries.remove(country)
         self.visitedCountries = allVisitedCountries
         
         CoreDataStack.shared.saveContext()
-        
-//        let region = findRegion(for: country)
-//        if region.visitedCountries.count == 1 {
-//            CoreDataStack.shared.mainContext.delete(region)
-//            User.shared.visitedRegions.removeObject(region)
-//        } else {
-//            CoreDataStack.shared.mainContext.delete(country)
-//            region.sortedVisitedCountries.removeObject(country)
-//        }
-//        CoreDataStack.shared.saveContext()
     }
-    
-    
-//    func updateInfo() {
-//        CoreDataStack.shared.saveContext()
-//    }
     
     private func saveCountryVisit(code: String) {
         let region = findOrCreateRegion(for: code)
@@ -174,29 +126,15 @@ class User: NSManagedObject {
         } else {
             country = existingCountries.filter { $0.code == code }.first!
         }
-        //self.visitedCountries = self.visitedCountries.adding(country!) as NSSet //add(country!)
+
         let allVisitedCountries = NSMutableSet(set: self.visitedCountries)
         allVisitedCountries.add(country!)
         self.visitedCountries = allVisitedCountries
         
-        //country!.region = region
-//        
-        //self.visitedCountries.add(country!)
-//        
         CoreDataStack.shared.saveContext()
-        
-        //print(country!.users.allObjects)
-        
-//        if !User.shared.visitedCountries.contains(where: { $0.code == code }) {
-//            let country = Country(code: code, region: region)
-//            if !region.sortedVisitedCountries.contains(country) {
-//                region.sortedVisitedCountries.append(country) { $0.code.localized() < $1.code.localized() }
-//            }
-//        }
     }
     
     private func findOrCreateRegion(for countryCode: String) -> Region {
-//        let regionObject: Region?
         let region = Codes.countryToRegion[countryCode]!
         
         let frRegions = NSFetchRequest<Region>(entityName: "Region")
@@ -207,19 +145,5 @@ class User: NSManagedObject {
         } else {
             return Region(code: region.code, index: Int16(Codes.Region.all.index(of: region)!))
         }
-        
-//        if User.shared.visitedRegions.contains(where: { $0.code == region.code }) {
-//            let visitedRegions = User.shared.visitedRegions
-//            regionObject = visitedRegions.filter { $0.code == region.code }.first
-//        } else {
-//            regionObject = Region(code: region.code, index: Int16(Codes.Region.all.index(of: region)!))
-//            User.shared.visitedRegions.append(regionObject!) { $0.index < $1.index }
-//        }
-//        return regionObject!
     }
-    
-//    private func findRegion(for country: Country) -> Region {
-//        return User.shared.visitedRegions.filter { $0.visitedCountries.contains(country) }.first!
-//    }
-//    
 }

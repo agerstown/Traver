@@ -18,15 +18,16 @@
         <attribute name="locale" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numberOfVisitedCountries" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="photoPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="friends" inverseEntity="User" syncable="YES"/>
+        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="friends" inverseEntity="User" syncable="YES"/>
         <relationship name="visitedCountries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Country" inverseName="users" inverseEntity="Country" syncable="YES"/>
     </entity>
     <elements>
         <element name="Country" positionX="-45" positionY="45" width="128" height="105"/>
         <element name="Region" positionX="-54" positionY="36" width="128" height="88"/>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="210"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="223"/>
     </elements>
 </model>
