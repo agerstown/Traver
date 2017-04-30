@@ -65,6 +65,7 @@ class User: NSManagedObject {
     @NSManaged var iCloudID: String?
     @NSManaged var locale: String?
     @NSManaged var numberOfVisitedCountries: String?
+    @NSManaged var feedbackEmail: String?
     
     @NSManaged var friends: NSOrderedSet
     @NSManaged var visitedCountries: NSSet
@@ -119,8 +120,6 @@ class User: NSManagedObject {
     }
     
     private func saveCountry(for code: String, in region: Region) {
-        
-        
         let frCountries = NSFetchRequest<Country>(entityName: "Country")
         let existingCountries = try! CoreDataStack.shared.mainContext.fetch(frCountries)
         

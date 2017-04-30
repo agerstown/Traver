@@ -254,3 +254,11 @@
 "Connect your Facebook to see your friends" = "Подключите свой Facebook, чтобы увидеть друзей";
 "Connect" = "Подключить";
 "Invite your friends to use Traver!" = "Пригласите своих друзей в Traver!";
+
+//Feedback
+"Support and feedback" = "Поддержка и отзывы";
+"Send" = "Отправить";
+"Please write something." = "Пожалуйста, напишите что-нибудь.";
+"Your feedback has been sent!" = "Ваше сообщение отправлено!";
+"Error! Please try to send your feedback later." = "Ошибка! Пожалуйста, попробуйте позднее.";
+"The email is not valid!" = "Введеный e-mail некорректен!";

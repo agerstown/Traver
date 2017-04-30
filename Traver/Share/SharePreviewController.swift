@@ -23,14 +23,7 @@ class SharePreviewController: UIViewController {
         
         if let backgroundController = backgroundController {
             backgroundController.tabBarController?.tabBar.isHidden = true
-            
-            UIGraphicsBeginImageContextWithOptions(backgroundController.view.bounds.size, false, 0)
-            backgroundController.view.drawHierarchy(in: backgroundController.view.bounds, afterScreenUpdates: true)
-            var snapshot = UIGraphicsGetImageFromCurrentImageContext()!
-            UIGraphicsEndImageContext()
-            let tintColor = UIColor(white:0.11, alpha:0.75) //0.11 0.8
-            snapshot = snapshot.applyBlurWithRadius(3, tintColor:tintColor, saturationDeltaFactor:1.8, maskImage:nil)! //5 1.8
-            
+            let snapshot = Bluring.blurBackground(backgroundController: backgroundController)
             view.backgroundColor = UIColor(patternImage: snapshot)
         }
         
@@ -69,7 +62,6 @@ class SharePreviewController: UIViewController {
 
 // MARK: - UIGestureRecognizerDelegate
 extension SharePreviewController: UIGestureRecognizerDelegate {
-    
     func handleTap(recognizer: UIGestureRecognizer) {
         if recognizer.state == .ended {
             let view = recognizer.view

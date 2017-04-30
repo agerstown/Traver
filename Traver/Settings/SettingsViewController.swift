@@ -16,9 +16,11 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var tableViewSettings: UITableView!
     @IBOutlet weak var cellImportFromPhotos: UITableViewCell!
     @IBOutlet weak var cellFacebook: UITableViewCell!
+    @IBOutlet weak var textViewFeedback: UITextView!
+    @IBOutlet weak var buttonSendFeedback: UIButton!
     
-    let sectionsHeaders = ["Import".localized(), "Accounts".localized()];
-    let sectionsFooters = ["It may take some time, just wait a little.".localized(), ""];
+    let sectionsHeaders = ["Import".localized(), "Accounts".localized(), "Support and feedback".localized()];
+    let sectionsFooters = ["It may take some time, just wait a little.".localized(), "", ""];
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -31,7 +33,18 @@ class SettingsViewController: UITableViewController {
         cellFacebook.textLabel?.text = "Facebook".localized()
         cellFacebook.detailTextLabel?.text = FacebookHelper.shared.isConnected() ? "Connected".localized() : "Not connected".localized()
         
+        textViewFeedback.layer.cornerRadius = 5
+        textViewFeedback.layer.borderColor = UIColor.gray.cgColor
+        textViewFeedback.layer.borderWidth = 0.5
+        
+        buttonSendFeedback.setTitle("Send".localized(), for: .normal)
+        buttonSendFeedback.layer.cornerRadius = 5
+        
         tableViewSettings.delegate = self
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        view.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateAccountsInfo), name: FacebookHelper.shared.AccountInfoUpdatedNotification, object: nil)
     }
@@ -40,6 +53,23 @@ class SettingsViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
+    @IBAction func buttonSendFeedbackTapped(_ sender: Any) {
+        if textViewFeedback.text.isEmpty {
+            StatusBarManager.shared.showCustomStatusBarError(text: "Please write something.".localized())
+            textViewFeedback.becomeFirstResponder()
+        } else {
+            self.performSegue(withIdentifier: "segueToEmailController", sender: nil)
+        }
+    }
+    
+    // MARK: - Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? EmailController {
+            controller.backgroundController = self
+            controller.feedbackText = textViewFeedback.text
+        }
+    }
+    
     // MARK: - UITableViewDataSource
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionsHeaders[section]
@@ -72,9 +102,14 @@ class SettingsViewController: UITableViewController {
                           animations: {
                             self.cellFacebook.detailTextLabel?.text = FacebookHelper.shared.isConnected() ? "Connected".localized() : "Not connected".localized()
         }, completion: nil)
-//
-//        
-//        cellFacebook.detailTextLabel?.text = FacebookHelper.shared.isConnected() ? "Connected".localized() : "Not connected".localized()
-//        self.tableViewSettings.reloadData()
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension SettingsViewController: UIGestureRecognizerDelegate {
+    func handleTap(recognizer: UIGestureRecognizer) {
+        if recognizer.state == .ended {
+            textViewFeedback.resignFirstResponder()
+        }
     }
 }

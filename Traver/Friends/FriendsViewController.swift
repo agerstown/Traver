@@ -104,13 +104,6 @@ class FriendsViewController: UIViewController {
         }
     }
     
-//    // MARK: - Segue
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let controller = segue.destination as? ProfileViewController {
-//            controller.user =
-//        }
-//    }
-    
 }
 
 // MARK: - UITableViewDataSource
@@ -132,22 +125,17 @@ extension FriendsViewController: UITableViewDataSource {
         cell.labelName.text = user.name
         cell.imageViewPhoto.image = user.photo != nil ? user.photo : UIImage(named: "default_photo")
         
-        //var numberOfVisitedCountries: Int?
         
         if user.visitedCountries.count > 0 {
             user.numberOfVisitedCountries = String(user.visitedCountries.count)
             CoreDataStack.shared.saveContext()
-            //numberOfVisitedCountries = user.visitedCountries.count
-        } //else {
-            if let numberOfVisitedCountriesString = user.numberOfVisitedCountries {
-                if let number = Int(numberOfVisitedCountriesString) {
-                    //numberOfVisitedCountries = number
-                    cell.labelVisitedCountries.text =  visitedCountriesText.localized(for: number)
-                }
-            }
-        //}
+        }
         
-        //cell.labelVisitedCountries.text =  visitedCountriesText.localized(for: numberOfVisitedCountries!)
+        if let numberOfVisitedCountriesString = user.numberOfVisitedCountries {
+            if let number = Int(numberOfVisitedCountriesString) {
+                cell.labelVisitedCountries.text =  visitedCountriesText.localized(for: number)
+            }
+        }
     }
 }
 

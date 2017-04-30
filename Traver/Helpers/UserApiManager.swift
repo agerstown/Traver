@@ -333,6 +333,23 @@ class UserApiManager {
         }
     }
     
+    func setFeedbackEmail(email: String) {
+        let params: Parameters = [
+            "feedback_email": email
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+        
+        _ = Alamofire.request(host + "users/set-feedback-email/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            if response.response?.statusCode == 200 {
+                User.shared.feedbackEmail = email
+                CoreDataStack.shared.saveContext()
+            }
+        }
+    }
+
     
     // MARK: - UPDATE methods
     
@@ -699,6 +716,7 @@ class UserApiManager {
         user.location = stringOrNilIfEmpty(profile["location"].stringValue)
         user.name = stringOrNilIfEmpty(profile["name"].stringValue)
         user.iCloudID = stringOrNilIfEmpty(profile["icloud_id"].stringValue)
+        user.feedbackEmail = stringOrNilIfEmpty(profile["feedback_email"].stringValue)
         
         if json["num_countries"].int != nil {
             user.numberOfVisitedCountries = json["num_countries"].stringValue

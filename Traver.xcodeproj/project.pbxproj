@@ -67,6 +67,8 @@
 		61B2765F1DF9E327008AA44B /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2765E1DF9E327008AA44B /* ShareManager.swift */; };
 		61B276611DF9E8C2008AA44B /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B276601DF9E8C2008AA44B /* ShareView.swift */; };
 		61C4F1B71DFAD5380070158E /* SVGKImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C4F1B61DFAD5380070158E /* SVGKImage+Extensions.swift */; };
+		61FD56DD1EB6776A0035F169 /* Bluring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD56DC1EB6776A0035F169 /* Bluring.swift */; };
+		61FD56DF1EB6784B0035F169 /* EmailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD56DE1EB6784B0035F169 /* EmailController.swift */; };
 		701D2FE7FC330201D6B772C6 /* Pods_Traver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7B2C246E1D164A28EA3D41 /* Pods_Traver.framework */; };
 /* End PBXBuildFile section */
 
@@ -300,6 +302,8 @@
 		61B276601DF9E8C2008AA44B /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		61BFDB101DE5ABB700F49F6B /* Traver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Traver-Bridging-Header.h"; sourceTree = "<group>"; };
 		61C4F1B61DFAD5380070158E /* SVGKImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SVGKImage+Extensions.swift"; sourceTree = "<group>"; };
+		61FD56DC1EB6776A0035F169 /* Bluring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bluring.swift; sourceTree = "<group>"; };
+		61FD56DE1EB6784B0035F169 /* EmailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailController.swift; sourceTree = "<group>"; };
 		EE7B2C246E1D164A28EA3D41 /* Pods_Traver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Traver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -404,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				615665891DE384920050AE5A /* SettingsViewController.swift */,
+				61FD56DE1EB6784B0035F169 /* EmailController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -684,6 +689,7 @@
 				612BF6431DE5E06A0092D43F /* Settings */,
 				611EB3061DF5ED30002960A8 /* Share */,
 				613C54DA1DF0CF3A006660B9 /* Helpers */,
+				61FD56DB1EB677180035F169 /* Shared functionality */,
 				615BAD5D1DE4CF7700D1478D /* Model */,
 				612BF6451DE5E1CA0092D43F /* Storyboards */,
 				612BF64C1DE5F9530092D43F /* Extensions */,
@@ -724,6 +730,14 @@
 				6133945D1E31485D0001CF2A /* Traver.xcdatamodeld */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		61FD56DB1EB677180035F169 /* Shared functionality */ = {
+			isa = PBXGroup;
+			children = (
+				61FD56DC1EB6776A0035F169 /* Bluring.swift */,
+			);
+			path = "Shared functionality";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -945,9 +959,11 @@
 			files = (
 				612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */,
 				615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */,
+				61FD56DD1EB6776A0035F169 /* Bluring.swift in Sources */,
 				61B276611DF9E8C2008AA44B /* ShareView.swift in Sources */,
 				612A0B3B1E9FA902005BDCA6 /* SharePreviewController.swift in Sources */,
 				615665861DE3846B0050AE5A /* ProfileViewController.swift in Sources */,
+				61FD56DF1EB6784B0035F169 /* EmailController.swift in Sources */,
 				61B2765F1DF9E327008AA44B /* ShareManager.swift in Sources */,
 				612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */,
 				615665881DE384830050AE5A /* RecommendationsViewController.swift in Sources */,

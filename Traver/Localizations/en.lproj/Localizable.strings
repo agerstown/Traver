@@ -253,3 +253,11 @@
 "Connect your Facebook to see your friends" = "Connect your Facebook to see your friends";
 "Connect" = "Connect";
 "Invite your friends to use Traver!" = "Invite your friends to use Traver!";
+
+//Feedback
+"Support and feedback" = "Support and feedback";
+"Send" = "Send";
+"Please write something." = "Please write something.";
+"Your feedback has been sent!" = "Your feedback has been sent!";
+"Error! Please try to send your feedback later." = "Error! Please try to send your feedback later.";
+"The email is not valid!" = "The email is not valid!";

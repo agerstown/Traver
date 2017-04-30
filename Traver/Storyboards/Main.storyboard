@@ -595,6 +595,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="x8O-RT-T3x">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.93656378984451294" green="0.9386104941368103" blue="0.95605641603469849" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </view>
+                        <view key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleToFill" id="Fb0-Nr-Ss3">
+                            <rect key="frame" x="0.0" y="477.5" width="375" height="126"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.93656378984451294" green="0.9386104941368103" blue="0.95605641603469849" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </view>
                         <sections>
                             <tableViewSection headerTitle="Import" footerTitle="It may take some time, just wait a little." id="6Aw-Io-joS">
                                 <cells>
@@ -645,6 +655,49 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Support and feedback" id="1ij-si-er6">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="192" id="4VJ-OE-V2a" customClass="FeedbackCell" customModule="Traver" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="268" width="375" height="192"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4VJ-OE-V2a" id="hCh-IN-vto">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="191"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Kcd-av-JoI">
+                                                    <rect key="frame" x="20" y="22" width="335" height="104"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="104" id="JfY-pL-ZTC"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes"/>
+                                                </textView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="693-ZA-TcB">
+                                                    <rect key="frame" x="137" y="142" width="100" height="30"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="Na3-mu-H9f"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Send">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="buttonSendFeedbackTapped:" destination="x0d-sr-0FG" eventType="touchUpInside" id="fd7-qZ-4xe"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Kcd-av-JoI" firstAttribute="leading" secondItem="hCh-IN-vto" secondAttribute="leadingMargin" constant="12" id="IGk-25-qLM"/>
+                                                <constraint firstItem="693-ZA-TcB" firstAttribute="top" secondItem="Kcd-av-JoI" secondAttribute="bottom" constant="16" id="MRb-fC-Kpn"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Kcd-av-JoI" secondAttribute="trailing" constant="12" id="R0v-rw-9xI"/>
+                                                <constraint firstItem="Kcd-av-JoI" firstAttribute="top" secondItem="hCh-IN-vto" secondAttribute="topMargin" constant="14" id="YVW-O2-r8S"/>
+                                                <constraint firstItem="693-ZA-TcB" firstAttribute="centerX" secondItem="hCh-IN-vto" secondAttribute="centerX" id="gDu-LK-rjW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="x0d-sr-0FG" id="Q6I-5e-e6F"/>
@@ -653,14 +706,94 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="XKs-oc-Xjv"/>
                     <connections>
+                        <outlet property="buttonSendFeedback" destination="693-ZA-TcB" id="Mfv-wH-B6Q"/>
                         <outlet property="cellFacebook" destination="udT-9X-D60" id="8dW-4p-1Vd"/>
                         <outlet property="cellImportFromPhotos" destination="CcC-dy-ZbG" id="2YU-9l-kYg"/>
                         <outlet property="tableViewSettings" destination="bpl-Ue-1x5" id="24r-5t-JK8"/>
+                        <outlet property="textViewFeedback" destination="Kcd-av-JoI" id="mLU-gC-Jwq"/>
+                        <segue destination="Jd0-HN-20D" kind="presentation" identifier="segueToEmailController" id="kdu-6u-PnV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="be3-RB-fVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="1970"/>
+            <point key="canvasLocation" x="853.60000000000002" y="1969.5652173913045"/>
+        </scene>
+        <!--Email Controller-->
+        <scene sceneID="YUm-Kv-Nsy">
+            <objects>
+                <viewController id="Jd0-HN-20D" customClass="EmailController" customModule="Traver" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uYm-G3-sUz"/>
+                        <viewControllerLayoutGuide type="bottom" id="npJ-VT-MA3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="s16-y4-lYf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" restorationIdentifier="viewEmail" translatesAutoresizingMaskIntoConstraints="NO" id="j8F-yR-uKd">
+                                <rect key="frame" x="0.0" y="84" width="375" height="160"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please write your e-mail if you want us to answer you." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iS-nE-rcx">
+                                        <rect key="frame" x="32" y="24" width="300" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="STl-EN-CMm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NHd-Fd-PyA">
+                                        <rect key="frame" x="32" y="85" width="311" height="40"/>
+                                        <color key="backgroundColor" red="0.85886237029710366" green="0.86736595812182737" blue="0.86736595812182737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="kSy-ck-LSO"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="9iS-nE-rcx" firstAttribute="top" secondItem="j8F-yR-uKd" secondAttribute="top" constant="24" id="A8k-vi-yxd"/>
+                                    <constraint firstItem="NHd-Fd-PyA" firstAttribute="leading" secondItem="j8F-yR-uKd" secondAttribute="leading" constant="32" id="Aj0-vA-saa"/>
+                                    <constraint firstAttribute="height" constant="160" id="JWN-jf-eXg"/>
+                                    <constraint firstAttribute="trailing" secondItem="NHd-Fd-PyA" secondAttribute="trailing" constant="32" id="eWi-nJ-Eob"/>
+                                    <constraint firstItem="9iS-nE-rcx" firstAttribute="leading" secondItem="j8F-yR-uKd" secondAttribute="leading" constant="32" id="kuh-kg-7X6"/>
+                                    <constraint firstItem="NHd-Fd-PyA" firstAttribute="top" secondItem="9iS-nE-rcx" secondAttribute="bottom" constant="20" id="san-Pu-2yf"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5t-Js-09i">
+                                <rect key="frame" x="131" y="276" width="112" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="112" id="axr-1L-2oA"/>
+                                    <constraint firstAttribute="height" constant="40" id="i3e-bX-eOE"/>
+                                </constraints>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonSendFeedbackTapped:" destination="Jd0-HN-20D" eventType="touchUpInside" id="eHW-Hp-q1L"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="j8F-yR-uKd" firstAttribute="leading" secondItem="s16-y4-lYf" secondAttribute="leading" id="Jp6-nI-nZA"/>
+                            <constraint firstAttribute="trailing" secondItem="j8F-yR-uKd" secondAttribute="trailing" id="hR8-QC-PSa"/>
+                            <constraint firstItem="N5t-Js-09i" firstAttribute="top" secondItem="j8F-yR-uKd" secondAttribute="bottom" constant="32" id="jaL-ZA-vwU"/>
+                            <constraint firstItem="j8F-yR-uKd" firstAttribute="top" secondItem="uYm-G3-sUz" secondAttribute="bottom" constant="64" id="vVt-Ea-IBl"/>
+                            <constraint firstItem="N5t-Js-09i" firstAttribute="centerX" secondItem="s16-y4-lYf" secondAttribute="centerX" id="whZ-Bc-pkb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonSendFeedback" destination="N5t-Js-09i" id="5hz-Sd-BIU"/>
+                        <outlet property="textFieldEmail" destination="NHd-Fd-PyA" id="3RT-T0-PwB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TiN-9k-QyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1760.8" y="1969.5652173913045"/>
         </scene>
         <!--Profile-->
         <scene sceneID="O9R-f4-fyV">
@@ -856,7 +989,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfD-ff-JCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1628" y="357.57121439280365"/>
+            <point key="canvasLocation" x="854" y="358"/>
         </scene>
         <!--Recommendations-->
         <scene sceneID="Jnl-Rw-MHM">
