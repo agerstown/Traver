@@ -13,6 +13,8 @@ import Alamofire
 
 class ProfileViewController: UIViewController {
 
+    var user: User?
+    
     @IBOutlet weak var tableViewVisitedCountries: UITableView!
     @IBOutlet weak var viewTableViewHeader: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -22,12 +24,16 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var labelLocation: UILabel!
     @IBOutlet weak var labelVisitedCountries: UILabel!
     @IBOutlet weak var imageViewPhoto: UIImageView!
+    @IBOutlet weak var buttonAddCountries: UIBarButtonItem!
     @IBOutlet weak var buttonEditUserInfo: UIButton!
     @IBOutlet weak var buttonFillInfo: UIButton!
     @IBOutlet weak var buttonShare: UIButton!
     
     @IBOutlet weak var constraintScrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var constraintButtonFillInfo: NSLayoutConstraint!
+    @IBOutlet weak var constraintPhotoLeft: NSLayoutConstraint!
+    @IBOutlet weak var constraintPhotoBottom: NSLayoutConstraint!
+    @IBOutlet weak var constraintViewUserInfo: NSLayoutConstraint!
     
     var mapImage: SVGKImage = SVGKImage(named: "WorldMap.svg")!
     
@@ -41,6 +47,8 @@ class ProfileViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureButtonsForUser()
         
         self.title = "Profile".localized()
         buttonEditUserInfo.setTitle(" " + "Edit".localized(), for: .normal)
@@ -81,7 +89,7 @@ class ProfileViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
         tableViewVisitedCountries.refreshControl = refreshControl
         
-        let predicate = NSPredicate(format: "ANY users = %@", User.shared)
+        let predicate = NSPredicate(format: "ANY users = %@", user!)
         let fetchRequest = NSFetchRequest<Country> (entityName: "Country")
         fetchRequest.predicate = predicate
         let regionSortDescriptor = NSSortDescriptor(key: "region.index", ascending: true)
@@ -89,19 +97,19 @@ class ProfileViewController: UIViewController {
         fetchRequest.sortDescriptors = [regionSortDescriptor, countrySortDescriptor]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "region.index", cacheName: nil)
         
-        try! fetchedResultsController!.performFetch()
-        
         fetchedResultsController?.delegate = self
+        
+        try! fetchedResultsController!.performFetch()
         
         NotificationCenter.default.addObserver(self, selector: #selector(profileInfoUpdated), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: UserApiManager.shared.CountriesUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: user!.CountriesUpdatedNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         updateProfileInfo()
         updateCountriesRelatedInfo()
     }
@@ -124,9 +132,9 @@ class ProfileViewController: UIViewController {
     }
     
     func updateProfileInfo() {
-        if User.shared.name != nil && User.shared.name != "" {
+        if user!.name != nil && user!.name != "" {
             buttonFillInfo.isHidden = true
-            buttonShare.isHidden = false
+            buttonShare.isHidden = user == User.shared ? false : true
             constraintButtonFillInfo.constant = 66
         } else {
             buttonFillInfo.isHidden = false
@@ -134,20 +142,20 @@ class ProfileViewController: UIViewController {
             constraintButtonFillInfo.constant = 16
         }
         
-        labelName.text = User.shared.name
-        labelLocation.text = User.shared.location
+        labelName.text = user!.name
+        labelLocation.text = user!.location
         
-        imageViewPhoto.image = User.shared.photo != nil ? User.shared.photo : UIImage(named: "default_photo")
+        imageViewPhoto.image = user!.photo != nil ? user!.photo : UIImage(named: "default_photo")
     }
     
     func updateCountriesRelatedInfo() {
-        mapImage.colorVisitedCounties()
+        mapImage.colorVisitedCounties(for: user!)
         tableViewVisitedCountries.reloadData()
-        labelVisitedCountries.text = visitedCountriesText.localized(for: User.shared.visitedCountries.count)
+        labelVisitedCountries.text = visitedCountriesText.localized(for: user!.visitedCountries.count)
     }
     
     func updatePhoto() {
-        imageViewPhoto.image = User.shared.photo != nil ? User.shared.photo : UIImage(named: "default_photo")
+        imageViewPhoto.image = user!.photo != nil ? user!.photo : UIImage(named: "default_photo")
     }
     
     @IBAction func buttonEditTapped(_ sender: UIButton) {
@@ -155,8 +163,8 @@ class ProfileViewController: UIViewController {
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {
-        if User.shared.token != nil && User.shared.token != "" {
-            UserApiManager.shared.getUserInfo(user: User.shared) { _ in
+        if user!.token != nil && user!.token != "" {
+            UserApiManager.shared.getUserInfo(user: user!) { _ in
                 refreshControl.endRefreshing()
             }
         } else {
@@ -170,7 +178,7 @@ class ProfileViewController: UIViewController {
         if let navController = segue.destination as? UINavigationController {
             if let controller = navController.viewControllers[0] as? CountriesViewController {
                 controller.selectedCountries = Codes.Country.all.filter { (country) in
-                    User.shared.visitedCountriesArray.contains(where: { $0.code == country.code })
+                    user!.visitedCountriesArray.contains(where: { $0.code == country.code })
                 }
             }
         } else if let controller = segue.destination as? SharePreviewController {
@@ -181,7 +189,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Notifications
     func countryCodeImported(notification: NSNotification) {
         if let countryCode = notification.userInfo?[VisitedCountriesImporter.shared.CountryCodeInfoKey] as? String {
-            if !User.shared.visitedCountriesArray.contains(where: { $0.code == countryCode }) {
+            if !user!.visitedCountriesArray.contains(where: { $0.code == countryCode }) {
                 UserApiManager.shared.addCountryVisit(code: countryCode) {
                     let countriesLayers = self.mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
                     if let newCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
@@ -212,7 +220,7 @@ class ProfileViewController: UIViewController {
                                   duration: 0.3,
                                   options: [.transitionCrossDissolve],
                                   animations: {
-                                    self.labelVisitedCountries.text = self.visitedCountriesText.localized(for: User.shared.visitedCountries.count)
+                                    self.labelVisitedCountries.text = self.visitedCountriesText.localized(for: self.user!.visitedCountries.count)
         }, completion: nil)
     }
     
@@ -230,6 +238,29 @@ class ProfileViewController: UIViewController {
                             self.configureVisitedCountriesNumber(for: header, in: section)
         }, completion: nil)
     }
+    
+    func configureButtonsForUser() {
+        if user == nil {
+            user = User.shared
+            
+            self.navigationItem.rightBarButtonItem = buttonAddCountries
+            buttonShare.isHidden = false
+            buttonEditUserInfo.isHidden = false
+            
+            constraintPhotoLeft.constant = 8
+            constraintPhotoBottom.constant = 32
+            constraintViewUserInfo.constant = 106
+            
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
+            buttonShare.isHidden = true
+            buttonEditUserInfo.isHidden = true
+            
+            constraintPhotoLeft.constant = 16
+            constraintPhotoBottom.constant = 20
+            constraintViewUserInfo.constant = 122
+        }
+    }
 }
 
 
@@ -245,18 +276,24 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
-        
+        configureCell(cell, at: indexPath)
+        return cell
+    }
+    
+    func configureCell(_ cell: VisitedCountryItemCell, at indexPath: IndexPath) {
         let country =  fetchedResultsController!.object(at: indexPath)
         
         cell.labelCountryName.text = country.code.localized()
         cell.country = country
         cell.selectionStyle = .none
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if user == User.shared {
+            return true
+        } else {
+            return false
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

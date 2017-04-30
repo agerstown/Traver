@@ -69,7 +69,6 @@ class User: NSManagedObject {
     @NSManaged var friends: NSOrderedSet
     @NSManaged var visitedCountries: NSSet
     
-    
     var username: String {
         return facebookID != nil ? "fb" + facebookID! : iCloudID != nil ? "ic" + iCloudID! : ""
     }
@@ -78,6 +77,10 @@ class User: NSManagedObject {
         return visitedCountries.allObjects as! [Country]
     }
     
+    // MARK: - Notifications
+    let CountriesUpdatedNotification = NSNotification.Name(rawValue: "CountriesUpdatedNotification")
+    
+    // MARK: - CoreData
     func updateCountryVisits(codes: [String]) {
         
         let currentCountryVisits = self.visitedCountries.allObjects as! [Country]
@@ -93,6 +96,8 @@ class User: NSManagedObject {
         }
         
         CoreDataStack.shared.saveContext()
+        
+        NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
     }
     
     func addCountryVisit(code: String) {

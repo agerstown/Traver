@@ -22,7 +22,6 @@ class UserApiManager {
     // MARK: - Notifications
     let ProfileInfoUpdatedNotification = NSNotification.Name(rawValue: "ProfileInfoUpdatedNotification")
     let PhotoUpdatedNotification = NSNotification.Name(rawValue: "PhotoUpdatedNotification")
-    let CountriesUpdatedNotification = NSNotification.Name(rawValue: "CountriesUpdatedNotification")
     let FriendsUpdatedNotification = NSNotification.Name(rawValue: "FriendsUpdatedNotification")
     
     // MARK: - GET methods
@@ -146,10 +145,6 @@ class UserApiManager {
                 }
                 
                 user.updateCountryVisits(codes: visitedCountriesCodes)
-                
-                if user == User.shared {
-                    NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
-                }
             }
         }
     }
@@ -201,13 +196,12 @@ class UserApiManager {
                     }
                     User.shared.friends = NSOrderedSet(array: friendsArray)
                     CoreDataStack.shared.saveContext()
-                    
-                    //NotificationCenter.default.post(name: self.FriendsUpdatedNotification, object: nil)
                 }
                 
                 if let completion = completion {
                     completion()
                 }
+                
                 NotificationCenter.default.post(name: self.FriendsUpdatedNotification, object: nil)
             }
         }
@@ -249,6 +243,8 @@ class UserApiManager {
                     User.shared.facebookEmail = email
                     User.shared.name = name
                     User.shared.location = location
+                    
+                    CoreDataStack.shared.saveContext()
                     
                     NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
                     
@@ -318,8 +314,6 @@ class UserApiManager {
         if user.visitedCountries.count != 0 {
             
             let visitedCountriesCodes = user.visitedCountriesArray.map { $0.code }
-            
-            //let visitedCountriesCodes = user.visitedCountries.map{ $0.code }
             
             let params: Parameters = [
                 "countries_codes": visitedCountriesCodes
@@ -613,9 +607,7 @@ class UserApiManager {
                 completion()
             }
         } else {
-//            self.updateCountryVisits(user: user, codes: user.visitedCountries.map{ $0.code }) {
             self.updateCountryVisits(user: user, codes: user.visitedCountriesArray.map{ $0.code }) {
-                NotificationCenter.default.post(name: self.CountriesUpdatedNotification, object: nil)
                 if let completion = completion {
                     completion()
                 }
@@ -692,7 +684,6 @@ class UserApiManager {
                 User.shared.facebookEmail = nil
                 CoreDataStack.shared.saveContext()
             }
-            //NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
         }
     }
     

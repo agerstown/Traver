@@ -29,7 +29,7 @@ class ShareView: UIView {
         image.size = CGSize(width: width, height: height)
         if let imageView = SVGKLayeredImageView(svgkImage: image) {
             viewMap.addSubview(imageView)
-            image.colorVisitedCounties()
+            image.colorVisitedCounties(for: User.shared)
         }
         
         imageViewPhoto.image = User.shared.photo

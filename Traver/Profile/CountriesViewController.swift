@@ -29,9 +29,7 @@ class CountriesViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func buttonDoneClicked(_ button: UIBarButtonItem) {
-        UserApiManager.shared.updateCountryVisits(user: User.shared, codes: selectedCountries.map { $0.code }) {
-            NotificationCenter.default.post(name: UserApiManager.shared.CountriesUpdatedNotification, object: nil)
-        }
+        UserApiManager.shared.updateCountryVisits(user: User.shared, codes: selectedCountries.map { $0.code }, completion: nil) 
         self.dismiss(animated: true, completion: nil)
     }
     

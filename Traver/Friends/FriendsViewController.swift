@@ -34,6 +34,8 @@ class FriendsViewController: UIViewController {
         tableViewFriends.dataSource = self
         tableViewFriends.delegate = self
         
+        fetchedResultsController?.delegate = self
+        
         let predicate = NSPredicate(format: "ANY friends = %@", User.shared)
         let fetchRequest = NSFetchRequest<User> (entityName: "User")
         fetchRequest.predicate = predicate
@@ -43,7 +45,7 @@ class FriendsViewController: UIViewController {
         
         try! fetchedResultsController!.performFetch()
         
-        fetchedResultsController?.delegate = self
+        UserApiManager.shared.getFriends(user: User.shared)
         
         refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
         tableViewFriends.refreshControl = refreshControl
@@ -51,6 +53,11 @@ class FriendsViewController: UIViewController {
         configureView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(facebookConnected), name: UserApiManager.shared.FriendsUpdatedNotification, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableViewFriends.reloadData()
     }
     
     deinit {
@@ -97,6 +104,13 @@ class FriendsViewController: UIViewController {
         }
     }
     
+//    // MARK: - Segue
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let controller = segue.destination as? ProfileViewController {
+//            controller.user =
+//        }
+//    }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -118,17 +132,40 @@ extension FriendsViewController: UITableViewDataSource {
         cell.labelName.text = user.name
         cell.imageViewPhoto.image = user.photo != nil ? user.photo : UIImage(named: "default_photo")
         
-        if let numberOfVisitedCountriesString = user.numberOfVisitedCountries {
-            if let number = Int(numberOfVisitedCountriesString) {
-                cell.labelVisitedCountries.text =  visitedCountriesText.localized(for: number)
+        //var numberOfVisitedCountries: Int?
+        
+        if user.visitedCountries.count > 0 {
+            user.numberOfVisitedCountries = String(user.visitedCountries.count)
+            CoreDataStack.shared.saveContext()
+            //numberOfVisitedCountries = user.visitedCountries.count
+        } //else {
+            if let numberOfVisitedCountriesString = user.numberOfVisitedCountries {
+                if let number = Int(numberOfVisitedCountriesString) {
+                    //numberOfVisitedCountries = number
+                    cell.labelVisitedCountries.text =  visitedCountriesText.localized(for: number)
+                }
             }
-        }
+        //}
+        
+        //cell.labelVisitedCountries.text =  visitedCountriesText.localized(for: numberOfVisitedCountries!)
     }
 }
 
 // MARK: - UITableViewDelegate
 extension FriendsViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user =  fetchedResultsController!.object(at: indexPath)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let controller = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController {
+            controller.user = user
+            UserApiManager.shared.getUserCountryVisits(user: user)
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+        
+        tableViewFriends.deselectRow(at: indexPath, animated: true)
+    }
 
 }
 
