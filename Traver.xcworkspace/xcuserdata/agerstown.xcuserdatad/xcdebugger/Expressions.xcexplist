@@ -147,6 +147,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ProfileViewController.configureButtonForUser() -&gt; ():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.name">
+            </PersistentString>
+            <PersistentString
+               value = "user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.getOrCreateUserWithFacebook(id : String, email : String, name : String, location : String, photo : UIImage) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -159,17 +170,6 @@
          <PersistentStrings>
             <PersistentString
                value = "response.result.value">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfileViewController.configureButtonForUser() -&gt; ():ProfileViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user.name">
-            </PersistentString>
-            <PersistentString
-               value = "user">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -267,6 +267,14 @@
          <PersistentStrings>
             <PersistentString
                value = "country">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingsViewController.gestureRecognizer(UIGestureRecognizer, shouldReceive : UITouch) -&gt; Bool:SettingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "view.isKind(of: UITableViewCell.self)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -382,6 +390,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "EmailController.(buttonSendFeedbackTapped(Any) -&gt; ()).(closure #1):EmailController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.presentedViewController">
+            </PersistentString>
+            <PersistentString
+               value = "self.presentingViewController.dynamicType">
+            </PersistentString>
+            <PersistentString
+               value = "self.presentingViewController?.childViewControllers">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.(updatePhoto(photo : UIImage, completion : () -&gt; ()) -&gt; ()).(closure #2):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -461,7 +483,7 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "json[&quot;num_countries&quot;].stringValue">
+               value = "User.shared.facebookEmail">
             </PersistentString>
             <PersistentString
                value = "json[&quot;num_countries&quot;].int">
@@ -470,10 +492,10 @@
                value = "user.location">
             </PersistentString>
             <PersistentString
-               value = "User.shared.facebookEmail">
+               value = "user.facebookID">
             </PersistentString>
             <PersistentString
-               value = "user.facebookID">
+               value = "json[&quot;num_countries&quot;].stringValue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

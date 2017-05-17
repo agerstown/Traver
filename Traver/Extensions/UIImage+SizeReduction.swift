@@ -12,7 +12,7 @@ extension UIImage {
     
     func reduced() -> UIImage? {
         var canvasSize = CGSize()
-        let minSize: CGFloat = 100
+        let minSize: CGFloat = 200
         if size.width < size.height {
             canvasSize = CGSize(width: minSize, height: CGFloat(ceil(minSize/size.width * size.height)))
         } else {

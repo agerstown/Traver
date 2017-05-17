@@ -44,7 +44,7 @@ class FacebookHelper {
                 case .failed(let error):
                     self.showErrorAlert(for: error)
                 case .success(_, _, let accessToken):
-                    let getUserDataRequest = GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, friends, picture.width(100).height(100), location"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
+                    let getUserDataRequest = GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, friends, picture.width(200).height(200), location"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
                     getUserDataRequest.start { (response, result) in
                         switch result {
                         case .failed(let error):

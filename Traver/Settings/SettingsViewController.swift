@@ -22,6 +22,8 @@ class SettingsViewController: UITableViewController {
     let sectionsHeaders = ["Import".localized(), "Accounts".localized(), "Support and feedback".localized()];
     let sectionsFooters = ["It may take some time, just wait a little.".localized(), "", ""];
     
+    let tapGestureRecognizer = UITapGestureRecognizer()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +38,16 @@ class SettingsViewController: UITableViewController {
         textViewFeedback.layer.cornerRadius = 5
         textViewFeedback.layer.borderColor = UIColor.gray.cgColor
         textViewFeedback.layer.borderWidth = 0.5
+        textViewFeedback.delegate = self
         
         buttonSendFeedback.setTitle("Send".localized(), for: .normal)
         buttonSendFeedback.layer.cornerRadius = 5
         
         tableViewSettings.delegate = self
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        tapGestureRecognizer.addTarget(self, action: #selector(handleTap(recognizer:)))
+        tapGestureRecognizer.isEnabled = false
+        //tapGestureRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer.delegate = self
         
@@ -65,7 +70,8 @@ class SettingsViewController: UITableViewController {
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? EmailController {
-            controller.backgroundController = self
+            controller.feedbackDelegate = self
+            controller.backgroundImage = Bluring.blurBackground(backgroundController: self)
             controller.feedbackText = textViewFeedback.text
         }
     }
@@ -107,9 +113,31 @@ class SettingsViewController: UITableViewController {
 
 // MARK: - UIGestureRecognizerDelegate
 extension SettingsViewController: UIGestureRecognizerDelegate {
+    
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        if let view = touch.view {
+//            return !view.isKind(of: UITableViewCell.self)
+//        }
+//        return true
+//    }
+    
     func handleTap(recognizer: UIGestureRecognizer) {
         if recognizer.state == .ended {
             textViewFeedback.resignFirstResponder()
+            tapGestureRecognizer.isEnabled = false
         }
+    }
+}
+
+extension SettingsViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        tapGestureRecognizer.isEnabled = true
+    }
+}
+
+// MARK: - FeedbackDelegate
+extension SettingsViewController: FeedbackDelegate {
+    func feedbackSuccessfullySent() {
+        textViewFeedback.text = ""
     }
 }

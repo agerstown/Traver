@@ -145,7 +145,7 @@ class ProfileViewController: UIViewController {
         labelName.text = user!.name
         labelLocation.text = user!.location
         
-        imageViewPhoto.image = user!.photo != nil ? user!.photo : UIImage(named: "default_photo")
+        imageViewPhoto.image = user!.photo != nil ? user!.photo : user == User.shared ? UIImage(named: "default_photo") : UIImage(named: "bordered_photo")
     }
     
     func updateCountriesRelatedInfo() {
@@ -182,7 +182,7 @@ class ProfileViewController: UIViewController {
                 }
             }
         } else if let controller = segue.destination as? SharePreviewController {
-            controller.backgroundController = self
+            controller.backgroundImage = Bluring.blurBackground(backgroundController: self)
         }
     }
 
@@ -193,7 +193,7 @@ class ProfileViewController: UIViewController {
                 UserApiManager.shared.addCountryVisit(code: countryCode) {
                     let countriesLayers = self.mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
                     if let newCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
-                        newCountryLayer.fillColor = UIColor.blue.cgColor
+                        newCountryLayer.fillColor = UIColor.blueTraverColor.cgColor //UIColor.blue.cgColor
                     }
                     
                     self.updateNumberOfVisitedCountriesAnimated()

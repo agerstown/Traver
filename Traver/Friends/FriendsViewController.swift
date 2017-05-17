@@ -52,12 +52,13 @@ class FriendsViewController: UIViewController {
         
         configureView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(facebookConnected), name: UserApiManager.shared.FriendsUpdatedNotification, object: nil)
+        buttonConnectFacebook.layer.cornerRadius = 5
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(friendsUpdated), name: UserApiManager.shared.FriendsUpdatedNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableViewFriends.reloadData()
     }
     
     deinit {
@@ -66,7 +67,14 @@ class FriendsViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func buttonConnectFacebookTapped(_ sender: Any) {
-        FacebookHelper.shared.login()
+        if AccessToken.current == nil {
+            FacebookHelper.shared.login()
+        } else {
+            UserApiManager.shared.getFriends(user: User.shared) {
+                try! self.fetchedResultsController!.performFetch()
+                self.tableViewFriends.reloadData()
+            }
+        }
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {
@@ -77,7 +85,7 @@ class FriendsViewController: UIViewController {
     }
     
     // MARK: - Notifications
-    func facebookConnected() {
+    func friendsUpdated() {
         configureView()
     }
     
@@ -92,14 +100,10 @@ class FriendsViewController: UIViewController {
             
             if AccessToken.current == nil { //User.shared.facebookID == nil
                 labelNoFriendsText.text = "Connect your Facebook to see your friends".localized()
-                buttonConnectFacebook.isHidden = false
                 buttonConnectFacebook.setTitle("Connect".localized(), for: .normal)
-                buttonConnectFacebook.layer.cornerRadius = 5
-                
             } else {
-                
                 labelNoFriendsText.text = "Invite your friends to use Traver!".localized()
-                buttonConnectFacebook.isHidden = true
+                buttonConnectFacebook.setTitle("Update".localized(), for: .normal)
             }
         }
     }

@@ -22,8 +22,7 @@ extension SVGKImage {
         }
         
         for layer in visitedCountriesLayers {
-            let color = UIColor.blue
-            layer.fillColor = color.cgColor
+            layer.fillColor = UIColor.blueTraverColor.cgColor
         }
     }
     

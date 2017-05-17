@@ -18,5 +18,7 @@ class MainTabBarController: UITabBarController {
                 item.title = item.title?.localized()
             }
         }
+        
+        self.tabBar.tintColor = UIColor.darkBlueTraverColor
     }
 }

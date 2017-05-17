@@ -22,7 +22,7 @@ class StatusBarManager {
     }
     
     func showCustomStatusBarNeutral(text: String) {
-        showCustomStatusBar(text: text, color: UIColor.blue)
+        showCustomStatusBar(text: text, color: UIColor.blueTraverColor)
     }
     
     func showCustomStatusBarError(text: String) {

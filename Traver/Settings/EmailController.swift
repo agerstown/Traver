@@ -9,6 +9,10 @@
 import Foundation
 import Alamofire
 
+protocol FeedbackDelegate {
+    func feedbackSuccessfullySent()
+}
+
 class EmailController: UIViewController {
     
     let slackFeedbackURL = "https://hooks.slack.com/services/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"
@@ -16,18 +20,18 @@ class EmailController: UIViewController {
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var buttonSendFeedback: UIButton!
     
-    var backgroundController: SettingsViewController?
+    var backgroundImage: UIImage?
     
     var feedbackText: String?
+    
+    var feedbackDelegate: FeedbackDelegate?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let backgroundController = backgroundController {
-            backgroundController.tabBarController?.tabBar.isHidden = true
-            let snapshot = Bluring.blurBackground(backgroundController: backgroundController)
-            view.backgroundColor = UIColor(patternImage: snapshot)
+        if let backgroundImage = backgroundImage {
+            view.backgroundColor = UIColor(patternImage: backgroundImage)
         }
         
         textFieldEmail.adjustsFontSizeToFitWidth = true
@@ -43,18 +47,6 @@ class EmailController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         view.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer.delegate = self
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if let tabBar = self.backgroundController?.tabBarController?.tabBar {
-            tabBar.frame.origin.y += tabBar.frame.size.height
-            self.backgroundController?.tabBarController?.tabBar.isHidden = false
-            UIView.animate(withDuration: 0.3) {
-                tabBar.frame.origin.y -= tabBar.frame.size.height
-            }
-        }
     }
     
     // MARK: - Actions
@@ -78,7 +70,8 @@ class EmailController: UIViewController {
             
             _ = Alamofire.request(slackFeedbackURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
                 if response.response?.statusCode == 200 {
-                    self.backgroundController?.textViewFeedback.text = ""
+                    self.feedbackDelegate?.feedbackSuccessfullySent()
+        
                     self.dismiss(animated: true, completion: nil)
                     StatusBarManager.shared.showCustomStatusBarNeutral(text: "Your feedback has been sent!".localized())
                 } else {

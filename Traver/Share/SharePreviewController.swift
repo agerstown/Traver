@@ -13,7 +13,7 @@ class SharePreviewController: UIViewController {
     @IBOutlet weak var imageViewSharePicture: UIImageView!
     @IBOutlet weak var buttonShare: UIButton!
     
-    var backgroundController: UIViewController?
+    var backgroundImage: UIImage?
     
     var sharePicture: UIImage?
     
@@ -21,10 +21,8 @@ class SharePreviewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let backgroundController = backgroundController {
-            backgroundController.tabBarController?.tabBar.isHidden = true
-            let snapshot = Bluring.blurBackground(backgroundController: backgroundController)
-            view.backgroundColor = UIColor(patternImage: snapshot)
+        if let backgroundImage = backgroundImage {
+            view.backgroundColor = UIColor(patternImage: backgroundImage)
         }
         
         buttonShare.setTitle("Share".localized(), for: .normal)
@@ -37,18 +35,6 @@ class SharePreviewController: UIViewController {
         
         sharePicture = ShareManager.shared.getSharePicture()
         imageViewSharePicture.image = sharePicture
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if let tabBar = self.backgroundController?.tabBarController?.tabBar {
-            tabBar.frame.origin.y += tabBar.frame.size.height
-            self.backgroundController?.tabBarController?.tabBar.isHidden = false
-            UIView.animate(withDuration: 0.3) {
-                tabBar.frame.origin.y -= tabBar.frame.size.height
-            }
-        }
     }
     
     // MARK: - Actions
