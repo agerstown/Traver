@@ -261,6 +261,12 @@
 "Choose your current location." = "Choose your current location.";
 "City, region, place.." = "City, region, place..";
 "Hide" = "Hide";
+" and2 " = " and ";
+" and " = " and ";
+" more have been there." = " more have been there.";
+" have been there." = " have been there.";
+" has been there." = " has been there.";
+"Currently in " = "Currently in ";
 
 // Feedback
 "Support and feedback" = "Support and feedback";

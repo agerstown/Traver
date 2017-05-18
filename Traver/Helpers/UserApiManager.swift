@@ -15,10 +15,10 @@ class UserApiManager {
     
     static let shared = UserApiManager()
     
-    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com/"
-    let photosHost = "https://s3.amazonaws.com/"
-//    let host = "http://127.0.0.1:8000/"
-//    let photosHost = "http://127.0.0.1:8000/"
+//    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com/"
+//    let photosHost = "https://s3.amazonaws.com/"
+    let host = "http://127.0.0.1:8000/"
+    let photosHost = "http://127.0.0.1:8000/"
     
     // MARK: - Notifications
     let ProfileInfoUpdatedNotification = NSNotification.Name(rawValue: "ProfileInfoUpdatedNotification")
@@ -223,6 +223,27 @@ class UserApiManager {
 
     }
     
+    func getFriendsForCurrentCountry(code: String,
+                                     completion: @escaping (_ friendsNames: [String]) -> Void) {
+        
+        let parameters: Parameters = [
+            "country_code": code
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+        
+        Alamofire.request(host + "users/get-friends-for-current-country/", method: .get, parameters: parameters, headers: headers).responseJSON { response in
+            if let value = response.result.value {
+                let json = JSON(value)
+                if let names = json["friends_names"].arrayObject as? [String] {
+                    completion(names)
+                }
+            }
+        }
+    }
+    
     
     // MARK: - CREATE methods
     private func createUserWithFacebook(id: String, email: String?, name: String, location: String?, photo: UIImage?, friendsIDs: [String]?) {
@@ -349,19 +370,24 @@ class UserApiManager {
     }
     
     func setFeedbackEmail(email: String) {
-        let params: Parameters = [
-            "feedback_email": email
-        ]
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Token \(User.shared.token!)"
-        ]
-        
-        _ = Alamofire.request(host + "users/set-feedback-email/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            if response.response?.statusCode == 200 {
-                User.shared.feedbackEmail = email
-                CoreDataStack.shared.saveContext()
+        if User.shared.token != nil && !User.shared.token!.isEmpty {
+            let params: Parameters = [
+                "feedback_email": email
+            ]
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(User.shared.token!)"
+            ]
+            
+            _ = Alamofire.request(host + "users/set-feedback-email/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                if response.response?.statusCode == 200 {
+                    User.shared.feedbackEmail = email
+                    CoreDataStack.shared.saveContext()
+                }
             }
+        } else {
+            User.shared.feedbackEmail = email
+            CoreDataStack.shared.saveContext()
         }
     }
 

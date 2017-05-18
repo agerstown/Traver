@@ -86,7 +86,6 @@ class FriendsViewController: UIViewController {
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {
-        
         UserApiManager.shared.getFriends(user: User.shared) {
             refreshControl.endRefreshing()
         }
@@ -106,6 +105,7 @@ class FriendsViewController: UIViewController {
     
     // MARK: - Notifications
     func friendsUpdated() {
+        try! fetchedResultsController!.performFetch()
         configureView()
     }
 
@@ -130,8 +130,14 @@ class FriendsViewController: UIViewController {
             
             configureCurrentLocationLabel()
             
-            viewHeader.frame.size.height = 76
-            labelFriendsInfo.isHidden = true
+            labelFriendsInfo.adjustsFontSizeToFitWidth = true
+            
+            if let currentCountryCode = User.shared.currentCountryCode {
+                UserApiManager.shared.getFriendsForCurrentCountry(code: currentCountryCode) { friendsNames in
+                    self.configureFriendsInfoLabel(names: friendsNames)
+                }
+            }
+            
         } else {
             tableViewFriends.isHidden = true
             viewNoFriends.isHidden = false
@@ -150,20 +156,41 @@ class FriendsViewController: UIViewController {
     }
 
     func configureCurrentLocationLabel() {
-        if let currentCountryCode = User.shared.currentCountryCode?.localized() {
+        if User.shared.currentCountryCode != nil {
             labelCurrentLocation.layer.borderWidth = 0
             labelCurrentLocation.textAlignment = .left
-            
-            var location = currentCountryCode
-            if let region = User.shared.currentRegion {
-                location += ", " + region
-            }
-            
-            labelCurrentLocation.text = location
+            labelCurrentLocation.text = User.shared.currentLocation
         } else {
             labelCurrentLocation.layer.borderWidth = 1
             labelCurrentLocation.textAlignment = .center
             labelCurrentLocation.text = "Set current location".localized()
+        }
+    }
+    
+    func configureFriendsInfoLabel(names: [String]) {
+        if names.count > 0 {
+            viewHeader.frame.size.height = 120
+            labelFriendsInfo.isHidden = false
+            tableViewFriends.reloadData()
+            
+            var text = "\u{2022} " + names[0]
+            
+            if names.count > 1 {
+                if names.count > 2 {
+                    text += ", " + names[1] + " and2 ".localized() + "\(names.count - 2)" + " more have been there.".localized()
+                } else {
+                    text += " and ".localized() + names[1] + " have been there.".localized()
+                }
+            } else {
+                text += " has been there.".localized()
+            }
+            
+            labelFriendsInfo.text = text
+            
+        } else {
+            viewHeader.frame.size.height = 76
+            labelFriendsInfo.isHidden = true
+            tableViewFriends.reloadData()
         }
     }
     
@@ -187,7 +214,11 @@ extension FriendsViewController: UITableViewDataSource {
         
         cell.labelName.text = user.name
         cell.imageViewPhoto.image = user.photo != nil ? user.photo : UIImage(named: "default_photo")
-        
+        if let location = user.currentLocation {
+            cell.labelCurrentLocation.text = "Currently in ".localized() + location
+        } else {
+            cell.labelCurrentLocation.text = nil
+        }
         
         if user.visitedCountries.count > 0 {
             user.numberOfVisitedCountries = String(user.visitedCountries.count)
@@ -256,5 +287,9 @@ extension FriendsViewController: NSFetchedResultsControllerDelegate {
 extension FriendsViewController: CurrentLocationDelegate {
     func locationSaved() {
         configureCurrentLocationLabel()
+    }
+    
+    func friendsNamesDownloaded(names: [String]) {
+        configureFriendsInfoLabel(names: names)
     }
 }

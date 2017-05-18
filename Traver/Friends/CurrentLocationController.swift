@@ -10,6 +10,7 @@ import Foundation
 
 protocol CurrentLocationDelegate {
     func locationSaved()
+    func friendsNamesDownloaded(names: [String])
 }
 
 class CurrentLocationController: UIViewController {
@@ -81,6 +82,9 @@ class CurrentLocationController: UIViewController {
                 self.currentLocationDelegate?.locationSaved()
                 self.dismiss(animated: true, completion: nil)
             }
+        }
+        UserApiManager.shared.getFriendsForCurrentCountry(code: selectedCountry.code) { friendsNames in
+            self.currentLocationDelegate?.friendsNamesDownloaded(names: friendsNames)
         }
     }
     

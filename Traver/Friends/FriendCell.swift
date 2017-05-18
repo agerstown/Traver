@@ -13,6 +13,7 @@ class FriendCell: UITableViewCell {
     @IBOutlet weak var imageViewPhoto: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelVisitedCountries: UILabel!
+    @IBOutlet weak var labelCurrentLocation: UILabel!
     
     override func layoutSubviews() {
         super.layoutSubviews()

@@ -68,6 +68,16 @@ class User: NSManagedObject {
     @NSManaged var feedbackEmail: String?
     @NSManaged var currentCountryCode: String?
     @NSManaged var currentRegion: String?
+    var currentLocation: String? {
+        if let currentCountryCode = currentCountryCode {
+            var location = currentCountryCode.localized()
+            if let region = User.shared.currentRegion {
+                location += ", " + region
+            }
+            return location
+        }
+        return nil
+    }
     
     @NSManaged var friends: NSOrderedSet
     @NSManaged var visitedCountries: NSSet

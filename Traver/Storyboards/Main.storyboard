@@ -958,11 +958,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="C6A-3Q-teD">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMt-nl-ffH">
-                                            <rect key="frame" x="8" y="8" width="359" height="104"/>
+                                            <rect key="frame" x="8" y="8" width="359" height="60"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_photo" translatesAutoresizingMaskIntoConstraints="NO" id="86S-rn-ZpR">
                                                     <rect key="frame" x="12" y="6" width="48" height="48"/>
@@ -971,10 +971,10 @@
                                                         <constraint firstAttribute="height" constant="48" id="FPJ-bY-GB8"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend Friend, Friend Friend and 2 others have been there" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arb-fI-TGn">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend Friend, Friend Friend and 2 others have been there" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arb-fI-TGn">
                                                     <rect key="frame" x="12" y="62" width="335" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.23772891191056533" green="0.23772891191056533" blue="0.23772891191056533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set current location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wX8-uc-HuW">
@@ -1011,7 +1011,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FriendCell" rowHeight="100" id="MIR-ig-gns" customClass="FriendCell" customModule="Traver" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="148" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="104" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MIR-ig-gns" id="avC-3g-CMV">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="100"/>
@@ -1024,32 +1024,42 @@
                                                         <constraint firstAttribute="height" constant="80" id="a0G-5y-sEC"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend Friend" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LO-vc-R3S">
-                                                    <rect key="frame" x="128" y="24" width="198" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 countries visited" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x80-Ac-BSG">
-                                                    <rect key="frame" x="128" y="56" width="198" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="QGe-Ec-q5q">
+                                                    <rect key="frame" x="128" y="8" width="206" height="82"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend Friend" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LO-vc-R3S">
+                                                            <rect key="frame" x="0.0" y="0.0" width="206" height="32"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 countries visited" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x80-Ac-BSG">
+                                                            <rect key="frame" x="0.0" y="32" width="206" height="27.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently in Russia" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiC-4r-W6m">
+                                                            <rect key="frame" x="0.0" y="59.5" width="206" height="22.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.23772891190000001" green="0.23772891190000001" blue="0.23772891190000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="PkT-an-4hD" firstAttribute="centerY" secondItem="avC-3g-CMV" secondAttribute="centerY" id="DXY-PJ-sil"/>
-                                                <constraint firstItem="2LO-vc-R3S" firstAttribute="top" secondItem="avC-3g-CMV" secondAttribute="topMargin" constant="16" id="FB6-JV-lO8"/>
                                                 <constraint firstItem="PkT-an-4hD" firstAttribute="leading" secondItem="avC-3g-CMV" secondAttribute="leadingMargin" constant="16" id="OhR-mK-bu7"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="x80-Ac-BSG" secondAttribute="trailing" constant="8" id="fbN-pC-1SJ"/>
-                                                <constraint firstItem="x80-Ac-BSG" firstAttribute="leading" secondItem="PkT-an-4hD" secondAttribute="trailing" constant="24" id="jSV-W4-7Ay"/>
-                                                <constraint firstItem="x80-Ac-BSG" firstAttribute="top" secondItem="2LO-vc-R3S" secondAttribute="bottom" constant="8" id="sNm-a9-fSh"/>
-                                                <constraint firstItem="2LO-vc-R3S" firstAttribute="leading" secondItem="PkT-an-4hD" secondAttribute="trailing" constant="24" id="t8C-wA-aPZ"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="2LO-vc-R3S" secondAttribute="trailing" constant="8" id="tLo-oT-wkg"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="QGe-Ec-q5q" secondAttribute="bottom" constant="2" id="U4d-q3-fCi"/>
+                                                <constraint firstAttribute="topMargin" secondItem="QGe-Ec-q5q" secondAttribute="top" id="Vvv-hI-4in"/>
+                                                <constraint firstItem="QGe-Ec-q5q" firstAttribute="leading" secondItem="PkT-an-4hD" secondAttribute="trailing" constant="24" id="vwh-gJ-Ddd"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="QGe-Ec-q5q" secondAttribute="trailing" id="wX9-WT-Zmc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="imageViewPhoto" destination="PkT-an-4hD" id="ynz-Pa-0N5"/>
+                                            <outlet property="labelCurrentLocation" destination="wiC-4r-W6m" id="IxT-7t-n73"/>
                                             <outlet property="labelName" destination="2LO-vc-R3S" id="kPz-xD-Rx9"/>
                                             <outlet property="labelVisitedCountries" destination="x80-Ac-BSG" id="sbb-hn-Ed7"/>
                                         </connections>

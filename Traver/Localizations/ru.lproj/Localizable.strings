@@ -262,6 +262,12 @@
 "Choose your current location." = "Выберите свое текущее местоположение.";
 "City, region, place.." = "Город, регион, место..";
 "Hide" = "Скрыть";
+" and2 " = " и еще ";
+" and " = " и ";
+" more have been there." = " были в этой стране.";
+" have been there." = " были в этой стране.";
+" has been there." = " был в этой стране.";
+"Currently in " = "Сейчас в ";
 
 // Feedback
 "Support and feedback" = "Поддержка и отзывы";
