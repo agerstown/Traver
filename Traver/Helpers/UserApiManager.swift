@@ -365,6 +365,33 @@ class UserApiManager {
         }
     }
 
+    func setCurrentLocation(countryCode: String?, region: String?, completion: @escaping (_ success: Bool) -> Void) {
+        var parameters = Parameters()
+        if let countryCode = countryCode {
+            parameters["country_code"] = countryCode
+        }
+        if let region = region {
+            parameters["region"] = region
+        }
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+        
+        _ = Alamofire.request(host + "users/set-current-location/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            if response.response?.statusCode == 200 {
+                User.shared.currentCountryCode = countryCode
+                User.shared.currentRegion = region
+                CoreDataStack.shared.saveContext()
+                completion(true)
+            } else {
+                self.showNoInternetErrorAlert(response: response)
+                completion(false)
+            }
+        }
+        
+    }
+    
     
     // MARK: - UPDATE methods
     
@@ -732,6 +759,8 @@ class UserApiManager {
         user.name = stringOrNilIfEmpty(profile["name"].stringValue)
         user.iCloudID = stringOrNilIfEmpty(profile["icloud_id"].stringValue)
         user.feedbackEmail = stringOrNilIfEmpty(profile["feedback_email"].stringValue)
+        user.currentCountryCode = stringOrNilIfEmpty(profile["current_country_code"].stringValue)
+        user.currentRegion = stringOrNilIfEmpty(profile["current_region"].stringValue)
         
         if json["num_countries"].int != nil {
             user.numberOfVisitedCountries = json["num_countries"].stringValue

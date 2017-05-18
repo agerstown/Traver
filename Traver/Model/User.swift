@@ -66,6 +66,8 @@ class User: NSManagedObject {
     @NSManaged var locale: String?
     @NSManaged var numberOfVisitedCountries: String?
     @NSManaged var feedbackEmail: String?
+    @NSManaged var currentCountryCode: String?
+    @NSManaged var currentRegion: String?
     
     @NSManaged var friends: NSOrderedSet
     @NSManaged var visitedCountries: NSSet

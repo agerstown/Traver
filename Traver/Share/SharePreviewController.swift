@@ -48,15 +48,17 @@ class SharePreviewController: UIViewController {
 
 // MARK: - UIGestureRecognizerDelegate
 extension SharePreviewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let view = touch.view {
+            return !view.isKind(of: UIImageView.self)
+        }
+        return true
+    }
+    
     func handleTap(recognizer: UIGestureRecognizer) {
         if recognizer.state == .ended {
-            let view = recognizer.view
-            let location = recognizer.location(in: view)
-            if let subview = view?.hitTest(location, with: nil) {
-                if !(subview is UIImageView) {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }

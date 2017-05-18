@@ -205,6 +205,7 @@
 "Error" = "Error";
 "Success" = "Success";
 "OK" = "OK";
+"Save" = "Save";
 
 // Import
 "Import countries from Photos" = "Import countries from Photos";
@@ -248,17 +249,24 @@
 "Check your Internet connection." = "Check your Internet connection.";
 "Status code" = "Status code";
 
-//Friends
+// Friends
 "Nobody's here :(" = "Nobody's here :(";
 "Connect your Facebook to see your friends" = "Connect your Facebook to see your friends";
 "Connect" = "Connect";
 "Update" = "Update";
 "Invite your friends to use Traver!" = "Invite your friends to use Traver!";
 
-//Feedback
+// Current location
+"Set current location" = "Set current location";
+"Choose your current location." = "Choose your current location.";
+"City, region, place.." = "City, region, place..";
+"Hide" = "Hide";
+
+// Feedback
 "Support and feedback" = "Support and feedback";
 "Send" = "Send";
 "Please write something." = "Please write something.";
 "Your feedback has been sent!" = "Your feedback has been sent!";
 "Error! Please try to send your feedback later." = "Error! Please try to send your feedback later.";
 "The email is not valid!" = "The email is not valid!";
+"Please write your e-mail if you want us to answer you." = "Please write your e-mail if you want us to answer you.";

@@ -56,6 +56,7 @@
 		615BAD5C1DE4C13000D1478D /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5B1DE4C13000D1478D /* Country.swift */; };
 		615BAD5F1DE4CF9500D1478D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5E1DE4CF9500D1478D /* User.swift */; };
 		615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */; };
+		6162D05F1ECDEA08009AA8C9 /* CurrentLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6162D05E1ECDEA08009AA8C9 /* CurrentLocationController.swift */; };
 		616E0ED31E34BC0700044A4C /* Codes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616E0ED21E34BC0700044A4C /* Codes.swift */; };
 		61732B231E491AFC00A0C952 /* UserApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61732B221E491AFC00A0C952 /* UserApiManager.swift */; };
 		61732B251E491EFB00A0C952 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61732B241E491EFB00A0C952 /* Main.storyboard */; };
@@ -288,6 +289,7 @@
 		615BAD5B1DE4C13000D1478D /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		615BAD5E1DE4CF9500D1478D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitedCountryItemCell.swift; sourceTree = "<group>"; };
+		6162D05E1ECDEA08009AA8C9 /* CurrentLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrentLocationController.swift; path = ../CurrentLocationController.swift; sourceTree = "<group>"; };
 		616E0ED21E34BC0700044A4C /* Codes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Codes.swift; sourceTree = "<group>"; };
 		616E64A01DE6223300680D4F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61732B221E491AFC00A0C952 /* UserApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserApiManager.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			children = (
 				612A0B3F1EA2842F005BDCA6 /* FriendsViewController.swift */,
 				619AE8881EA3F1C9005FCC46 /* FriendCell.swift */,
+				6162D0601ECE0120009AA8C9 /* Current location */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -732,6 +735,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		6162D0601ECE0120009AA8C9 /* Current location */ = {
+			isa = PBXGroup;
+			children = (
+				6162D05E1ECDEA08009AA8C9 /* CurrentLocationController.swift */,
+			);
+			path = "Current location";
+			sourceTree = "<group>";
+		};
 		61FD56DB1EB677180035F169 /* Shared functionality */ = {
 			isa = PBXGroup;
 			children = (
@@ -964,6 +975,7 @@
 				612A0B3B1E9FA902005BDCA6 /* SharePreviewController.swift in Sources */,
 				615665861DE3846B0050AE5A /* ProfileViewController.swift in Sources */,
 				61FD56DF1EB6784B0035F169 /* EmailController.swift in Sources */,
+				6162D05F1ECDEA08009AA8C9 /* CurrentLocationController.swift in Sources */,
 				61B2765F1DF9E327008AA44B /* ShareManager.swift in Sources */,
 				612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */,
 				615665881DE384830050AE5A /* RecommendationsViewController.swift in Sources */,

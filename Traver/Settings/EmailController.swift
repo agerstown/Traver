@@ -17,6 +17,7 @@ class EmailController: UIViewController {
     
     let slackFeedbackURL = "https://hooks.slack.com/services/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"
     
+    @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var buttonSendFeedback: UIButton!
     
@@ -34,6 +35,8 @@ class EmailController: UIViewController {
             view.backgroundColor = UIColor(patternImage: backgroundImage)
         }
         
+        labelTitle.text = "Please write your e-mail if you want us to answer you.".localized()
+        
         textFieldEmail.adjustsFontSizeToFitWidth = true
         if let email = User.shared.feedbackEmail {
             textFieldEmail.text = email
@@ -45,6 +48,7 @@ class EmailController: UIViewController {
         buttonSendFeedback.layer.cornerRadius = 5
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        tapGestureRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer.delegate = self
     }
@@ -85,18 +89,21 @@ class EmailController: UIViewController {
 
 // MARK: - UIGestureRecognizerDelegate
 extension EmailController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let view = touch.view {
+            return !(view.restorationIdentifier == "viewEmail")
+        }
+        return true
+    }
+    
+
     func handleTap(recognizer: UIGestureRecognizer) {
         if recognizer.state == .ended {
             if textFieldEmail.isFirstResponder {
                 textFieldEmail.resignFirstResponder()
             } else {
-                let view = recognizer.view
-                let location = recognizer.location(in: view)
-                if let subview = view?.hitTest(location, with: nil) {
-                    if subview.restorationIdentifier != "viewEmail" && !(subview is UILabel) {
-                        self.dismiss(animated: true, completion: nil)
-                    }
-                }
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }

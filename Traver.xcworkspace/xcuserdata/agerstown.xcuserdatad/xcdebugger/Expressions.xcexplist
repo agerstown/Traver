@@ -236,18 +236,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FriendsViewController.tableView(UITableView, didSelectRowAt : IndexPath) -&gt; ():FriendsViewController.swift">
+         contextName = "SettingsViewController.gestureRecognizer(UIGestureRecognizer, shouldReceive : UITouch) -&gt; Bool:SettingsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.navigationController">
+               value = "view.isKind(of: UITableViewCell.self)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.(updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ()).(closure #1):UserApiManager.swift">
+         contextName = "FriendsViewController.tableView(UITableView, didSelectRowAt : IndexPath) -&gt; ():FriendsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "response.response?.statusCode">
+               value = "self.navigationController">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -271,10 +271,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SettingsViewController.gestureRecognizer(UIGestureRecognizer, shouldReceive : UITouch) -&gt; Bool:SettingsViewController.swift">
+         contextName = "UserApiManager.(updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "view.isKind(of: UITableViewCell.self)">
+               value = "response.response?.statusCode">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -328,10 +328,10 @@
                value = "country.code">
             </PersistentString>
             <PersistentString
-               value = "self.visitedCountries.count">
+               value = "region.code">
             </PersistentString>
             <PersistentString
-               value = "region.code">
+               value = "self.visitedCountries.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -434,10 +434,10 @@
                value = "self.locale">
             </PersistentString>
             <PersistentString
-               value = "User.shared.locale">
+               value = "user.token">
             </PersistentString>
             <PersistentString
-               value = "user.token">
+               value = "User.shared.locale">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -483,7 +483,7 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "User.shared.facebookEmail">
+               value = "json[&quot;num_countries&quot;].stringValue">
             </PersistentString>
             <PersistentString
                value = "json[&quot;num_countries&quot;].int">
@@ -492,10 +492,10 @@
                value = "user.location">
             </PersistentString>
             <PersistentString
-               value = "user.facebookID">
+               value = "User.shared.facebookEmail">
             </PersistentString>
             <PersistentString
-               value = "json[&quot;num_countries&quot;].stringValue">
+               value = "user.facebookID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -519,16 +519,27 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "CurrentLocationController.gestureRecognizer(UIGestureRecognizer, shouldReceive : UITouch) -&gt; Bool:CurrentLocationController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "view.isKind(of: UIButton.self)">
+            </PersistentString>
+            <PersistentString
+               value = "view.restorationIdentifier">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "CountriesViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CountriesViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "regions">
             </PersistentString>
             <PersistentString
-               value = "regionsWithCountries">
+               value = "Codes.Region(rawValue: section)">
             </PersistentString>
             <PersistentString
-               value = "Codes.Region(rawValue: section)">
+               value = "regionsWithCountries">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -572,6 +583,14 @@
          <PersistentStrings>
             <PersistentString
                value = "region.code">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CurrentLocationController.handleTap(recognizer : UIGestureRecognizer) -&gt; ():CurrentLocationController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pickerViewCountry.isFocused">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

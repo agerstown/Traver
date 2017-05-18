@@ -113,14 +113,6 @@ class SettingsViewController: UITableViewController {
 
 // MARK: - UIGestureRecognizerDelegate
 extension SettingsViewController: UIGestureRecognizerDelegate {
-    
-//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-//        if let view = touch.view {
-//            return !view.isKind(of: UITableViewCell.self)
-//        }
-//        return true
-//    }
-    
     func handleTap(recognizer: UIGestureRecognizer) {
         if recognizer.state == .ended {
             textViewFeedback.resignFirstResponder()

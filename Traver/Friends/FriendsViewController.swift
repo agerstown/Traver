@@ -19,6 +19,14 @@ class FriendsViewController: UIViewController {
     @IBOutlet weak var labelNoFriendsText: UILabel!
     @IBOutlet weak var buttonConnectFacebook: UIButton!
     
+    @IBOutlet weak var viewHeader: UIView!
+    @IBOutlet weak var viewInnerHeader: UIView!
+    @IBOutlet weak var imageViewPhoto: UIImageView!
+    @IBOutlet weak var labelCurrentLocation: UILabel!
+    @IBOutlet weak var labelFriendsInfo: UILabel!
+    
+    let gestureRecognizerLabelCurrentLocation = UITapGestureRecognizer()
+    
     var fetchedResultsController: NSFetchedResultsController<User>?
     
     let refreshControl = UIRefreshControl()
@@ -33,6 +41,8 @@ class FriendsViewController: UIViewController {
         
         tableViewFriends.dataSource = self
         tableViewFriends.delegate = self
+        
+        tableViewFriends.tableFooterView = UIView()
         
         fetchedResultsController?.delegate = self
         
@@ -51,8 +61,6 @@ class FriendsViewController: UIViewController {
         tableViewFriends.refreshControl = refreshControl
         
         configureView()
-        
-        buttonConnectFacebook.layer.cornerRadius = 5
         
         NotificationCenter.default.addObserver(self, selector: #selector(friendsUpdated), name: UserApiManager.shared.FriendsUpdatedNotification, object: nil)
     }
@@ -84,19 +92,52 @@ class FriendsViewController: UIViewController {
         }
     }
     
+    func labelCurrentLocationTapped() {
+        performSegue(withIdentifier: "segueToCurrentLocationController", sender: nil)
+    }
+    
+    // MARK: - Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? CurrentLocationController {
+            controller.currentLocationDelegate = self
+            controller.backgroundImage = Bluring.blurBackground(backgroundController: self)
+        }
+    }
+    
     // MARK: - Notifications
     func friendsUpdated() {
         configureView()
     }
-    
+
+    // MARK: - UI
     func configureView() {
         if User.shared.friends.count > 0 {
             tableViewFriends.isHidden = false
             viewNoFriends.isHidden = true
+            
+            gestureRecognizerLabelCurrentLocation.addTarget(self, action: #selector(labelCurrentLocationTapped))
+            labelCurrentLocation.isUserInteractionEnabled = true
+            labelCurrentLocation.addGestureRecognizer(gestureRecognizerLabelCurrentLocation)
+            
+            viewInnerHeader.layer.cornerRadius = 5
+            imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
+            imageViewPhoto.image = User.shared.photo
+            
+            labelCurrentLocation.adjustsFontSizeToFitWidth = true
+            
+            labelCurrentLocation.layer.cornerRadius = 5
+            labelCurrentLocation.layer.borderColor = UIColor.gray.cgColor
+            
+            configureCurrentLocationLabel()
+            
+            viewHeader.frame.size.height = 76
+            labelFriendsInfo.isHidden = true
         } else {
             tableViewFriends.isHidden = true
             viewNoFriends.isHidden = false
             labelNobodysHere.text = "Nobody's here :(".localized()
+            
+            buttonConnectFacebook.layer.cornerRadius = 5
             
             if AccessToken.current == nil { //User.shared.facebookID == nil
                 labelNoFriendsText.text = "Connect your Facebook to see your friends".localized()
@@ -105,6 +146,24 @@ class FriendsViewController: UIViewController {
                 labelNoFriendsText.text = "Invite your friends to use Traver!".localized()
                 buttonConnectFacebook.setTitle("Update".localized(), for: .normal)
             }
+        }
+    }
+
+    func configureCurrentLocationLabel() {
+        if let currentCountryCode = User.shared.currentCountryCode?.localized() {
+            labelCurrentLocation.layer.borderWidth = 0
+            labelCurrentLocation.textAlignment = .left
+            
+            var location = currentCountryCode
+            if let region = User.shared.currentRegion {
+                location += ", " + region
+            }
+            
+            labelCurrentLocation.text = location
+        } else {
+            labelCurrentLocation.layer.borderWidth = 1
+            labelCurrentLocation.textAlignment = .center
+            labelCurrentLocation.text = "Set current location".localized()
         }
     }
     
@@ -191,5 +250,11 @@ extension FriendsViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableViewFriends.endUpdates()
     }
-    
+}
+
+// MARK: - CurrentLocationDelegate
+extension FriendsViewController: CurrentLocationDelegate {
+    func locationSaved() {
+        configureCurrentLocationLabel()
+    }
 }
