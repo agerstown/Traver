@@ -13,6 +13,8 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UIApplication.shared.isStatusBarHidden = false
+        
         if let items = self.tabBar.items {
             for item in items {
                 item.title = item.title?.localized()

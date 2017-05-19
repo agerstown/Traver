@@ -103,6 +103,8 @@ class ProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: user!.CountriesUpdatedNotification, object: nil)
+        
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,6 +112,10 @@ class ProfileViewController: UIViewController {
 
         updateProfileInfo()
         updateCountriesRelatedInfo()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     deinit {

@@ -6,4 +6,4 @@
   Copyright © 2016 Natalia Nikitina. All rights reserved.
 */
 
-"NSPhotoLibraryUsageDescription" = "We need it to import visited countries from your Photos locations";
+"NSPhotoLibraryUsageDescription" = "We need it to save pictures and import visited countries from your photos.";

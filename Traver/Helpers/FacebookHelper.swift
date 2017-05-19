@@ -39,7 +39,9 @@ class FacebookHelper {
             })
             UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
         } else {
+            UIApplication.shared.statusBarStyle = .default
             loginManager.logIn([.publicProfile, .email, .userFriends, .custom("user_location")], viewController: nil) { loginResult in
+                UIApplication.shared.statusBarStyle = .lightContent
                 switch loginResult {
                 case .failed(let error):
                     self.showErrorAlert(for: error)
