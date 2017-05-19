@@ -63,6 +63,7 @@ class FriendsViewController: UIViewController {
         configureView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(friendsUpdated), name: UserApiManager.shared.FriendsUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,9 +109,14 @@ class FriendsViewController: UIViewController {
         try! fetchedResultsController!.performFetch()
         configureView()
     }
+    
+    func photoUpdated() {
+        imageViewPhoto.image = User.shared.photo
+    }
 
     // MARK: - UI
     func configureView() {
+        
         if User.shared.friends.count > 0 {
             tableViewFriends.isHidden = false
             viewNoFriends.isHidden = true
@@ -121,12 +127,12 @@ class FriendsViewController: UIViewController {
             
             viewInnerHeader.layer.cornerRadius = 5
             imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
-            imageViewPhoto.image = User.shared.photo
+            imageViewPhoto.image = User.shared.photo ?? UIImage(named: "default_photo")
             
             labelCurrentLocation.adjustsFontSizeToFitWidth = true
             
             labelCurrentLocation.layer.cornerRadius = 5
-            labelCurrentLocation.layer.borderColor = UIColor.gray.cgColor
+            labelCurrentLocation.layer.borderColor = UIColor.lightGray.cgColor
             
             configureCurrentLocationLabel()
             
@@ -159,7 +165,7 @@ class FriendsViewController: UIViewController {
         if User.shared.currentCountryCode != nil {
             labelCurrentLocation.layer.borderWidth = 0
             labelCurrentLocation.textAlignment = .left
-            labelCurrentLocation.text = User.shared.currentLocation
+            labelCurrentLocation.text = "Currently in ".localized() + User.shared.currentLocation!
         } else {
             labelCurrentLocation.layer.borderWidth = 1
             labelCurrentLocation.textAlignment = .center
@@ -173,7 +179,7 @@ class FriendsViewController: UIViewController {
             labelFriendsInfo.isHidden = false
             tableViewFriends.reloadData()
             
-            var text = "\u{2022} " + names[0]
+            var text = names[0] //"\u{2022} " + names[0]
             
             if names.count > 1 {
                 if names.count > 2 {
@@ -216,13 +222,10 @@ extension FriendsViewController: UITableViewDataSource {
         cell.imageViewPhoto.image = user.photo != nil ? user.photo : UIImage(named: "default_photo")
         if let location = user.currentLocation {
             cell.labelCurrentLocation.text = "Currently in ".localized() + location
+            cell.constraintLabelName.constant = 6
         } else {
             cell.labelCurrentLocation.text = nil
-        }
-        
-        if user.visitedCountries.count > 0 {
-            user.numberOfVisitedCountries = String(user.visitedCountries.count)
-            CoreDataStack.shared.saveContext()
+            cell.constraintLabelName.constant = 18
         }
         
         if let numberOfVisitedCountriesString = user.numberOfVisitedCountries {

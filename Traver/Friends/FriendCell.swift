@@ -11,6 +11,7 @@ import Foundation
 class FriendCell: UITableViewCell {
     
     @IBOutlet weak var imageViewPhoto: UIImageView!
+    @IBOutlet weak var constraintLabelName: NSLayoutConstraint!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelVisitedCountries: UILabel!
     @IBOutlet weak var labelCurrentLocation: UILabel!
@@ -18,6 +19,7 @@ class FriendCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         labelName.adjustsFontSizeToFitWidth = true
+        labelCurrentLocation.adjustsFontSizeToFitWidth = true
         imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
     }
     

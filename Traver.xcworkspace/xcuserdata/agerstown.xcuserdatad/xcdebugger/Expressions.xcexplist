@@ -271,18 +271,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.(updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.response?.statusCode">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "FriendsViewController.configureView() -&gt; ():FriendsViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "User.shared.friends.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -336,10 +336,10 @@
                value = "country.code">
             </PersistentString>
             <PersistentString
-               value = "self.visitedCountries.count">
+               value = "region.code">
             </PersistentString>
             <PersistentString
-               value = "region.code">
+               value = "self.visitedCountries.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -442,10 +442,10 @@
                value = "self.locale">
             </PersistentString>
             <PersistentString
-               value = "User.shared.locale">
+               value = "user.token">
             </PersistentString>
             <PersistentString
-               value = "user.token">
+               value = "User.shared.locale">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -491,7 +491,7 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "user.facebookID">
+               value = "User.shared.facebookEmail">
             </PersistentString>
             <PersistentString
                value = "json[&quot;num_countries&quot;].int">
@@ -500,10 +500,18 @@
                value = "user.location">
             </PersistentString>
             <PersistentString
-               value = "json[&quot;num_countries&quot;].stringValue">
+               value = "user.facebookID">
             </PersistentString>
             <PersistentString
-               value = "User.shared.facebookEmail">
+               value = "json[&quot;num_countries&quot;].stringValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.currentLocation.getter:User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.currentRegion">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -547,10 +555,10 @@
                value = "regions">
             </PersistentString>
             <PersistentString
-               value = "regionsWithCountries">
+               value = "Codes.Region(rawValue: section)">
             </PersistentString>
             <PersistentString
-               value = "Codes.Region(rawValue: section)">
+               value = "regionsWithCountries">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -612,7 +620,7 @@
                value = "user.currentCountryCode">
             </PersistentString>
             <PersistentString
-               value = "user.currentLocation">
+               value = "user.currentRegion">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

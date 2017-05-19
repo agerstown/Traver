@@ -31,9 +31,7 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var constraintScrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var constraintButtonFillInfo: NSLayoutConstraint!
-    @IBOutlet weak var constraintPhotoLeft: NSLayoutConstraint!
     @IBOutlet weak var constraintPhotoBottom: NSLayoutConstraint!
-    @IBOutlet weak var constraintViewUserInfo: NSLayoutConstraint!
     
     var mapImage: SVGKImage = SVGKImage(named: "WorldMap.svg")!
     
@@ -247,18 +245,14 @@ class ProfileViewController: UIViewController {
             buttonShare.isHidden = false
             buttonEditUserInfo.isHidden = false
             
-            constraintPhotoLeft.constant = 8
             constraintPhotoBottom.constant = 32
-            constraintViewUserInfo.constant = 106
             
         } else {
             self.navigationItem.rightBarButtonItem = nil
             buttonShare.isHidden = true
             buttonEditUserInfo.isHidden = true
             
-            constraintPhotoLeft.constant = 16
             constraintPhotoBottom.constant = 20
-            constraintViewUserInfo.constant = 122
         }
     }
 }

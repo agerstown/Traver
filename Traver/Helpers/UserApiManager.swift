@@ -15,10 +15,10 @@ class UserApiManager {
     
     static let shared = UserApiManager()
     
-//    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com/"
-//    let photosHost = "https://s3.amazonaws.com/"
-    let host = "http://127.0.0.1:8000/"
-    let photosHost = "http://127.0.0.1:8000/"
+    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com/"
+    let photosHost = "https://s3.amazonaws.com/"
+//    let host = "http://127.0.0.1:8000/"
+//    let photosHost = "http://127.0.0.1:8000/"
     
     // MARK: - Notifications
     let ProfileInfoUpdatedNotification = NSNotification.Name(rawValue: "ProfileInfoUpdatedNotification")
@@ -179,45 +179,48 @@ class UserApiManager {
     
     func getFriends(user: User, completion: (() -> Void)? = nil) {
         
-        let headers: HTTPHeaders = [
-            "Authorization": "Token \(user.token!)"
-        ]
+        if let token = user.token {
         
-        Alamofire.request(host + "users/get-friends/", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            if let friends = response.result.value as? NSArray {
-                
-                if User.shared.friends.count != 0 {
-                    let predicate = NSPredicate(format: "ANY friends = %@", User.shared)
-                    let fetchRequest = NSFetchRequest<NSFetchRequestResult> (entityName: "User")
-                    fetchRequest.predicate = predicate
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(token)"
+            ]
+            
+            Alamofire.request(host + "users/get-friends/", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                if let friends = response.result.value as? NSArray {
                     
-                    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-                    
-                    try! CoreDataStack.shared.persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: CoreDataStack.shared.mainContext)
-                }
-                
-                if friends.count > 0 {
-                    var friendsArray: [User] = []
-                    
-                    for friend in friends {
+                    if User.shared.friends.count != 0 {
+                        let predicate = NSPredicate(format: "ANY friends = %@", User.shared)
+                        let fetchRequest = NSFetchRequest<NSFetchRequestResult> (entityName: "User")
+                        fetchRequest.predicate = predicate
                         
-                        let user = User(context: CoreDataStack.shared.mainContext)
-                        friendsArray.append(user)
+                        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
                         
-                        self.parseAndSaveUser(user: user, from: friend, withCountries: false, withFriends: false)
+                        try! CoreDataStack.shared.persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: CoreDataStack.shared.mainContext)
                     }
-                    User.shared.friends = NSOrderedSet(array: friendsArray)
-                } else {
-                    User.shared.friends = NSOrderedSet()
+                    
+                    if friends.count > 0 {
+                        var friendsArray: [User] = []
+                        
+                        for friend in friends {
+                            
+                            let user = User(context: CoreDataStack.shared.mainContext)
+                            friendsArray.append(user)
+                            
+                            self.parseAndSaveUser(user: user, from: friend, withCountries: false, withFriends: false)
+                        }
+                        User.shared.friends = NSOrderedSet(array: friendsArray)
+                    } else {
+                        User.shared.friends = NSOrderedSet()
+                    }
+                    
+                    CoreDataStack.shared.saveContext()
+                    
+                    if let completion = completion {
+                        completion()
+                    }
+                    
+                    NotificationCenter.default.post(name: self.FriendsUpdatedNotification, object: nil)
                 }
-                
-                CoreDataStack.shared.saveContext()
-                
-                if let completion = completion {
-                    completion()
-                }
-                
-                NotificationCenter.default.post(name: self.FriendsUpdatedNotification, object: nil)
             }
         }
 

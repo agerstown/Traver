@@ -71,7 +71,7 @@ class User: NSManagedObject {
     var currentLocation: String? {
         if let currentCountryCode = currentCountryCode {
             var location = currentCountryCode.localized()
-            if let region = User.shared.currentRegion {
+            if let region = currentRegion {
                 location += ", " + region
             }
             return location
