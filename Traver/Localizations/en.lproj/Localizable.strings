@@ -194,7 +194,7 @@
 
 // Controllers titles
 "Profile" = "Profile";
-"Recommendations" = "Recommendations";
+"Tips" = "Tips";
 "Friends" = "Friends";
 "Settings" = "Settings";
 "Countries" = "Countries";
@@ -276,3 +276,14 @@
 "Error! Please try to send your feedback later." = "Error! Please try to send your feedback later.";
 "The email is not valid!" = "The email is not valid!";
 "Please write your e-mail if you want us to answer you." = "Please write your e-mail if you want us to answer you.";
+
+// New tip
+"Cities, regions or places" = "Cities, regions or places";
+"Why these regions are worth visiting. Recommended landmarks, hotels, restaurants and so" = "Why these regions are worth visiting. Recommended landmarks, hotels, restaurants and so";
+"New tip" = "New tip";
+"Country" = "Country";
+"Tip title" = "Tip title";
+"Tip text" = "Tip text";
+"Please enter tip text" = "Please enter tip text";
+"Please enter tip title" = "Please enter tip title";
+"Anonymous" = "Anonymous";

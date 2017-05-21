@@ -107,7 +107,12 @@ class FriendsViewController: UIViewController {
     // MARK: - Notifications
     func friendsUpdated() {
         try! fetchedResultsController!.performFetch()
-        configureView()
+        
+        if let currentCountryCode = User.shared.currentCountryCode {
+            UserApiManager.shared.getFriendsForCurrentCountry(code: currentCountryCode) { friendsNames in
+                self.configureFriendsInfoLabel(names: friendsNames)
+            }
+        }
     }
     
     func photoUpdated() {
@@ -129,20 +134,16 @@ class FriendsViewController: UIViewController {
             imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
             imageViewPhoto.image = User.shared.photo ?? UIImage(named: "default_photo")
             
-            labelCurrentLocation.adjustsFontSizeToFitWidth = true
-            
             labelCurrentLocation.layer.cornerRadius = 5
             labelCurrentLocation.layer.borderColor = UIColor.lightGray.cgColor
             
             configureCurrentLocationLabel()
             
-            labelFriendsInfo.adjustsFontSizeToFitWidth = true
-            
-            if let currentCountryCode = User.shared.currentCountryCode {
-                UserApiManager.shared.getFriendsForCurrentCountry(code: currentCountryCode) { friendsNames in
-                    self.configureFriendsInfoLabel(names: friendsNames)
-                }
-            }
+//            if let currentCountryCode = User.shared.currentCountryCode {
+//                UserApiManager.shared.getFriendsForCurrentCountry(code: currentCountryCode) { friendsNames in
+//                    self.configureFriendsInfoLabel(names: friendsNames)
+//                }
+//            }
             
         } else {
             tableViewFriends.isHidden = true
@@ -160,7 +161,7 @@ class FriendsViewController: UIViewController {
             }
         }
     }
-
+    
     func configureCurrentLocationLabel() {
         if User.shared.currentCountryCode != nil {
             labelCurrentLocation.layer.borderWidth = 0
@@ -210,7 +211,7 @@ extension FriendsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewFriends.dequeueReusableCell(withIdentifier: "FriendCell") as! FriendCell
+        let cell = tableViewFriends.dequeue(FriendCell.self) //.dequeueReusableCell(withIdentifier: "FriendCell") as! FriendCell
         configureCell(cell, at: indexPath)
         return cell
     }
@@ -245,7 +246,8 @@ extension FriendsViewController: UITableViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let controller = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController {
             controller.user = user
-            UserApiManager.shared.getUserCountryVisits(user: user)
+            CountryVisitApiManager.shared.getUserCountryVisits(user: user)
+//            UserApiManager.shared.getUserCountryVisits(user: user)
             self.navigationController?.pushViewController(controller, animated: true)
         }
         

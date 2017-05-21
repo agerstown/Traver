@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "default_photo.png",
+      "filename" : "asia.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "default_photo@2x.png",
       "scale" : "2x"
     },
     {

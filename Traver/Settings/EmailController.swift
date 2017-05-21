@@ -37,7 +37,6 @@ class EmailController: UIViewController {
         
         labelTitle.text = "Please write your e-mail if you want us to answer you.".localized()
         
-        textFieldEmail.adjustsFontSizeToFitWidth = true
         if let email = User.shared.feedbackEmail {
             textFieldEmail.text = email
         } else if let email = User.shared.facebookEmail {

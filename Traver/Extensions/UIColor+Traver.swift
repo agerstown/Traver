@@ -20,4 +20,6 @@ extension UIColor {
     static let darkBlueTraverColor = UIColor(red: 0, green: 52.0/255.0, blue: 112.0/255.0, alpha: 1)
     static let yellowTraverColor = UIColor(red: 250.0/255.0, green: 205.0/255.0, blue: 125.0/255.0, alpha: 1)
     
+    static let placeholderColor = UIColor(red: 195.0/255.0, green: 197.0/255.0, blue: 205.0/255.0, alpha: 1)
+    
 }

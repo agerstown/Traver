@@ -59,9 +59,6 @@ class ProfileViewController: UIViewController {
         tableViewVisitedCountries.delegate = self
         scrollView.delegate = self
         
-        labelName.adjustsFontSizeToFitWidth = true
-        labelLocation.adjustsFontSizeToFitWidth = true
-        labelVisitedCountries.adjustsFontSizeToFitWidth = true
         buttonEditUserInfo.titleLabel?.adjustsFontSizeToFitWidth = true
         
         buttonFillInfo.layer.cornerRadius = 5
@@ -103,8 +100,6 @@ class ProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: user!.CountriesUpdatedNotification, object: nil)
-        
-        setNeedsStatusBarAppearanceUpdate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,11 +108,7 @@ class ProfileViewController: UIViewController {
         updateProfileInfo()
         updateCountriesRelatedInfo()
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -149,7 +140,7 @@ class ProfileViewController: UIViewController {
         labelName.text = user!.name
         labelLocation.text = user!.location
         
-        imageViewPhoto.image = user!.photo != nil ? user!.photo : user == User.shared ? UIImage(named: "default_photo") : UIImage(named: "bordered_photo")
+        updatePhoto()
     }
     
     func updateCountriesRelatedInfo() {
@@ -194,7 +185,8 @@ class ProfileViewController: UIViewController {
     func countryCodeImported(notification: NSNotification) {
         if let countryCode = notification.userInfo?[VisitedCountriesImporter.shared.CountryCodeInfoKey] as? String {
             if !user!.visitedCountriesArray.contains(where: { $0.code == countryCode }) {
-                UserApiManager.shared.addCountryVisit(code: countryCode) {
+                CountryVisitApiManager.shared.addCountryVisit(code: countryCode) {
+                //UserApiManager.shared.addCountryVisit(code: countryCode) {
                     let countriesLayers = self.mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
                     if let newCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
                         newCountryLayer.fillColor = UIColor.blueTraverColor.cgColor //UIColor.blue.cgColor
@@ -275,7 +267,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewVisitedCountries.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
+        let cell = tableViewVisitedCountries.dequeue(VisitedCountryItemCell.self) //.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
         configureCell(cell, at: indexPath)
         return cell
     }
@@ -283,7 +275,7 @@ extension ProfileViewController: UITableViewDataSource {
     func configureCell(_ cell: VisitedCountryItemCell, at indexPath: IndexPath) {
         let country =  fetchedResultsController!.object(at: indexPath)
         
-        cell.labelCountryName.text = country.code.localized()
+        cell.labelCountryName.text = country.name //country.code.localized()
         cell.country = country
         cell.selectionStyle = .none
     }
@@ -303,8 +295,9 @@ extension ProfileViewController: UITableViewDataSource {
             let country = cell.country!
             let code = country.code
             
-            UserApiManager.shared.deleteCountryVisit(country: country) {
-                
+            CountryVisitApiManager.shared.deleteCountryVisit(country: country) {
+//            UserApiManager.shared.deleteCountryVisit(country: country) {
+            
                 let countriesLayers = self.mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
                 if let deletedCountryLayer = countriesLayers.first(where: { $0.name! == code } ) {
                     deletedCountryLayer.fillColor = UIColor.countryDefaultColor.cgColor
@@ -320,12 +313,12 @@ extension ProfileViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableViewVisitedCountries.dequeueReusableHeaderFooterView(withIdentifier: "VisitedRegionHeaderView") as! VisitedRegionHeaderView
+        let header = tableViewVisitedCountries.dequeueHeaderFooter(VisitedRegionHeaderView.self) //.dequeueReusableHeaderFooterView(withIdentifier: "VisitedRegionHeaderView") as! VisitedRegionHeaderView
         configureVisitedCountriesNumber(for: header, in: section)
         if let sections = fetchedResultsController?.sections {
             if let regionIndex = Int(sections[section].name) {
                 if let region = Codes.Region(rawValue: regionIndex) {
-                    header.labelRegionName.text = region.code.localized()
+                    header.labelRegionName.text = region.name //region.code.localized()
                 }
             }
         }

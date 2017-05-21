@@ -194,7 +194,7 @@
 
 // Controllers titles
 "Profile" = "Профиль";
-"Recommendations" = "Рекоммендации";
+"Tips" = "Советы";
 "Friends" = "Друзья";
 "Settings" = "Настройки";
 "Countries" = "Страны";
@@ -277,3 +277,14 @@
 "Error! Please try to send your feedback later." = "Ошибка! Пожалуйста, попробуйте позднее.";
 "The email is not valid!" = "Введеный e-mail некорректен!";
 "Please write your e-mail if you want us to answer you." = "Пожалуйста, укажите свой e-mail, если хотите, чтобы Вам ответили.";
+
+// New tip
+"Cities, regions or places" = "Города, регионы или места";
+"Why these regions are worth visiting. Recommended landmarks, hotels, restaurants and so" = "Почему данные места стоит посетить. Рекомендуемые достопремечательности, отели, рестораны и т.п.";
+"New tip" = "Новый совет";
+"Country" = "Страна";
+"Tip title" = "Заголовок";
+"Tip text" = "Текст";
+"Please enter tip text" = "Пожалуйста, введите текст совета";
+"Please enter tip title" = "Пожалуйста, введите заголовок совета";
+"Anonymous" = "Аноним";

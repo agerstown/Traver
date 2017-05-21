@@ -29,7 +29,8 @@ class CountriesViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func buttonDoneClicked(_ button: UIBarButtonItem) {
-        UserApiManager.shared.updateCountryVisits(user: User.shared, codes: selectedCountries.map { $0.code }, completion: nil) 
+        CountryVisitApiManager.shared.updateCountryVisits(user: User.shared, codes: selectedCountries.map { $0.code }, completion: nil)
+//        UserApiManager.shared.updateCountryVisits(user: User.shared, codes: selectedCountries.map { $0.code }, completion: nil) 
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -56,7 +57,7 @@ extension CountriesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewCountries.dequeueReusableCell(withIdentifier: "CountryItemCell") as! CountryItemCell
+        let cell = tableViewCountries.dequeue(CountryItemCell.self) //.dequeueReusableCell(withIdentifier: "CountryItemCell") as! CountryItemCell
         
         let countriesInRegion = regions[indexPath.section].1
         cell.labelCountryName.text = countriesInRegion[indexPath.row].name

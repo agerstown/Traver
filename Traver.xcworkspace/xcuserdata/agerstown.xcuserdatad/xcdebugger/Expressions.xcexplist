@@ -114,6 +114,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "NewTipController.buttonSaveTapped(Any) -&gt; ():NewTipController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "textViewText.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "SharePreviewController.handleTap(recognizer : UIGestureRecognizer) -&gt; ():SharePreviewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -336,10 +344,10 @@
                value = "country.code">
             </PersistentString>
             <PersistentString
-               value = "region.code">
+               value = "self.visitedCountries.count">
             </PersistentString>
             <PersistentString
-               value = "self.visitedCountries.count">
+               value = "region.code">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -442,10 +450,10 @@
                value = "self.locale">
             </PersistentString>
             <PersistentString
-               value = "user.token">
+               value = "User.shared.locale">
             </PersistentString>
             <PersistentString
-               value = "User.shared.locale">
+               value = "user.token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -491,7 +499,7 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "User.shared.facebookEmail">
+               value = "json[&quot;num_countries&quot;].stringValue">
             </PersistentString>
             <PersistentString
                value = "json[&quot;num_countries&quot;].int">
@@ -500,10 +508,10 @@
                value = "user.location">
             </PersistentString>
             <PersistentString
-               value = "user.facebookID">
+               value = "User.shared.facebookEmail">
             </PersistentString>
             <PersistentString
-               value = "json[&quot;num_countries&quot;].stringValue">
+               value = "user.facebookID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -555,10 +563,10 @@
                value = "regions">
             </PersistentString>
             <PersistentString
-               value = "Codes.Region(rawValue: section)">
+               value = "regionsWithCountries">
             </PersistentString>
             <PersistentString
-               value = "regionsWithCountries">
+               value = "Codes.Region(rawValue: section)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

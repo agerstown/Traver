@@ -11,14 +11,9 @@ import Alamofire
 import SwiftyJSON
 import CoreData
 
-class UserApiManager {
+class UserApiManager: ApiManager {
     
     static let shared = UserApiManager()
-    
-    let host = "http://traver-dev.us-east-1.elasticbeanstalk.com/"
-    let photosHost = "https://s3.amazonaws.com/"
-//    let host = "http://127.0.0.1:8000/"
-//    let photosHost = "http://127.0.0.1:8000/"
     
     // MARK: - Notifications
     let ProfileInfoUpdatedNotification = NSNotification.Name(rawValue: "ProfileInfoUpdatedNotification")
@@ -126,26 +121,6 @@ class UserApiManager {
                 } else {
                     completion(false)
                 }
-            }
-        }
-    }
-    
-    func getUserCountryVisits(user: User) {
-        let headers = [
-            "Authorization": "Token \(user.token!)"
-        ]
-        
-        Alamofire.request(host + "visits/get-user-country-visits/", headers: headers).responseJSON { response in
-            if let value = response.result.value {
-                var visitedCountriesCodes: [String] = []
-                let countryVisits = JSON(value)
-                
-                for (_, countryVisit):(String, JSON) in countryVisits {
-                    let code = countryVisit["country_code"].stringValue
-                    visitedCountriesCodes.append(code)
-                }
-                
-                user.updateCountryVisits(codes: visitedCountriesCodes)
             }
         }
     }
@@ -301,7 +276,7 @@ class UserApiManager {
                         self.updateFriends(friendsIDs: friendsIDs)
                     }
                     
-                    self.createCountryVisits(user: User.shared)
+                    CountryVisitApiManager.shared.createCountryVisits(user: User.shared)
                 }
             } else {
                 self.showNoInternetErrorAlert(response: response)
@@ -343,30 +318,7 @@ class UserApiManager {
                         }
                     }
                     
-                    self.createCountryVisits(user: user)
-                }
-            }
-        }
-    }
-    
-    private func createCountryVisits(user: User) {
-        if user.visitedCountries.count != 0 {
-            
-            let visitedCountriesCodes = user.visitedCountriesArray.map { $0.code }
-            
-            let params: Parameters = [
-                "countries_codes": visitedCountriesCodes
-            ]
-            
-            let headers: HTTPHeaders = [
-                "Authorization": "Token \(user.token!)"
-            ]
-            
-            _ = Alamofire.request(host + "visits/create-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                if response.response?.statusCode == 201 {
-                    user.updateCountryVisits(codes: visitedCountriesCodes)
-                } else {
-                    self.showNoInternetErrorAlert(response: response)
+                    CountryVisitApiManager.shared.createCountryVisits(user: user)
                 }
             }
         }
@@ -421,6 +373,42 @@ class UserApiManager {
         
     }
     
+//    func createTip(countryCode: String, title: String, text: String) {
+//        let parameters: Parameters = [
+//            "country_code": countryCode,
+//            "title": title,
+//            "text": text
+//        ]
+//        
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Token \(User.shared.token!)"
+//        ]
+//        
+//        _ = Alamofire.request(host + "tips/create-tip/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//            print(response)
+//            if response.response?.statusCode == 200 {
+//                if let value = response.result.value {
+//                    let json = JSON(value)
+//                    
+//                    let creationDateString = json["creation_date"].stringValue
+//                    
+//                    let dateFormatter = DateFormatter()
+//                    dateFormatter.dateFormat = "yyyy-MM-dd"
+//                    
+//                    if let creationDate = dateFormatter.date(from: creationDateString) {
+//                        if let country = Codes.Country.all.filter({ $0.code == countryCode }).first {
+//                            let tip = Tip(authorName: User.shared.name ?? "Anonymous".localized(),
+//                                          authorPhoto: User.shared.photo ?? UIImage(named: "default_photo")!,
+//                                          country: country, title: title, text: text, creationDate: creationDate)
+//                            User.shared.tips.append(tip)
+//                        }
+//                    }
+//                }
+//            } else {
+//                self.showNoInternetErrorAlert(response: response)
+//            }
+//        }
+//    }
     
     // MARK: - UPDATE methods
     
@@ -553,60 +541,6 @@ class UserApiManager {
         }
     }
     
-    func updateCountryVisits(user: User, codes: [String], completion: (() -> Void)?) {
-        if user.token != nil && !user.token!.isEmpty {
-            let params: Parameters = [
-                "countries_codes": codes
-            ]
-            
-            let headers: HTTPHeaders = [
-                "Authorization": "Token \(user.token!)"
-            ]
-            
-            _ = Alamofire.request(host + "visits/update-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                if response.response?.statusCode == 200 {
-                    user.updateCountryVisits(codes: codes)
-                    if let completion = completion {
-                        completion()
-                    }
-                } else {
-                    self.showNoInternetErrorAlert(response: response)
-                }
-            }
-        } else {
-            user.updateCountryVisits(codes: codes)
-            if let completion = completion {
-                completion()
-            }
-        }
-    }
-    
-    func addCountryVisit(code: String, completion: (() -> Void)?) {
-        if User.shared.token != nil && !User.shared.token!.isEmpty {
-            let params: Parameters = [
-                "country_code": code
-            ]
-            
-            let headers: HTTPHeaders = [
-                "Authorization": "Token \(User.shared.token!)"
-            ]
-            
-            _ = Alamofire.request(host + "visits/add-country-visit/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                if response.response?.statusCode == 201 {
-                    User.shared.addCountryVisit(code: code)
-                    if let completion = completion {
-                        completion()
-                    }
-                }
-            }
-        } else {
-            User.shared.addCountryVisit(code: code)
-            if let completion = completion {
-                completion()
-            }
-        }
-    }
-    
     func updatePhoto(user: User, photo: UIImage, completion: @escaping () -> Void) {
         if User.shared.token != nil && !User.shared.token!.isEmpty {
             
@@ -695,7 +629,7 @@ class UserApiManager {
                 completion()
             }
         } else {
-            self.updateCountryVisits(user: user, codes: user.visitedCountriesArray.map{ $0.code }) {
+            CountryVisitApiManager.shared.updateCountryVisits(user: user, codes: user.visitedCountriesArray.map{ $0.code }) {
                 if let completion = completion {
                     completion()
                 }
@@ -733,34 +667,6 @@ class UserApiManager {
     }
     
     // MARK: - DELETE methods
-    func deleteCountryVisit(country: Country, completion: (() -> Void)?) {
-        if User.shared.token != nil && !User.shared.token!.isEmpty {
-            let params: Parameters = [
-                "code": country.code
-            ]
-            
-            let headers: HTTPHeaders = [
-                "Authorization": "Token \(User.shared.token!)"
-            ]
-            
-            _ = Alamofire.request(host + "visits/delete-country-visit/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                if response.response?.statusCode == 200 {
-                    User.shared.removeCountryVisit(country: country)
-                    if let completion = completion {
-                        completion()
-                    }
-                } else {
-                    self.showNoInternetErrorAlert(response: response)
-                }
-            }
-        } else {
-            User.shared.removeCountryVisit(country: country)
-            if let completion = completion {
-                completion()
-            }
-        }
-    }
-    
     func disconnectFacebook() {
         let headers: HTTPHeaders = [
             "Authorization": "Token \(User.shared.token!)"
@@ -806,7 +712,8 @@ class UserApiManager {
         getPhoto(user: user)
         
         if withCountries {
-            getUserCountryVisits(user: user)
+            CountryVisitApiManager.shared.getUserCountryVisits(user: user)
+//            getUserCountryVisits(user: user)
         }
         
         if withFriends {
@@ -820,15 +727,6 @@ class UserApiManager {
         } else {
             return string
         }
-    }
-    
-    private func showNoInternetErrorAlert(response: DataResponse<Any>) {
-        let codeString = response.response?.statusCode != nil ? "\(response.response!.statusCode)" : "No Internet.".localized()
-        StatusBarManager.shared.showCustomStatusBarError(text: "Error".localized() + ". " + "Check your Internet connection.".localized() + " " + "Status code".localized() + ": " + codeString)
-    }
-    
-    private func showNoInternetErrorAlert(error: Error) {
-        StatusBarManager.shared.showCustomStatusBarError(text: "Check your Internet connection.".localized() + " " + "Error".localized() + ": " + error.localizedDescription)
     }
     
     private func updateUserInfoInCoreData(name: String, location: String?, completion: @escaping () -> Void) {

@@ -19,8 +19,6 @@ class ShareView: UIView {
         super.draw(rect)
         
         imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
-        labelName.adjustsFontSizeToFitWidth = true
-        labelCountriesVisited.adjustsFontSizeToFitWidth = true
         
         let image = SVGKImage(named: "WorldMap.svg")!
         let width = self.bounds.width

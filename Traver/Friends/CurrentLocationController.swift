@@ -35,8 +35,6 @@ class CurrentLocationController: UIViewController {
             view.backgroundColor = UIColor(patternImage: backgroundImage)
         }
         
-        labelTitle.adjustsFontSizeToFitWidth = true
-        
         labelTitle.text = "Choose your current location.".localized()
         textFieldRegion.placeholder = "City, region, place..".localized()
         

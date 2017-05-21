@@ -18,8 +18,6 @@ class FriendCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        labelName.adjustsFontSizeToFitWidth = true
-        labelCurrentLocation.adjustsFontSizeToFitWidth = true
         imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
     }
     
