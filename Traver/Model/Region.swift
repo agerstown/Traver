@@ -19,7 +19,6 @@ class Region: NSManagedObject {
     lazy var sortedVisitedCountries: [Country] = {
         let array = Array(self.countries) as! [Country]
         return array.sorted { $0.name < $1.name }
-//        return array.sorted { $0.code.localized() < $1.code.localized() }
     }()
     
     convenience init(code: String, index: Int16) {

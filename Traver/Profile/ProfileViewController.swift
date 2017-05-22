@@ -186,10 +186,9 @@ class ProfileViewController: UIViewController {
         if let countryCode = notification.userInfo?[VisitedCountriesImporter.shared.CountryCodeInfoKey] as? String {
             if !user!.visitedCountriesArray.contains(where: { $0.code == countryCode }) {
                 CountryVisitApiManager.shared.addCountryVisit(code: countryCode) {
-                //UserApiManager.shared.addCountryVisit(code: countryCode) {
                     let countriesLayers = self.mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
                     if let newCountryLayer = countriesLayers.first(where: { $0.name! == countryCode } ) {
-                        newCountryLayer.fillColor = UIColor.blueTraverColor.cgColor //UIColor.blue.cgColor
+                        newCountryLayer.fillColor = UIColor.blueTraverColor.cgColor
                     }
                     
                     self.updateNumberOfVisitedCountriesAnimated()
@@ -267,7 +266,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewVisitedCountries.dequeue(VisitedCountryItemCell.self) //.dequeueReusableCell(withIdentifier: "VisitedCountryItemCell") as! VisitedCountryItemCell
+        let cell = tableViewVisitedCountries.dequeue(VisitedCountryItemCell.self)
         configureCell(cell, at: indexPath)
         return cell
     }
@@ -275,7 +274,7 @@ extension ProfileViewController: UITableViewDataSource {
     func configureCell(_ cell: VisitedCountryItemCell, at indexPath: IndexPath) {
         let country =  fetchedResultsController!.object(at: indexPath)
         
-        cell.labelCountryName.text = country.name //country.code.localized()
+        cell.labelCountryName.text = country.name
         cell.country = country
         cell.selectionStyle = .none
     }
@@ -296,7 +295,6 @@ extension ProfileViewController: UITableViewDataSource {
             let code = country.code
             
             CountryVisitApiManager.shared.deleteCountryVisit(country: country) {
-//            UserApiManager.shared.deleteCountryVisit(country: country) {
             
                 let countriesLayers = self.mapImage.caLayerTree.sublayers?[0].sublayers as! [CAShapeLayer]
                 if let deletedCountryLayer = countriesLayers.first(where: { $0.name! == code } ) {
@@ -313,12 +311,12 @@ extension ProfileViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableViewVisitedCountries.dequeueHeaderFooter(VisitedRegionHeaderView.self) //.dequeueReusableHeaderFooterView(withIdentifier: "VisitedRegionHeaderView") as! VisitedRegionHeaderView
+        let header = tableViewVisitedCountries.dequeueHeaderFooter(VisitedRegionHeaderView.self)
         configureVisitedCountriesNumber(for: header, in: section)
         if let sections = fetchedResultsController?.sections {
             if let regionIndex = Int(sections[section].name) {
                 if let region = Codes.Region(rawValue: regionIndex) {
-                    header.labelRegionName.text = region.name //region.code.localized()
+                    header.labelRegionName.text = region.name
                 }
             }
         }

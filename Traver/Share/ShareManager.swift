@@ -32,7 +32,6 @@ class ShareManager: NSObject {
         activityViewController.completionWithItemsHandler = { activity, success, items, error in
             controller.dismiss(animated: true, completion: nil)
         }
-        // activityViewController.popoverPresentationController?.sourceView = controller.view // so that iPads won't crash
         controller.present(activityViewController, animated: true, completion: nil)
     }
     

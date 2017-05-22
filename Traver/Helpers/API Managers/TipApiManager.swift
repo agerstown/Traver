@@ -15,6 +15,24 @@ class TipApiManager: ApiManager {
     
     static let shared = TipApiManager()
     
+    // MARK: - GET methods
+    func getExistingTipsCountries(completion: @escaping (_ countryCodes: [String: Int]) -> Void) {
+        Alamofire.request(host + "tips/get-existing-tips-countries/", method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { response in
+            if let value = response.result.value {
+                let json = JSON(value)
+                let countryCodesJSON = json["country_codes"].arrayValue
+                var countryCodes: [String: Int] = [:]
+                for codeObject in countryCodesJSON {
+                    let code = codeObject["country_code"].stringValue
+                    let count = codeObject["count"].intValue
+                    countryCodes[code] = count
+                }
+                completion(countryCodes)
+            }
+        }
+        
+    }
+    
     // MARK: - CREATE methods
     func createTip(countryCode: String, title: String, text: String) {
         let parameters: Parameters = [
@@ -28,7 +46,6 @@ class TipApiManager: ApiManager {
         ]
         
         _ = Alamofire.request(host + "tips/create-tip/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            print(response)
             if response.response?.statusCode == 200 {
                 if let value = response.result.value {
                     let json = JSON(value)
@@ -44,6 +61,7 @@ class TipApiManager: ApiManager {
                                           authorPhoto: User.shared.photo ?? UIImage(named: "default_photo")!,
                                           country: country, title: title, text: text, creationDate: creationDate)
                             User.shared.tips.append(tip)
+                            StatusBarManager.shared.showCustomStatusBarNeutral(text: "Your tip was created successfully!".localized())
                         }
                     }
                 }

@@ -11,6 +11,7 @@ import Foundation
 class TipsRegionCell: UITableViewCell {
     
     @IBOutlet weak var labelRegionName: UILabel!
+    @IBOutlet weak var labelNumberOfTips: UILabel!
     @IBOutlet weak var imageViewRegionPicture: UIImageView!
     
 }

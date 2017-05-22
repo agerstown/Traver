@@ -373,43 +373,6 @@ class UserApiManager: ApiManager {
         
     }
     
-//    func createTip(countryCode: String, title: String, text: String) {
-//        let parameters: Parameters = [
-//            "country_code": countryCode,
-//            "title": title,
-//            "text": text
-//        ]
-//        
-//        let headers: HTTPHeaders = [
-//            "Authorization": "Token \(User.shared.token!)"
-//        ]
-//        
-//        _ = Alamofire.request(host + "tips/create-tip/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-//            print(response)
-//            if response.response?.statusCode == 200 {
-//                if let value = response.result.value {
-//                    let json = JSON(value)
-//                    
-//                    let creationDateString = json["creation_date"].stringValue
-//                    
-//                    let dateFormatter = DateFormatter()
-//                    dateFormatter.dateFormat = "yyyy-MM-dd"
-//                    
-//                    if let creationDate = dateFormatter.date(from: creationDateString) {
-//                        if let country = Codes.Country.all.filter({ $0.code == countryCode }).first {
-//                            let tip = Tip(authorName: User.shared.name ?? "Anonymous".localized(),
-//                                          authorPhoto: User.shared.photo ?? UIImage(named: "default_photo")!,
-//                                          country: country, title: title, text: text, creationDate: creationDate)
-//                            User.shared.tips.append(tip)
-//                        }
-//                    }
-//                }
-//            } else {
-//                self.showNoInternetErrorAlert(response: response)
-//            }
-//        }
-//    }
-    
     // MARK: - UPDATE methods
     
     // if a token is not nil and not empty - a person is logged in

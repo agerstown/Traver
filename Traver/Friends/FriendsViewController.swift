@@ -138,13 +138,6 @@ class FriendsViewController: UIViewController {
             labelCurrentLocation.layer.borderColor = UIColor.lightGray.cgColor
             
             configureCurrentLocationLabel()
-            
-//            if let currentCountryCode = User.shared.currentCountryCode {
-//                UserApiManager.shared.getFriendsForCurrentCountry(code: currentCountryCode) { friendsNames in
-//                    self.configureFriendsInfoLabel(names: friendsNames)
-//                }
-//            }
-            
         } else {
             tableViewFriends.isHidden = true
             viewNoFriends.isHidden = false
@@ -211,7 +204,7 @@ extension FriendsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewFriends.dequeue(FriendCell.self) //.dequeueReusableCell(withIdentifier: "FriendCell") as! FriendCell
+        let cell = tableViewFriends.dequeue(FriendCell.self)
         configureCell(cell, at: indexPath)
         return cell
     }
@@ -247,7 +240,6 @@ extension FriendsViewController: UITableViewDelegate {
         if let controller = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController {
             controller.user = user
             CountryVisitApiManager.shared.getUserCountryVisits(user: user)
-//            UserApiManager.shared.getUserCountryVisits(user: user)
             self.navigationController?.pushViewController(controller, animated: true)
         }
         

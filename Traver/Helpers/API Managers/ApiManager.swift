@@ -13,8 +13,8 @@ class ApiManager {
     
     let host = "http://traver-dev.us-east-1.elasticbeanstalk.com/"
     let photosHost = "https://s3.amazonaws.com/"
-    //    let host = "http://127.0.0.1:8000/"
-    //    let photosHost = "http://127.0.0.1:8000/"
+//    let host = "http://127.0.0.1:8000/"
+//    let photosHost = "http://127.0.0.1:8000/"
     
     func showNoInternetErrorAlert(response: DataResponse<Any>) {
         let codeString = response.response?.statusCode != nil ? "\(response.response!.statusCode)" : "No Internet.".localized()

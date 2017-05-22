@@ -60,6 +60,23 @@
                 <string>Import from Photos is finished: %d countries were found</string>
             </dict>
         </dict>
+        
+        <key>%d tips</key>
+        <dict>
+            <key>NSStringLocalizedFormatKey</key>
+            <string>%#@tips@</string>
+            <key>tips</key>
+            <dict>
+                <key>NSStringFormatSpecTypeKey</key>
+                <string>NSStringPluralRuleType</string>
+                <key>NSStringFormatValueTypeKey</key>
+                <string>d</string>
+                <key>one</key>
+                <string>%d tip</string>
+                <key>other</key>
+                <string>%d tips</string>
+            </dict>
+        </dict>
+        
     </dict>
-    
 </plist>
