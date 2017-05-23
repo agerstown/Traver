@@ -15,12 +15,21 @@ class TipsCountriesInRegionController: UIViewController {
     var countryCodes: [String: Int] = [:]
     var countries: [Codes.Country] = []
     
+    var selectedCountry: Codes.Country?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableViewTipsCountries.dataSource = self
         tableViewTipsCountries.delegate = self
+    }
+    
+    // MARK: - Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? TipsInCountryController {
+            controller.country = selectedCountry
+        }
     }
     
 }
@@ -46,5 +55,8 @@ extension TipsCountriesInRegionController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension TipsCountriesInRegionController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedCountry = countries[indexPath.row]
+        performSegue(withIdentifier: "segueToTipsList", sender: nil)
+    }
 }

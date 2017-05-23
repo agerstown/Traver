@@ -289,3 +289,4 @@
 "Please enter tip title" = "Пожалуйста, введите заголовок совета";
 "Anonymous" = "Аноним";
 "Your tip was created successfully!" = "Ваш совет был успешно создан!";
+"No more than 100 characters!" = "Не больше 100 символов!";

@@ -126,30 +126,19 @@ class UserApiManager: ApiManager {
     }
     
     func getPhoto(user: User) {
-        let headers: HTTPHeaders = [
-            "Authorization": "Token \(user.token!)"
-        ]
-        
-        Alamofire.request(host + "users/get-user-photo-path/", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            if let value = response.result.value {
-                let json = JSON(value)
-                let path = json["path"].stringValue
-                if path != user.photoPath {
-                    if let url = URL(string: self.photosHost + "traver-media/" + path) {
-                        Alamofire.request(url).responseImage { response in
-                            if let image = response.result.value {
-                                user.photoData = UIImagePNGRepresentation(image) as Data?
-                                CoreDataStack.shared.saveContext()
-                                if user == User.shared {
-                                    NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
-                                }
-                            }
+        if let path = user.photoPath {
+            if let url = URL(string: self.photosHost + "traver-media/" + path) {
+                Alamofire.request(url).responseImage { response in
+                    if let image = response.result.value {
+                        user.photoData = UIImagePNGRepresentation(image) as Data?
+                        CoreDataStack.shared.saveContext()
+                        if user == User.shared {
+                            NotificationCenter.default.post(name: self.PhotoUpdatedNotification, object: nil)
                         }
                     }
                 }
             }
         }
-        
     }
     
     func getFriends(user: User, completion: (() -> Void)? = nil) {
@@ -672,11 +661,16 @@ class UserApiManager: ApiManager {
             NotificationCenter.default.post(name: self.ProfileInfoUpdatedNotification, object: nil)
         }
         
-        getPhoto(user: user)
+        if let photoPath = stringOrNilIfEmpty(profile["photo_path"].stringValue) {
+            if user.photoPath != photoPath {
+                user.photoPath = photoPath
+                CoreDataStack.shared.saveContext()
+                getPhoto(user: user)
+            }
+        }
         
         if withCountries {
             CountryVisitApiManager.shared.getUserCountryVisits(user: user)
-//            getUserCountryVisits(user: user)
         }
         
         if withFriends {

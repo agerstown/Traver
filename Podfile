@@ -12,4 +12,5 @@ target 'Traver' do
 	pod 'SwiftKeychainWrapper'
 	pod 'Fabric'
 	pod 'Crashlytics'
+	pod 'Nuke'
 end

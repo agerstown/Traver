@@ -44,15 +44,19 @@ class TipsController: UIViewController {
     }
     
     // MARK: Regions update
-    func reloadRegionsTable(completion: @escaping () -> Void) {
+    func reloadRegionsTable(completion: (() -> Void)?) {
         TipApiManager.shared.getExistingTipsCountries() { countryCodes in
             self.countryCodes = countryCodes
+            var regions: [Codes.Region: Int] = [.REU: 0, .RAS: 0, .RNA: 0, .RSA: 0, .RAU: 0, .RAF: 0]
             for code in countryCodes {
                 if let region = Codes.countryToRegion[code.key] {
-                    self.regions[region]! += code.value
+                    regions[region]! += code.value
                 }
+                self.regions = regions
             }
-            completion()
+            if let completion = completion {
+                completion()
+            }
             
             for region in self.regions {
                 if region.value == 0 {
@@ -86,6 +90,10 @@ class TipsController: UIViewController {
             controller.countryCodes = countryCodes
             controller.countries = countriesInSelectedRegion
             controller.title = selectedRegion?.name
+        } else if let navController = segue.destination as? UINavigationController {
+            if let controller = navController.viewControllers[0] as? NewTipController {
+                controller.tipDelegate = self
+            }
         }
     }
     
@@ -139,5 +147,11 @@ extension TipsController: UITableViewDelegate {
         countriesInSelectedRegion = countries
         
         performSegue(withIdentifier: "segueToTipsCountriesInRegion", sender: nil)
+    }
+}
+
+extension TipsController: TipDelegate {
+    func tipCreated(country: Codes.Country) {
+        reloadRegionsTable(completion: nil)
     }
 }

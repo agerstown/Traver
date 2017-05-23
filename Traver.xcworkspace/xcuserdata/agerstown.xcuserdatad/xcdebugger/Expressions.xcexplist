@@ -287,6 +287,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TipApiManager.(getTipsForCountry(Codes.Country) -&gt; ()).(closure #1):TipApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.(updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -499,7 +507,7 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "user.facebookID">
+               value = "json[&quot;num_countries&quot;].stringValue">
             </PersistentString>
             <PersistentString
                value = "json[&quot;num_countries&quot;].int">
@@ -508,10 +516,10 @@
                value = "user.location">
             </PersistentString>
             <PersistentString
-               value = "json[&quot;num_countries&quot;].stringValue">
+               value = "User.shared.facebookEmail">
             </PersistentString>
             <PersistentString
-               value = "User.shared.facebookEmail">
+               value = "user.facebookID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -561,6 +569,9 @@
          <PersistentStrings>
             <PersistentString
                value = "countryCodesInSelectedRegion">
+            </PersistentString>
+            <PersistentString
+               value = "segue.destination as? NewTipController">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

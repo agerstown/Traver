@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol TipDelegate {
+    func tipCreated(country: Codes.Country)
+}
+
 class NewTipController: UITableViewController {
     
     @IBOutlet weak var pickerViewCountries: UIPickerView!
@@ -20,6 +24,10 @@ class NewTipController: UITableViewController {
     
     let countries = Codes.Country.allSorted
     
+    var alertTitleLengthShown = false
+    
+    var tipDelegate: TipDelegate?
+    
     // MARK: - Lifeсycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +37,7 @@ class NewTipController: UITableViewController {
         textFieldTitle.placeholder = textFieldTitle.placeholder?.localized()
         textViewText.text = textViewText.text.localized()
         
+        textFieldTitle.delegate = self
         textViewText.delegate = self
         
         pickerViewCountries.dataSource = self
@@ -43,7 +52,9 @@ class NewTipController: UITableViewController {
             if !title.isEmpty {
                 if !textViewText.text.isEmpty && textViewText.text != textViewTextPlaceholder {
                     let selectedCountry = countries[pickerViewCountries.selectedRow(inComponent: 0)]
-                    TipApiManager.shared.createTip(countryCode: selectedCountry.code, title: title, text: textViewText.text)
+                    TipApiManager.shared.createTip(countryCode: selectedCountry.code, title: title, text: textViewText.text) {
+                        self.tipDelegate?.tipCreated(country: selectedCountry)
+                    }
                     self.dismiss(animated: true, completion: nil)
                 } else {
                     StatusBarManager.shared.showCustomStatusBarError(text: "Please enter tip text".localized())
@@ -68,6 +79,25 @@ class NewTipController: UITableViewController {
         return sectionsHeaders[section].localized()
     }
     
+}
+
+// MARK: - UITextFieldDelegate
+extension NewTipController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textFieldTitle.text {
+            if text.characters.count + string.characters.count <= 100 {
+                return true
+            } else {
+                if !alertTitleLengthShown {
+                    alertTitleLengthShown = true
+                    StatusBarManager.shared.showCustomStatusBarError(text: "No more than 100 characters!".localized())
+                }
+                return false
+            }
+        }
+        return true
+    }
 }
 
 // MARK: - UITextViewDelegate

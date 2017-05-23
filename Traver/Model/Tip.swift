@@ -10,17 +10,16 @@ import Foundation
 
 class Tip {
     
-    var authorName: String
-    var authorPhoto: UIImage
+//    var authorName: String
+//    var authorPhoto: UIImage
+    var author: TipAuthor
     var country: Codes.Country
     var title: String
     var text: String
     var creationDate: Date
     
-    init(authorName: String, authorPhoto: UIImage, country: Codes.Country,
-         title: String, text: String, creationDate: Date) {
-        self.authorName = authorName
-        self.authorPhoto = authorPhoto
+    init(author: TipAuthor, country: Codes.Country, title: String, text: String, creationDate: Date) {
+        self.author = author
         self.title = title
         self.text = text
         self.country = country

@@ -69,11 +69,11 @@ class ProfileViewController: UIViewController {
         
         // setting up the scroll view and table view header sizes
         scrollView.frame.size.width = UIScreen.main.bounds.width
-        constraintScrollViewHeight.constant = scrollView.frame.size.width / mapHeightToWidthRatio
-        viewTableViewHeader.frame.size.height = constraintScrollViewHeight.constant + viewUserInfo.frame.size.height
+        constraintScrollViewHeight.constant = scrollView.frame.width / mapHeightToWidthRatio
+        viewTableViewHeader.frame.size.height = constraintScrollViewHeight.constant + viewUserInfo.frame.height
         
         // setting up the map and it's size
-        let width = scrollView.frame.size.width
+        let width = scrollView.frame.width
         let scale = width / mapImage.size.width
         let height = mapImage.size.height * scale
         mapImage.size = CGSize(width: width, height: height)
