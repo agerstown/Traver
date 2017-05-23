@@ -678,14 +678,6 @@ class UserApiManager: ApiManager {
         }
     }
     
-    private func stringOrNilIfEmpty(_ string: String) -> String? {
-        if string.isEmpty {
-            return nil
-        } else {
-            return string
-        }
-    }
-    
     private func updateUserInfoInCoreData(name: String, location: String?, completion: @escaping () -> Void) {
         User.shared.name = name.isEmpty ? nil : name
         if let location = location {

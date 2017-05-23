@@ -9,14 +9,17 @@
 import Foundation
 
 class Tip {
-    
-//    var authorName: String
-//    var authorPhoto: UIImage
+
     var author: TipAuthor
     var country: Codes.Country
     var title: String
     var text: String
     var creationDate: Date
+    var dateString: String {
+        return dateFormatter.string(from: creationDate)
+    }
+    
+    let dateFormatter = DateFormatter()
     
     init(author: TipAuthor, country: Codes.Country, title: String, text: String, creationDate: Date) {
         self.author = author
@@ -24,6 +27,8 @@ class Tip {
         self.text = text
         self.country = country
         self.creationDate = creationDate
+        
+        dateFormatter.dateFormat = "dd.MM.yyyy"
     }
     
 }

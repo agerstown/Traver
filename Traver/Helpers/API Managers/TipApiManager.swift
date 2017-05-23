@@ -58,19 +58,16 @@ class TipApiManager: ApiManager {
                     let username = user["username"].stringValue
                     let token = user["token"].stringValue
                     
-                    let name = user["profile"]["name"].stringValue
-                    let photoPath = user["profile"]["photo_path"].stringValue
+                    let name = self.stringOrNilIfEmpty(user["profile"]["name"].stringValue)
+                    let photoPath = self.stringOrNilIfEmpty(user["profile"]["photo_path"].stringValue)
+                    let location = self.stringOrNilIfEmpty(user["profile"]["location"].stringValue)
                     
                     let author = TipAuthor(username: username, token: token)
                     
-                    if !name.isEmpty {
-                        author.name = name
-                    }
+                    author.name = name
+                    author.photoPath = photoPath
+                    author.location = location
                     
-                    if !photoPath.isEmpty {
-                        author.photoPath = photoPath
-                    }
-
                     let tip = Tip(author: author, country: country, title: title, text: text, creationDate: creationDate)
                     tips.append(tip)
                 }
@@ -83,7 +80,11 @@ class TipApiManager: ApiManager {
         imageView.image = UIImage(named: "default_photo")
         if let path = author.photoPath {
             if let url = URL(string: photosHost + "traver-media/" + path) {
-                Nuke.loadImage(with: url, into: imageView)
+                Nuke.loadImage(with: url, into: imageView) { handler in
+                    let image = handler.0.value
+                    author.photo = image
+                    imageView.image = author.photo
+                }
             }
         }
     }

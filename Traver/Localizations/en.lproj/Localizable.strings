@@ -277,7 +277,7 @@
 "The email is not valid!" = "The email is not valid!";
 "Please write your e-mail if you want us to answer you." = "Please write your e-mail if you want us to answer you.";
 
-// New tip
+// Tips
 "Cities, regions or places" = "Cities, regions or places";
 "Why these regions are worth visiting. Recommended landmarks, hotels, restaurants and so" = "Why these regions are worth visiting. Recommended landmarks, hotels, restaurants and so";
 "New tip" = "New tip";
@@ -289,3 +289,4 @@
 "Anonymous" = "Anonymous";
 "Your tip was created successfully!" = "Your tip was created successfully!";
 "No more than 100 characters!" = "No more than 100 letters!";
+"Lives in" = "Lives in";

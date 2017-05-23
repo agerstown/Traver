@@ -18,19 +18,19 @@ class TipsInCountryController: UIViewController {
     
     let activityIndicatorInitialLoading = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
-    let dateFormatter = DateFormatter()
+    var selectedTip: Tip?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dateFormatter.dateFormat = "dd.MM.yyyy"
         
         tableViewTips.dataSource = self
         tableViewTips.delegate = self
         
         tableViewTips.estimatedRowHeight = 180
         tableViewTips.rowHeight = UITableViewAutomaticDimension
+        
+        tableViewTips.tableFooterView = UIView()
         
         startSpinning()
         reloadTipsTable() {
@@ -64,6 +64,14 @@ class TipsInCountryController: UIViewController {
         activityIndicatorInitialLoading.removeFromSuperview()
         tableViewTips.isHidden = false
     }
+    
+    // MARK: - Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? TipController {
+            controller.tip = selectedTip
+            controller.backgroundImage = Bluring.blurBackground(backgroundController: self)
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -79,7 +87,7 @@ extension TipsInCountryController: UITableViewDataSource {
         cell.labelTitle.text = tip.title
         cell.labelText.text = tip.text
         cell.labelAuthorName.text = tip.author.name ?? "Anonymous".localized()
-        cell.labelCreationDate.text = dateFormatter.string(from: tip.creationDate)
+        cell.labelCreationDate.text = tip.dateString
     
         TipApiManager.shared.getAuthorPhoto(author: tip.author, putInto: cell.imageViewAuthorPhoto)
 
@@ -90,5 +98,9 @@ extension TipsInCountryController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension TipsInCountryController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableViewTips.deselectRow(at: indexPath, animated: true)
+        selectedTip = tips[indexPath.row]
+        performSegue(withIdentifier: "segueToTipController", sender: nil)
+    }
 }

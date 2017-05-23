@@ -15,6 +15,8 @@ class TipAuthor {
     
     var name: String?
     var photoPath: String?
+    var photo: UIImage?
+    var location: String?
     
     init(username: String, token: String) {
         self.username = username

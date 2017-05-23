@@ -23,6 +23,8 @@ class TipsCountriesInRegionController: UIViewController {
         
         tableViewTipsCountries.dataSource = self
         tableViewTipsCountries.delegate = self
+        
+        tableViewTipsCountries.tableFooterView = UIView()
     }
     
     // MARK: - Segue
@@ -56,6 +58,7 @@ extension TipsCountriesInRegionController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension TipsCountriesInRegionController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableViewTipsCountries.deselectRow(at: indexPath, animated: true)
         selectedCountry = countries[indexPath.row]
         performSegue(withIdentifier: "segueToTipsList", sender: nil)
     }

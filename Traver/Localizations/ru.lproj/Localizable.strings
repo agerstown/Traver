@@ -249,7 +249,6 @@
 "Check your Internet connection." = "Проверьте, есть ли соединение с Интернетом.";
 "Status code" = "Статус-код";
 
-
 // Friends
 "Nobody's here :(" = "Тут никого нет :(";
 "Connect your Facebook to see your friends" = "Подключите свой Facebook, чтобы увидеть друзей";
@@ -278,7 +277,7 @@
 "The email is not valid!" = "Введеный e-mail некорректен!";
 "Please write your e-mail if you want us to answer you." = "Пожалуйста, укажите свой e-mail, если хотите, чтобы Вам ответили.";
 
-// New tip
+// Tips
 "Cities, regions or places" = "Города, регионы или места";
 "Why these regions are worth visiting. Recommended landmarks, hotels, restaurants and so" = "Почему данные места стоит посетить. Рекомендуемые достопремечательности, отели, рестораны и т.п.";
 "New tip" = "Новый совет";
@@ -290,3 +289,4 @@
 "Anonymous" = "Аноним";
 "Your tip was created successfully!" = "Ваш совет был успешно создан!";
 "No more than 100 characters!" = "Не больше 100 символов!";
+"Lives in" = "Живет в";

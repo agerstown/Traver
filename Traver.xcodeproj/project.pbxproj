@@ -66,6 +66,7 @@
 		617C17391E6B0AFC008576E4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617C17381E6B0AFC008576E4 /* CloudKit.framework */; };
 		619AE8891EA3F1C9005FCC46 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619AE8881EA3F1C9005FCC46 /* FriendCell.swift */; };
 		619D6ED41ED48A0300DED7B7 /* TipAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D6ED31ED48A0200DED7B7 /* TipAuthor.swift */; };
+		619D6ED61ED4C45C00DED7B7 /* TipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D6ED51ED4C45C00DED7B7 /* TipController.swift */; };
 		619F963E1EA7E4B5001DA4EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 619F963D1EA7E4B5001DA4EE /* LaunchScreen.storyboard */; };
 		61A16E301E69A82700184C7F /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A16E2F1E69A82700184C7F /* CloudKitHelper.swift */; };
 		61B2765D1DF9D475008AA44B /* PhotosAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2765C1DF9D475008AA44B /* PhotosAccessManager.swift */; };
@@ -313,6 +314,7 @@
 		617C17381E6B0AFC008576E4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		619AE8881EA3F1C9005FCC46 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		619D6ED31ED48A0200DED7B7 /* TipAuthor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipAuthor.swift; sourceTree = "<group>"; };
+		619D6ED51ED4C45C00DED7B7 /* TipController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipController.swift; sourceTree = "<group>"; };
 		619F963D1EA7E4B5001DA4EE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61A16E2F1E69A82700184C7F /* CloudKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
 		61B2765C1DF9D475008AA44B /* PhotosAccessManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosAccessManager.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 			children = (
 				61FF9D791ED0D6190008AFE9 /* TipsInCountryController.swift */,
 				61FF9D7B1ED0D6750008AFE9 /* TipCell.swift */,
+				619D6ED51ED4C45C00DED7B7 /* TipController.swift */,
 			);
 			path = InCountry;
 			sourceTree = "<group>";
@@ -1083,6 +1086,7 @@
 				612F29C11DEB62F40057E20B /* MainTabBarController.swift in Sources */,
 				6133945F1E31485D0001CF2A /* Traver.xcdatamodeld in Sources */,
 				612F287F1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift in Sources */,
+				619D6ED61ED4C45C00DED7B7 /* TipController.swift in Sources */,
 				614534FF1ED22FBD005DE8C7 /* ApiManager.swift in Sources */,
 				619D6ED41ED48A0300DED7B7 /* TipAuthor.swift in Sources */,
 				612F29AB1DEB4D020057E20B /* RegionHeaderCell.swift in Sources */,
