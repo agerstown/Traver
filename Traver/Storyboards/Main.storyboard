@@ -1255,12 +1255,8 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="WTH-be-d1J">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GI4-2v-H94">
-                                <rect key="frame" x="0.0" y="44" width="375" height="510"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TipsRegionCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="TipsRegionCell" rowHeight="85" id="9gR-oR-jGS" customClass="TipsRegionCell" customModule="Traver" customModuleProvider="target">
@@ -1323,13 +1319,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WTH-be-d1J" firstAttribute="top" secondItem="d9x-5n-Mzi" secondAttribute="bottom" id="2G0-f7-hcV"/>
                             <constraint firstItem="Egx-sJ-0aN" firstAttribute="top" secondItem="GI4-2v-H94" secondAttribute="bottom" id="55c-qj-k4W"/>
-                            <constraint firstItem="WTH-be-d1J" firstAttribute="leading" secondItem="hiu-GM-JF8" secondAttribute="leading" id="BXH-Jo-HyD"/>
-                            <constraint firstAttribute="trailing" secondItem="WTH-be-d1J" secondAttribute="trailing" id="I39-OS-as4"/>
+                            <constraint firstItem="GI4-2v-H94" firstAttribute="top" secondItem="d9x-5n-Mzi" secondAttribute="bottom" id="7Mq-Lj-9Fa"/>
                             <constraint firstAttribute="trailing" secondItem="GI4-2v-H94" secondAttribute="trailing" id="Rba-e4-ihm"/>
                             <constraint firstItem="GI4-2v-H94" firstAttribute="leading" secondItem="hiu-GM-JF8" secondAttribute="leading" id="VsU-eR-m9s"/>
-                            <constraint firstItem="GI4-2v-H94" firstAttribute="top" secondItem="WTH-be-d1J" secondAttribute="bottom" id="oGx-gO-2ms"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="USd-Bc-XTz">
@@ -1342,6 +1335,9 @@
                                 <segment title="Friends"/>
                             </segments>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="segmentedControlTipsCategoryChanged:" destination="JxD-Ai-aBv" eventType="valueChanged" id="Yz3-EW-glZ"/>
+                            </connections>
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dKh-nX-PdL">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1352,7 +1348,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="barButtonAddTip" destination="dKh-nX-PdL" id="FFm-7C-2BK"/>
-                        <outlet property="searchBar" destination="WTH-be-d1J" id="ReQ-tF-GYK"/>
                         <outlet property="segmentedControlTipsCategory" destination="07Z-bv-lHi" id="YKt-hh-MeP"/>
                         <outlet property="tableViewRegions" destination="GI4-2v-H94" id="9rk-jC-RzL"/>
                         <segue destination="QKl-Zs-naf" kind="show" identifier="segueToTipsCountriesInRegion" id="BSC-LX-qbj"/>
@@ -1604,7 +1599,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJU-b3-QWE">
-                                        <rect key="frame" x="24" y="186" width="327" height="255"/>
+                                        <rect key="frame" x="22" y="186" width="331" height="255"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation </string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1631,9 +1626,9 @@
                                     <constraint firstItem="cfh-Qy-5B4" firstAttribute="leading" secondItem="DU6-4T-8qf" secondAttribute="leading" id="W43-VV-N10"/>
                                     <constraint firstItem="cfh-Qy-5B4" firstAttribute="top" secondItem="mh5-d6-ZsS" secondAttribute="bottom" constant="20" id="YQi-vb-mXG"/>
                                     <constraint firstItem="mh5-d6-ZsS" firstAttribute="top" secondItem="DU6-4T-8qf" secondAttribute="top" constant="20" id="ZIt-u7-mag"/>
-                                    <constraint firstAttribute="trailing" secondItem="zJU-b3-QWE" secondAttribute="trailing" constant="24" id="ZRR-ei-4tc"/>
+                                    <constraint firstAttribute="trailing" secondItem="zJU-b3-QWE" secondAttribute="trailing" constant="22" id="ZRR-ei-4tc"/>
                                     <constraint firstItem="O3t-g6-m4t" firstAttribute="leading" secondItem="mh5-d6-ZsS" secondAttribute="trailing" constant="24" id="dYx-hg-rcJ"/>
-                                    <constraint firstItem="zJU-b3-QWE" firstAttribute="leading" secondItem="DU6-4T-8qf" secondAttribute="leading" constant="24" id="mme-fO-8ZH"/>
+                                    <constraint firstItem="zJU-b3-QWE" firstAttribute="leading" secondItem="DU6-4T-8qf" secondAttribute="leading" constant="22" id="mme-fO-8ZH"/>
                                     <constraint firstItem="O3t-g6-m4t" firstAttribute="top" secondItem="DU6-4T-8qf" secondAttribute="top" constant="32" id="r3i-sp-cDn"/>
                                     <constraint firstAttribute="bottom" secondItem="emA-rR-Am5" secondAttribute="bottom" constant="24" id="xma-Bq-iMg"/>
                                     <constraint firstAttribute="trailing" secondItem="O3t-g6-m4t" secondAttribute="trailing" constant="24" id="yLV-R4-qiS"/>

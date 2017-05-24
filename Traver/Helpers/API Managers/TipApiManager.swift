@@ -18,19 +18,29 @@ class TipApiManager: ApiManager {
     // MARK: - GET methods
     func getExistingTipsCountries(completion: @escaping (_ countryCodes: [String: Int]) -> Void) {
         Alamofire.request(host + "tips/get-existing-tips-countries/", method: .get, parameters: nil).responseJSON { response in
-            if let value = response.result.value {
-                let json = JSON(value)
-                let countryCodesJSON = json["country_codes"].arrayValue
-                var countryCodes: [String: Int] = [:]
-                for codeObject in countryCodesJSON {
-                    let code = codeObject["country_code"].stringValue
-                    let count = codeObject["count"].intValue
-                    countryCodes[code] = count
-                }
-                completion(countryCodes)
-            }
+            self.parseCountryCodes(response: response, completion: completion)
         }
-        
+    }
+    
+    func getExistingTipsCountriesFriends(completion: @escaping (_ countryCodes: [String: Int]) -> Void) {
+        Alamofire.request(host + "tips/get-existing-tips-countries-friends/", method: .get,
+                          parameters: nil).responseJSON { response in
+            self.parseCountryCodes(response: response, completion: completion)
+        }
+    }
+    
+    private func parseCountryCodes(response: DataResponse<Any>, completion: @escaping (_ countryCodes: [String: Int]) -> Void) {
+        if let value = response.result.value {
+            let json = JSON(value)
+            let countryCodesJSON = json["country_codes"].arrayValue
+            var countryCodes: [String: Int] = [:]
+            for codeObject in countryCodesJSON {
+                let code = codeObject["country_code"].stringValue
+                let count = codeObject["count"].intValue
+                countryCodes[code] = count
+            }
+            completion(countryCodes)
+        }
     }
     
     func getTipsForCountry(_ country: Codes.Country, completion: @escaping (_ tips: [Tip]) -> Void) {

@@ -11,14 +11,20 @@ import Foundation
 class TipsController: UIViewController {
     
     @IBOutlet weak var segmentedControlTipsCategory: UISegmentedControl!
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var barButtonAddTip: UIBarButtonItem!
     @IBOutlet weak var tableViewRegions: UITableView!
     
     var regions: [Codes.Region: Int] = [.REU: 0, .RAS: 0, .RNA: 0, .RSA: 0, .RAU: 0, .RAF: 0]
     var regionsArray: [Codes.Region] = []
-    
     var countryCodes: [String: Int] = [:]
+    
+    var allRegions: [Codes.Region: Int] = [.REU: 0, .RAS: 0, .RNA: 0, .RSA: 0, .RAU: 0, .RAF: 0]
+    var allRegionsArray: [Codes.Region] = []
+    var allCountryCodes: [String: Int] = [:]
+    
+    var friendsRegions: [Codes.Region: Int] = [.REU: 0, .RAS: 0, .RNA: 0, .RSA: 0, .RAU: 0, .RAF: 0]
+    var friendsRegionsArray: [Codes.Region] = []
+    var friendsCountryCodes: [String: Int] = [:]
     
     var selectedRegion: Codes.Region?
     var countriesInSelectedRegion: [Codes.Country] = []
@@ -45,28 +51,61 @@ class TipsController: UIViewController {
     
     // MARK: Regions update
     func reloadRegionsTable(completion: (() -> Void)?) {
-        TipApiManager.shared.getExistingTipsCountries() { countryCodes in
-            self.countryCodes = countryCodes
-            var regions: [Codes.Region: Int] = [.REU: 0, .RAS: 0, .RNA: 0, .RSA: 0, .RAU: 0, .RAF: 0]
-            for code in countryCodes {
-                if let region = Codes.countryToRegion[code.key] {
-                    regions[region]! += code.value
+        if segmentedControlTipsCategory.selectedSegmentIndex == 0 {
+            if allRegionsArray.isEmpty {
+                TipApiManager.shared.getExistingTipsCountries() { countryCodes in
+                    self.filterCountryCodes(codes: countryCodes, countryCodes: &self.allCountryCodes,
+                                            regions: &self.allRegions, regionsArray: &self.allRegionsArray,
+                                            completion: completion)
                 }
-                self.regions = regions
+            } else {
+                countryCodes = allCountryCodes
+                regions = allRegions
+                regionsArray = allRegionsArray
+                tableViewRegions.reloadData()
             }
-            if let completion = completion {
-                completion()
-            }
-            
-            for region in self.regions {
-                if region.value == 0 {
-                    self.regions.removeValue(forKey: region.key)
+        } else {
+            if friendsRegionsArray.isEmpty {
+                TipApiManager.shared.getExistingTipsCountriesFriends() { countryCodes in
+                    self.filterCountryCodes(codes: countryCodes, countryCodes: &self.friendsCountryCodes,
+                                            regions: &self.friendsRegions, regionsArray: &self.friendsRegionsArray,
+                                            completion: completion)
                 }
+            } else {
+                countryCodes = friendsCountryCodes
+                regions = friendsRegions
+                regionsArray = friendsRegionsArray
+                tableViewRegions.reloadData()
             }
-            
-            self.regionsArray = Array(self.regions.keys).sorted(by: { $0.rawValue < $1.rawValue })
-            self.tableViewRegions.reloadData()
         }
+    }
+    
+    func filterCountryCodes(codes: [String: Int], countryCodes: inout [String: Int], regions: inout [Codes.Region: Int],
+             regionsArray: inout [Codes.Region], completion: (() -> Void)?) {
+        countryCodes = codes
+        var regionsDict: [Codes.Region: Int] = [.REU: 0, .RAS: 0, .RNA: 0, .RSA: 0, .RAU: 0, .RAF: 0]
+        for code in codes {
+            if let region = Codes.countryToRegion[code.key] {
+                regionsDict[region]! += code.value
+            }
+            regions = regionsDict
+        }
+        if let completion = completion {
+            completion()
+        }
+        
+        for region in regionsDict {
+            if region.value == 0 {
+                regions.removeValue(forKey: region.key)
+            }
+        }
+        regionsArray = Array(regions.keys).sorted(by: { $0.rawValue < $1.rawValue })
+        
+        self.countryCodes = countryCodes
+        self.regions = regions
+        self.regionsArray = regionsArray
+        
+        self.tableViewRegions.reloadData()
     }
     
     // MARK: - Spinner for initial regions loading
@@ -82,6 +121,11 @@ class TipsController: UIViewController {
         activityIndicatorInitialLoading.stopAnimating()
         activityIndicatorInitialLoading.removeFromSuperview()
         tableViewRegions.isHidden = false
+    }
+    
+    // MARK: - Actions
+    @IBAction func segmentedControlTipsCategoryChanged(_ sender: UISegmentedControl) {
+        reloadRegionsTable(completion: nil)
     }
     
     // MARK: - Segue
@@ -131,7 +175,8 @@ extension TipsController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension TipsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (self.view.bounds.height - 44 - searchBar.bounds.height) / CGFloat(regions.count)
+        return tableViewRegions.frame.height / CGFloat(regions.count)
+//        return (self.view.bounds.height - 44) / CGFloat(regions.count)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
