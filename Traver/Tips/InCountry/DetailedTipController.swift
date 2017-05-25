@@ -1,5 +1,5 @@
 //
-//  TipController.swift
+//  DetailedTipController.swift
 //  Traver
 //
 //  Created by Natalia Nikitina on 5/23/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TipController: UIViewController {
+class DetailedTipController: UIViewController {
     
     @IBOutlet weak var imageViewAuthorPhoto: UIImageView!
     @IBOutlet weak var labelAuthorName: UILabel!
@@ -51,7 +51,7 @@ class TipController: UIViewController {
 }
 
 // MARK: - UIGestureRecognizerDelegate
-extension TipController: UIGestureRecognizerDelegate {
+extension DetailedTipController: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let view = touch.view {

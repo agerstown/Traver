@@ -10,7 +10,6 @@ import Foundation
 
 class TipAuthor {
     
-    var username: String
     var token: String
     
     var name: String?
@@ -18,9 +17,16 @@ class TipAuthor {
     var photo: UIImage?
     var location: String?
     
-    init(username: String, token: String) {
-        self.username = username
+    init(token: String) {
         self.token = token
+    }
+    
+    init(user: User) {
+        self.token = user.token!
+        self.name = user.name
+        self.photoPath = user.photoPath
+        self.photo = user.photo
+        self.location = user.location
     }
     
 }

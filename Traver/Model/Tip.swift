@@ -8,25 +8,27 @@
 
 import Foundation
 
-class Tip {
+class Tip: NSObject {
 
+    var id: Int
     var author: TipAuthor
     var country: Codes.Country
     var title: String
     var text: String
-    var creationDate: Date
+    var updateDate: Date
     var dateString: String {
-        return dateFormatter.string(from: creationDate)
+        return dateFormatter.string(from: updateDate)
     }
     
     let dateFormatter = DateFormatter()
     
-    init(author: TipAuthor, country: Codes.Country, title: String, text: String, creationDate: Date) {
+    init(id: Int, author: TipAuthor, country: Codes.Country, title: String, text: String, updateDate: Date) {
+        self.id = id
         self.author = author
         self.title = title
         self.text = text
         self.country = country
-        self.creationDate = creationDate
+        self.updateDate = updateDate
         
         dateFormatter.dateFormat = "dd.MM.yyyy"
     }

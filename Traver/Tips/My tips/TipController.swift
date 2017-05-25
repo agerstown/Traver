@@ -1,5 +1,5 @@
 //
-//  NewTipController.swift
+//  TipController.swift
 //  Traver
 //
 //  Created by Natalia Nikitina on 5/20/17.
@@ -9,10 +9,15 @@
 import Foundation
 
 protocol TipDelegate {
-    func tipCreated(country: Codes.Country)
+    func tipCreated(tip: Tip)
+    func tipUpdated(tip: Tip)
 }
 
-class NewTipController: UITableViewController {
+extension TipDelegate {
+    func tipUpdated(tip: Tip) {}
+}
+
+class TipController: UITableViewController {
     
     @IBOutlet weak var pickerViewCountries: UIPickerView!
     @IBOutlet weak var textFieldTitle: UITextField!
@@ -27,6 +32,8 @@ class NewTipController: UITableViewController {
     var alertTitleLengthShown = false
     
     var tipDelegate: TipDelegate?
+    
+    var tip: Tip?
     
     // MARK: - Lifeсycle
     override func viewDidLoad() {
@@ -43,7 +50,21 @@ class NewTipController: UITableViewController {
         pickerViewCountries.dataSource = self
         pickerViewCountries.delegate = self
         
-        pickerViewCountries.selectRow(2, inComponent: 0, animated: false)
+        setUpViews()
+    }
+    
+    func setUpViews() {
+        if let tip = tip {
+            if let row = countries.index(of: tip.country) {
+                pickerViewCountries.selectRow(row, inComponent: 0, animated: false)
+            }
+            textFieldTitle.text = tip.title
+            textViewText.text = tip.text
+            textViewText.textColor = .black
+            pickerViewCountries.isUserInteractionEnabled = false
+        } else {
+            pickerViewCountries.selectRow(2, inComponent: 0, animated: false)
+        }
     }
     
     // MARK: - Actions
@@ -51,9 +72,20 @@ class NewTipController: UITableViewController {
         if let title = textFieldTitle.text {
             if !title.isEmpty {
                 if !textViewText.text.isEmpty && textViewText.text != textViewTextPlaceholder {
-                    let selectedCountry = countries[pickerViewCountries.selectedRow(inComponent: 0)]
-                    TipApiManager.shared.createTip(countryCode: selectedCountry.code, title: title, text: textViewText.text) {
-                        self.tipDelegate?.tipCreated(country: selectedCountry)
+                    if let tip = tip {
+                        let text = textViewText.text!
+                        TipApiManager.shared.updateTip(id: tip.id, title: title, text: text) { updateDate in
+                            tip.title = title
+                            tip.text = text
+                            tip.updateDate = updateDate
+                            self.tipDelegate?.tipUpdated(tip: tip)
+                        }
+                    } else {
+                        let selectedCountry = countries[pickerViewCountries.selectedRow(inComponent: 0)]
+                        TipApiManager.shared.createTip(country: selectedCountry,
+                                                       title: title, text: textViewText.text) { tip in
+                            self.tipDelegate?.tipCreated(tip: tip) //(country: selectedCountry)
+                        }
                     }
                     self.dismiss(animated: true, completion: nil)
                 } else {
@@ -82,7 +114,7 @@ class NewTipController: UITableViewController {
 }
 
 // MARK: - UITextFieldDelegate
-extension NewTipController: UITextFieldDelegate {
+extension TipController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let text = textFieldTitle.text {
@@ -101,7 +133,7 @@ extension NewTipController: UITextFieldDelegate {
 }
 
 // MARK: - UITextViewDelegate
-extension NewTipController: UITextViewDelegate {
+extension TipController: UITextViewDelegate {
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textViewText.text == textViewTextPlaceholder {
             textViewText.text = ""
@@ -119,7 +151,7 @@ extension NewTipController: UITextViewDelegate {
 }
 
 // MARK: - UIPickerViewDataSource
-extension NewTipController: UIPickerViewDataSource {
+extension TipController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -130,7 +162,7 @@ extension NewTipController: UIPickerViewDataSource {
 }
 
 // MARK: - UIPickerViewDelegate
-extension NewTipController: UIPickerViewDelegate {
+extension TipController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.text = countries[row].name

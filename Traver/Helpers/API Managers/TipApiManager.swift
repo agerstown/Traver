@@ -23,8 +23,12 @@ class TipApiManager: ApiManager {
     }
     
     func getExistingTipsCountriesFriends(completion: @escaping (_ countryCodes: [String: Int]) -> Void) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+
         Alamofire.request(host + "tips/get-existing-tips-countries-friends/", method: .get,
-                          parameters: nil).responseJSON { response in
+                          parameters: nil, headers: headers).responseJSON { response in
             self.parseCountryCodes(response: response, completion: completion)
         }
     }
@@ -50,40 +54,56 @@ class TipApiManager: ApiManager {
     
         Alamofire.request(host + "tips/get-tips-for-country/", method: .get, parameters: parameters).responseJSON { response in
             if let tipsJSON = response.result.value as? NSArray {
-                var tips: [Tip] = []
-                for tip in tipsJSON {
-                    let json = JSON(tip)
-                    
-                    let creationDateString = json["creation_date"].stringValue
-
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd"
-
-                    let creationDate = dateFormatter.date(from: creationDateString) ?? Date()
-                    
-                    let title = json["title"].stringValue
-                    let text = json["text"].stringValue
-                    
-                    let user = json["user"]
-                    let username = user["username"].stringValue
-                    let token = user["token"].stringValue
-                    
-                    let name = self.stringOrNilIfEmpty(user["profile"]["name"].stringValue)
-                    let photoPath = self.stringOrNilIfEmpty(user["profile"]["photo_path"].stringValue)
-                    let location = self.stringOrNilIfEmpty(user["profile"]["location"].stringValue)
-                    
-                    let author = TipAuthor(username: username, token: token)
-                    
-                    author.name = name
-                    author.photoPath = photoPath
-                    author.location = location
-                    
-                    let tip = Tip(author: author, country: country, title: title, text: text, creationDate: creationDate)
-                    tips.append(tip)
-                }
+                let tips = self.parseTips(json: tipsJSON, country: country)
                 completion(tips)
             }
         }
+    }
+    
+    private func parseTips(json: NSArray, country: Codes.Country?) -> [Tip] {
+        var tips: [Tip] = []
+        for tip in json {
+            let json = JSON(tip)
+            
+            let updateDateString = json["update_date"].stringValue
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            let updateDate = dateFormatter.date(from: updateDateString) ?? Date()
+            
+            let id = json["id"].intValue
+            
+            let title = json["title"].stringValue
+            let text = json["text"].stringValue
+            
+            let user = json["user"]
+            
+            let token = user["token"].stringValue
+            let profile = user["profile"]
+            
+            let name = self.stringOrNilIfEmpty(profile["name"].stringValue)
+            let photoPath = self.stringOrNilIfEmpty(profile["photo_path"].stringValue)
+            let location = self.stringOrNilIfEmpty(profile["location"].stringValue)
+            
+            let author = TipAuthor(token: token)
+            
+            author.name = name
+            author.photoPath = photoPath
+            author.location = location
+            
+            if let country = country {
+                let tip = Tip(id: id, author: author, country: country, title: title, text: text, updateDate: updateDate)
+                tips.append(tip)
+            } else {
+                let countryCode = json["country_code"].stringValue
+                if let country = Codes.Country.all.filter( { $0.code == countryCode } ).first {
+                    let tip = Tip(id: id, author: author, country: country, title: title, text: text, updateDate: updateDate)
+                    tips.append(tip)
+                }
+            }
+        }
+        return tips
     }
     
     func getAuthorPhoto(author: TipAuthor, putInto imageView: UIImageView) {
@@ -99,10 +119,24 @@ class TipApiManager: ApiManager {
         }
     }
     
+    func getUserTips(completion: @escaping (_ tips: [Tip]) -> Void) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+        
+        Alamofire.request(host + "tips/get-user-tips/", method: .get, parameters: nil,
+                          headers: headers).responseJSON { response in
+            if let tipsJSON = response.result.value as? NSArray {
+                let tips = self.parseTips(json: tipsJSON, country: nil)
+                completion(tips)
+            }
+        }
+    }
+    
     // MARK: - CREATE methods
-    func createTip(countryCode: String, title: String, text: String, completion: @escaping () -> Void) {
+    func createTip(country: Codes.Country, title: String, text: String, completion: @escaping (_ tip: Tip) -> Void) {
         let parameters: Parameters = [
-            "country_code": countryCode,
+            "country_code": country.code,
             "title": title,
             "text": text
         ]
@@ -113,12 +147,80 @@ class TipApiManager: ApiManager {
         
         _ = Alamofire.request(host + "tips/create-tip/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             if response.response?.statusCode == 200 {
-                completion()
-                StatusBarManager.shared.showCustomStatusBarNeutral(text: "Your tip was created successfully!".localized())
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    
+                    let updateDateString = json["update_date"].stringValue
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    
+                    let updateDate = dateFormatter.date(from: updateDateString) ?? Date()
+                    
+                    let id = json["id"].intValue
+                    
+                    let author = TipAuthor(user: User.shared)
+                    
+                    let tip = Tip(id: id, author: author, country: country, title: title, text: text, updateDate: updateDate)
+                    completion(tip)
+                }
             } else {
                 self.showNoInternetErrorAlert(response: response)
             }
         }
     }
     
+    // MARK: - UPDATE methods
+    func updateTip(id: Int, title: String, text: String, completion: @escaping (_ date: Date) -> Void) {
+        let parameters: Parameters = [
+            "tip_id": id,
+            "title": title,
+            "text": text
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+        
+        _ = Alamofire.request(host + "tips/update-tip/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            if response.response?.statusCode == 200 {
+                
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    let updateDateString = json["update_date"].stringValue
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    
+                    let updateDate = dateFormatter.date(from: updateDateString) ?? Date()
+                    
+                    completion(updateDate)
+                }
+                
+            } else {
+                self.showNoInternetErrorAlert(response: response)
+            }
+        }
+        
+    }
+    
+    
+    // MARK: - DELETE methods
+    func deleteTip(id: Int, completion: @escaping () -> Void) {
+        let parameters: Parameters = [
+            "tip_id": id
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+        
+        _ = Alamofire.request(host + "tips/delete-tip/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            if response.response?.statusCode == 200 {
+                completion()
+            } else {
+                self.showNoInternetErrorAlert(response: response)
+            }
+        }
+    }
 }

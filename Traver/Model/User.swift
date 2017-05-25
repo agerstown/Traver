@@ -90,7 +90,7 @@ class User: NSManagedObject {
         return visitedCountries.allObjects as! [Country]
     }
     
-    //var tips: [Tip] = []
+    var tips: [Tip]?
     
     // MARK: - Notifications
     let CountriesUpdatedNotification = NSNotification.Name(rawValue: "CountriesUpdatedNotification")

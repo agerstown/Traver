@@ -42,21 +42,22 @@ class TipsController: UIViewController {
         tableViewRegions.dataSource = self
         tableViewRegions.delegate = self
         
-        startSpinning()
-        reloadRegionsTable() {
-            self.stopSpinning()
-        }
+        segmentedControlTipsCategory.setTitle("All".localized(), forSegmentAt: 0)
+        segmentedControlTipsCategory.setTitle("Friends".localized(), forSegmentAt: 1)
         
+        reloadRegionsTable()
     }
     
     // MARK: Regions update
-    func reloadRegionsTable(completion: (() -> Void)?) {
+    func reloadRegionsTable() {
         if segmentedControlTipsCategory.selectedSegmentIndex == 0 {
             if allRegionsArray.isEmpty {
+                startSpinning()
                 TipApiManager.shared.getExistingTipsCountries() { countryCodes in
                     self.filterCountryCodes(codes: countryCodes, countryCodes: &self.allCountryCodes,
-                                            regions: &self.allRegions, regionsArray: &self.allRegionsArray,
-                                            completion: completion)
+                                            regions: &self.allRegions, regionsArray: &self.allRegionsArray) {
+                        self.stopSpinning()
+                    }
                 }
             } else {
                 countryCodes = allCountryCodes
@@ -66,10 +67,12 @@ class TipsController: UIViewController {
             }
         } else {
             if friendsRegionsArray.isEmpty {
+                startSpinning()
                 TipApiManager.shared.getExistingTipsCountriesFriends() { countryCodes in
                     self.filterCountryCodes(codes: countryCodes, countryCodes: &self.friendsCountryCodes,
-                                            regions: &self.friendsRegions, regionsArray: &self.friendsRegionsArray,
-                                            completion: completion)
+                                            regions: &self.friendsRegions, regionsArray: &self.friendsRegionsArray) {
+                        self.stopSpinning()
+                    }
                 }
             } else {
                 countryCodes = friendsCountryCodes
@@ -90,9 +93,6 @@ class TipsController: UIViewController {
             }
             regions = regionsDict
         }
-        if let completion = completion {
-            completion()
-        }
         
         for region in regionsDict {
             if region.value == 0 {
@@ -104,6 +104,10 @@ class TipsController: UIViewController {
         self.countryCodes = countryCodes
         self.regions = regions
         self.regionsArray = regionsArray
+        
+        if let completion = completion {
+            completion()
+        }
         
         self.tableViewRegions.reloadData()
     }
@@ -125,7 +129,7 @@ class TipsController: UIViewController {
     
     // MARK: - Actions
     @IBAction func segmentedControlTipsCategoryChanged(_ sender: UISegmentedControl) {
-        reloadRegionsTable(completion: nil)
+        reloadRegionsTable()
     }
     
     // MARK: - Segue
@@ -134,11 +138,14 @@ class TipsController: UIViewController {
             controller.countryCodes = countryCodes
             controller.countries = countriesInSelectedRegion
             controller.title = selectedRegion?.name
-        } else if let navController = segue.destination as? UINavigationController {
-            if let controller = navController.viewControllers[0] as? NewTipController {
-                controller.tipDelegate = self
-            }
+        } else if let controller = segue.destination as? MyTipsController {
+            controller.tipsDelegate = self
         }
+//        } else if let navController = segue.destination as? UINavigationController {
+//            if let controller = navController.viewControllers[0] as? TipController {
+//                controller.tipDelegate = self
+//            }
+//        }
     }
     
 }
@@ -176,7 +183,6 @@ extension TipsController: UITableViewDataSource {
 extension TipsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableViewRegions.frame.height / CGFloat(regions.count)
-//        return (self.view.bounds.height - 44) / CGFloat(regions.count)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -195,8 +201,20 @@ extension TipsController: UITableViewDelegate {
     }
 }
 
-extension TipsController: TipDelegate {
+// MARK: - TipsDelegate
+extension TipsController: TipsDelegate {
     func tipCreated(country: Codes.Country) {
-        reloadRegionsTable(completion: nil)
+        TipApiManager.shared.getExistingTipsCountries() { countryCodes in
+            self.filterCountryCodes(codes: countryCodes, countryCodes: &self.allCountryCodes,
+                                    regions: &self.allRegions, regionsArray: &self.allRegionsArray, completion: nil)
+        }
+        //reloadRegionsTable()
     }
 }
+
+//// MARK: - TipDelegate
+//extension TipsController: TipDelegate {
+//    func tipCreated(country: Codes.Country) {
+//        reloadRegionsTable()
+//    }
+//}

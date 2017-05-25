@@ -67,7 +67,7 @@ class TipsInCountryController: UIViewController {
     
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? TipController {
+        if let controller = segue.destination as? DetailedTipController {
             controller.tip = selectedTip
             controller.backgroundImage = Bluring.blurBackground(backgroundController: self)
         }

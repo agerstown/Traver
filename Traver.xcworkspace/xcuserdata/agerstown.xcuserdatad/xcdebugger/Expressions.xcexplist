@@ -44,6 +44,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TipController.(buttonSaveTapped(Any) -&gt; ()).(closure #1):TipController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tipDelegate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ProfileViewController.numberOfSections(in : UITableView) -&gt; Int:ProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -118,6 +126,14 @@
          <PersistentStrings>
             <PersistentString
                value = "textViewText.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MyTipsController.(tableView(UITableView, commit : UITableViewCellEditingStyle, forRowAt : IndexPath) -&gt; ()).(closure #1):MyTipsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tips">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -352,10 +368,10 @@
                value = "country.code">
             </PersistentString>
             <PersistentString
-               value = "region.code">
+               value = "self.visitedCountries.count">
             </PersistentString>
             <PersistentString
-               value = "self.visitedCountries.count">
+               value = "region.code">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -458,10 +474,10 @@
                value = "self.locale">
             </PersistentString>
             <PersistentString
-               value = "user.token">
+               value = "User.shared.locale">
             </PersistentString>
             <PersistentString
-               value = "User.shared.locale">
+               value = "user.token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -507,7 +523,7 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "json[&quot;num_countries&quot;].stringValue">
+               value = "user.facebookID">
             </PersistentString>
             <PersistentString
                value = "json[&quot;num_countries&quot;].int">
@@ -516,10 +532,10 @@
                value = "user.location">
             </PersistentString>
             <PersistentString
-               value = "User.shared.facebookEmail">
+               value = "json[&quot;num_countries&quot;].stringValue">
             </PersistentString>
             <PersistentString
-               value = "user.facebookID">
+               value = "User.shared.facebookEmail">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -539,6 +555,14 @@
             </PersistentString>
             <PersistentString
                value = "json[&quot;country_codes&quot;].arrayObject">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MyTipsController.reloadTipsTable() -&gt; ():MyTipsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.tips">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -593,10 +617,10 @@
                value = "regions">
             </PersistentString>
             <PersistentString
-               value = "Codes.Region(rawValue: section)">
+               value = "regionsWithCountries">
             </PersistentString>
             <PersistentString
-               value = "regionsWithCountries">
+               value = "Codes.Region(rawValue: section)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
