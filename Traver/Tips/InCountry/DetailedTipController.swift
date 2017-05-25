@@ -10,6 +10,8 @@ import Foundation
 
 class DetailedTipController: UIViewController {
     
+    @IBOutlet weak var viewTip: UIView!
+    
     @IBOutlet weak var imageViewAuthorPhoto: UIImageView!
     @IBOutlet weak var labelAuthorName: UILabel!
     @IBOutlet weak var labelAuthorLocation: UILabel!
@@ -26,6 +28,8 @@ class DetailedTipController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        viewTip.layer.cornerRadius = 10
+        
         if let backgroundImage = backgroundImage {
             view.backgroundColor = UIColor(patternImage: backgroundImage)
         }

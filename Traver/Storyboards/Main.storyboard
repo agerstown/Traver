@@ -612,7 +612,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="168"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xW4-HE-yuV" id="Chf-KI-VAT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="167.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="168"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title title title title title title title title title title title title title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="K4v-WK-TJU">
@@ -1371,6 +1371,35 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhc-WN-KCb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your friends haven't written any tips yet :(" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yy-On-3Wi">
+                                        <rect key="frame" x="68" y="104" width="240" height="57.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="58" id="7kX-04-hkc"/>
+                                            <constraint firstAttribute="width" constant="240" id="h2F-LW-hg0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friends" translatesAutoresizingMaskIntoConstraints="NO" id="Lw7-hm-VAZ">
+                                        <rect key="frame" x="75" y="225" width="225" height="225"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Lw7-hm-VAZ" secondAttribute="height" multiplier="1:1" id="Rfz-9h-kDs"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Lw7-hm-VAZ" firstAttribute="centerX" secondItem="Dhc-WN-KCb" secondAttribute="centerX" id="4bY-GN-Gvv"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lw7-hm-VAZ" secondAttribute="bottom" constant="104" id="9ZD-Ao-0pK"/>
+                                    <constraint firstItem="8yy-On-3Wi" firstAttribute="centerX" secondItem="Dhc-WN-KCb" secondAttribute="centerX" id="cK9-ah-lRV"/>
+                                    <constraint firstItem="Lw7-hm-VAZ" firstAttribute="top" secondItem="8yy-On-3Wi" secondAttribute="bottom" constant="63.5" id="dxS-zz-rwL"/>
+                                    <constraint firstItem="8yy-On-3Wi" firstAttribute="top" secondItem="Dhc-WN-KCb" secondAttribute="top" constant="104" id="jLM-Uw-l6X"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GI4-2v-H94">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1436,9 +1465,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Egx-sJ-0aN" firstAttribute="top" secondItem="GI4-2v-H94" secondAttribute="bottom" id="55c-qj-k4W"/>
+                            <constraint firstItem="Egx-sJ-0aN" firstAttribute="top" secondItem="Dhc-WN-KCb" secondAttribute="bottom" id="5H9-tj-e0M"/>
+                            <constraint firstAttribute="trailing" secondItem="Dhc-WN-KCb" secondAttribute="trailing" id="7DN-xi-Ftw"/>
                             <constraint firstItem="GI4-2v-H94" firstAttribute="top" secondItem="d9x-5n-Mzi" secondAttribute="bottom" id="7Mq-Lj-9Fa"/>
                             <constraint firstAttribute="trailing" secondItem="GI4-2v-H94" secondAttribute="trailing" id="Rba-e4-ihm"/>
+                            <constraint firstItem="Dhc-WN-KCb" firstAttribute="top" secondItem="d9x-5n-Mzi" secondAttribute="bottom" id="UsJ-IF-OsS"/>
                             <constraint firstItem="GI4-2v-H94" firstAttribute="leading" secondItem="hiu-GM-JF8" secondAttribute="leading" id="VsU-eR-m9s"/>
+                            <constraint firstItem="Dhc-WN-KCb" firstAttribute="leading" secondItem="hiu-GM-JF8" secondAttribute="leading" id="fZi-WG-FSw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="USd-Bc-XTz">
@@ -1464,12 +1497,13 @@
                     <connections>
                         <outlet property="segmentedControlTipsCategory" destination="07Z-bv-lHi" id="YKt-hh-MeP"/>
                         <outlet property="tableViewRegions" destination="GI4-2v-H94" id="9rk-jC-RzL"/>
+                        <outlet property="viewNoFriends" destination="Dhc-WN-KCb" id="O0N-rT-3ON"/>
                         <segue destination="QKl-Zs-naf" kind="show" identifier="segueToTipsCountriesInRegion" id="BSC-LX-qbj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zcM-Wk-yRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="1470"/>
+            <point key="canvasLocation" x="853.60000000000002" y="1469.4152923538231"/>
         </scene>
         <!--Tips Countries In Region Controller-->
         <scene sceneID="W72-zE-KfE">
@@ -1764,6 +1798,7 @@
                         <outlet property="labelTipTitle" destination="8jb-Cx-thJ" id="hn1-tg-gum"/>
                         <outlet property="lableTipCreationDate" destination="emA-rR-Am5" id="ZwI-hA-Lx5"/>
                         <outlet property="textViewTipText" destination="zJU-b3-QWE" id="SjG-NB-1qJ"/>
+                        <outlet property="viewTip" destination="DU6-4T-8qf" id="qh5-rr-yfh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4t-ct-0T2" userLabel="First Responder" sceneMemberID="firstResponder"/>

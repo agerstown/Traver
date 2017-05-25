@@ -13,10 +13,6 @@ protocol TipDelegate {
     func tipUpdated(tip: Tip)
 }
 
-extension TipDelegate {
-    func tipUpdated(tip: Tip) {}
-}
-
 class TipController: UITableViewController {
     
     @IBOutlet weak var pickerViewCountries: UIPickerView!

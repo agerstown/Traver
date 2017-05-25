@@ -11,8 +11,8 @@ import Foundation
 class TipsController: UIViewController {
     
     @IBOutlet weak var segmentedControlTipsCategory: UISegmentedControl!
-    @IBOutlet weak var barButtonAddTip: UIBarButtonItem!
     @IBOutlet weak var tableViewRegions: UITableView!
+    @IBOutlet weak var viewNoFriends: UIView!
     
     var regions: [Codes.Region: Int] = [.REU: 0, .RAS: 0, .RNA: 0, .RSA: 0, .RAU: 0, .RAF: 0]
     var regionsArray: [Codes.Region] = []
@@ -51,6 +51,8 @@ class TipsController: UIViewController {
     // MARK: Regions update
     func reloadRegionsTable() {
         if segmentedControlTipsCategory.selectedSegmentIndex == 0 {
+            viewNoFriends.isHidden = true
+            tableViewRegions.isHidden = false
             if allRegionsArray.isEmpty {
                 startSpinning()
                 TipApiManager.shared.getExistingTipsCountries() { countryCodes in
@@ -72,6 +74,7 @@ class TipsController: UIViewController {
                     self.filterCountryCodes(codes: countryCodes, countryCodes: &self.friendsCountryCodes,
                                             regions: &self.friendsRegions, regionsArray: &self.friendsRegionsArray) {
                         self.stopSpinning()
+                        self.configureFriendsSection()
                     }
                 }
             } else {
@@ -80,6 +83,16 @@ class TipsController: UIViewController {
                 regionsArray = friendsRegionsArray
                 tableViewRegions.reloadData()
             }
+        }
+    }
+    
+    func configureFriendsSection() {
+        if countryCodes.count == 0 {
+            viewNoFriends.isHidden = false
+            tableViewRegions.isHidden = true
+        } else {
+            viewNoFriends.isHidden = true
+            tableViewRegions.isHidden = false
         }
     }
     
@@ -141,11 +154,6 @@ class TipsController: UIViewController {
         } else if let controller = segue.destination as? MyTipsController {
             controller.tipsDelegate = self
         }
-//        } else if let navController = segue.destination as? UINavigationController {
-//            if let controller = navController.viewControllers[0] as? TipController {
-//                controller.tipDelegate = self
-//            }
-//        }
     }
     
 }
@@ -208,13 +216,5 @@ extension TipsController: TipsDelegate {
             self.filterCountryCodes(codes: countryCodes, countryCodes: &self.allCountryCodes,
                                     regions: &self.allRegions, regionsArray: &self.allRegionsArray, completion: nil)
         }
-        //reloadRegionsTable()
     }
 }
-
-//// MARK: - TipDelegate
-//extension TipsController: TipDelegate {
-//    func tipCreated(country: Codes.Country) {
-//        reloadRegionsTable()
-//    }
-//}

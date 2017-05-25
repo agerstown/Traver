@@ -10,7 +10,6 @@
 		610B2F651E92D01400000006 /* UIImage+SizeReduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610B2F641E92D01400000006 /* UIImage+SizeReduction.swift */; };
 		610D86FF1DECE0C40030C153 /* VisitedRegionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 610D86FE1DECE0C40030C153 /* VisitedRegionHeaderView.xib */; };
 		610FCA2B1DF4A5FE00046546 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 610FCA2D1DF4A5FE00046546 /* InfoPlist.strings */; };
-		6117BBD31ED37404001169F6 /* TipsCountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117BBD21ED37404001169F6 /* TipsCountryCell.swift */; };
 		611EB3081DF5ED5E002960A8 /* Share.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611EB3071DF5ED5E002960A8 /* Share.xib */; };
 		612A0B3B1E9FA902005BDCA6 /* SharePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3A1E9FA902005BDCA6 /* SharePreviewController.swift */; };
 		612A0B3D1E9FB4D0005BDCA6 /* UIImage+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3C1E9FB4D0005BDCA6 /* UIImage+Effects.swift */; };
@@ -65,6 +64,10 @@
 		616E0ED31E34BC0700044A4C /* Codes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616E0ED21E34BC0700044A4C /* Codes.swift */; };
 		61732B231E491AFC00A0C952 /* UserApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61732B221E491AFC00A0C952 /* UserApiManager.swift */; };
 		61732B251E491EFB00A0C952 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61732B241E491EFB00A0C952 /* Main.storyboard */; };
+		6177EAA71ED77ED600AEEA5B /* TipsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6177EAA61ED77ED600AEEA5B /* TipsController.swift */; };
+		6177EAAB1ED77EF500AEEA5B /* TipsCountriesInRegionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6177EAA81ED77EF500AEEA5B /* TipsCountriesInRegionController.swift */; };
+		6177EAAC1ED77EF500AEEA5B /* TipsCountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6177EAA91ED77EF500AEEA5B /* TipsCountryCell.swift */; };
+		6177EAAD1ED77EF500AEEA5B /* TipsRegionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6177EAAA1ED77EF500AEEA5B /* TipsRegionCell.swift */; };
 		617C17391E6B0AFC008576E4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617C17381E6B0AFC008576E4 /* CloudKit.framework */; };
 		619AE8891EA3F1C9005FCC46 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619AE8881EA3F1C9005FCC46 /* FriendCell.swift */; };
 		619D6ED41ED48A0300DED7B7 /* TipAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619D6ED31ED48A0200DED7B7 /* TipAuthor.swift */; };
@@ -77,10 +80,7 @@
 		61C4F1B71DFAD5380070158E /* SVGKImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C4F1B61DFAD5380070158E /* SVGKImage+Extensions.swift */; };
 		61FD56DD1EB6776A0035F169 /* Bluring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD56DC1EB6776A0035F169 /* Bluring.swift */; };
 		61FD56DF1EB6784B0035F169 /* EmailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD56DE1EB6784B0035F169 /* EmailController.swift */; };
-		61FF9D701ED0A1DF0008AFE9 /* TipsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF9D6F1ED0A1DF0008AFE9 /* TipsController.swift */; };
-		61FF9D741ED0AFA80008AFE9 /* TipsRegionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF9D731ED0AFA80008AFE9 /* TipsRegionCell.swift */; };
 		61FF9D761ED0B3C00008AFE9 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF9D751ED0B3C00008AFE9 /* UITableView+Extensions.swift */; };
-		61FF9D781ED0D5D20008AFE9 /* TipsCountriesInRegionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF9D771ED0D5D20008AFE9 /* TipsCountriesInRegionController.swift */; };
 		61FF9D7A1ED0D6190008AFE9 /* TipsInCountryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF9D791ED0D6190008AFE9 /* TipsInCountryController.swift */; };
 		61FF9D7C1ED0D6750008AFE9 /* TipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF9D7B1ED0D6750008AFE9 /* TipCell.swift */; };
 		61FF9D7E1ED0DF8B0008AFE9 /* TipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF9D7D1ED0DF8B0008AFE9 /* TipController.swift */; };
@@ -127,7 +127,6 @@
 		610D86FE1DECE0C40030C153 /* VisitedRegionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisitedRegionHeaderView.xib; sourceTree = "<group>"; };
 		610FCA2C1DF4A5FE00046546 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		610FCA2E1DF4A60000046546 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6117BBD21ED37404001169F6 /* TipsCountryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipsCountryCell.swift; path = "../Regions & Countries/TipsCountryCell.swift"; sourceTree = "<group>"; };
 		611EB3071DF5ED5E002960A8 /* Share.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Share.xib; sourceTree = "<group>"; };
 		612A0B3A1E9FA902005BDCA6 /* SharePreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePreviewController.swift; sourceTree = "<group>"; };
 		612A0B3C1E9FB4D0005BDCA6 /* UIImage+Effects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Effects.swift"; sourceTree = "<group>"; };
@@ -314,6 +313,10 @@
 		616E64A01DE6223300680D4F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61732B221E491AFC00A0C952 /* UserApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserApiManager.swift; sourceTree = "<group>"; };
 		61732B241E491EFB00A0C952 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		6177EAA61ED77ED600AEEA5B /* TipsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipsController.swift; path = "Traver/Tips/Regions & Countries/TipsController.swift"; sourceTree = SOURCE_ROOT; };
+		6177EAA81ED77EF500AEEA5B /* TipsCountriesInRegionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipsCountriesInRegionController.swift; path = "Traver/Tips/Regions & Countries/TipsCountriesInRegionController.swift"; sourceTree = SOURCE_ROOT; };
+		6177EAA91ED77EF500AEEA5B /* TipsCountryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipsCountryCell.swift; path = "Traver/Tips/Regions & Countries/TipsCountryCell.swift"; sourceTree = SOURCE_ROOT; };
+		6177EAAA1ED77EF500AEEA5B /* TipsRegionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipsRegionCell.swift; path = "Traver/Tips/Regions & Countries/TipsRegionCell.swift"; sourceTree = SOURCE_ROOT; };
 		617C17371E6B0AEE008576E4 /* Traver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Traver.entitlements; sourceTree = "<group>"; };
 		617C17381E6B0AFC008576E4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		619AE8881EA3F1C9005FCC46 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
@@ -328,10 +331,7 @@
 		61C4F1B61DFAD5380070158E /* SVGKImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SVGKImage+Extensions.swift"; sourceTree = "<group>"; };
 		61FD56DC1EB6776A0035F169 /* Bluring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bluring.swift; sourceTree = "<group>"; };
 		61FD56DE1EB6784B0035F169 /* EmailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailController.swift; sourceTree = "<group>"; };
-		61FF9D6F1ED0A1DF0008AFE9 /* TipsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipsController.swift; path = "../Regions & Countries/TipsController.swift"; sourceTree = "<group>"; };
-		61FF9D731ED0AFA80008AFE9 /* TipsRegionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipsRegionCell.swift; path = "../Regions & Countries/TipsRegionCell.swift"; sourceTree = "<group>"; };
 		61FF9D751ED0B3C00008AFE9 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
-		61FF9D771ED0D5D20008AFE9 /* TipsCountriesInRegionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipsCountriesInRegionController.swift; path = "../Regions & Countries/TipsCountriesInRegionController.swift"; sourceTree = "<group>"; };
 		61FF9D791ED0D6190008AFE9 /* TipsInCountryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipsInCountryController.swift; sourceTree = "<group>"; };
 		61FF9D7B1ED0D6750008AFE9 /* TipCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipCell.swift; sourceTree = "<group>"; };
 		61FF9D7D1ED0DF8B0008AFE9 /* TipController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipController.swift; sourceTree = "<group>"; };
@@ -398,10 +398,10 @@
 		6117BBCE1ED372A4001169F6 /* Regions & Countries */ = {
 			isa = PBXGroup;
 			children = (
-				61FF9D6F1ED0A1DF0008AFE9 /* TipsController.swift */,
-				61FF9D731ED0AFA80008AFE9 /* TipsRegionCell.swift */,
-				61FF9D771ED0D5D20008AFE9 /* TipsCountriesInRegionController.swift */,
-				6117BBD21ED37404001169F6 /* TipsCountryCell.swift */,
+				6177EAA61ED77ED600AEEA5B /* TipsController.swift */,
+				6177EAA81ED77EF500AEEA5B /* TipsCountriesInRegionController.swift */,
+				6177EAA91ED77EF500AEEA5B /* TipsCountryCell.swift */,
+				6177EAAA1ED77EF500AEEA5B /* TipsRegionCell.swift */,
 			);
 			name = "Regions & Countries";
 			path = Regions;
@@ -1047,7 +1047,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				614534FD1ED22CAF005DE8C7 /* TipApiManager.swift in Sources */,
-				61FF9D701ED0A1DF0008AFE9 /* TipsController.swift in Sources */,
 				612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */,
 				6165EF391ED726E100741FE5 /* MyTipsController.swift in Sources */,
 				61FF9D7E1ED0DF8B0008AFE9 /* TipController.swift in Sources */,
@@ -1058,6 +1057,8 @@
 				612A0B3B1E9FA902005BDCA6 /* SharePreviewController.swift in Sources */,
 				615665861DE3846B0050AE5A /* ProfileViewController.swift in Sources */,
 				61FD56DF1EB6784B0035F169 /* EmailController.swift in Sources */,
+				6177EAA71ED77ED600AEEA5B /* TipsController.swift in Sources */,
+				6177EAAB1ED77EF500AEEA5B /* TipsCountriesInRegionController.swift in Sources */,
 				6162D05F1ECDEA08009AA8C9 /* CurrentLocationController.swift in Sources */,
 				61B2765F1DF9E327008AA44B /* ShareManager.swift in Sources */,
 				612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */,
@@ -1067,7 +1068,6 @@
 				612A0B3D1E9FB4D0005BDCA6 /* UIImage+Effects.swift in Sources */,
 				612A0B401EA28430005BDCA6 /* FriendsViewController.swift in Sources */,
 				61FF9D801ED0E0610008AFE9 /* Tip.swift in Sources */,
-				61FF9D781ED0D5D20008AFE9 /* TipsCountriesInRegionController.swift in Sources */,
 				61FF9D7C1ED0D6750008AFE9 /* TipCell.swift in Sources */,
 				615BAD5F1DE4CF9500D1478D /* User.swift in Sources */,
 				61FF9D761ED0B3C00008AFE9 /* UITableView+Extensions.swift in Sources */,
@@ -1075,14 +1075,13 @@
 				614534FB1ED22C96005DE8C7 /* CountryVisitApiManager.swift in Sources */,
 				61A16E301E69A82700184C7F /* CloudKitHelper.swift in Sources */,
 				612F29C31DECB1A10057E20B /* UIColor+Traver.swift in Sources */,
-				61FF9D741ED0AFA80008AFE9 /* TipsRegionCell.swift in Sources */,
 				61B2765D1DF9D475008AA44B /* PhotosAccessManager.swift in Sources */,
 				613C54DE1DF0D0C3006660B9 /* Double+Round.swift in Sources */,
 				615665401DE322D70050AE5A /* AppDelegate.swift in Sources */,
+				6177EAAD1ED77EF500AEEA5B /* TipsRegionCell.swift in Sources */,
 				612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */,
 				615BAD5C1DE4C13000D1478D /* Country.swift in Sources */,
 				612F29B61DEB512D0057E20B /* String+Localized.swift in Sources */,
-				6117BBD31ED37404001169F6 /* TipsCountryCell.swift in Sources */,
 				613394591E21B4810001CF2A /* FacebookHelper.swift in Sources */,
 				612F29C11DEB62F40057E20B /* MainTabBarController.swift in Sources */,
 				6133945F1E31485D0001CF2A /* Traver.xcdatamodeld in Sources */,
@@ -1097,6 +1096,7 @@
 				6156658A1DE384920050AE5A /* SettingsViewController.swift in Sources */,
 				619AE8891EA3F1C9005FCC46 /* FriendCell.swift in Sources */,
 				61C4F1B71DFAD5380070158E /* SVGKImage+Extensions.swift in Sources */,
+				6177EAAC1ED77EF500AEEA5B /* TipsCountryCell.swift in Sources */,
 				6133945C1E22DAC30001CF2A /* ProfileEditViewController.swift in Sources */,
 				612F29A91DEB27430057E20B /* VisitedRegionHeaderView.swift in Sources */,
 				616E0ED31E34BC0700044A4C /* Codes.swift in Sources */,
