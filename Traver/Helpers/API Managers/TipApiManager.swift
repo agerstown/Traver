@@ -60,6 +60,23 @@ class TipApiManager: ApiManager {
         }
     }
     
+    func getTipsForCountryFriends(_ country: Codes.Country, completion: @escaping (_ tips: [Tip]) -> Void) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+        
+        let parameters: Parameters = [
+            "country_code": country.code
+        ]
+        
+        Alamofire.request(host + "tips/get-tips-for-country-friends/", method: .get, parameters: parameters, headers: headers).responseJSON { response in
+            if let tipsJSON = response.result.value as? NSArray {
+                let tips = self.parseTips(json: tipsJSON, country: country)
+                completion(tips)
+            }
+        }
+    }
+    
     private func parseTips(json: NSArray, country: Codes.Country?) -> [Tip] {
         var tips: [Tip] = []
         for tip in json {

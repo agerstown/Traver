@@ -47,7 +47,6 @@ class SettingsViewController: UITableViewController {
         
         tapGestureRecognizer.addTarget(self, action: #selector(handleTap(recognizer:)))
         tapGestureRecognizer.isEnabled = false
-        //tapGestureRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer.delegate = self
         
@@ -121,6 +120,7 @@ extension SettingsViewController: UIGestureRecognizerDelegate {
     }
 }
 
+// MARK: - UITextViewDelegate
 extension SettingsViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         tapGestureRecognizer.isEnabled = true

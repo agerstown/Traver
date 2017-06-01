@@ -31,11 +31,11 @@ class TipController: UITableViewController {
     
     var tip: Tip?
     
+    let tapGestureRecognizer = UITapGestureRecognizer()
+    
     // MARK: - Lifeсycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = "New tip".localized()
         
         textFieldTitle.placeholder = textFieldTitle.placeholder?.localized()
         textViewText.text = textViewText.text.localized()
@@ -45,6 +45,11 @@ class TipController: UITableViewController {
         
         pickerViewCountries.dataSource = self
         pickerViewCountries.delegate = self
+        
+        tapGestureRecognizer.addTarget(self, action: #selector(handleTap(recognizer:)))
+        tapGestureRecognizer.isEnabled = false
+        view.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.delegate = self
         
         setUpViews()
     }
@@ -58,8 +63,10 @@ class TipController: UITableViewController {
             textViewText.text = tip.text
             textViewText.textColor = .black
             pickerViewCountries.isUserInteractionEnabled = false
+            self.title = "Edit tip".localized()
         } else {
             pickerViewCountries.selectRow(2, inComponent: 0, animated: false)
+            self.title = "New tip".localized()
         }
     }
     
@@ -126,6 +133,10 @@ extension TipController: UITextFieldDelegate {
         }
         return true
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        tapGestureRecognizer.isEnabled = true
+    }
 }
 
 // MARK: - UITextViewDelegate
@@ -143,6 +154,10 @@ extension TipController: UITextViewDelegate {
             textViewText.text = textViewTextPlaceholder
             textViewText.textColor = .placeholderColor
         }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        tapGestureRecognizer.isEnabled = true
     }
 }
 
@@ -166,5 +181,15 @@ extension TipController: UIPickerViewDelegate {
         pickerLabel.textAlignment = NSTextAlignment.center
         return pickerLabel
     }
-    
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension TipController: UIGestureRecognizerDelegate {
+    func handleTap(recognizer: UIGestureRecognizer) {
+        if recognizer.state == .ended {
+            textFieldTitle.resignFirstResponder()
+            textViewText.resignFirstResponder()
+            tapGestureRecognizer.isEnabled = false
+        }
+    }
 }

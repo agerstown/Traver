@@ -90,6 +90,7 @@ class CurrentLocationController: UIViewController {
         UserApiManager.shared.setCurrentLocation(countryCode: nil, region: nil) { success in
             if success {
                 self.currentLocationDelegate?.locationSaved()
+                self.currentLocationDelegate?.friendsNamesDownloaded(names: [])
                 self.dismiss(animated: true, completion: nil)
             }
         }

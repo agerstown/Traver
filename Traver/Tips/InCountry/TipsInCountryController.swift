@@ -16,6 +16,8 @@ class TipsInCountryController: UIViewController {
     
     var tips: [Tip] = []
     
+    var friends: Bool?
+    
     let activityIndicatorInitialLoading = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     var selectedTip: Tip?
@@ -23,6 +25,8 @@ class TipsInCountryController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = country?.name
         
         tableViewTips.dataSource = self
         tableViewTips.delegate = self
@@ -41,14 +45,27 @@ class TipsInCountryController: UIViewController {
     // MARK: Tips update
     func reloadTipsTable(completion: @escaping () -> Void) {
         if let country = country {
-            TipApiManager.shared.getTipsForCountry(country) { tips in
-                completion()
-                self.tips = tips
-                self.tableViewTips.reloadData()
+            
+            if let friends = friends {
+                if friends {
+                    TipApiManager.shared.getTipsForCountryFriends(country) { tips in
+                        self.tipsLoaded(tips: tips, completion: completion)
+                    }
+                } else {
+                    TipApiManager.shared.getTipsForCountry(country) { tips in
+                        self.tipsLoaded(tips: tips, completion: completion)
+                    }
+                }
             }
         }
     }
 
+    func tipsLoaded(tips: [Tip], completion: @escaping () -> Void) {
+        completion()
+        self.tips = tips
+        tableViewTips.reloadData()
+    }
+    
     
     // MARK: - Spinner for initial tips loading
     func startSpinning() {

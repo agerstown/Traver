@@ -17,6 +17,8 @@ class TipsCountriesInRegionController: UIViewController {
     
     var selectedCountry: Codes.Country?
     
+    var friends: Bool?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,7 @@ class TipsCountriesInRegionController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? TipsInCountryController {
             controller.country = selectedCountry
+            controller.friends = friends
         }
     }
     

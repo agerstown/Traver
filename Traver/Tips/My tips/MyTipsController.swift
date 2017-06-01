@@ -16,8 +16,6 @@ class MyTipsController: UIViewController {
     
     @IBOutlet weak var tableViewTips: UITableView!
     
-    var tips: [Tip] = []
-    
     let activityIndicatorInitialLoading = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     var selectedTip: Tip? 
@@ -27,6 +25,8 @@ class MyTipsController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "My tips".localized()
         
         tableViewTips.dataSource = self
         tableViewTips.delegate = self
@@ -42,14 +42,11 @@ class MyTipsController: UIViewController {
     // MARK: Tips update
     func reloadTipsTable() {
         if User.shared.tips != nil {
-            self.tips = User.shared.tips!
             tableViewTips.reloadData()
         } else {
             startSpinning()
             TipApiManager.shared.getUserTips() { tips in
                 User.shared.tips = tips
-                self.tips = tips
-                
                 self.stopSpinning()
                 self.tableViewTips.reloadData()
             }
@@ -86,15 +83,14 @@ class MyTipsController: UIViewController {
 // MARK: - UITableViewDataSource
 extension MyTipsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tips.count
+        return User.shared.tips?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewTips.dequeue(MyTipCell.self)
-        let tip = tips[indexPath.row]
-        
-        configureCell(cell: cell, tip: tip)
-        
+        if let tip = User.shared.tips?[indexPath.row] {
+            configureCell(cell: cell, tip: tip)
+        }
         return cell
     }
     
@@ -111,12 +107,12 @@ extension MyTipsController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            let tip = tips[indexPath.row]
-            TipApiManager.shared.deleteTip(id: tip.id) {
-                self.tips.remove(at: indexPath.row)
-                self.tableViewTips.deleteRows(at: [indexPath], with: .automatic)
+            if let tip = User.shared.tips?[indexPath.row] {
+                TipApiManager.shared.deleteTip(id: tip.id) {
+                    User.shared.tips?.remove(at: indexPath.row)
+                    self.tableViewTips.deleteRows(at: [indexPath], with: .automatic)
+                }
             }
-            
         }
     }
     
@@ -126,7 +122,7 @@ extension MyTipsController: UITableViewDataSource {
 extension MyTipsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableViewTips.deselectRow(at: indexPath, animated: true)
-        selectedTip = tips[indexPath.row]
+        selectedTip = User.shared.tips?[indexPath.row]
         performSegue(withIdentifier: "segueToTipController", sender: nil)
     }
 }
@@ -135,7 +131,7 @@ extension MyTipsController: UITableViewDelegate {
 extension MyTipsController: TipDelegate {
     
     func tipUpdated(tip: Tip) {
-        if let row = tips.index(of: tip) {
+        if let row = User.shared.tips?.index(of: tip) {
             let indexPath = IndexPath(row: row, section: 0)
             if let cell = tableViewTips.cellForRow(at: indexPath) as? MyTipCell {
                 configureCell(cell: cell, tip: tip)
@@ -146,7 +142,7 @@ extension MyTipsController: TipDelegate {
     }
     
     func tipCreated(tip: Tip) {
-        tips.insert(tip, at: 0)
+        User.shared.tips?.insert(tip, at: 0)
         tableViewTips.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         tipsDelegate?.tipCreated(country: tip.country)
     }

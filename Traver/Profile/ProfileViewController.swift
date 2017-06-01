@@ -107,6 +107,7 @@ class ProfileViewController: UIViewController {
 
         updateProfileInfo()
         updateCountriesRelatedInfo()
+        updatePhoto()
     }
 
     deinit {
@@ -139,8 +140,6 @@ class ProfileViewController: UIViewController {
         
         labelName.text = user!.name
         labelLocation.text = user!.location
-        
-        updatePhoto()
     }
     
     func updateCountriesRelatedInfo() {

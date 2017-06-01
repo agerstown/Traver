@@ -49,27 +49,25 @@ class FriendsViewController: UIViewController {
         let predicate = NSPredicate(format: "ANY friends = %@", User.shared)
         let fetchRequest = NSFetchRequest<User> (entityName: "User")
         fetchRequest.predicate = predicate
-        let sortDescriptor = NSSortDescriptor(key: "numberOfVisitedCountries", ascending: true)
+        //let sortDescriptor = NSSortDescriptor(key: "numberOfVisitedCountries", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         
         try! fetchedResultsController!.performFetch()
+        
+        configureView()
         
         UserApiManager.shared.getFriends(user: User.shared)
         
         refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
         tableViewFriends.refreshControl = refreshControl
         
-        configureView()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(friendsUpdated), name: UserApiManager.shared.FriendsUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(facebookConnected), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -79,10 +77,7 @@ class FriendsViewController: UIViewController {
         if AccessToken.current == nil {
             FacebookHelper.shared.login()
         } else {
-            UserApiManager.shared.getFriends(user: User.shared) {
-                try! self.fetchedResultsController!.performFetch()
-                self.tableViewFriends.reloadData()
-            }
+            UserApiManager.shared.getFriends(user: User.shared)
         }
     }
     
@@ -108,11 +103,18 @@ class FriendsViewController: UIViewController {
     func friendsUpdated() {
         try! fetchedResultsController!.performFetch()
         
+        configureView()
+        tableViewFriends.reloadData()
+        
         if let currentCountryCode = User.shared.currentCountryCode {
             UserApiManager.shared.getFriendsForCurrentCountry(code: currentCountryCode) { friendsNames in
                 self.configureFriendsInfoLabel(names: friendsNames)
             }
         }
+    }
+    
+    func facebookConnected() {
+        UserApiManager.shared.getFriends(user: User.shared)
     }
     
     func photoUpdated() {
@@ -173,7 +175,7 @@ class FriendsViewController: UIViewController {
             labelFriendsInfo.isHidden = false
             tableViewFriends.reloadData()
             
-            var text = names[0] //"\u{2022} " + names[0]
+            var text = names[0]
             
             if names.count > 1 {
                 if names.count > 2 {
@@ -213,7 +215,14 @@ extension FriendsViewController: UITableViewDataSource {
         let user =  fetchedResultsController!.object(at: indexPath)
         
         cell.labelName.text = user.name
-        cell.imageViewPhoto.image = user.photo != nil ? user.photo : UIImage(named: "default_photo")
+        
+        if let path = user.photoPath {
+            ImagesManager.shared.loadImage(withURL: "https://s3.amazonaws.com/traver-media/" + path, intoImageView: cell.imageViewPhoto)
+        } else {
+            cell.imageViewPhoto.image = UIImage(named: "default_photo")
+        }
+        
+        //cell.imageViewPhoto.image = user.photo != nil ? user.photo : UIImage(named: "default_photo")
         if let location = user.currentLocation {
             cell.labelCurrentLocation.text = "Currently in ".localized() + location
             cell.constraintLabelName.constant = 6

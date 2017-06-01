@@ -14,6 +14,9 @@ class User: NSManagedObject {
     
     static var shared: User = {
         let frUser = NSFetchRequest<User>(entityName: "User")
+        let predicate = NSPredicate(format: "mainUser = %@", NSNumber(value: true))
+        frUser.predicate = predicate
+        
         let users = try! CoreDataStack.shared.mainContext.fetch(frUser)
         if users.count > 0 {
             let user = users.first!
@@ -28,6 +31,7 @@ class User: NSManagedObject {
             }
             
             user.locale = Locale.current.languageCode
+            user.mainUser = true
             
             if let token = user.token {
                 UserApiManager.shared.getUserInfo(user: user) { success in
@@ -43,6 +47,7 @@ class User: NSManagedObject {
         } else {
             let user = User(context: CoreDataStack.shared.mainContext)
             user.locale = Locale.current.languageCode
+            user.mainUser = true
             CloudKitHelper.shared.login(user: user)
             return user
         }
@@ -81,6 +86,7 @@ class User: NSManagedObject {
     
     @NSManaged var friends: NSOrderedSet
     @NSManaged var visitedCountries: NSSet
+    @NSManaged var mainUser: NSNumber?
     
     var username: String {
         return facebookID != nil ? "fb" + facebookID! : iCloudID != nil ? "ic" + iCloudID! : ""
@@ -124,7 +130,6 @@ class User: NSManagedObject {
         let allVisitedCountries = NSMutableSet(set: self.visitedCountries)
         allVisitedCountries.remove(country)
         self.visitedCountries = allVisitedCountries
-        
         CoreDataStack.shared.saveContext()
     }
     

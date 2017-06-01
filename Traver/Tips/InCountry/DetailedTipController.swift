@@ -37,7 +37,7 @@ class DetailedTipController: UIViewController {
         imageViewAuthorPhoto.layer.cornerRadius = imageViewAuthorPhoto.frame.height / 2
         
         if let tip = tip {
-            imageViewAuthorPhoto.image = tip.author.photo
+            imageViewAuthorPhoto.image = tip.author.photo ?? UIImage(named: "default_photo")
             labelAuthorName.text = tip.author.name ?? "Anonymous".localized()
             labelAuthorLocation.text = tip.author.location == nil ? "" : "Lives in".localized() + " " + tip.author.location!
             

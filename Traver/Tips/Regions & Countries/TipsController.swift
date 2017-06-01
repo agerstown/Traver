@@ -151,6 +151,7 @@ class TipsController: UIViewController {
             controller.countryCodes = countryCodes
             controller.countries = countriesInSelectedRegion
             controller.title = selectedRegion?.name
+            controller.friends = countryCodes == friendsCountryCodes
         } else if let controller = segue.destination as? MyTipsController {
             controller.tipsDelegate = self
         }
@@ -169,6 +170,8 @@ extension TipsController: UITableViewDataSource {
         let cell = tableViewRegions.dequeue(TipsRegionCell.self)
         if indexPath.row % 2 == 1 {
             cell.backgroundColor = .yellowTraverColor
+        } else {
+            cell.backgroundColor = .white
         }
         
         let region = regionsArray[indexPath.row]

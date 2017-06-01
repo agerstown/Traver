@@ -281,6 +281,7 @@
 "Cities, regions or places" = "Cities, regions or places";
 "Why these regions are worth visiting. Recommended landmarks, hotels, restaurants and so" = "Why these regions are worth visiting. Recommended landmarks, hotels, restaurants and so";
 "New tip" = "New tip";
+"Edit tip" = "Edit tip";
 "Country" = "Country";
 "Tip title" = "Tip title";
 "Tip text" = "Tip text";
@@ -291,3 +292,4 @@
 "No more than 100 characters!" = "No more than 100 letters!";
 "Lives in" = "Lives in";
 "All" = "All";
+"My tips" = "My tips";

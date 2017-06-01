@@ -281,6 +281,7 @@
 "Cities, regions or places" = "Города, регионы или места";
 "Why these regions are worth visiting. Recommended landmarks, hotels, restaurants and so" = "Почему данные места стоит посетить. Рекомендуемые достопремечательности, отели, рестораны и т.п.";
 "New tip" = "Новый совет";
+"Edit tip" = "Редактирование";
 "Country" = "Страна";
 "Tip title" = "Заголовок";
 "Tip text" = "Текст";
@@ -291,3 +292,4 @@
 "No more than 100 characters!" = "Не больше 100 символов!";
 "Lives in" = "Живет в";
 "All" = "Все";
+"My tips" = "Мои советы";

@@ -53,9 +53,10 @@ class UserApiManager: ApiManager {
                     }
                 }
             }
-        } else {
-            getFriends(user: User.shared)
         }
+//        } else {
+//            getFriends(user: User.shared)
+//        }
     }
     
     func getOrCreateUserWithICloud(user: User, id: String) {
@@ -153,13 +154,11 @@ class UserApiManager: ApiManager {
                 if let friends = response.result.value as? NSArray {
                     
                     if User.shared.friends.count != 0 {
-                        let predicate = NSPredicate(format: "ANY friends = %@", User.shared)
-                        let fetchRequest = NSFetchRequest<NSFetchRequestResult> (entityName: "User")
-                        fetchRequest.predicate = predicate
-                        
-                        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-                        
-                        try! CoreDataStack.shared.persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: CoreDataStack.shared.mainContext)
+                        for friend in User.shared.friends {
+                            if let friend = friend as? NSManagedObject {
+                                CoreDataStack.shared.mainContext.delete(friend)
+                            }
+                        }
                     }
                     
                     if friends.count > 0 {
@@ -169,9 +168,9 @@ class UserApiManager: ApiManager {
                             
                             let user = User(context: CoreDataStack.shared.mainContext)
                             friendsArray.append(user)
-                            
                             self.parseAndSaveUser(user: user, from: friend, withCountries: false, withFriends: false)
                         }
+                        
                         User.shared.friends = NSOrderedSet(array: friendsArray)
                     } else {
                         User.shared.friends = NSOrderedSet()
@@ -654,6 +653,7 @@ class UserApiManager: ApiManager {
         }
         
         user.token = json["token"].stringValue
+        user.mainUser = NSNumber(value: user == User.shared)
         
         CoreDataStack.shared.saveContext()
         
@@ -665,17 +665,30 @@ class UserApiManager: ApiManager {
             if user.photoPath != photoPath {
                 user.photoPath = photoPath
                 CoreDataStack.shared.saveContext()
-                getPhoto(user: user)
+                if user == User.shared {
+                    getPhoto(user: user)
+                }
             }
         }
+        
+        
+        
+        
+//        if let photoPath = stringOrNilIfEmpty(profile["photo_path"].stringValue) {
+//            if user.photoPath != photoPath {
+//                user.photoPath = photoPath
+//                CoreDataStack.shared.saveContext()
+//                getPhoto(user: user)
+//            }
+//        }
         
         if withCountries {
             CountryVisitApiManager.shared.getUserCountryVisits(user: user)
         }
         
-        if withFriends {
-            getFriends(user: user)
-        }
+//        if withFriends {
+//            getFriends(user: user)
+//        }
     }
     
     private func updateUserInfoInCoreData(name: String, location: String?, completion: @escaping () -> Void) {

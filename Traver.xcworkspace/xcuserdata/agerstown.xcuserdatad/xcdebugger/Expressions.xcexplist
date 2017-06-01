@@ -27,6 +27,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "UserApiManager.getPhoto(user : User) -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2):ProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -362,6 +370,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "UserApiManager.(getFriends(user : User, completion : () -&gt; ()?) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.friends.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "User.saveCountry(for : String, in : Region) -&gt; ():User.swift">
          <PersistentStrings>
             <PersistentString
@@ -405,6 +421,9 @@
       <ContextState
          contextName = "FriendsViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:FriendsViewController.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "fetchedResultsController?.sections?[section].numberOfObjects">
+            </PersistentString>
             <PersistentString
                value = "friends.count">
             </PersistentString>
@@ -468,16 +487,27 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TipApiManager.(getTipsForCountryFriends(Codes.Country, completion : ([Tip]) -&gt; ()) -&gt; ()).(closure #1):TipApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "JSON(response.result.value)[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "static User.(shared).(variable initialization expression).(closure #1):User.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.locale">
+               value = "">
             </PersistentString>
             <PersistentString
                value = "User.shared.locale">
             </PersistentString>
             <PersistentString
-               value = "user.token">
+               value = "self.locale">
+            </PersistentString>
+            <PersistentString
+               value = "user.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -486,6 +516,17 @@
          <PersistentStrings>
             <PersistentString
                value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsViewController.viewDidLoad() -&gt; ():FriendsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.friends.count">
+            </PersistentString>
+            <PersistentString
+               value = "">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -523,7 +564,7 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "user.facebookID">
+               value = "json[&quot;num_countries&quot;].stringValue">
             </PersistentString>
             <PersistentString
                value = "json[&quot;num_countries&quot;].int">
@@ -532,10 +573,10 @@
                value = "user.location">
             </PersistentString>
             <PersistentString
-               value = "json[&quot;num_countries&quot;].stringValue">
+               value = "User.shared.facebookEmail">
             </PersistentString>
             <PersistentString
-               value = "User.shared.facebookEmail">
+               value = "user.facebookID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

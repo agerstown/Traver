@@ -57,24 +57,20 @@ class EmailController: UIViewController {
         
         let email = textFieldEmail.text ?? ""
         
-        if !email.contains("@") {
-            StatusBarManager.shared.showCustomStatusBarError(text: "The email is not valid!".localized())
-            textFieldEmail.becomeFirstResponder()
-        } else {
-            
+        if email.contains("@") || email.isEmpty {
             if User.shared.feedbackEmail == nil || User.shared.feedbackEmail != email {
                 UserApiManager.shared.setFeedbackEmail(email: email)
             }
             
             let parameters: Parameters = [
-                    "text": feedbackText ?? "no text",
-                    "username": email
+                "text": feedbackText ?? "no text",
+                "username": email
             ]
             
             _ = Alamofire.request(slackFeedbackURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
                 if response.response?.statusCode == 200 {
                     self.feedbackDelegate?.feedbackSuccessfullySent()
-        
+                    
                     self.dismiss(animated: true, completion: nil)
                     StatusBarManager.shared.showCustomStatusBarNeutral(text: "Your feedback has been sent!".localized())
                 } else {
@@ -82,6 +78,9 @@ class EmailController: UIViewController {
                     StatusBarManager.shared.showCustomStatusBarError(text: "Error! Please try to send your feedback later.".localized())
                 }
             }
+        } else {
+            StatusBarManager.shared.showCustomStatusBarError(text: "The email is not valid!".localized())
+            textFieldEmail.becomeFirstResponder()
         }
     }
 }

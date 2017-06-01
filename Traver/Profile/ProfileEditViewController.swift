@@ -65,6 +65,7 @@ class ProfileEditViewController: UITableViewController {
                 UserApiManager.shared.updatePhoto(user: User.shared, photo: image) {
                     User.shared.photoData = UIImagePNGRepresentation(image)
                     CoreDataStack.shared.saveContext()
+                    NotificationCenter.default.post(name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
                 }
             }
         }
@@ -79,7 +80,7 @@ class ProfileEditViewController: UITableViewController {
 extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            selectedImage = pickedImage
+            selectedImage = pickedImage.normalizedImage()
             self.setPhoto(selectedImage)
         }
         dismiss(animated: true, completion: nil)

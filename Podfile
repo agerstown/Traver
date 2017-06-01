@@ -12,5 +12,6 @@ target 'Traver' do
 	pod 'SwiftKeychainWrapper'
 	pod 'Fabric'
 	pod 'Crashlytics'
-	pod 'Nuke'
+	pod 'Nuke', '~> 5.1'
+	pod 'DFCache', '~> 4.0.1'
 end
