@@ -72,7 +72,9 @@ class ProfileEditViewController: UITableViewController {
     }
     
     @IBAction func buttonPhotoTapped(_ sender: UIButton) {
-        present(imagePicker, animated: true, completion: nil)
+        present(imagePicker, animated: true) {
+            UIApplication.shared.statusBarStyle = .default
+        }
     }
 }
 
@@ -83,10 +85,12 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
             selectedImage = pickedImage.normalizedImage()
             self.setPhoto(selectedImage)
         }
+        UIApplication.shared.statusBarStyle = .lightContent
         dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        UIApplication.shared.statusBarStyle = .lightContent
         dismiss(animated: true, completion: nil)
     }
 }

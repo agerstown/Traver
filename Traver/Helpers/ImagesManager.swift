@@ -13,6 +13,7 @@ import Nuke
 
 protocol ImageLoader {
     func loadImage(withURL url: String, intoImageView imageView: UIImageView)
+    func loadImage(withURL url: String, intoImageView imageView: UIImageView, handler: @escaping Manager.Handler)
 }
 
 class ImagesManager: ImageLoader {
@@ -28,6 +29,15 @@ class ImagesManager: ImageLoader {
         }
         manager.loadImage(with: url, into: imageView)
     }
+    
+    func loadImage(withURL urlStr: String, intoImageView imageView: UIImageView, handler: @escaping Manager.Handler) {
+        guard let url = URL(string: urlStr) else {
+            assertionFailure("asked to load image for not url convertible string \(urlStr)")
+            return
+        }
+        manager.loadImage(with: url, into: imageView, handler: handler)
+    }
+
     
     init() {
         // Create DFCache instance. It makes sense not to store data in memory cache.

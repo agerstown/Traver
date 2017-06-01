@@ -33,6 +33,9 @@ class FriendsViewController: UIViewController {
     
     let visitedCountriesText = "%d countries visited"
     
+    let photosHost =  "https://s3.amazonaws.com/"
+//    let photosHost =  "http://127.0.0.1:8000/"
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -217,12 +220,11 @@ extension FriendsViewController: UITableViewDataSource {
         cell.labelName.text = user.name
         
         if let path = user.photoPath {
-            ImagesManager.shared.loadImage(withURL: "https://s3.amazonaws.com/traver-media/" + path, intoImageView: cell.imageViewPhoto)
+            ImagesManager.shared.loadImage(withURL: photosHost + "traver-media/" + path, intoImageView: cell.imageViewPhoto)
         } else {
             cell.imageViewPhoto.image = UIImage(named: "default_photo")
         }
         
-        //cell.imageViewPhoto.image = user.photo != nil ? user.photo : UIImage(named: "default_photo")
         if let location = user.currentLocation {
             cell.labelCurrentLocation.text = "Currently in ".localized() + location
             cell.constraintLabelName.constant = 6

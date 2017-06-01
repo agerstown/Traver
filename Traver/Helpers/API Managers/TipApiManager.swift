@@ -126,12 +126,10 @@ class TipApiManager: ApiManager {
     func getAuthorPhoto(author: TipAuthor, putInto imageView: UIImageView) {
         imageView.image = UIImage(named: "default_photo")
         if let path = author.photoPath {
-            if let url = URL(string: photosHost + "traver-media/" + path) {
-                Nuke.loadImage(with: url, into: imageView) { handler in
-                    let image = handler.0.value
-                    author.photo = image
-                    imageView.image = author.photo
-                }
+            ImagesManager.shared.loadImage(withURL: photosHost + "traver-media/" + path, intoImageView: imageView) { handler in
+                let image = handler.0.value
+                author.photo = image
+                imageView.image = author.photo
             }
         }
     }

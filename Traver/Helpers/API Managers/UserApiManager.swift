@@ -54,9 +54,6 @@ class UserApiManager: ApiManager {
                 }
             }
         }
-//        } else {
-//            getFriends(user: User.shared)
-//        }
     }
     
     func getOrCreateUserWithICloud(user: User, id: String) {
@@ -168,7 +165,7 @@ class UserApiManager: ApiManager {
                             
                             let user = User(context: CoreDataStack.shared.mainContext)
                             friendsArray.append(user)
-                            self.parseAndSaveUser(user: user, from: friend, withCountries: false, withFriends: false)
+                            self.parseAndSaveUser(user: user, from: friend, withCountries: false)
                         }
                         
                         User.shared.friends = NSOrderedSet(array: friendsArray)
@@ -607,7 +604,7 @@ class UserApiManager: ApiManager {
                     let user = User(context: CoreDataStack.shared.mainContext)
                     friendsArray.append(user)
                     
-                    self.parseAndSaveUser(user: user, from: friend, withCountries: false, withFriends: false)
+                    self.parseAndSaveUser(user: user, from: friend, withCountries: false)
                 }
                 User.shared.friends = NSOrderedSet(array: friendsArray)
                 CoreDataStack.shared.saveContext()
@@ -634,7 +631,7 @@ class UserApiManager: ApiManager {
     
     
     // MARK: - Helper methods
-    private func parseAndSaveUser(user: User, from responseValue: Any, withCountries: Bool = true, withFriends: Bool = true) {
+    private func parseAndSaveUser(user: User, from responseValue: Any, withCountries: Bool = true) {
         let json = JSON(responseValue)
         
         let profile = json["profile"]
@@ -671,24 +668,9 @@ class UserApiManager: ApiManager {
             }
         }
         
-        
-        
-        
-//        if let photoPath = stringOrNilIfEmpty(profile["photo_path"].stringValue) {
-//            if user.photoPath != photoPath {
-//                user.photoPath = photoPath
-//                CoreDataStack.shared.saveContext()
-//                getPhoto(user: user)
-//            }
-//        }
-        
         if withCountries {
             CountryVisitApiManager.shared.getUserCountryVisits(user: user)
         }
-        
-//        if withFriends {
-//            getFriends(user: user)
-//        }
     }
     
     private func updateUserInfoInCoreData(name: String, location: String?, completion: @escaping () -> Void) {
