@@ -11,10 +11,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "specialized UserApiManager.(updateFacebookInfo(id : String, email : String?, name : String, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
+         contextName = "UserApiManager.getPhoto(user : User) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "response.response?.statusCode">
+               value = "user.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -27,10 +27,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.getPhoto(user : User) -&gt; ():UserApiManager.swift">
+         contextName = "specialized UserApiManager.(updateFacebookInfo(id : String, email : String?, name : String, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "user.name">
+               value = "response.response?.statusCode">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -56,6 +56,17 @@
          <PersistentStrings>
             <PersistentString
                value = "self.tipDelegate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TipController.tableView(UITableView, heightForRowAt : IndexPath) -&gt; CGFloat:TipController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view.bounds.height">
+            </PersistentString>
+            <PersistentString
+               value = "cellTipText.bounds.origin.x">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -260,6 +271,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TipsInCountryController.loadMoreCoursesIfNecessary(row : Int) -&gt; ():TipsInCountryController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "activityIndicatorBottom">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.createCountryVisits() -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -346,10 +365,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ():UserApiManager.swift">
+         contextName = "UserApiManager.(getFriends(user : User, completion : () -&gt; ()?) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "User.shared.token">
+               value = "User.shared.friends.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -370,10 +389,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.(getFriends(user : User, completion : () -&gt; ()?) -&gt; ()).(closure #1):UserApiManager.swift">
+         contextName = "UserApiManager.updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "User.shared.friends.count">
+               value = "User.shared.token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -512,6 +531,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TipsInCountryController.reloadTipsTable(completion : () -&gt; ()) -&gt; ():TipsInCountryController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "lastLoadedPageNumber">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserApiManager.(getUserInfo(user : User, completion : () -&gt; ()) -&gt; ()).(closure #2):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -564,7 +591,7 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "json[&quot;num_countries&quot;].stringValue">
+               value = "User.shared.facebookEmail">
             </PersistentString>
             <PersistentString
                value = "json[&quot;num_countries&quot;].int">
@@ -573,10 +600,10 @@
                value = "user.location">
             </PersistentString>
             <PersistentString
-               value = "User.shared.facebookEmail">
+               value = "user.facebookID">
             </PersistentString>
             <PersistentString
-               value = "user.facebookID">
+               value = "json[&quot;num_countries&quot;].stringValue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

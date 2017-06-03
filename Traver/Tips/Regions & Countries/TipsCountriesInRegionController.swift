@@ -34,6 +34,11 @@ class TipsCountriesInRegionController: UIViewController {
         if let controller = segue.destination as? TipsInCountryController {
             controller.country = selectedCountry
             controller.friends = friends
+            if let country = selectedCountry {
+                if let tipsNumber = countryCodes[country.code] {
+                    controller.numberOfTips = tipsNumber
+                }
+            }
         }
     }
     

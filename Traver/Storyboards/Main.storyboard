@@ -727,7 +727,7 @@
                                         <rect key="frame" x="0.0" y="56" width="375" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8f1-Bc-dcE" id="Ps9-EC-ExX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zh7-Gr-9Xp">
@@ -772,15 +772,15 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Tip text" id="LMP-l0-GPf">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="160" id="lCj-Xb-7yg">
-                                        <rect key="frame" x="0.0" y="332" width="375" height="160"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="200" id="lCj-Xb-7yg">
+                                        <rect key="frame" x="0.0" y="332" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lCj-Xb-7yg" id="AZ3-Jq-1Hi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="159"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Why these regions are worth visiting. Recommended landmarks, hotels, restaurants and so" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tzg-cV-LpU">
-                                                    <rect key="frame" x="8" y="8" width="359" height="143.5"/>
+                                                    <rect key="frame" x="8" y="8" width="359" height="183.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" red="0.76536405648526684" green="0.77082120613739491" blue="0.78719265509377878" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -818,6 +818,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cellTipText" destination="lCj-Xb-7yg" id="xgE-Xn-x8H"/>
                         <outlet property="pickerViewCountries" destination="zh7-Gr-9Xp" id="9IB-Bc-O3x"/>
                         <outlet property="textFieldTitle" destination="faJ-ye-fgc" id="pWg-jc-6r7"/>
                         <outlet property="textViewText" destination="Tzg-cV-LpU" id="CQx-2F-BDW"/>
@@ -856,7 +857,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Import countries from Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hMV-3S-vvO">
-                                                    <rect key="frame" x="16" y="0.0" width="344" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -877,7 +878,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WOO-wZ-sMI">
-                                                    <rect key="frame" x="16" y="12" width="74.5" height="20.5"/>
+                                                    <rect key="frame" x="15" y="12" width="74.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1587,8 +1588,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vG2-Ri-j0q">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="GWx-ee-yyX">
+                                    <rect key="frame" x="0.0" y="208" width="375" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MYq-iF-gcM">
+                                            <rect key="frame" x="177.5" y="10" width="20" height="20"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="MYq-iF-gcM" firstAttribute="centerY" secondItem="GWx-ee-yyX" secondAttribute="centerY" id="SZ4-O3-Lrv"/>
+                                        <constraint firstItem="MYq-iF-gcM" firstAttribute="centerX" secondItem="GWx-ee-yyX" secondAttribute="centerX" id="z2x-uA-7Q9"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TipCell" rowHeight="180" id="YRp-8d-j44" customClass="TipCell" customModule="Traver" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="180"/>
@@ -1669,14 +1684,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IzS-h3-hy9" firstAttribute="top" secondItem="vG2-Ri-j0q" secondAttribute="bottom" id="5KZ-Ke-lJ2"/>
                             <constraint firstItem="vG2-Ri-j0q" firstAttribute="leading" secondItem="3FQ-5y-Ibb" secondAttribute="leading" id="66X-5E-jeI"/>
                             <constraint firstItem="vG2-Ri-j0q" firstAttribute="top" secondItem="a5e-aS-BxI" secondAttribute="bottom" id="LmR-j6-b9F"/>
                             <constraint firstAttribute="trailing" secondItem="vG2-Ri-j0q" secondAttribute="trailing" id="l1S-Gk-8lb"/>
+                            <constraint firstAttribute="bottom" secondItem="vG2-Ri-j0q" secondAttribute="bottom" id="p5P-dB-TsI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tips" id="J8L-4R-hMg"/>
                     <connections>
+                        <outlet property="activityIndicatorBottom" destination="MYq-iF-gcM" id="Ffp-qq-ntp"/>
                         <outlet property="tableViewTips" destination="vG2-Ri-j0q" id="Amz-LT-pj3"/>
                         <segue destination="A0S-tX-xeZ" kind="presentation" identifier="segueToTipController" modalPresentationStyle="fullScreen" id="uSx-Zw-wRS"/>
                     </connections>

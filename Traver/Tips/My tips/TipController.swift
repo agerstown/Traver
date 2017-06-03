@@ -18,6 +18,7 @@ class TipController: UITableViewController {
     @IBOutlet weak var pickerViewCountries: UIPickerView!
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textViewText: UITextView!
+    @IBOutlet weak var cellTipText: UITableViewCell!
     
     let textViewTextPlaceholder = "Why these regions are worth visiting. Recommended landmarks, hotels, restaurants and so".localized()
     
@@ -112,6 +113,19 @@ class TipController: UITableViewController {
     // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionsHeaders[section].localized()
+    }
+    
+    let tipCountryRowHeight: CGFloat = 120
+    let tipTitleRowHeight: CGFloat = 44
+    let sectionHeaderHeight: CGFloat = 64
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+            case 0: return tipCountryRowHeight
+            case 1: return tipTitleRowHeight
+            case 2: return self.view.bounds.height - tipCountryRowHeight - tipTitleRowHeight - 3 * sectionHeaderHeight
+            default: return 0
+        }
     }
     
 }

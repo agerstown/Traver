@@ -23,13 +23,18 @@ class TipApiManager: ApiManager {
     }
     
     func getExistingTipsCountriesFriends(completion: @escaping (_ countryCodes: [String: Int]) -> Void) {
-        let headers: HTTPHeaders = [
-            "Authorization": "Token \(User.shared.token!)"
-        ]
+        if let token = User.shared.token {
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(token)"
+            ]
 
-        Alamofire.request(host + "tips/get-existing-tips-countries-friends/", method: .get,
-                          parameters: nil, headers: headers).responseJSON { response in
-            self.parseCountryCodes(response: response, completion: completion)
+            Alamofire.request(host + "tips/get-existing-tips-countries-friends/", method: .get,
+                              parameters: nil, headers: headers).responseJSON { response in
+                self.parseCountryCodes(response: response, completion: completion)
+            }
+        } else {
+            let codesEmpty: [String:Int] = [:]
+            completion(codesEmpty)
         }
     }
     
@@ -47,12 +52,13 @@ class TipApiManager: ApiManager {
         }
     }
     
-    func getTipsForCountry(_ country: Codes.Country, completion: @escaping (_ tips: [Tip]) -> Void) {
+    func getTipsForCountryPage(_ country: Codes.Country, page: Int, completion: @escaping (_ tips: [Tip]) -> Void) {
         let parameters: Parameters = [
-            "country_code": country.code
+            "country_code": country.code,
+            "page": page
         ]
-    
-        Alamofire.request(host + "tips/get-tips-for-country/", method: .get, parameters: parameters).responseJSON { response in
+        
+        Alamofire.request(host + "tips/get-tips-for-country-page/", method: .get, parameters: parameters).responseJSON { response in
             if let tipsJSON = response.result.value as? NSArray {
                 let tips = self.parseTips(json: tipsJSON, country: country)
                 completion(tips)
@@ -60,16 +66,17 @@ class TipApiManager: ApiManager {
         }
     }
     
-    func getTipsForCountryFriends(_ country: Codes.Country, completion: @escaping (_ tips: [Tip]) -> Void) {
+    func getTipsForCountryFriendsPage(_ country: Codes.Country, page: Int, completion: @escaping (_ tips: [Tip]) -> Void) {
         let headers: HTTPHeaders = [
             "Authorization": "Token \(User.shared.token!)"
         ]
         
         let parameters: Parameters = [
-            "country_code": country.code
+            "country_code": country.code,
+            "page": page
         ]
         
-        Alamofire.request(host + "tips/get-tips-for-country-friends/", method: .get, parameters: parameters, headers: headers).responseJSON { response in
+        Alamofire.request(host + "tips/get-tips-for-country-friends-page/", method: .get, parameters: parameters, headers: headers).responseJSON { response in
             if let tipsJSON = response.result.value as? NSArray {
                 let tips = self.parseTips(json: tipsJSON, country: country)
                 completion(tips)

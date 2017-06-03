@@ -11,6 +11,7 @@ import Foundation
 class TipsInCountryController: UIViewController {
     
     @IBOutlet weak var tableViewTips: UITableView!
+    @IBOutlet weak var activityIndicatorBottom: UIActivityIndicatorView!
     
     var country: Codes.Country?
     
@@ -21,6 +22,21 @@ class TipsInCountryController: UIViewController {
     let activityIndicatorInitialLoading = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     var selectedTip: Tip?
+    
+    var numberOfTips: Int?
+    
+    var loading = false
+    var lastLoadedPageNumber = 0
+    let tipsNumberOnPage = 10
+    var hasNextPage: Bool {
+        if let numberOfTips = numberOfTips {
+            return numberOfTips > (lastLoadedPageNumber + 1) * tipsNumberOnPage
+        } else {
+            return false
+        }
+    }
+    
+    let refreshControl = UIRefreshControl()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -34,7 +50,10 @@ class TipsInCountryController: UIViewController {
         tableViewTips.estimatedRowHeight = 180
         tableViewTips.rowHeight = UITableViewAutomaticDimension
         
-        tableViewTips.tableFooterView = UIView()
+        refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
+        tableViewTips.refreshControl = refreshControl
+        
+        activityIndicatorBottom.isHidden = true
         
         startSpinning()
         reloadTipsTable() {
@@ -45,27 +64,32 @@ class TipsInCountryController: UIViewController {
     // MARK: Tips update
     func reloadTipsTable(completion: @escaping () -> Void) {
         if let country = country {
-            
             if let friends = friends {
                 if friends {
-                    TipApiManager.shared.getTipsForCountryFriends(country) { tips in
-                        self.tipsLoaded(tips: tips, completion: completion)
+                    TipApiManager.shared.getTipsForCountryFriendsPage(country, page: lastLoadedPageNumber) { tips in
+                        self.updateTips(tips: tips, completion: completion)
                     }
                 } else {
-                    TipApiManager.shared.getTipsForCountry(country) { tips in
-                        self.tipsLoaded(tips: tips, completion: completion)
+                    TipApiManager.shared.getTipsForCountryPage(country, page: lastLoadedPageNumber) { tips in
+                        self.updateTips(tips: tips, completion: completion)
                     }
                 }
             }
         }
     }
 
-    func tipsLoaded(tips: [Tip], completion: @escaping () -> Void) {
+    func updateTips(tips: [Tip], completion: @escaping () -> Void) {
         completion()
         self.tips = tips
         tableViewTips.reloadData()
     }
     
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        lastLoadedPageNumber = 0
+        reloadTipsTable() {
+            refreshControl.endRefreshing()
+        }
+    }
     
     // MARK: - Spinner for initial tips loading
     func startSpinning() {
@@ -108,7 +132,48 @@ extension TipsInCountryController: UITableViewDataSource {
     
         TipApiManager.shared.getAuthorPhoto(author: tip.author, putInto: cell.imageViewAuthorPhoto)
 
+        loadMoreCoursesIfNecessary(row: indexPath.row)
+        
         return cell
+    }
+    
+    func loadMoreCoursesIfNecessary(row: Int) {
+        if hasNextPage {
+            if loading == false {
+                if row == tips.count - 3 {
+                    activityIndicatorBottom.isHidden = false
+                    activityIndicatorBottom.startAnimating()
+                    
+                    loading = true
+                    
+                    if let country = country {
+                        if let friends = friends {
+                            if friends {
+                               TipApiManager.shared.getTipsForCountryFriendsPage(country,
+                                                                                 page: lastLoadedPageNumber + 1) { tips in
+                                    self.addNewTips(tips: tips)
+                                }
+                            } else {
+                                TipApiManager.shared.getTipsForCountryPage(country, page: lastLoadedPageNumber + 1) { tips in
+                                    self.addNewTips(tips: tips)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func addNewTips(tips: [Tip]) {
+        activityIndicatorBottom.stopAnimating()
+        activityIndicatorBottom.isHidden = true
+        
+        lastLoadedPageNumber += 1
+        self.tips.append(contentsOf: tips)
+        tableViewTips.reloadData()
+        
+        loading = false
     }
     
 }

@@ -149,7 +149,15 @@ class ProfileViewController: UIViewController {
     }
     
     func updatePhoto() {
-        imageViewPhoto.image = user!.photo != nil ? user!.photo : UIImage(named: "default_photo")
+        if user == User.shared {
+            imageViewPhoto.image = user!.photo != nil ? user!.photo : UIImage(named: "default_photo")
+        } else {
+            imageViewPhoto.image = UIImage(named: "default_photo")
+            if let path = user!.photoPath {
+                ImagesManager.shared.loadImage(withURL: UserApiManager.shared.photosHost + "traver-media/" + path,
+                                           intoImageView: imageViewPhoto)
+            }
+        }
     }
     
     @IBAction func buttonEditTapped(_ sender: UIButton) {
