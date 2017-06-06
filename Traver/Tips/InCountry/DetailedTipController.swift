@@ -51,6 +51,7 @@ class DetailedTipController: UIViewController {
         tapGestureRecognizer.cancelsTouchesInView = false
         tapGestureRecognizer.delegate = self
         
+        textViewTipText.setContentOffset(.zero, animated: false)
     }
 }
 

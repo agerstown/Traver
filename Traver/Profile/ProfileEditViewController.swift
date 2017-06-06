@@ -60,10 +60,12 @@ class ProfileEditViewController: UITableViewController {
                 self.dismiss(animated: true, completion: nil)
             }
             if let image = selectedImage {
-                UserApiManager.shared.updatePhoto(user: User.shared, photo: image) {
-                    User.shared.photoData = UIImagePNGRepresentation(image)
-                    CoreDataStack.shared.saveContext()
-                    NotificationCenter.default.post(name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
+                if let reducedImage = image.reduced() {
+                    UserApiManager.shared.updatePhoto(user: User.shared, photo: reducedImage) {
+                        User.shared.photoData = UIImagePNGRepresentation(reducedImage)
+                        CoreDataStack.shared.saveContext()
+                        NotificationCenter.default.post(name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
+                    }
                 }
             }
         }

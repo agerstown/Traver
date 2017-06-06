@@ -784,7 +784,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" red="0.76536405648526684" green="0.77082120613739491" blue="0.78719265509377878" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>
@@ -844,7 +844,27 @@
                         <view key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleToFill" id="Fb0-Nr-Ss3">
                             <rect key="frame" x="0.0" y="477.5" width="375" height="126"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Traver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAV-uA-FEx">
+                                    <rect key="frame" x="163" y="67" width="48.5" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FsH-kM-aRw">
+                                    <rect key="frame" x="151.5" y="92" width="73" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="15"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" red="0.93656378984451294" green="0.9386104941368103" blue="0.95605641603469849" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="FsH-kM-aRw" firstAttribute="top" secondItem="LAV-uA-FEx" secondAttribute="bottom" constant="4" id="55d-PI-XfP"/>
+                                <constraint firstItem="FsH-kM-aRw" firstAttribute="centerX" secondItem="Fb0-Nr-Ss3" secondAttribute="centerX" id="5Ix-HA-Q3s"/>
+                                <constraint firstAttribute="bottom" secondItem="FsH-kM-aRw" secondAttribute="bottom" constant="16" id="C1B-Q3-NoL"/>
+                                <constraint firstItem="LAV-uA-FEx" firstAttribute="centerX" secondItem="Fb0-Nr-Ss3" secondAttribute="centerX" id="mRI-CK-3fJ"/>
+                            </constraints>
                         </view>
                         <sections>
                             <tableViewSection headerTitle="Import" footerTitle="It may take some time, just wait a little." id="6Aw-Io-joS">
@@ -912,7 +932,7 @@
                                                         <constraint firstAttribute="height" constant="104" id="JfY-pL-ZTC"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="yes"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="693-ZA-TcB">
                                                     <rect key="frame" x="137" y="142" width="100" height="30"/>
@@ -950,6 +970,7 @@
                         <outlet property="buttonSendFeedback" destination="693-ZA-TcB" id="Mfv-wH-B6Q"/>
                         <outlet property="cellFacebook" destination="udT-9X-D60" id="8dW-4p-1Vd"/>
                         <outlet property="cellImportFromPhotos" destination="CcC-dy-ZbG" id="2YU-9l-kYg"/>
+                        <outlet property="labelVersion" destination="FsH-kM-aRw" id="TgB-mr-ncr"/>
                         <outlet property="tableViewSettings" destination="bpl-Ue-1x5" id="24r-5t-JK8"/>
                         <outlet property="textViewFeedback" destination="Kcd-av-JoI" id="mLU-gC-Jwq"/>
                         <segue destination="Jd0-HN-20D" kind="presentation" identifier="segueToEmailController" modalPresentationStyle="fullScreen" id="kdu-6u-PnV"/>
