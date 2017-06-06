@@ -19,18 +19,13 @@
 		612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */; };
 		612F287F1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F287E1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift */; };
 		612F28811DE77CFB0057E20B /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F28801DE77CFB0057E20B /* Region.swift */; };
-		612F29121DE7A6D40057E20B /* libSVGKit-iOS.2.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 612F29111DE7A6D40057E20B /* libSVGKit-iOS.2.0.0.a */; };
 		612F29971DE7A6F00057E20B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612F29961DE7A6F00057E20B /* CoreText.framework */; };
 		612F29991DE7A6F70057E20B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612F29981DE7A6F70057E20B /* CoreImage.framework */; };
-		612F299B1DE7A7000057E20B /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 612F299A1DE7A7000057E20B /* libxml2.tbd */; };
 		612F299D1DE7A7070057E20B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612F299C1DE7A7070057E20B /* QuartzCore.framework */; };
 		612F299F1DE7A70D0057E20B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612F299E1DE7A70D0057E20B /* CoreGraphics.framework */; };
 		612F29A11DE7A7110057E20B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612F29A01DE7A7110057E20B /* UIKit.framework */; };
-		612F29A21DE7A7170057E20B /* libSVGKit-iOS.2.0.0.a in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 612F29111DE7A6D40057E20B /* libSVGKit-iOS.2.0.0.a */; };
 		612F29A41DE7A7250057E20B /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612F29A31DE7A7250057E20B /* CocoaLumberjack.framework */; };
-		612F29A51DE7A7300057E20B /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 612F29A31DE7A7250057E20B /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		612F29A61DE7A7640057E20B /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612F29A31DE7A7250057E20B /* CocoaLumberjack.framework */; };
-		612F29A71DE7A7840057E20B /* libSVGKit-iOS.2.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 612F29111DE7A6D40057E20B /* libSVGKit-iOS.2.0.0.a */; };
 		612F29A91DEB27430057E20B /* VisitedRegionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F29A81DEB27430057E20B /* VisitedRegionHeaderView.swift */; };
 		612F29AB1DEB4D020057E20B /* RegionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612F29AA1DEB4D020057E20B /* RegionHeaderCell.swift */; };
 		612F29B11DEB4FF90057E20B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 612F29B31DEB4FF90057E20B /* Localizable.strings */; };
@@ -113,8 +108,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				612F29A51DE7A7300057E20B /* CocoaLumberjack.framework in Embed Frameworks */,
-				612F29A21DE7A7170057E20B /* libSVGKit-iOS.2.0.0.a in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,7 +130,6 @@
 		612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		612F287E1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+InverseKeysValues.swift"; sourceTree = "<group>"; };
 		612F28801DE77CFB0057E20B /* Region.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
-		612F29111DE7A6D40057E20B /* libSVGKit-iOS.2.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libSVGKit-iOS.2.0.0.a"; sourceTree = "<group>"; };
 		612F29161DE7A6DA0057E20B /* AppleSucksDOMImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleSucksDOMImplementation.h; sourceTree = "<group>"; };
 		612F29171DE7A6DA0057E20B /* Attr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attr.h; sourceTree = "<group>"; };
 		612F29181DE7A6DA0057E20B /* BaseClassForAllSVGBasicShapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseClassForAllSVGBasicShapes.h; sourceTree = "<group>"; };
@@ -268,7 +260,6 @@
 		612F29951DE7A6DA0057E20B /* TinySVGTextAreaElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TinySVGTextAreaElement.h; sourceTree = "<group>"; };
 		612F29961DE7A6F00057E20B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		612F29981DE7A6F70057E20B /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		612F299A1DE7A7000057E20B /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		612F299C1DE7A7070057E20B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		612F299E1DE7A70D0057E20B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		612F29A01DE7A7110057E20B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -349,10 +340,8 @@
 				612F29A11DE7A7110057E20B /* UIKit.framework in Frameworks */,
 				612F299F1DE7A70D0057E20B /* CoreGraphics.framework in Frameworks */,
 				612F299D1DE7A7070057E20B /* QuartzCore.framework in Frameworks */,
-				612F299B1DE7A7000057E20B /* libxml2.tbd in Frameworks */,
 				612F29A61DE7A7640057E20B /* CocoaLumberjack.framework in Frameworks */,
 				617C17391E6B0AFC008576E4 /* CloudKit.framework in Frameworks */,
-				612F29A71DE7A7840057E20B /* libSVGKit-iOS.2.0.0.a in Frameworks */,
 				612F29991DE7A6F70057E20B /* CoreImage.framework in Frameworks */,
 				612F29971DE7A6F00057E20B /* CoreText.framework in Frameworks */,
 				701D2FE7FC330201D6B772C6 /* Pods_Traver.framework in Frameworks */,
@@ -364,7 +353,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				612F29A41DE7A7250057E20B /* CocoaLumberjack.framework in Frameworks */,
-				612F29121DE7A6D40057E20B /* libSVGKit-iOS.2.0.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,10 +511,8 @@
 				612F29A01DE7A7110057E20B /* UIKit.framework */,
 				612F299E1DE7A70D0057E20B /* CoreGraphics.framework */,
 				612F299C1DE7A7070057E20B /* QuartzCore.framework */,
-				612F299A1DE7A7000057E20B /* libxml2.tbd */,
 				612F29981DE7A6F70057E20B /* CoreImage.framework */,
 				612F29961DE7A6F00057E20B /* CoreText.framework */,
-				612F29111DE7A6D40057E20B /* libSVGKit-iOS.2.0.0.a */,
 				612F29131DE7A6DA0057E20B /* usr */,
 				EE7B2C246E1D164A28EA3D41 /* Pods_Traver.framework */,
 			);
@@ -1010,7 +996,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" dcff0ad61720d4a4d3dadc1aaf21769d14fb9e51 3d6cf7226ec4aa1d1fc820be42ab68b82e0377bdfe1b0095f15640bdc8b5fd39\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" dcff0ad61720d4a4d3dadc1aaf21769d14fb9e51 3d6cf7226ec4aa1d1fc820be42ab68b82e0377bdfe1b0095f15640bdc8b5fd39";
 		};
 		637F1AF029CD75FC3609C1DB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
