@@ -228,6 +228,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "VisitedCountriesImporter.(getCountriesCodesFromLocations(using : CLGeocoder) -&gt; ()).(closure #1):VisitedCountriesImporter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.locations">
+            </PersistentString>
+            <PersistentString
+               value = "self.locationsCounter">
+            </PersistentString>
+            <PersistentString
+               value = "self.locations[(self.locationsCounter)]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "static User.(shared).(variable initialization expression).(closure #1).(closure #2):User.swift">
          <PersistentStrings>
             <PersistentString
@@ -354,18 +368,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.getOrCreateUserWithFacebook(id : String, email : String?, name : String, location : String?, photo : UIImage?, friendsIDs : [String]?) -&gt; ():UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.facebookID">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "CountryVisitApiManager.(updateCountryVisits(user : User, codes : [String], completion : () -&gt; ()?) -&gt; ()).(closure #1):CountryVisitApiManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.getOrCreateUserWithFacebook(id : String, email : String?, name : String, location : String?, photo : UIImage?, friendsIDs : [String]?) -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.facebookID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -419,10 +433,10 @@
                value = "country.code">
             </PersistentString>
             <PersistentString
-               value = "region.code">
+               value = "self.visitedCountries.count">
             </PersistentString>
             <PersistentString
-               value = "self.visitedCountries.count">
+               value = "region.code">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -457,10 +471,10 @@
          contextName = "FriendsViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:FriendsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "friends.count">
+               value = "fetchedResultsController?.sections?[section].numberOfObjects">
             </PersistentString>
             <PersistentString
-               value = "fetchedResultsController?.sections?[section].numberOfObjects">
+               value = "friends.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -607,7 +621,7 @@
          contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "json[&quot;num_countries&quot;].stringValue">
+               value = "user.facebookID">
             </PersistentString>
             <PersistentString
                value = "json[&quot;num_countries&quot;].int">
@@ -616,10 +630,10 @@
                value = "user.location">
             </PersistentString>
             <PersistentString
-               value = "User.shared.facebookEmail">
+               value = "json[&quot;num_countries&quot;].stringValue">
             </PersistentString>
             <PersistentString
-               value = "user.facebookID">
+               value = "User.shared.facebookEmail">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -701,10 +715,10 @@
                value = "regions">
             </PersistentString>
             <PersistentString
-               value = "Codes.Region(rawValue: section)">
+               value = "regionsWithCountries">
             </PersistentString>
             <PersistentString
-               value = "regionsWithCountries">
+               value = "Codes.Region(rawValue: section)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

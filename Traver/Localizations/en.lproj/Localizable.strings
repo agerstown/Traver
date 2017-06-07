@@ -294,5 +294,11 @@
 "All" = "All";
 "My tips" = "My tips";
 
+// Report tip
+"Report" = "Report";
+"Report tip" = "Report tip";
+"Do you want to report the tip for objectionable or abusive content?" = "Do you want to report the tip for objectionable or abusive content?";
+"Your report has been sent succesfully!" = "Your report has been sent succesfully!";
+
 // Settings
 "Version" = "Version";

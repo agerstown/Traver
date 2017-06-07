@@ -294,5 +294,11 @@
 "All" = "Все";
 "My tips" = "Мои советы";
 
+// Report tip
+"Report" = "Пожаловаться";
+"Report tip" = "Пожаловаться на совет";
+"Do you want to report the tip for objectionable or abusive content?" = "Вы хотите пожаловаться, что данный совет содержит оскорбительное или неподобающее содержание?";
+"Your report has been sent succesfully!" = "Ваша жалоба была успешно отправлена!";
+
 // Settings
 "Version" = "Версия";

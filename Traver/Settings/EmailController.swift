@@ -15,8 +15,6 @@ protocol FeedbackDelegate {
 
 class EmailController: UIViewController {
     
-    let slackFeedbackURL = "https://hooks.slack.com/services/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"
-    
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var buttonSendFeedback: UIButton!
@@ -62,21 +60,14 @@ class EmailController: UIViewController {
                 UserApiManager.shared.setFeedbackEmail(email: email)
             }
             
-            let parameters: Parameters = [
-                "text": feedbackText ?? "no text",
-                "username": email
-            ]
-            
-            _ = Alamofire.request(slackFeedbackURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
-                if response.response?.statusCode == 200 {
+            SlackHelper.shared.sendFeedback(feedbackText: feedbackText, email: email) { success in
+                if success {
                     self.feedbackDelegate?.feedbackSuccessfullySent()
-                    
-                    self.dismiss(animated: true, completion: nil)
                     StatusBarManager.shared.showCustomStatusBarNeutral(text: "Your feedback has been sent!".localized())
                 } else {
-                    self.dismiss(animated: true, completion: nil)
                     StatusBarManager.shared.showCustomStatusBarError(text: "Error! Please try to send your feedback later.".localized())
                 }
+                self.dismiss(animated: true, completion: nil)
             }
         } else {
             StatusBarManager.shared.showCustomStatusBarError(text: "The email is not valid!".localized())

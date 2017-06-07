@@ -20,6 +20,8 @@ class DetailedTipController: UIViewController {
     @IBOutlet weak var textViewTipText: UITextView!
     @IBOutlet weak var lableTipCreationDate: UILabel!
     
+    @IBOutlet weak var buttonReport: UIButton!
+    
     var tip: Tip?
     
     var backgroundImage: UIImage?
@@ -35,6 +37,8 @@ class DetailedTipController: UIViewController {
         }
         
         imageViewAuthorPhoto.layer.cornerRadius = imageViewAuthorPhoto.frame.height / 2
+        
+        buttonReport.setTitle("Report".localized(), for: .normal)
         
         if let tip = tip {
             imageViewAuthorPhoto.image = tip.author.photo ?? UIImage(named: "default_photo")
@@ -53,6 +57,25 @@ class DetailedTipController: UIViewController {
         
         textViewTipText.setContentOffset(.zero, animated: false)
     }
+    
+    // MARK: - Actions
+    @IBAction func buttonReportTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Report tip".localized(), message: "Do you want to report the tip for objectionable or abusive content?".localized(), preferredStyle: UIAlertControllerStyle.alert)
+        let reportAction = UIAlertAction(title: "Report".localized(), style: .default) { _ in
+            if let tip = self.tip {
+                SlackHelper.shared.sendReport(tipID: tip.id) { success in
+                    if success {
+                        StatusBarManager.shared.showCustomStatusBarNeutral(text: "Your report has been sent succesfully!".localized())
+                    }
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
+        alert.addAction(reportAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 // MARK: - UIGestureRecognizerDelegate
@@ -60,7 +83,7 @@ extension DetailedTipController: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let view = touch.view {
-            return !(view.restorationIdentifier == "tipView" || view.isKind(of: UITextView.self))
+            return !(view.restorationIdentifier == "tipView" || view.isKind(of: UITextView.self) || view.isKind(of: UIButton.self))
         }
         return true
     }

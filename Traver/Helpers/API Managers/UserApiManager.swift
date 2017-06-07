@@ -643,6 +643,7 @@ class UserApiManager: ApiManager {
             user.numberOfVisitedCountries = json["num_countries"].stringValue
         }
         
+        user.id = json["id"].stringValue
         user.token = json["token"].stringValue
         user.mainUser = NSNumber(value: user == User.shared)
         

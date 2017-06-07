@@ -23,6 +23,7 @@ class VisitedCountriesImporter {
     private var countriesCodes = [String]()
     
     func fetchVisitedCountriesCodesFromPhotos() {
+        StatusBarManager.shared.showCustomStatusBarNeutral(text: "Import has been started".localized())
         DispatchQueue.global().async { [weak self] in
             var momentsLocations = [CLLocation]()
             let moments = PHAssetCollection.fetchMoments(with: nil)
@@ -60,24 +61,26 @@ class VisitedCountriesImporter {
         // Geocoding requests are rate-limited for each app, so making too many requests in a short period of time may cause some of the requests to fail. There is a forced delay for that reason
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
             
-            geocoder.reverseGeocodeLocation((self.locations[(self.locationsCounter)]),
-                                            completionHandler: { (placemarks, error) in
-                
-                if let code = placemarks?[0].isoCountryCode {
-                    if Codes.Country.all.contains(where: { $0.code == code } ) {
-                        if !self.countriesCodes.contains(code) {
-                            self.countriesCodes.append(code)
-                            NotificationCenter.default.post(name: self.CountryCodeImportedNotification,
-                                                            object: nil,
-                                                            userInfo: [self.CountryCodeInfoKey : code])
+            if self.locationsCounter < self.locations.count {
+                geocoder.reverseGeocodeLocation((self.locations[(self.locationsCounter)]),
+                                                completionHandler: { (placemarks, error) in
+                    
+                    if let code = placemarks?[0].isoCountryCode {
+                        if Codes.Country.all.contains(where: { $0.code == code } ) {
+                            if !self.countriesCodes.contains(code) {
+                                self.countriesCodes.append(code)
+                                NotificationCenter.default.post(name: self.CountryCodeImportedNotification,
+                                                                object: nil,
+                                                                userInfo: [self.CountryCodeInfoKey : code])
+                            }
                         }
                     }
-                }
-                
-                self.locationsCounter += 1
-                
-                _ = self.getCountriesCodesFromLocations(using: geocoder)
-            })
+                    
+                    self.locationsCounter += 1
+                    
+                    _ = self.getCountriesCodesFromLocations(using: geocoder)
+                })
+            }
         }
         
     }
