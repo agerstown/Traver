@@ -294,6 +294,10 @@
 "All" = "Все";
 "My tips" = "Мои советы";
 
+// My tips log in
+"Log in" = "Регистрация";
+"Please log in using your iCloud account (in Settigs) or Facebook to leave tips" = "Пожалуйста, подключите свой iCloud аккаунт (в Настройках) или Facebook для того, чтобы оставлять советы";
+
 // Report tip
 "Report" = "Пожаловаться";
 "Report tip" = "Пожаловаться на совет";

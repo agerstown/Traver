@@ -1512,7 +1512,7 @@
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" image="profile" id="SAG-K9-wDS">
                             <connections>
-                                <segue destination="ml9-DI-Svn" kind="show" id="i1Q-Ko-w7i"/>
+                                <action selector="buttonMyTipsTapped:" destination="JxD-Ai-aBv" id="XNY-U5-yNP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1521,6 +1521,7 @@
                         <outlet property="tableViewRegions" destination="GI4-2v-H94" id="9rk-jC-RzL"/>
                         <outlet property="viewNoFriends" destination="Dhc-WN-KCb" id="O0N-rT-3ON"/>
                         <segue destination="QKl-Zs-naf" kind="show" identifier="segueToTipsCountriesInRegion" id="BSC-LX-qbj"/>
+                        <segue destination="ml9-DI-Svn" kind="show" identifier="segueToMyTipsController" id="EBT-0q-vY1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zcM-Wk-yRn" userLabel="First Responder" sceneMemberID="firstResponder"/>

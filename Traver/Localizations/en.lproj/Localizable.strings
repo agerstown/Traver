@@ -294,6 +294,10 @@
 "All" = "All";
 "My tips" = "My tips";
 
+// My tips log in
+"Log in" = "Log in";
+"Please log in using your iCloud account (in Settigs) or Facebook to leave tips" = "Please log in using your iCloud account (in Settigs) or Facebook to leave tips";
+
 // Report tip
 "Report" = "Report";
 "Report tip" = "Report tip";

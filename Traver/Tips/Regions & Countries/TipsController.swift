@@ -145,6 +145,21 @@ class TipsController: UIViewController {
         reloadRegionsTable()
     }
     
+    @IBAction func buttonMyTipsTapped(_ sender: Any) {
+        if User.shared.token == nil {
+            let alert = UIAlertController(title: "Log in".localized(), message: "Please log in using your iCloud account (in Settigs) or Facebook to leave tips".localized(), preferredStyle: UIAlertControllerStyle.alert)
+            let connectFacebookAction = UIAlertAction(title: "Connect Facebook".localized(), style: .default) { _ in
+                FacebookHelper.shared.login()
+            }
+            let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
+            alert.addAction(connectFacebookAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            performSegue(withIdentifier: "segueToMyTipsController", sender: nil)
+        }
+    }
+    
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? TipsCountriesInRegionController {
