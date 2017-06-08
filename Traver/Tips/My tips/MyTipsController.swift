@@ -69,6 +69,12 @@ class MyTipsController: UIViewController {
         tableViewTips.isHidden = false
     }
     
+    // MARK: - Actions
+    @IBAction func buttonAddTipTapped(_ sender: Any) {
+        selectedTip = nil
+        performSegue(withIdentifier: "segueToTipController", sender: nil)
+    }
+    
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navController = segue.destination as? UINavigationController {

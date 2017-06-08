@@ -694,7 +694,7 @@
                     <navigationItem key="navigationItem" title="My tips" id="tR9-fB-EZ0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="JJq-hL-4KI">
                             <connections>
-                                <segue destination="NQN-Ed-hav" kind="presentation" id="SRq-YP-P2g"/>
+                                <action selector="buttonAddTipTapped:" destination="ml9-DI-Svn" id="cE6-a5-00t"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1984,7 +1984,4 @@
         <image name="settings" width="25" height="25"/>
         <image name="share" width="30" height="30"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="SRq-YP-P2g"/>
-    </inferredMetricsTieBreakers>
 </document>
