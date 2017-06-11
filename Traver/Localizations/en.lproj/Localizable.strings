@@ -298,11 +298,15 @@
 "Log in" = "Log in";
 "Please log in using your iCloud account (in Settigs) or Facebook to leave tips" = "Please log in using your iCloud account (in Settigs) or Facebook to leave tips";
 
-// Report tip
+// Report tip & agreement
 "Report" = "Report";
 "Report tip" = "Report tip";
 "Do you want to report the tip for objectionable or abusive content?" = "Do you want to report the tip for objectionable or abusive content?";
 "Your report has been sent succesfully!" = "Your report has been sent succesfully!";
+"Agreemnent" = "Agreemnent";
+"Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content" = "Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content";
+"Agree" = "Agree";
+"Disagree" = "Disagree";
 
 // Settings
 "Version" = "Version";

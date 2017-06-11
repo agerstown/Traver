@@ -71,8 +71,35 @@ class MyTipsController: UIViewController {
     
     // MARK: - Actions
     @IBAction func buttonAddTipTapped(_ sender: Any) {
-        selectedTip = nil
-        performSegue(withIdentifier: "segueToTipController", sender: nil)
+        if let tips = User.shared.tips {
+            if UserDefaults.standard.object(forKey: "agreedToTerms") as? Bool == nil {
+                UserDefaults.standard.set(tips.count > 0, forKey: "agreedToTerms")
+            }
+            
+            if let agreedToTerms = UserDefaults.standard.object(forKey: "agreedToTerms") as? Bool {
+                if agreedToTerms {
+                    selectedTip = nil
+                    performSegue(withIdentifier: "segueToTipController", sender: nil)
+                } else {
+                    showAgreementAlert()
+                }
+            }
+        }
+    }
+    
+    func showAgreementAlert() {
+        let alert = UIAlertController(title: "Agreemnent".localized(), message: "Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content".localized(), preferredStyle: UIAlertControllerStyle.alert)
+        let agreeAction = UIAlertAction(title: "Agree".localized(), style: .default) { _ in
+            UserDefaults.standard.set(true, forKey: "agreedToTerms")
+            self.selectedTip = nil
+            self.performSegue(withIdentifier: "segueToTipController", sender: nil)
+        }
+        let disagreeAction = UIAlertAction(title: "Disagree".localized(), style: .cancel) { _ in
+            UserDefaults.standard.set(false, forKey: "agreedToTerms")
+        }
+        alert.addAction(agreeAction)
+        alert.addAction(disagreeAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Segue
