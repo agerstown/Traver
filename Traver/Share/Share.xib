@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -33,31 +34,49 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Natalia Nikitina" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="03t-sT-rnD">
-                            <rect key="frame" x="136" y="52" width="376" height="36"/>
+                            <rect key="frame" x="136" y="32" width="480" height="36"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50 countries visited" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="X4T-oY-tHg">
-                            <rect key="frame" x="576" y="54.5" width="248" height="31.5"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="248" id="r0j-Ps-U9m"/>
-                            </constraints>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50 countries visited" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="X4T-oY-tHg">
+                            <rect key="frame" x="136" y="76" width="480" height="31.5"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Traver" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ap9-pJ-YuT">
+                            <rect key="frame" x="728" y="52.5" width="88" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="88" id="BId-Ec-co4"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="Ebf-IR-RzB">
+                            <rect key="frame" x="640" y="34" width="72" height="72"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Ebf-IR-RzB" secondAttribute="height" multiplier="1:1" id="gE3-LO-jQv"/>
+                                <constraint firstAttribute="height" constant="72" id="h2x-5m-okO"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.20250400900000001" blue="0.43977230789999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="03t-sT-rnD" firstAttribute="centerY" secondItem="mnI-ZT-NSF" secondAttribute="centerY" id="Ctr-HN-yf8"/>
+                        <constraint firstItem="Ebf-IR-RzB" firstAttribute="centerY" secondItem="mnI-ZT-NSF" secondAttribute="centerY" id="8Uy-Pg-Sw8"/>
+                        <constraint firstItem="X4T-oY-tHg" firstAttribute="leading" secondItem="Wf4-ed-anp" secondAttribute="trailing" constant="16" id="EOD-rh-TRz"/>
                         <constraint firstItem="Wf4-ed-anp" firstAttribute="centerY" secondItem="mnI-ZT-NSF" secondAttribute="centerY" id="FFo-fO-14s"/>
+                        <constraint firstAttribute="trailing" secondItem="ap9-pJ-YuT" secondAttribute="trailing" constant="24" id="P3I-tW-plh"/>
                         <constraint firstItem="03t-sT-rnD" firstAttribute="leading" secondItem="Wf4-ed-anp" secondAttribute="trailing" constant="16" id="T4s-GO-u8j"/>
-                        <constraint firstAttribute="trailing" secondItem="X4T-oY-tHg" secondAttribute="trailing" constant="16" id="VtS-z8-II1"/>
+                        <constraint firstItem="03t-sT-rnD" firstAttribute="top" secondItem="mnI-ZT-NSF" secondAttribute="top" constant="32" id="fK3-Qt-9Sn"/>
                         <constraint firstItem="Wf4-ed-anp" firstAttribute="leading" secondItem="mnI-ZT-NSF" secondAttribute="leading" constant="24" id="gKs-8v-dnT"/>
-                        <constraint firstItem="X4T-oY-tHg" firstAttribute="leading" secondItem="03t-sT-rnD" secondAttribute="trailing" constant="64" id="lme-DL-OB3"/>
+                        <constraint firstItem="Ebf-IR-RzB" firstAttribute="leading" secondItem="03t-sT-rnD" secondAttribute="trailing" constant="24" id="iwd-Hz-pFc"/>
                         <constraint firstAttribute="height" constant="140" id="nXh-dm-k44"/>
-                        <constraint firstItem="X4T-oY-tHg" firstAttribute="centerY" secondItem="mnI-ZT-NSF" secondAttribute="centerY" id="pyd-Yf-MT6"/>
+                        <constraint firstItem="ap9-pJ-YuT" firstAttribute="centerY" secondItem="mnI-ZT-NSF" secondAttribute="centerY" id="oTQ-ef-QxL"/>
+                        <constraint firstItem="Ebf-IR-RzB" firstAttribute="leading" secondItem="X4T-oY-tHg" secondAttribute="trailing" constant="24" id="pPL-ja-8by"/>
+                        <constraint firstItem="X4T-oY-tHg" firstAttribute="top" secondItem="03t-sT-rnD" secondAttribute="bottom" constant="8" id="qzd-8x-Few"/>
+                        <constraint firstItem="ap9-pJ-YuT" firstAttribute="leading" secondItem="Ebf-IR-RzB" secondAttribute="trailing" constant="16" id="vPH-we-eln"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6XC-mZ-BWN">
@@ -83,6 +102,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="imageViewIcon" destination="Ebf-IR-RzB" id="yVk-9t-eg8"/>
                 <outlet property="imageViewPhoto" destination="Wf4-ed-anp" id="7Mf-1s-PEF"/>
                 <outlet property="labelCountriesVisited" destination="X4T-oY-tHg" id="cgq-nz-zDz"/>
                 <outlet property="labelName" destination="03t-sT-rnD" id="nrF-87-2BK"/>
@@ -93,5 +113,6 @@
     </objects>
     <resources>
         <image name="default_photo" width="85" height="85"/>
+        <image name="icon" width="512" height="512"/>
     </resources>
 </document>

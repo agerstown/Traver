@@ -14,11 +14,13 @@ class ShareView: UIView {
     @IBOutlet weak var viewMap: UIView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelCountriesVisited: UILabel!
+    @IBOutlet weak var imageViewIcon: UIImageView!
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
         imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
+        imageViewIcon.layer.cornerRadius = 10
         
         let image = SVGKImage(named: "WorldMap.svg")!
         let width = self.bounds.width
@@ -32,6 +34,6 @@ class ShareView: UIView {
         
         imageViewPhoto.image = User.shared.photo
         labelName.text = User.shared.name
-        labelCountriesVisited.text = "%d countries visited".localized(for: User.shared.visitedCountries.count)
+        labelCountriesVisited.text = "%d/176 countries visited".localized(for: User.shared.visitedCountries.count)
     }
 }
