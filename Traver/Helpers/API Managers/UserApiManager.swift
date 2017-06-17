@@ -19,6 +19,7 @@ class UserApiManager: ApiManager {
     let ProfileInfoUpdatedNotification = NSNotification.Name(rawValue: "ProfileInfoUpdatedNotification")
     let PhotoUpdatedNotification = NSNotification.Name(rawValue: "PhotoUpdatedNotification")
     let FriendsUpdatedNotification = NSNotification.Name(rawValue: "FriendsUpdatedNotification")
+    let UserBlockedNotification = NSNotification.Name(rawValue: "UserBlockedNotification")
     
     // MARK: - GET methods
     func getOrCreateUserWithFacebook(id: String, email: String?, name: String, location: String?, photo: UIImage?, friendsIDs: [String]?) {
@@ -356,6 +357,26 @@ class UserApiManager: ApiManager {
             }
         }
         
+    }
+    
+    func blockUser(id: String) {
+        let parameters: Parameters = [
+            "id": id
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Token \(User.shared.token!)"
+        ]
+        
+        _ = Alamofire.request(host + "users/block-user/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            if response.response?.statusCode == 200 {
+                NotificationCenter.default.post(name: self.UserBlockedNotification, object: nil)
+                StatusBarManager.shared.showCustomStatusBarNeutral(text: "User has been successfully blocked!".localized())
+            } else {
+                self.showNoInternetErrorAlert(response: response)
+            }
+        }
+
     }
     
     // MARK: - UPDATE methods

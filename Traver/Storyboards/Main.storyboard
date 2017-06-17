@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -877,7 +877,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Import countries from Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hMV-3S-vvO">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="344" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -898,7 +898,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WOO-wZ-sMI">
-                                                    <rect key="frame" x="15" y="12" width="74.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="12" width="74.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1198,7 +1198,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mpq-zc-HpR">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="C6A-3Q-teD">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
@@ -1333,8 +1333,8 @@
                             <constraint firstItem="4RR-ga-kvl" firstAttribute="leading" secondItem="dD6-j9-n8b" secondAttribute="leading" id="Ssy-n4-qjP"/>
                             <constraint firstItem="mpq-zc-HpR" firstAttribute="top" secondItem="dD6-j9-n8b" secondAttribute="top" id="h3V-Fl-abQ"/>
                             <constraint firstAttribute="trailing" secondItem="mpq-zc-HpR" secondAttribute="trailing" id="iVq-4L-YDy"/>
+                            <constraint firstItem="QBq-rB-eOJ" firstAttribute="top" secondItem="mpq-zc-HpR" secondAttribute="bottom" id="j3M-vM-XfY"/>
                             <constraint firstAttribute="bottom" secondItem="4RR-ga-kvl" secondAttribute="bottom" id="m78-H4-RBm"/>
-                            <constraint firstAttribute="bottom" secondItem="mpq-zc-HpR" secondAttribute="bottom" id="pJl-jz-TdA"/>
                             <constraint firstItem="4RR-ga-kvl" firstAttribute="top" secondItem="ggy-g1-ZR9" secondAttribute="bottom" id="pxF-2Y-zlF"/>
                         </constraints>
                     </view>

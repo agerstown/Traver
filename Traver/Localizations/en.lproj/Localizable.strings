@@ -298,15 +298,19 @@
 "Log in" = "Log in";
 "Please log in using your iCloud account (in Settigs) or Facebook to leave tips" = "Please log in using your iCloud account (in Settigs) or Facebook to leave tips";
 
-// Report tip & agreement
+// Report tip, agreement, blocking
 "Report" = "Report";
 "Report tip" = "Report tip";
 "Do you want to report the tip for objectionable or abusive content?" = "Do you want to report the tip for objectionable or abusive content?";
 "Your report has been sent succesfully!" = "Your report has been sent succesfully!";
-"Agreemnent" = "Agreemnent";
+"Agreement" = "Agreement";
+"In Traver you can write travel tips for other users." = "In Traver you can write travel tips for other users.";
 "Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content" = "Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content";
 "Agree" = "Agree";
 "Disagree" = "Disagree";
+"Block author" = "Block author";
+"User has been successfully blocked!" = "User has been successfully blocked!";
+"Please log in using your iCloud account (in Settigs) or Facebook to block someone" = "Please log in using your iCloud account (in Settigs) or Facebook to block someone";
 
 // Settings
 "Version" = "Version";

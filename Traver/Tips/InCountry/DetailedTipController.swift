@@ -70,8 +70,25 @@ class DetailedTipController: UIViewController {
                 }
             }
         }
+        let blockUserAction = UIAlertAction(title: "Block author".localized(), style: .default) { _ in
+            if User.shared.token != nil {
+                if let tip = self.tip {
+                    UserApiManager.shared.blockUser(id: tip.author.id)
+                }
+            } else {
+                let alert = UIAlertController(title: "Log in".localized(), message: "Please log in using your iCloud account (in Settigs) or Facebook to block someone".localized(), preferredStyle: UIAlertControllerStyle.alert)
+                let connectFacebookAction = UIAlertAction(title: "Connect Facebook".localized(), style: .default) { _ in
+                    FacebookHelper.shared.login()
+                }
+                let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
+                alert.addAction(connectFacebookAction)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
         let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
         alert.addAction(reportAction)
+        alert.addAction(blockUserAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }

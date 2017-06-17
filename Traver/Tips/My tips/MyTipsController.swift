@@ -88,7 +88,7 @@ class MyTipsController: UIViewController {
     }
     
     func showAgreementAlert() {
-        let alert = UIAlertController(title: "Agreemnent".localized(), message: "Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content".localized(), preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Agreement".localized(), message: "Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content".localized(), preferredStyle: UIAlertControllerStyle.alert)
         let agreeAction = UIAlertAction(title: "Agree".localized(), style: .default) { _ in
             UserDefaults.standard.set(true, forKey: "agreedToTerms")
             self.selectedTip = nil

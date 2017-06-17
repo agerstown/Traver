@@ -100,6 +100,8 @@ class ProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: user!.CountriesUpdatedNotification, object: nil)
+        
+        showAgreementAlert()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -173,7 +175,31 @@ class ProfileViewController: UIViewController {
             refreshControl.endRefreshing()
         }
     }
-
+    
+    func showAgreementAlert() {
+        if UserDefaults.standard.object(forKey: "agreedToTerms") as? Bool == nil {
+            if let tips = User.shared.tips {
+                UserDefaults.standard.set(tips.count > 0, forKey: "agreedToTerms")
+            } else {
+                UserDefaults.standard.set(false, forKey: "agreedToTerms")
+            }
+        }
+        
+        if let agreedToTerms = UserDefaults.standard.object(forKey: "agreedToTerms") as? Bool {
+            if !agreedToTerms {
+                let alert = UIAlertController(title: "Agreement".localized(), message: "In Traver you can write travel tips for other users.".localized() + " " + "Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content".localized(), preferredStyle: UIAlertControllerStyle.alert)
+                let agreeAction = UIAlertAction(title: "Agree".localized(), style: .default) { _ in
+                    UserDefaults.standard.set(true, forKey: "agreedToTerms")
+                }
+                let disagreeAction = UIAlertAction(title: "Disagree".localized(), style: .cancel) { _ in
+                    UserDefaults.standard.set(false, forKey: "agreedToTerms")
+                }
+                alert.addAction(agreeAction)
+                alert.addAction(disagreeAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
     
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
