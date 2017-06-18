@@ -8,6 +8,7 @@
 
 import Foundation
 import Photos
+import CWStatusBarNotification
 
 class PhotosAccessManager {
     
@@ -22,13 +23,13 @@ class PhotosAccessManager {
                 if status ==  .authorized {
                     VisitedCountriesImporter.shared.fetchVisitedCountriesCodesFromPhotos()
                 } else {
-                    PhotosAccessManager.shared.showAlertAllowAccessToPhotos(on: controller, withTitle: "Import is impossible")
+                    PhotosAccessManager.shared.showAlertAllowAccessToPhotos(on: controller, withTitle: "Import is impossible".localized())
                 }
             })
         case .denied:
-            PhotosAccessManager.shared.showAlertAllowAccessToPhotos(on: controller, withTitle: "Import is impossible")
+            PhotosAccessManager.shared.showAlertAllowAccessToPhotos(on: controller, withTitle: "Import is impossible".localized())
         case .restricted:
-            PhotosAccessManager.shared.showAlertRestrictedAccess(on: controller, withMessage: "We can't import visited countries from your Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.")
+            PhotosAccessManager.shared.showAlertRestrictedAccess(on: controller, withMessage: "We can't import visited countries from your Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.".localized())
         }
     }
     
@@ -53,4 +54,6 @@ class PhotosAccessManager {
         alert.addAction(OKAction)
         controller.present(alert, animated: true, completion: nil)
     }
+    
 }
+

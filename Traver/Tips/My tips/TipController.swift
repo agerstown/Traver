@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TipDelegate {
+protocol TipDelegate: class {
     func tipCreated(tip: Tip)
     func tipUpdated(tip: Tip)
 }
@@ -28,7 +28,7 @@ class TipController: UITableViewController {
     
     var alertTitleLengthShown = false
     
-    var tipDelegate: TipDelegate?
+    weak var tipDelegate: TipDelegate?
     
     var tip: Tip?
     

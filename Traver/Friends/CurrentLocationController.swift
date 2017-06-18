@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CurrentLocationDelegate {
+protocol CurrentLocationDelegate: class {
     func locationSaved()
     func friendsNamesDownloaded(names: [String])
 }
@@ -25,7 +25,7 @@ class CurrentLocationController: UIViewController {
     
     let countries = Codes.Country.allSorted
     
-    var currentLocationDelegate: CurrentLocationDelegate?
+    weak var currentLocationDelegate: CurrentLocationDelegate?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TipsDelegate {
+protocol TipsDelegate: class {
     func tipCreated(country: Codes.Country)
 }
 
@@ -20,7 +20,7 @@ class MyTipsController: UIViewController {
     
     var selectedTip: Tip? 
     
-    var tipsDelegate: TipsDelegate?
+    weak var tipsDelegate: TipsDelegate?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

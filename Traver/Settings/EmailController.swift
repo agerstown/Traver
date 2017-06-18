@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-protocol FeedbackDelegate {
+protocol FeedbackDelegate: class {
     func feedbackSuccessfullySent()
 }
 
@@ -23,7 +23,7 @@ class EmailController: UIViewController {
     
     var feedbackText: String?
     
-    var feedbackDelegate: FeedbackDelegate?
+    weak var feedbackDelegate: FeedbackDelegate?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
