@@ -16,6 +16,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var tableViewSettings: UITableView!
     @IBOutlet weak var cellImportFromPhotos: UITableViewCell!
     @IBOutlet weak var cellFacebook: UITableViewCell!
+    @IBOutlet weak var cellAitA: UITableViewCell!
     @IBOutlet weak var textViewFeedback: UITextView!
     @IBOutlet weak var buttonSendFeedback: UIButton!
     @IBOutlet weak var labelVersion: UILabel!
@@ -31,7 +32,7 @@ class SettingsViewController: UITableViewController {
         
         self.title = "Settings".localized()
         
-        labelVersion.text = "Version".localized() + " " + "1.0"
+        labelVersion.text = "Version".localized() + " " + "1.1"
         
         cellImportFromPhotos.textLabel?.text = "Import countries from Photos".localized()
         
@@ -96,6 +97,8 @@ class SettingsViewController: UITableViewController {
                 PhotosAccessManager.shared.importVisitedCountries(controller: self)
             case cellFacebook:
                 FacebookHelper.shared.login()
+            case cellAitA:
+                let a = 1
             default: ()
             }
         }

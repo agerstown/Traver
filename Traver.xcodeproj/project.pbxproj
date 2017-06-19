@@ -45,13 +45,14 @@
 		614534FD1ED22CAF005DE8C7 /* TipApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614534FC1ED22CAF005DE8C7 /* TipApiManager.swift */; };
 		614534FF1ED22FBD005DE8C7 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614534FE1ED22FBC005DE8C7 /* ApiManager.swift */; };
 		614BE76B1EF853EF00D531B6 /* WorldMap.svg in Resources */ = {isa = PBXBuildFile; fileRef = 614BE76A1EF853EF00D531B6 /* WorldMap.svg */; };
+		614BE76F1EF867B800D531B6 /* AitaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614BE76E1EF867B800D531B6 /* AitaHelper.swift */; };
+		614BE7711EF8719400D531B6 /* AitaLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614BE7701EF8719400D531B6 /* AitaLoginController.swift */; };
 		615665401DE322D70050AE5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156653F1DE322D70050AE5A /* AppDelegate.swift */; };
 		615665491DE322D70050AE5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 615665481DE322D70050AE5A /* Assets.xcassets */; };
 		615665571DE322D70050AE5A /* TraverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665561DE322D70050AE5A /* TraverTests.swift */; };
 		615665621DE322D70050AE5A /* TraverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665611DE322D70050AE5A /* TraverUITests.swift */; };
 		615665861DE3846B0050AE5A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665851DE3846A0050AE5A /* ProfileViewController.swift */; };
 		6156658A1DE384920050AE5A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665891DE384920050AE5A /* SettingsViewController.swift */; };
-		615BAD161DE3A05D00D1478D /* WorldMapBasic.svg in Resources */ = {isa = PBXBuildFile; fileRef = 615BAD151DE3A05D00D1478D /* WorldMapBasic.svg */; };
 		615BAD5C1DE4C13000D1478D /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5B1DE4C13000D1478D /* Country.swift */; };
 		615BAD5F1DE4CF9500D1478D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5E1DE4CF9500D1478D /* User.swift */; };
 		615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */; };
@@ -287,6 +288,8 @@
 		614534FC1ED22CAF005DE8C7 /* TipApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipApiManager.swift; sourceTree = "<group>"; };
 		614534FE1ED22FBC005DE8C7 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		614BE76A1EF853EF00D531B6 /* WorldMap.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WorldMap.svg; sourceTree = "<group>"; };
+		614BE76E1EF867B800D531B6 /* AitaHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AitaHelper.swift; sourceTree = "<group>"; };
+		614BE7701EF8719400D531B6 /* AitaLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AitaLoginController.swift; sourceTree = "<group>"; };
 		6156653C1DE322D60050AE5A /* Traver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6156653F1DE322D70050AE5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		615665481DE322D70050AE5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -298,7 +301,6 @@
 		615665631DE322D70050AE5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		615665851DE3846A0050AE5A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		615665891DE384920050AE5A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		615BAD151DE3A05D00D1478D /* WorldMapBasic.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WorldMapBasic.svg; sourceTree = "<group>"; };
 		615BAD5B1DE4C13000D1478D /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		615BAD5E1DE4CF9500D1478D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitedCountryItemCell.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 			children = (
 				615665891DE384920050AE5A /* SettingsViewController.swift */,
 				61FD56DE1EB6784B0035F169 /* EmailController.swift */,
+				614BE7701EF8719400D531B6 /* AitaLoginController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -487,7 +490,6 @@
 			isa = PBXGroup;
 			children = (
 				614BE76A1EF853EF00D531B6 /* WorldMap.svg */,
-				615BAD151DE3A05D00D1478D /* WorldMapBasic.svg */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -706,6 +708,7 @@
 				61A16E2F1E69A82700184C7F /* CloudKitHelper.swift */,
 				61EF033C1EDF732E0055B5BB /* ImagesManager.swift */,
 				610D13CD1EE8A01B00C874E0 /* SlackHelper.swift */,
+				614BE76E1EF867B800D531B6 /* AitaHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -952,7 +955,6 @@
 				612F29BC1DEB59BA0057E20B /* Localizable.stringsdict in Resources */,
 				619F963E1EA7E4B5001DA4EE /* LaunchScreen.storyboard in Resources */,
 				614BE76B1EF853EF00D531B6 /* WorldMap.svg in Resources */,
-				615BAD161DE3A05D00D1478D /* WorldMapBasic.svg in Resources */,
 				615665491DE322D70050AE5A /* Assets.xcassets in Resources */,
 				61732B251E491EFB00A0C952 /* Main.storyboard in Resources */,
 				610D86FF1DECE0C40030C153 /* VisitedRegionHeaderView.xib in Resources */,
@@ -1078,6 +1080,7 @@
 				6177EAAD1ED77EF500AEEA5B /* TipsRegionCell.swift in Sources */,
 				610D13CE1EE8A01B00C874E0 /* SlackHelper.swift in Sources */,
 				612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */,
+				614BE76F1EF867B800D531B6 /* AitaHelper.swift in Sources */,
 				615BAD5C1DE4C13000D1478D /* Country.swift in Sources */,
 				612F29B61DEB512D0057E20B /* String+Localized.swift in Sources */,
 				613394591E21B4810001CF2A /* FacebookHelper.swift in Sources */,
@@ -1085,6 +1088,7 @@
 				6133945F1E31485D0001CF2A /* Traver.xcdatamodeld in Sources */,
 				612F287F1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift in Sources */,
 				619D6ED61ED4C45C00DED7B7 /* DetailedTipController.swift in Sources */,
+				614BE7711EF8719400D531B6 /* AitaLoginController.swift in Sources */,
 				614534FF1ED22FBD005DE8C7 /* ApiManager.swift in Sources */,
 				619D6ED41ED48A0300DED7B7 /* TipAuthor.swift in Sources */,
 				612F29AB1DEB4D020057E20B /* RegionHeaderCell.swift in Sources */,
