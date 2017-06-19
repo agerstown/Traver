@@ -44,13 +44,14 @@
 		614534FB1ED22C96005DE8C7 /* CountryVisitApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614534FA1ED22C96005DE8C7 /* CountryVisitApiManager.swift */; };
 		614534FD1ED22CAF005DE8C7 /* TipApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614534FC1ED22CAF005DE8C7 /* TipApiManager.swift */; };
 		614534FF1ED22FBD005DE8C7 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614534FE1ED22FBC005DE8C7 /* ApiManager.swift */; };
+		614BE76B1EF853EF00D531B6 /* WorldMap.svg in Resources */ = {isa = PBXBuildFile; fileRef = 614BE76A1EF853EF00D531B6 /* WorldMap.svg */; };
 		615665401DE322D70050AE5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156653F1DE322D70050AE5A /* AppDelegate.swift */; };
 		615665491DE322D70050AE5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 615665481DE322D70050AE5A /* Assets.xcassets */; };
 		615665571DE322D70050AE5A /* TraverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665561DE322D70050AE5A /* TraverTests.swift */; };
 		615665621DE322D70050AE5A /* TraverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665611DE322D70050AE5A /* TraverUITests.swift */; };
 		615665861DE3846B0050AE5A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665851DE3846A0050AE5A /* ProfileViewController.swift */; };
 		6156658A1DE384920050AE5A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665891DE384920050AE5A /* SettingsViewController.swift */; };
-		615BAD161DE3A05D00D1478D /* WorldMap.svg in Resources */ = {isa = PBXBuildFile; fileRef = 615BAD151DE3A05D00D1478D /* WorldMap.svg */; };
+		615BAD161DE3A05D00D1478D /* WorldMapBasic.svg in Resources */ = {isa = PBXBuildFile; fileRef = 615BAD151DE3A05D00D1478D /* WorldMapBasic.svg */; };
 		615BAD5C1DE4C13000D1478D /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5B1DE4C13000D1478D /* Country.swift */; };
 		615BAD5F1DE4CF9500D1478D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5E1DE4CF9500D1478D /* User.swift */; };
 		615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */; };
@@ -285,6 +286,7 @@
 		614534FA1ED22C96005DE8C7 /* CountryVisitApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryVisitApiManager.swift; sourceTree = "<group>"; };
 		614534FC1ED22CAF005DE8C7 /* TipApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipApiManager.swift; sourceTree = "<group>"; };
 		614534FE1ED22FBC005DE8C7 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		614BE76A1EF853EF00D531B6 /* WorldMap.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WorldMap.svg; sourceTree = "<group>"; };
 		6156653C1DE322D60050AE5A /* Traver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6156653F1DE322D70050AE5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		615665481DE322D70050AE5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -296,7 +298,7 @@
 		615665631DE322D70050AE5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		615665851DE3846A0050AE5A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		615665891DE384920050AE5A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		615BAD151DE3A05D00D1478D /* WorldMap.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WorldMap.svg; sourceTree = "<group>"; };
+		615BAD151DE3A05D00D1478D /* WorldMapBasic.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WorldMapBasic.svg; sourceTree = "<group>"; };
 		615BAD5B1DE4C13000D1478D /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		615BAD5E1DE4CF9500D1478D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitedCountryItemCell.swift; sourceTree = "<group>"; };
@@ -484,7 +486,8 @@
 		612BF6471DE5E2020092D43F /* Documents */ = {
 			isa = PBXGroup;
 			children = (
-				615BAD151DE3A05D00D1478D /* WorldMap.svg */,
+				614BE76A1EF853EF00D531B6 /* WorldMap.svg */,
+				615BAD151DE3A05D00D1478D /* WorldMapBasic.svg */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -948,7 +951,8 @@
 				610FCA2B1DF4A5FE00046546 /* InfoPlist.strings in Resources */,
 				612F29BC1DEB59BA0057E20B /* Localizable.stringsdict in Resources */,
 				619F963E1EA7E4B5001DA4EE /* LaunchScreen.storyboard in Resources */,
-				615BAD161DE3A05D00D1478D /* WorldMap.svg in Resources */,
+				614BE76B1EF853EF00D531B6 /* WorldMap.svg in Resources */,
+				615BAD161DE3A05D00D1478D /* WorldMapBasic.svg in Resources */,
 				615665491DE322D70050AE5A /* Assets.xcassets in Resources */,
 				61732B251E491EFB00A0C952 /* Main.storyboard in Resources */,
 				610D86FF1DECE0C40030C153 /* VisitedRegionHeaderView.xib in Resources */,

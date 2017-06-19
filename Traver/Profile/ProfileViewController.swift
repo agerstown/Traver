@@ -35,7 +35,7 @@ class ProfileViewController: UIViewController {
     
     var mapImage: SVGKImage = SVGKImage(named: "WorldMap.svg")!
     
-    let visitedCountriesText = "%d/176 countries visited"
+    let visitedCountriesText = "%d/180 countries visited"
     let mapHeightToWidthRatio: CGFloat = 1.5
     
     let refreshControl = UIRefreshControl()

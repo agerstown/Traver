@@ -183,6 +183,10 @@
 "YE" = "Yemen";
 "ZM" = "Zambia";
 "ZW" = "Zimbabwe";
+"AD" = "Andorra";
+"HK" = "Hong Kong";
+"SG" = "Singapore";
+"MT" = "Malta";
 
 // Regions names
 "REU" = "Europe";

@@ -34,6 +34,6 @@ class ShareView: UIView {
         
         imageViewPhoto.image = User.shared.photo
         labelName.text = User.shared.name
-        labelCountriesVisited.text = "%d/176 countries visited".localized(for: User.shared.visitedCountries.count)
+        labelCountriesVisited.text = "%d/180 countries visited".localized(for: User.shared.visitedCountries.count)
     }
 }
