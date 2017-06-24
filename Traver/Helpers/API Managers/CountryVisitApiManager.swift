@@ -115,6 +115,34 @@ class CountryVisitApiManager: ApiManager {
         }
     }
     
+    func addCountryVisits(codes: [String], completion: (() -> Void)?) {
+        if User.shared.token != nil && !User.shared.token!.isEmpty {
+            let params: Parameters = [
+                "country_codes": codes
+            ]
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(User.shared.token!)"
+            ]
+            
+            _ = Alamofire.request(host + "visits/add-country-visits/", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                if response.response?.statusCode == 201 {
+                    
+                    User.shared.addCountryVisits(codes: codes)
+                    if let completion = completion {
+                        completion()
+                    }
+                }
+            }
+        } else {
+            User.shared.addCountryVisits(codes: codes)
+            if let completion = completion {
+                completion()
+            }
+        }
+    }
+
+    
     // MARK: - DELETE methods
     func deleteCountryVisit(country: Country, completion: (() -> Void)?) {
         if User.shared.token != nil && !User.shared.token!.isEmpty {

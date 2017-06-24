@@ -15,6 +15,15 @@ class CoreDataStack {
     
     var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Traver")
+        
+        let description = NSPersistentStoreDescription()
+        
+        description.shouldInferMappingModelAutomatically = true
+        description.shouldMigrateStoreAutomatically = true
+        description.url = NSPersistentContainer.defaultDirectoryURL().appendingPathComponent("Traver.sqlite")
+        
+        container.persistentStoreDescriptions = [description]
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in } )
         return container
     }()

@@ -15,6 +15,7 @@
 		612A0B3B1E9FA902005BDCA6 /* SharePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3A1E9FA902005BDCA6 /* SharePreviewController.swift */; };
 		612A0B3D1E9FB4D0005BDCA6 /* UIImage+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3C1E9FB4D0005BDCA6 /* UIImage+Effects.swift */; };
 		612A0B401EA28430005BDCA6 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3F1EA2842F005BDCA6 /* FriendsViewController.swift */; };
+		612A38A61EFD5BA900C8B0DD /* AitaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A38A51EFD5BA900C8B0DD /* AitaHelper.swift */; };
 		612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6401DE5E04E0092D43F /* CountriesViewController.swift */; };
 		612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6481DE5E2880092D43F /* CountryItemCell.swift */; };
 		612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */; };
@@ -45,7 +46,6 @@
 		614534FD1ED22CAF005DE8C7 /* TipApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614534FC1ED22CAF005DE8C7 /* TipApiManager.swift */; };
 		614534FF1ED22FBD005DE8C7 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614534FE1ED22FBC005DE8C7 /* ApiManager.swift */; };
 		614BE76B1EF853EF00D531B6 /* WorldMap.svg in Resources */ = {isa = PBXBuildFile; fileRef = 614BE76A1EF853EF00D531B6 /* WorldMap.svg */; };
-		614BE76F1EF867B800D531B6 /* AitaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614BE76E1EF867B800D531B6 /* AitaHelper.swift */; };
 		614BE7711EF8719400D531B6 /* AitaLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614BE7701EF8719400D531B6 /* AitaLoginController.swift */; };
 		615665401DE322D70050AE5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156653F1DE322D70050AE5A /* AppDelegate.swift */; };
 		615665491DE322D70050AE5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 615665481DE322D70050AE5A /* Assets.xcassets */; };
@@ -129,6 +129,8 @@
 		612A0B3A1E9FA902005BDCA6 /* SharePreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePreviewController.swift; sourceTree = "<group>"; };
 		612A0B3C1E9FB4D0005BDCA6 /* UIImage+Effects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Effects.swift"; sourceTree = "<group>"; };
 		612A0B3F1EA2842F005BDCA6 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		612A38A41EFC57F100C8B0DD /* Traver v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Traver v2.xcdatamodel"; sourceTree = "<group>"; };
+		612A38A51EFD5BA900C8B0DD /* AitaHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AitaHelper.swift; sourceTree = "<group>"; };
 		612BF6401DE5E04E0092D43F /* CountriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesViewController.swift; sourceTree = "<group>"; };
 		612BF6481DE5E2880092D43F /* CountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryItemCell.swift; sourceTree = "<group>"; };
 		612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -288,7 +290,6 @@
 		614534FC1ED22CAF005DE8C7 /* TipApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipApiManager.swift; sourceTree = "<group>"; };
 		614534FE1ED22FBC005DE8C7 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		614BE76A1EF853EF00D531B6 /* WorldMap.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WorldMap.svg; sourceTree = "<group>"; };
-		614BE76E1EF867B800D531B6 /* AitaHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AitaHelper.swift; sourceTree = "<group>"; };
 		614BE7701EF8719400D531B6 /* AitaLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AitaLoginController.swift; sourceTree = "<group>"; };
 		6156653C1DE322D60050AE5A /* Traver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6156653F1DE322D70050AE5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -708,7 +709,7 @@
 				61A16E2F1E69A82700184C7F /* CloudKitHelper.swift */,
 				61EF033C1EDF732E0055B5BB /* ImagesManager.swift */,
 				610D13CD1EE8A01B00C874E0 /* SlackHelper.swift */,
-				614BE76E1EF867B800D531B6 /* AitaHelper.swift */,
+				612A38A51EFD5BA900C8B0DD /* AitaHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1048,6 +1049,7 @@
 				612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */,
 				6165EF391ED726E100741FE5 /* MyTipsController.swift in Sources */,
 				61FF9D7E1ED0DF8B0008AFE9 /* TipController.swift in Sources */,
+				612A38A61EFD5BA900C8B0DD /* AitaHelper.swift in Sources */,
 				615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */,
 				61FD56DD1EB6776A0035F169 /* Bluring.swift in Sources */,
 				61FF9D7A1ED0D6190008AFE9 /* TipsInCountryController.swift in Sources */,
@@ -1080,7 +1082,6 @@
 				6177EAAD1ED77EF500AEEA5B /* TipsRegionCell.swift in Sources */,
 				610D13CE1EE8A01B00C874E0 /* SlackHelper.swift in Sources */,
 				612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */,
-				614BE76F1EF867B800D531B6 /* AitaHelper.swift in Sources */,
 				615BAD5C1DE4C13000D1478D /* Country.swift in Sources */,
 				612F29B61DEB512D0057E20B /* String+Localized.swift in Sources */,
 				613394591E21B4810001CF2A /* FacebookHelper.swift in Sources */,
@@ -1451,9 +1452,10 @@
 		6133945D1E31485D0001CF2A /* Traver.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				612A38A41EFC57F100C8B0DD /* Traver v2.xcdatamodel */,
 				6133945E1E31485D0001CF2A /* Traver.xcdatamodel */,
 			);
-			currentVersion = 6133945E1E31485D0001CF2A /* Traver.xcdatamodel */;
+			currentVersion = 612A38A41EFC57F100C8B0DD /* Traver v2.xcdatamodel */;
 			path = Traver.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

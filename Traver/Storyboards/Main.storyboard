@@ -842,19 +842,19 @@
                             <color key="backgroundColor" red="0.93656378984451294" green="0.9386104941368103" blue="0.95605641603469849" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <view key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleToFill" id="Fb0-Nr-Ss3">
-                            <rect key="frame" x="0.0" y="521.5" width="375" height="126"/>
+                            <rect key="frame" x="0.0" y="509.5" width="375" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Traver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAV-uA-FEx">
-                                    <rect key="frame" x="163" y="67" width="48.5" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FsH-kM-aRw">
-                                    <rect key="frame" x="153" y="92" width="70.5" height="18"/>
+                                    <rect key="frame" x="153" y="70" width="70.5" height="18"/>
                                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="15"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Traver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAV-uA-FEx">
+                                    <rect key="frame" x="163.5" y="45" width="48.5" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -867,23 +867,65 @@
                             </constraints>
                         </view>
                         <sections>
-                            <tableViewSection headerTitle="Import" footerTitle="It may take some time, just wait a little." id="6Aw-Io-joS">
+                            <tableViewSection headerTitle="Import countries" id="6Aw-Io-joS">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="hMV-3S-vvO" style="IBUITableViewCellStyleDefault" id="CcC-dy-ZbG">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="CcC-dy-ZbG">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CcC-dy-ZbG" id="8GB-SO-e8Y">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CcC-dy-ZbG" id="8GB-SO-e8Y" customClass="ImportAccountCell" customModule="Traver" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Import countries from Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hMV-3S-vvO">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photos-icon" translatesAutoresizingMaskIntoConstraints="NO" id="fcp-xp-hSb">
+                                                    <rect key="frame" x="16" y="5" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="VKa-yv-nSy"/>
+                                                        <constraint firstAttribute="width" secondItem="fcp-xp-hSb" secondAttribute="height" multiplier="1:1" id="soG-6v-pLm"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import from Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qq7-0E-Jpm">
+                                                    <rect key="frame" x="60" y="11.5" width="149" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Qq7-0E-Jpm" firstAttribute="centerY" secondItem="8GB-SO-e8Y" secondAttribute="centerY" id="XfP-4Z-CNg"/>
+                                                <constraint firstItem="fcp-xp-hSb" firstAttribute="centerY" secondItem="8GB-SO-e8Y" secondAttribute="centerY" id="idr-Fd-4iJ"/>
+                                                <constraint firstItem="Qq7-0E-Jpm" firstAttribute="leading" secondItem="fcp-xp-hSb" secondAttribute="trailing" constant="12" id="mI7-dT-Gla"/>
+                                                <constraint firstItem="fcp-xp-hSb" firstAttribute="leading" secondItem="8GB-SO-e8Y" secondAttribute="leading" constant="16" id="qu3-6f-Hdv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="U3w-IT-Fly">
+                                        <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U3w-IT-Fly" id="Ihh-ci-cdB">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import from App in the Air" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="3vf-ku-4Ue">
+                                                    <rect key="frame" x="60" y="11" width="303" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="aita-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Hmd-fK-153">
+                                                    <rect key="frame" x="16" y="5" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="OED-op-oBK"/>
+                                                        <constraint firstAttribute="width" secondItem="Hmd-fK-153" secondAttribute="height" multiplier="1:1" id="TjL-dG-5kK"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Hmd-fK-153" firstAttribute="centerY" secondItem="Ihh-ci-cdB" secondAttribute="centerY" id="CdB-2e-9X5"/>
+                                                <constraint firstItem="3vf-ku-4Ue" firstAttribute="centerY" secondItem="Ihh-ci-cdB" secondAttribute="centerY" id="Ij9-27-Y8w"/>
+                                                <constraint firstItem="3vf-ku-4Ue" firstAttribute="leading" secondItem="Hmd-fK-153" secondAttribute="trailing" constant="12" id="OjI-0a-KIW"/>
+                                                <constraint firstItem="Hmd-fK-153" firstAttribute="leading" secondItem="Ihh-ci-cdB" secondAttribute="leading" constant="16" id="RNA-LB-tVi"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3vf-ku-4Ue" secondAttribute="trailing" constant="4" id="gD7-fc-wEU"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -891,7 +933,7 @@
                             <tableViewSection headerTitle="Accounts" id="6Sl-wf-c3D">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="WOO-wZ-sMI" detailTextLabel="2fc-HZ-m3P" style="IBUITableViewCellStyleValue1" id="udT-9X-D60">
-                                        <rect key="frame" x="0.0" y="168" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="199.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="udT-9X-D60" id="yDI-3H-hvi">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -914,39 +956,12 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="OJT-ok-gwW" detailTextLabel="S00-Hr-gTd" style="IBUITableViewCellStyleValue1" id="acQ-O6-Nyt">
-                                        <rect key="frame" x="0.0" y="212" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="acQ-O6-Nyt" id="zvl-hf-UZ1">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="App in the Air" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OJT-ok-gwW">
-                                                    <rect key="frame" x="15" y="12" width="103.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Not connected" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S00-Hr-gTd">
-                                                    <rect key="frame" x="246" y="12" width="114" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="qk0-Ah-GbH" kind="presentation" identifier="segueToAitaLoginController" id="FFE-ES-6Ki"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Support and feedback" id="1ij-si-er6">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="192" id="4VJ-OE-V2a">
-                                        <rect key="frame" x="0.0" y="312" width="375" height="192"/>
+                                        <rect key="frame" x="0.0" y="299.5" width="375" height="192"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4VJ-OE-V2a" id="hCh-IN-vto">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="191"/>
@@ -995,18 +1010,23 @@
                     <navigationItem key="navigationItem" title="Settings" id="XKs-oc-Xjv"/>
                     <connections>
                         <outlet property="buttonSendFeedback" destination="693-ZA-TcB" id="Mfv-wH-B6Q"/>
-                        <outlet property="cellAitA" destination="acQ-O6-Nyt" id="qvu-FH-8w9"/>
                         <outlet property="cellFacebook" destination="udT-9X-D60" id="8dW-4p-1Vd"/>
+                        <outlet property="cellImportFromAita" destination="U3w-IT-Fly" id="uvP-6j-tIV"/>
                         <outlet property="cellImportFromPhotos" destination="CcC-dy-ZbG" id="2YU-9l-kYg"/>
+                        <outlet property="imageViewAitaIcon" destination="Hmd-fK-153" id="od7-h1-pDA"/>
+                        <outlet property="imageViewPhotosIcon" destination="fcp-xp-hSb" id="xF3-ND-gJy"/>
+                        <outlet property="labelImportFromAita" destination="3vf-ku-4Ue" id="KL1-YA-o9X"/>
+                        <outlet property="labelImportFromPhotos" destination="Qq7-0E-Jpm" id="2kh-2L-dZb"/>
                         <outlet property="labelVersion" destination="FsH-kM-aRw" id="TgB-mr-ncr"/>
                         <outlet property="tableViewSettings" destination="bpl-Ue-1x5" id="24r-5t-JK8"/>
                         <outlet property="textViewFeedback" destination="Kcd-av-JoI" id="mLU-gC-Jwq"/>
                         <segue destination="Jd0-HN-20D" kind="presentation" identifier="segueToEmailController" modalPresentationStyle="fullScreen" id="kdu-6u-PnV"/>
+                        <segue destination="qk0-Ah-GbH" kind="presentation" identifier="segueToAitaLoginController" id="ISf-sJ-GBD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="be3-RB-fVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="2647"/>
+            <point key="canvasLocation" x="853.60000000000002" y="2646.9265367316343"/>
         </scene>
         <!--Email Controller-->
         <scene sceneID="YUm-Kv-Nsy">
@@ -1091,7 +1111,7 @@
         <scene sceneID="NOc-4m-Rxj">
             <objects>
                 <navigationController id="qk0-Ah-GbH" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bll-3a-XKz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bll-3a-XKz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2058,12 +2078,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="aita-icon" width="1024" height="1024"/>
         <image name="chat" width="25" height="25"/>
         <image name="default_photo" width="85" height="85"/>
         <image name="edit" width="12" height="12"/>
         <image name="friends" width="512" height="512"/>
         <image name="friends_icon" width="25" height="25"/>
         <image name="item_unchecked" width="25" height="25"/>
+        <image name="photos-icon" width="512" height="512"/>
         <image name="profile" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
         <image name="share" width="30" height="30"/>

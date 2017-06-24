@@ -25,7 +25,7 @@ class AitaLoginController: UIViewController {
         
         webView.delegate = self
         
-        if let url = URL(string: "https://iappintheair.appspot.com/oauth/authorize?client_id=02b3caf1-3d41-4431-a565-71653fc973b8&response_type=code&redirect_uri=http://traver-dev.us-east-1.elasticbeanstalk.com/users/aita&scope=user_flights") {
+        if let url = URL(string: AitaHelper.shared.authorisationLink) {
             let request = URLRequest(url: url)
             webView.loadRequest(request)
         }
@@ -33,7 +33,7 @@ class AitaLoginController: UIViewController {
     
     // MARK: - Actions
     @IBAction func buttonCancelTapped(_ sender: Any) {
-        dismiss(animated: true) {
+        self.dismiss(animated: true) {
             UIApplication.shared.statusBarStyle = .lightContent
         }
     }
@@ -60,5 +60,28 @@ class AitaLoginController: UIViewController {
 extension AitaLoginController: UIWebViewDelegate {
     func webViewDidFinishLoad(_ webView: UIWebView) {
         stopSpinning()
+    }
+    
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest,
+                 navigationType: UIWebViewNavigationType) -> Bool {
+        if let url = request.url {
+            if url.relativeString.hasPrefix(AitaHelper.shared.redirectURL) {
+                if let components = URLComponents(url: url, resolvingAgainstBaseURL: false) {
+                    if let codeItem = components.queryItems?.first {
+                        if codeItem.name == "code" {
+                            if let code = codeItem.value {
+                                AitaHelper.shared.importCountries(code: code) {
+                                    self.dismiss(animated: true) {
+                                        UIApplication.shared.statusBarStyle = .lightContent
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return true
     }
 }

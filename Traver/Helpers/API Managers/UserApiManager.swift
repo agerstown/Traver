@@ -629,6 +629,57 @@ class UserApiManager: ApiManager {
         }
     }
     
+    func setAitaTokens(accessToken: String, refreshToken: String) {
+        if User.shared.token != nil && !User.shared.token!.isEmpty {
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(User.shared.token!)"
+            ]
+            
+            let parameters: Parameters = [
+                "access_token": accessToken,
+                "refresh_token": refreshToken
+            ]
+            
+            _ = Alamofire.request(host + "users/set-aita-tokens/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                if response.response?.statusCode == 200 {
+                    self.setAitaTokensInCoreData(accessToken: accessToken, refreshToken: refreshToken)
+                }
+            }
+        } else {
+            setAitaTokensInCoreData(accessToken: accessToken, refreshToken: refreshToken)
+        }
+    }
+    
+    func setAitaTokensInCoreData(accessToken: String, refreshToken: String) {
+        User.shared.aitaAccessToken = accessToken
+        User.shared.aitaRefreshToken = refreshToken
+        CoreDataStack.shared.saveContext()
+    }
+    
+    func updateAitaAccessToken(_ accessToken: String, completion: @escaping () -> Void) {
+        if User.shared.token != nil && !User.shared.token!.isEmpty {
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(User.shared.token!)"
+            ]
+            
+            let parameters: Parameters = [
+                "access_token": accessToken
+            ]
+            
+            _ = Alamofire.request(host + "users/update-aita-access-token/", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                if response.response?.statusCode == 200 {
+                    User.shared.aitaAccessToken = accessToken
+                    CoreDataStack.shared.saveContext()
+                    completion()
+                }
+            }
+        } else {
+            User.shared.aitaAccessToken = accessToken
+            CoreDataStack.shared.saveContext()
+            completion()
+        }
+    }
+    
     // MARK: - DELETE methods
     func disconnectFacebook() {
         let headers: HTTPHeaders = [
@@ -659,6 +710,8 @@ class UserApiManager: ApiManager {
         user.feedbackEmail = stringOrNilIfEmpty(profile["feedback_email"].stringValue)
         user.currentCountryCode = stringOrNilIfEmpty(profile["current_country_code"].stringValue)
         user.currentRegion = stringOrNilIfEmpty(profile["current_region"].stringValue)
+        user.aitaAccessToken = stringOrNilIfEmpty(profile["aita_access_token"].stringValue)
+        user.aitaRefreshToken = stringOrNilIfEmpty(profile["aita_refresh_token"].stringValue)
         
         if json["num_countries"].int != nil {
             user.numberOfVisitedCountries = json["num_countries"].stringValue

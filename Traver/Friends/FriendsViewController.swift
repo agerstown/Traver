@@ -217,6 +217,7 @@ extension FriendsViewController: UITableViewDataSource {
         cell.labelName.text = user.name
         
         if let path = user.photoPath {
+            cell.imageViewPhoto.image = UIImage(named: "default_photo")
             ImagesManager.shared.loadImage(withURL: UserApiManager.shared.photosHost + "traver-media/" + path, intoImageView: cell.imageViewPhoto)
         } else {
             cell.imageViewPhoto.image = UIImage(named: "default_photo")

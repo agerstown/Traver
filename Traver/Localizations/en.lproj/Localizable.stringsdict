@@ -66,5 +66,21 @@
 			<string>%d tips</string>
 		</dict>
 	</dict>
+    <key>%d new countries were succesfully imported from AitA</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@countries@</string>
+        <key>countries</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>%d new country was succesfully imported from AitA</string>
+            <key>other</key>
+            <string>%d new countries were succesfully imported from AitA</string>
+        </dict>
+    </dict>
 </dict>
 </plist>

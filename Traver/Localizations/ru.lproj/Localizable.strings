@@ -213,7 +213,9 @@
 
 // Import
 "Import countries from Photos" = "Импортировать страны из Фото";
+"Import from Photos" = "Импортировать из Фото";
 "Import" = "Импорт";
+"Import countries" = "Импорт стран";
 "It may take some time, just wait a little." = "Это может занять некоторое время, просто подождите немного.";
 "Import has been started" = "Импорт начался";
 "Import is impossible" = "Импорт невозможен";
@@ -222,6 +224,8 @@
 "Don't Allow" = "Запретить";
 "Access to Photos is restricted" = "Доступ к Фото ограничен";
 "We can't import visited countries from your Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it." = "Мы не можем импортировать посещенные Вами страны из Фото, т.к. родительский контроль не позволяет Вам давать доступ к своим Фото для приложений. Попросите владельца разрешить доступ.";
+"Import from App in the Air" = "Импортировать из App in the Air";
+"Countries from AitA were succesfully imported!" = "Страны из AitA были успешно импортированы!";
 
 // Share
 "Share" = "Поделиться";

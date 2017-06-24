@@ -74,5 +74,23 @@
 			<string>%d совета</string>
 		</dict>
 	</dict>
+    <key>%d new countries were succesfully imported from AitA</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@countries@</string>
+        <key>countries</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>%d новая страна была успешно импортирована из AitA</string>
+            <key>many</key>
+            <string>%d новых стран было успешно импортировано из Aita</string>
+            <key>other</key>
+            <string>%d новые страны были успешно импортированы из AitA</string>
+        </dict>
+    </dict>
 </dict>
 </plist>
