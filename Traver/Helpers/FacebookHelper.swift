@@ -40,13 +40,13 @@ class FacebookHelper {
             UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
         } else {
             UIApplication.shared.statusBarStyle = .default
-            loginManager.logIn([.publicProfile, .email, .userFriends, .custom("user_location")], viewController: nil) { loginResult in
+            loginManager.logIn([.publicProfile, .email, .userFriends], viewController: nil) { loginResult in // .custom("user_location")
                 UIApplication.shared.statusBarStyle = .lightContent
                 switch loginResult {
                 case .failed(let error):
                     self.showErrorAlert(for: error)
                 case .success(_, _, let accessToken):
-                    let getUserDataRequest = GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, friends, picture.width(200).height(200), location"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
+                    let getUserDataRequest = GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, friends, picture.width(200).height(200)"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion) // location
                     getUserDataRequest.start { (response, result) in
                         switch result {
                         case .failed(let error):

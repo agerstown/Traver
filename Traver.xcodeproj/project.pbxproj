@@ -525,7 +525,7 @@
 				EE7B2C246E1D164A28EA3D41 /* Pods_Traver.framework */,
 			);
 			name = Frameworks;
-			path = Traver;
+			path = Traver/Frameworks;
 			sourceTree = "<group>";
 		};
 		612F29131DE7A6DA0057E20B /* usr */ = {

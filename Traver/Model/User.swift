@@ -15,7 +15,6 @@ class User: NSManagedObject {
     static let shared: User = {
         
         let coreDataStack = CoreDataStack.shared
-        let bla = CoreDataStack.shared.mainContext
         
         let frUser = NSFetchRequest<User>(entityName: "User")
         let predicate = NSPredicate(format: "mainUser = %@", NSNumber(value: true))
