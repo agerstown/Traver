@@ -7,3 +7,4 @@
 */
 
 "NSPhotoLibraryUsageDescription" = "We need it to save pictures and import visited countries from your photos.";
+"NSLocationUsageDescription" = "We need it to update your current location for your freinds.";

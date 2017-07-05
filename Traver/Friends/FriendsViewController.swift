@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 import FacebookCore
 import FacebookLogin
+import CoreLocation
 
 class FriendsViewController: UIViewController {
     
@@ -33,6 +34,8 @@ class FriendsViewController: UIViewController {
     
     let visitedCountriesText = "%d countries visited"
     
+    //let locationManager = CLLocationManager()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +52,9 @@ class FriendsViewController: UIViewController {
         let predicate = NSPredicate(format: "ANY friends = %@", User.shared)
         let fetchRequest = NSFetchRequest<User> (entityName: "User")
         fetchRequest.predicate = predicate
-        //let sortDescriptor = NSSortDescriptor(key: "numberOfVisitedCountries", ascending: true)
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        let countriesNumSortDescriptor = NSSortDescriptor(key: "numberOfVisitedCountries", ascending: false)
+        let nameSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [countriesNumSortDescriptor, nameSortDescriptor]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         
         try! fetchedResultsController!.performFetch()
@@ -62,6 +65,9 @@ class FriendsViewController: UIViewController {
         
         refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
         tableViewFriends.refreshControl = refreshControl
+        
+//        locationManager.delegate = self
+//        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
         NotificationCenter.default.addObserver(self, selector: #selector(friendsUpdated), name: UserApiManager.shared.FriendsUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
@@ -89,6 +95,11 @@ class FriendsViewController: UIViewController {
     
     func labelCurrentLocationTapped() {
         performSegue(withIdentifier: "segueToCurrentLocationController", sender: nil)
+//        if CLLocationManager.authorizationStatus() == .notDetermined {
+//            locationManager.requestAlwaysAuthorization()
+//        } else {
+//            performSegue(withIdentifier: "segueToCurrentLocationController", sender: nil)
+//        }
     }
     
     // MARK: - Segue
@@ -231,10 +242,8 @@ extension FriendsViewController: UITableViewDataSource {
             cell.constraintLabelName.constant = 18
         }
         
-        if let numberOfVisitedCountriesString = user.numberOfVisitedCountries {
-            if let number = Int(numberOfVisitedCountriesString) {
-                cell.labelVisitedCountries.text =  visitedCountriesText.localized(for: number)
-            }
+        if let numberOfVisitedCountries = user.numberOfVisitedCountries {
+            cell.labelVisitedCountries.text =  visitedCountriesText.localized(for: Int(numberOfVisitedCountries))
         }
     }
 }
@@ -299,3 +308,33 @@ extension FriendsViewController: CurrentLocationDelegate {
         configureFriendsInfoLabel(names: names)
     }
 }
+
+//// MARK: - CLLocationManagerDelegate
+//extension FriendsViewController: CLLocationManagerDelegate {
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        if status == .authorizedAlways {
+//            locationManager.startMonitoringSignificantLocationChanges()
+//        }
+//    }
+//    
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        if let location = locations.last {
+//            let geocoder = CLGeocoder()
+//            geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+//                if let placemark = placemarks?.first {
+//                    if let code = placemark.isoCountryCode {
+//                        if Codes.Country.all.contains(where: { $0.code == code } ) {
+//                            let region = placemark.locality
+//                            UserApiManager.shared.setCurrentLocation(countryCode: code, region: region) {
+//                                self.configureCurrentLocationLabel()
+//                            }
+//                            UserApiManager.shared.getFriendsForCurrentCountry(code: code) { friendsNames in
+//                                self.configureFriendsInfoLabel(names: friendsNames)
+//                            }
+//                        }
+//                    }
+//                }
+//            })
+//        }
+//    }
+//}

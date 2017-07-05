@@ -73,7 +73,7 @@ class User: NSManagedObject {
     @NSManaged var location: String?
     @NSManaged var iCloudID: String?
     @NSManaged var locale: String?
-    @NSManaged var numberOfVisitedCountries: String?
+    @NSManaged var numberOfVisitedCountries: NSNumber?
     @NSManaged var feedbackEmail: String?
     @NSManaged var currentCountryCode: String?
     @NSManaged var currentRegion: String?

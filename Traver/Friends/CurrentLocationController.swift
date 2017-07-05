@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol CurrentLocationDelegate: class {
     func locationSaved()
@@ -26,6 +27,8 @@ class CurrentLocationController: UIViewController {
     let countries = Codes.Country.allSorted
     
     weak var currentLocationDelegate: CurrentLocationDelegate?
+    
+    //let locationManager = CLLocationManager()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -61,10 +64,24 @@ class CurrentLocationController: UIViewController {
             textFieldRegion.text = region
         }
         
+//        locationManager.delegate = self
+//        locationManager.requestAlwaysAuthorization()
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         view.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer.cancelsTouchesInView = false
         tapGestureRecognizer.delegate = self
+    }
+    
+    func getCountryIndex(countryCode: String?) -> Int {
+        if let code = countryCode {
+            if let countryCode = Codes.Country.all.filter ({ $0.code == code }).first {
+                if let index = countries.index(of: countryCode) {
+                    return index
+                }
+            }
+        }
+        return 2
     }
     
     // MARK: - Actions
@@ -75,11 +92,9 @@ class CurrentLocationController: UIViewController {
         if let text = textFieldRegion.text {
             region = text.isEmpty ? nil : text
         }
-        UserApiManager.shared.setCurrentLocation(countryCode: selectedCountry.code, region: region) { success in
-            if success {
-                self.currentLocationDelegate?.locationSaved()
-                self.dismiss(animated: true, completion: nil)
-            }
+        UserApiManager.shared.setCurrentLocation(countryCode: selectedCountry.code, region: region) {
+            self.currentLocationDelegate?.locationSaved()
+            self.dismiss(animated: true, completion: nil)
         }
         UserApiManager.shared.getFriendsForCurrentCountry(code: selectedCountry.code) { friendsNames in
             self.currentLocationDelegate?.friendsNamesDownloaded(names: friendsNames)
@@ -87,12 +102,10 @@ class CurrentLocationController: UIViewController {
     }
     
     @IBAction func buttonHideTapped(_ sender: Any) {
-        UserApiManager.shared.setCurrentLocation(countryCode: nil, region: nil) { success in
-            if success {
-                self.currentLocationDelegate?.locationSaved()
-                self.currentLocationDelegate?.friendsNamesDownloaded(names: [])
-                self.dismiss(animated: true, completion: nil)
-            }
+        UserApiManager.shared.setCurrentLocation(countryCode: nil, region: nil) {
+            self.currentLocationDelegate?.locationSaved()
+            self.currentLocationDelegate?.friendsNamesDownloaded(names: [])
+            self.dismiss(animated: true, completion: nil)
         }
 
     }
@@ -144,3 +157,31 @@ extension CurrentLocationController: UIPickerViewDelegate {
     }
 
 }
+//// MARK: - CLLocationManagerDelegate
+//extension CurrentLocationController: CLLocationManagerDelegate {
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        if status == .authorizedAlways {
+//            locationManager.startMonitoringSignificantLocationChanges()
+//        }
+//    }
+//    
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        if let location = locations.last {
+//            let geocoder = CLGeocoder()
+//            geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+//                if let placemark = placemarks?.first {
+//                    if let code = placemark.isoCountryCode {
+//                        if Codes.Country.all.contains(where: { $0.code == code } ) {
+//                            let region = placemark.locality
+//                            UserApiManager.shared.setCurrentLocation(countryCode: code, region: region) { success in
+//                                if success {
+//                                    self.currentLocationDelegate?.locationSaved()
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            })
+//        }
+//    }
+//}

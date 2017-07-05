@@ -75,6 +75,8 @@
 	<string>Copyright @ 2017 Natalia Nikitina. All rights reserved.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need it to save pictures and import visited countries from your photos.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need it to update your current location for your freinds.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -329,6 +329,7 @@
 		61BFDB101DE5ABB700F49F6B /* Traver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Traver-Bridging-Header.h"; sourceTree = "<group>"; };
 		61C4F1B61DFAD5380070158E /* SVGKImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SVGKImage+Extensions.swift"; sourceTree = "<group>"; };
 		61EF033C1EDF732E0055B5BB /* ImagesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesManager.swift; sourceTree = "<group>"; };
+		61FBC9231F0D471A00993CBA /* Traver v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Traver v3.xcdatamodel"; sourceTree = "<group>"; };
 		61FD56DC1EB6776A0035F169 /* Bluring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bluring.swift; sourceTree = "<group>"; };
 		61FD56DE1EB6784B0035F169 /* EmailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailController.swift; sourceTree = "<group>"; };
 		61FF9D751ED0B3C00008AFE9 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
@@ -1452,10 +1453,11 @@
 		6133945D1E31485D0001CF2A /* Traver.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				61FBC9231F0D471A00993CBA /* Traver v3.xcdatamodel */,
 				612A38A41EFC57F100C8B0DD /* Traver v2.xcdatamodel */,
 				6133945E1E31485D0001CF2A /* Traver.xcdatamodel */,
 			);
-			currentVersion = 612A38A41EFC57F100C8B0DD /* Traver v2.xcdatamodel */;
+			currentVersion = 61FBC9231F0D471A00993CBA /* Traver v3.xcdatamodel */;
 			path = Traver.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -332,7 +332,7 @@ class UserApiManager: ApiManager {
         }
     }
 
-    func setCurrentLocation(countryCode: String?, region: String?, completion: @escaping (_ success: Bool) -> Void) {
+    func setCurrentLocation(countryCode: String?, region: String?, completion: @escaping () -> Void) {
         var parameters = Parameters()
         if let countryCode = countryCode {
             parameters["country_code"] = countryCode
@@ -350,10 +350,9 @@ class UserApiManager: ApiManager {
                 User.shared.currentCountryCode = countryCode
                 User.shared.currentRegion = region
                 CoreDataStack.shared.saveContext()
-                completion(true)
+                completion()
             } else {
                 self.showNoInternetErrorAlert(response: response)
-                completion(false)
             }
         }
         
@@ -714,7 +713,7 @@ class UserApiManager: ApiManager {
         user.aitaRefreshToken = stringOrNilIfEmpty(profile["aita_refresh_token"].stringValue)
         
         if json["num_countries"].int != nil {
-            user.numberOfVisitedCountries = json["num_countries"].stringValue
+            user.numberOfVisitedCountries = NSNumber(integerLiteral: json["num_countries"].intValue)
         }
         
         user.id = json["id"].stringValue
