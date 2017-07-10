@@ -171,14 +171,29 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2k-iA-0hf">
+                                                    <rect key="frame" x="339" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="AgX-rZ-4nt"/>
+                                                        <constraint firstAttribute="width" secondItem="h2k-iA-0hf" secondAttribute="height" multiplier="1:1" id="YYD-KV-XIm"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="question"/>
+                                                    <connections>
+                                                        <action selector="buttonAskForTipTapped:" destination="mUI-dh-3tL" eventType="touchUpInside" id="TpL-3D-YAp"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Fcm-1s-YE6" firstAttribute="leading" secondItem="tAA-aT-nIQ" secondAttribute="leadingMargin" constant="8" id="1Xw-uD-SRK"/>
+                                                <constraint firstItem="h2k-iA-0hf" firstAttribute="centerY" secondItem="tAA-aT-nIQ" secondAttribute="centerY" id="6BE-Nt-CYm"/>
                                                 <constraint firstItem="Fcm-1s-YE6" firstAttribute="centerY" secondItem="tAA-aT-nIQ" secondAttribute="centerY" id="OzI-0K-ACE"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Fcm-1s-YE6" secondAttribute="trailing" constant="8" id="uiW-Sl-kjr"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Fcm-1s-YE6" secondAttribute="trailing" constant="8" id="UWf-X4-K9H"/>
+                                                <constraint firstAttribute="trailing" secondItem="h2k-iA-0hf" secondAttribute="trailing" constant="16" id="kBd-wa-Tes"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="buttonAskForTip" destination="h2k-iA-0hf" id="trO-pD-Y0b"/>
+                                            <outlet property="constraintTrailingLabelName" destination="UWf-X4-K9H" id="phM-x1-1zD"/>
                                             <outlet property="labelCountryName" destination="Fcm-1s-YE6" id="Fch-8S-Uam"/>
                                         </connections>
                                     </tableViewCell>
@@ -515,7 +530,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLy-v5-P1a">
-                                <rect key="frame" x="131" y="428.5" width="112" height="40"/>
+                                <rect key="frame" x="131.5" y="428.5" width="112" height="40"/>
                                 <color key="backgroundColor" red="0.98089617490000003" green="0.80392156859999997" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="6Cn-hi-Dyn"/>
@@ -870,7 +885,7 @@
                             <tableViewSection headerTitle="Import countries" id="6Aw-Io-joS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="CcC-dy-ZbG">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CcC-dy-ZbG" id="8GB-SO-e8Y" customClass="ImportAccountCell" customModule="Traver" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -899,7 +914,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="U3w-IT-Fly">
-                                        <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="100" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U3w-IT-Fly" id="Ihh-ci-cdB">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -933,7 +948,7 @@
                             <tableViewSection headerTitle="Accounts" id="6Sl-wf-c3D">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="WOO-wZ-sMI" detailTextLabel="2fc-HZ-m3P" style="IBUITableViewCellStyleValue1" id="udT-9X-D60">
-                                        <rect key="frame" x="0.0" y="199.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="200" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="udT-9X-D60" id="yDI-3H-hvi">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -961,7 +976,7 @@
                             <tableViewSection headerTitle="Support and feedback" id="1ij-si-er6">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="192" id="4VJ-OE-V2a">
-                                        <rect key="frame" x="0.0" y="299.5" width="375" height="192"/>
+                                        <rect key="frame" x="0.0" y="300" width="375" height="192"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4VJ-OE-V2a" id="hCh-IN-vto">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="191"/>
@@ -1075,7 +1090,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5t-Js-09i">
-                                <rect key="frame" x="131" y="276" width="112" height="40"/>
+                                <rect key="frame" x="131.5" y="276" width="112" height="40"/>
                                 <color key="backgroundColor" red="0.98089617490000003" green="0.80392156859999997" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="axr-1L-2oA"/>
@@ -2087,6 +2102,7 @@
         <image name="item_unchecked" width="25" height="25"/>
         <image name="photos-icon" width="512" height="512"/>
         <image name="profile" width="25" height="25"/>
+        <image name="question" width="64" height="64"/>
         <image name="settings" width="25" height="25"/>
         <image name="share" width="30" height="30"/>
     </resources>

@@ -323,3 +323,8 @@
 
 // Settings
 "Version" = "Версия";
+
+// Tip request from friend
+"Ask for a tip" = "Попросить совет";
+"Do you want to ask your friend to leave a tip about" = "Вы хотите попросить своего друга оставить совет о стране";
+"Send request" = "Отправить просьбу";

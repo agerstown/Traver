@@ -42,6 +42,8 @@ class ProfileViewController: UIViewController {
     
     var fetchedResultsController: NSFetchedResultsController<Country>?
     
+    //let buttonAskForTip = UIButton()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +97,10 @@ class ProfileViewController: UIViewController {
         fetchedResultsController?.delegate = self
         
         try! fetchedResultsController!.performFetch()
+        
+//        buttonAskForTip.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+//        buttonAskForTip.addTarget(self, action: #selector(buttonAskForTipTapped), for: .touchUpInside)
+//        buttonAskForTip.setImage(UIImage(named: "question"), for: .normal)
         
         NotificationCenter.default.addObserver(self, selector: #selector(profileInfoUpdated), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
@@ -174,6 +180,10 @@ class ProfileViewController: UIViewController {
         } else {
             refreshControl.endRefreshing()
         }
+    }
+    
+    func buttonAskForTipTapped() {
+        
     }
     
 //    func showAgreementAlert() {
@@ -310,6 +320,13 @@ extension ProfileViewController: UITableViewDataSource {
         cell.labelCountryName.text = country.name
         cell.country = country
         cell.selectionStyle = .none
+        
+        if user != User.shared {
+            cell.tipRequestDelegate = self
+            cell.buttonAskForTip.isHidden = false
+            cell.constraintTrailingLabelName.constant = 36
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -420,3 +437,22 @@ extension ProfileViewController: NSFetchedResultsControllerDelegate {
 
 }
 
+// MARK: - TipRequestDelegate
+extension ProfileViewController: TipRequestDelegate {
+    func tipRequested(cell: UITableViewCell) {
+        if let indexPath = tableViewVisitedCountries.indexPath(for: cell) {
+            let country =  fetchedResultsController!.object(at: indexPath)
+            
+            let alert = UIAlertController(title: "Ask for a tip".localized(), message: "Do you want to ask your friend to leave a tip about".localized() + " " + country.name + "?", preferredStyle: UIAlertControllerStyle.alert)
+            let requestAction = UIAlertAction(title: "Send request".localized(), style: .default) { _ in
+                
+            }
+            let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel) { _ in
+                
+            }
+            alert.addAction(requestAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+}
