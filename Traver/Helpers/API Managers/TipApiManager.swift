@@ -17,8 +17,20 @@ class TipApiManager: ApiManager {
       
     // MARK: - GET methods
     func getExistingTipsCountries(completion: @escaping (_ countryCodes: [String: Int]) -> Void) {
-        Alamofire.request(host + "tips/get-existing-tips-countries/", method: .get, parameters: nil).responseJSON { response in
-            self.parseCountryCodes(response: response, completion: completion)
+//        Alamofire.request(host + "tips/get-existing-tips-countries/", method: .get, parameters: nil).responseJSON { response in
+//            self.parseCountryCodes(response: response, completion: completion)
+//        }
+        if let token = User.shared.token {
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(token)"
+            ]
+            Alamofire.request(host + "tips/get-existing-tips-countries/", method: .get, parameters: nil, headers: headers).responseJSON { response in
+                self.parseCountryCodes(response: response, completion: completion)
+            }
+        } else {
+            Alamofire.request(host + "tips/get-existing-tips-countries/", method: .get, parameters: nil).responseJSON { response in
+                self.parseCountryCodes(response: response, completion: completion)
+            }
         }
     }
     
@@ -58,10 +70,23 @@ class TipApiManager: ApiManager {
             "page": page
         ]
         
-        Alamofire.request(host + "tips/get-tips-for-country-page/", method: .get, parameters: parameters).responseJSON { response in
-            if let tipsJSON = response.result.value as? NSArray {
-                let tips = self.parseTips(json: tipsJSON, country: country)
-                completion(tips)
+        if let token = User.shared.token {
+            let headers: HTTPHeaders = [
+                "Authorization": "Token \(token)"
+            ]
+        
+            Alamofire.request(host + "tips/get-tips-for-country-page/", method: .get, parameters: parameters, headers: headers).responseJSON { response in
+                if let tipsJSON = response.result.value as? NSArray {
+                    let tips = self.parseTips(json: tipsJSON, country: country)
+                    completion(tips)
+                }
+            }
+        } else {
+            Alamofire.request(host + "tips/get-tips-for-country-page/", method: .get, parameters: parameters).responseJSON { response in
+                if let tipsJSON = response.result.value as? NSArray {
+                    let tips = self.parseTips(json: tipsJSON, country: country)
+                    completion(tips)
+                }
             }
         }
     }
@@ -96,7 +121,7 @@ class TipApiManager: ApiManager {
             
             let updateDate = dateFormatter.date(from: updateDateString) ?? Date()
             
-            let id = json["id"].intValue
+            let tipID = json["id"].intValue
             
             let title = json["title"].stringValue
             let text = json["text"].stringValue
@@ -104,25 +129,26 @@ class TipApiManager: ApiManager {
             let user = json["user"]
             
             let token = user["token"].stringValue
+            let userID = user["id"].stringValue
             let profile = user["profile"]
             
             let name = self.stringOrNilIfEmpty(profile["name"].stringValue)
             let photoPath = self.stringOrNilIfEmpty(profile["photo_path"].stringValue)
             let location = self.stringOrNilIfEmpty(profile["location"].stringValue)
             
-            let author = TipAuthor(token: token)
+            let author = TipAuthor(token: token, id: userID)
             
             author.name = name
             author.photoPath = photoPath
             author.location = location
             
             if let country = country {
-                let tip = Tip(id: id, author: author, country: country, title: title, text: text, updateDate: updateDate)
+                let tip = Tip(id: tipID, author: author, country: country, title: title, text: text, updateDate: updateDate)
                 tips.append(tip)
             } else {
                 let countryCode = json["country_code"].stringValue
                 if let country = Codes.Country.all.filter( { $0.code == countryCode } ).first {
-                    let tip = Tip(id: id, author: author, country: country, title: title, text: text, updateDate: updateDate)
+                    let tip = Tip(id: tipID, author: author, country: country, title: title, text: text, updateDate: updateDate)
                     tips.append(tip)
                 }
             }
@@ -133,8 +159,9 @@ class TipApiManager: ApiManager {
     func getAuthorPhoto(author: TipAuthor, putInto imageView: UIImageView) {
         imageView.image = #imageLiteral(resourceName: "default_photo")
         if let path = author.photoPath {
-            ImagesManager.shared.loadImage(withURL: photosHost + "traver-media/" + path, intoImageView: imageView) { handler in
-                let image = handler.0.value
+          ImagesManager.shared.loadImage(withURL: photosHost + "traver-media/" + path,
+                                         intoImageView: imageView) { handler, success in
+                let image = handler.value
                 author.photo = image
                 imageView.image = author.photo
             }

@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		610B2F651E92D01400000006 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610B2F641E92D01400000006 /* UIImage+Extensions.swift */; };
+		610D13CE1EE8A01B00C874E0 /* SlackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610D13CD1EE8A01B00C874E0 /* SlackHelper.swift */; };
 		610D86FF1DECE0C40030C153 /* VisitedRegionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 610D86FE1DECE0C40030C153 /* VisitedRegionHeaderView.xib */; };
 		610FCA2B1DF4A5FE00046546 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 610FCA2D1DF4A5FE00046546 /* InfoPlist.strings */; };
 		611EB3081DF5ED5E002960A8 /* Share.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611EB3071DF5ED5E002960A8 /* Share.xib */; };
 		612A0B3B1E9FA902005BDCA6 /* SharePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3A1E9FA902005BDCA6 /* SharePreviewController.swift */; };
 		612A0B3D1E9FB4D0005BDCA6 /* UIImage+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3C1E9FB4D0005BDCA6 /* UIImage+Effects.swift */; };
 		612A0B401EA28430005BDCA6 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A0B3F1EA2842F005BDCA6 /* FriendsViewController.swift */; };
+		612A38A61EFD5BA900C8B0DD /* AitaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612A38A51EFD5BA900C8B0DD /* AitaHelper.swift */; };
 		612BF6411DE5E04E0092D43F /* CountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6401DE5E04E0092D43F /* CountriesViewController.swift */; };
 		612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF6481DE5E2880092D43F /* CountryItemCell.swift */; };
 		612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */; };
@@ -40,16 +42,19 @@
 		613C54DC1DF0CF7C006660B9 /* VisitedCountriesImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C54DB1DF0CF7C006660B9 /* VisitedCountriesImporter.swift */; };
 		613C54DE1DF0D0C3006660B9 /* Double+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C54DD1DF0D0C3006660B9 /* Double+Round.swift */; };
 		613C54E01DF18C3B006660B9 /* StatusBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613C54DF1DF18C3B006660B9 /* StatusBarManager.swift */; };
+		614130271F13A5F80023DA28 /* UserDeviceTokenApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614130261F13A5F80023DA28 /* UserDeviceTokenApiManager.swift */; };
+		614130291F13AEF00023DA28 /* NotificationCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614130281F13AEF00023DA28 /* NotificationCenterManager.swift */; };
 		614534FB1ED22C96005DE8C7 /* CountryVisitApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614534FA1ED22C96005DE8C7 /* CountryVisitApiManager.swift */; };
 		614534FD1ED22CAF005DE8C7 /* TipApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614534FC1ED22CAF005DE8C7 /* TipApiManager.swift */; };
 		614534FF1ED22FBD005DE8C7 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614534FE1ED22FBC005DE8C7 /* ApiManager.swift */; };
+		614BE76B1EF853EF00D531B6 /* WorldMap.svg in Resources */ = {isa = PBXBuildFile; fileRef = 614BE76A1EF853EF00D531B6 /* WorldMap.svg */; };
+		614BE7711EF8719400D531B6 /* AitaLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614BE7701EF8719400D531B6 /* AitaLoginController.swift */; };
 		615665401DE322D70050AE5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156653F1DE322D70050AE5A /* AppDelegate.swift */; };
 		615665491DE322D70050AE5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 615665481DE322D70050AE5A /* Assets.xcassets */; };
 		615665571DE322D70050AE5A /* TraverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665561DE322D70050AE5A /* TraverTests.swift */; };
 		615665621DE322D70050AE5A /* TraverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665611DE322D70050AE5A /* TraverUITests.swift */; };
 		615665861DE3846B0050AE5A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665851DE3846A0050AE5A /* ProfileViewController.swift */; };
 		6156658A1DE384920050AE5A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615665891DE384920050AE5A /* SettingsViewController.swift */; };
-		615BAD161DE3A05D00D1478D /* WorldMap.svg in Resources */ = {isa = PBXBuildFile; fileRef = 615BAD151DE3A05D00D1478D /* WorldMap.svg */; };
 		615BAD5C1DE4C13000D1478D /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5B1DE4C13000D1478D /* Country.swift */; };
 		615BAD5F1DE4CF9500D1478D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD5E1DE4CF9500D1478D /* User.swift */; };
 		615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */; };
@@ -118,6 +123,7 @@
 		07B92020C7E7AF58CBFB4054 /* Pods-Traver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Traver.release.xcconfig"; path = "Pods/Target Support Files/Pods-Traver/Pods-Traver.release.xcconfig"; sourceTree = "<group>"; };
 		0DB2C7BE694343C1EA8CAF81 /* Pods-Traver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Traver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Traver/Pods-Traver.debug.xcconfig"; sourceTree = "<group>"; };
 		610B2F641E92D01400000006 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		610D13CD1EE8A01B00C874E0 /* SlackHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackHelper.swift; sourceTree = "<group>"; };
 		610D86FE1DECE0C40030C153 /* VisitedRegionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisitedRegionHeaderView.xib; sourceTree = "<group>"; };
 		610FCA2C1DF4A5FE00046546 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		610FCA2E1DF4A60000046546 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -125,6 +131,8 @@
 		612A0B3A1E9FA902005BDCA6 /* SharePreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePreviewController.swift; sourceTree = "<group>"; };
 		612A0B3C1E9FB4D0005BDCA6 /* UIImage+Effects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Effects.swift"; sourceTree = "<group>"; };
 		612A0B3F1EA2842F005BDCA6 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		612A38A41EFC57F100C8B0DD /* Traver v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Traver v2.xcdatamodel"; sourceTree = "<group>"; };
+		612A38A51EFD5BA900C8B0DD /* AitaHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AitaHelper.swift; sourceTree = "<group>"; };
 		612BF6401DE5E04E0092D43F /* CountriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesViewController.swift; sourceTree = "<group>"; };
 		612BF6481DE5E2880092D43F /* CountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryItemCell.swift; sourceTree = "<group>"; };
 		612BF64D1DE5F9FE0092D43F /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -152,9 +160,13 @@
 		613C54DB1DF0CF7C006660B9 /* VisitedCountriesImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitedCountriesImporter.swift; sourceTree = "<group>"; };
 		613C54DD1DF0D0C3006660B9 /* Double+Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Round.swift"; sourceTree = "<group>"; };
 		613C54DF1DF18C3B006660B9 /* StatusBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarManager.swift; sourceTree = "<group>"; };
+		614130261F13A5F80023DA28 /* UserDeviceTokenApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDeviceTokenApiManager.swift; sourceTree = "<group>"; };
+		614130281F13AEF00023DA28 /* NotificationCenterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenterManager.swift; sourceTree = "<group>"; };
 		614534FA1ED22C96005DE8C7 /* CountryVisitApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryVisitApiManager.swift; sourceTree = "<group>"; };
 		614534FC1ED22CAF005DE8C7 /* TipApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipApiManager.swift; sourceTree = "<group>"; };
 		614534FE1ED22FBC005DE8C7 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		614BE76A1EF853EF00D531B6 /* WorldMap.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WorldMap.svg; sourceTree = "<group>"; };
+		614BE7701EF8719400D531B6 /* AitaLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AitaLoginController.swift; sourceTree = "<group>"; };
 		6156653C1DE322D60050AE5A /* Traver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6156653F1DE322D70050AE5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		615665481DE322D70050AE5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -166,7 +178,6 @@
 		615665631DE322D70050AE5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		615665851DE3846A0050AE5A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		615665891DE384920050AE5A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		615BAD151DE3A05D00D1478D /* WorldMap.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WorldMap.svg; sourceTree = "<group>"; };
 		615BAD5B1DE4C13000D1478D /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		615BAD5E1DE4CF9500D1478D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		615BAD601DE4D40E00D1478D /* VisitedCountryItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitedCountryItemCell.swift; sourceTree = "<group>"; };
@@ -322,6 +333,7 @@
 		61BFDB101DE5ABB700F49F6B /* Traver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Traver-Bridging-Header.h"; sourceTree = "<group>"; };
 		61C4F1B61DFAD5380070158E /* SVGKImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SVGKImage+Extensions.swift"; sourceTree = "<group>"; };
 		61EF033C1EDF732E0055B5BB /* ImagesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesManager.swift; sourceTree = "<group>"; };
+		61FBC9231F0D471A00993CBA /* Traver v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Traver v3.xcdatamodel"; sourceTree = "<group>"; };
 		61FD56DC1EB6776A0035F169 /* Bluring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bluring.swift; sourceTree = "<group>"; };
 		61FD56DE1EB6784B0035F169 /* EmailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailController.swift; sourceTree = "<group>"; };
 		61FF9D751ED0B3C00008AFE9 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
@@ -456,6 +468,7 @@
 			children = (
 				615665891DE384920050AE5A /* SettingsViewController.swift */,
 				61FD56DE1EB6784B0035F169 /* EmailController.swift */,
+				614BE7701EF8719400D531B6 /* AitaLoginController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -482,7 +495,7 @@
 		612BF6471DE5E2020092D43F /* Documents */ = {
 			isa = PBXGroup;
 			children = (
-				615BAD151DE3A05D00D1478D /* WorldMap.svg */,
+				614BE76A1EF853EF00D531B6 /* WorldMap.svg */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -517,7 +530,7 @@
 				61A035421EE7449900533217 /* usr */,
 			);
 			name = Frameworks;
-			path = Traver;
+			path = Traver/Frameworks;
 			sourceTree = "<group>";
 		};
 		612F29AE1DEB4F870057E20B /* Localizations */ = {
@@ -549,6 +562,9 @@
 				613394621E3163220001CF2A /* CoreDataStack.swift */,
 				61A16E2F1E69A82700184C7F /* CloudKitHelper.swift */,
 				61EF033C1EDF732E0055B5BB /* ImagesManager.swift */,
+				610D13CD1EE8A01B00C874E0 /* SlackHelper.swift */,
+				612A38A51EFD5BA900C8B0DD /* AitaHelper.swift */,
+				614130281F13AEF00023DA28 /* NotificationCenterManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -560,6 +576,7 @@
 				61732B221E491AFC00A0C952 /* UserApiManager.swift */,
 				614534FA1ED22C96005DE8C7 /* CountryVisitApiManager.swift */,
 				614534FC1ED22CAF005DE8C7 /* TipApiManager.swift */,
+				614130261F13A5F80023DA28 /* UserDeviceTokenApiManager.swift */,
 			);
 			path = "API Managers";
 			sourceTree = "<group>";
@@ -886,17 +903,17 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Natalia Nikitina";
 				TargetAttributes = {
 					6156653B1DE322D60050AE5A = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 5H72FC97K4;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.iCloud = {
 								enabled = 1;
@@ -905,11 +922,13 @@
 					};
 					615665511DE322D70050AE5A = {
 						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6156653B1DE322D60050AE5A;
 					};
 					6156655C1DE322D70050AE5A = {
 						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6156653B1DE322D60050AE5A;
 					};
@@ -945,7 +964,7 @@
 				610FCA2B1DF4A5FE00046546 /* InfoPlist.strings in Resources */,
 				612F29BC1DEB59BA0057E20B /* Localizable.stringsdict in Resources */,
 				619F963E1EA7E4B5001DA4EE /* LaunchScreen.storyboard in Resources */,
-				615BAD161DE3A05D00D1478D /* WorldMap.svg in Resources */,
+				614BE76B1EF853EF00D531B6 /* WorldMap.svg in Resources */,
 				615665491DE322D70050AE5A /* Assets.xcassets in Resources */,
 				61732B251E491EFB00A0C952 /* Main.storyboard in Resources */,
 				610D86FF1DECE0C40030C153 /* VisitedRegionHeaderView.xib in Resources */,
@@ -1004,9 +1023,42 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Traver/Pods-Traver-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CWStatusBarNotification/CWStatusBarNotification.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DFCache/DFCache.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CWStatusBarNotification.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DFCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1019,13 +1071,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Traver-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1039,6 +1094,7 @@
 				612BF64E1DE5F9FE0092D43F /* Array+Extensions.swift in Sources */,
 				6165EF391ED726E100741FE5 /* MyTipsController.swift in Sources */,
 				61FF9D7E1ED0DF8B0008AFE9 /* TipController.swift in Sources */,
+				612A38A61EFD5BA900C8B0DD /* AitaHelper.swift in Sources */,
 				615BAD611DE4D40E00D1478D /* VisitedCountryItemCell.swift in Sources */,
 				61FD56DD1EB6776A0035F169 /* Bluring.swift in Sources */,
 				61FF9D7A1ED0D6190008AFE9 /* TipsInCountryController.swift in Sources */,
@@ -1069,19 +1125,23 @@
 				61EF033D1EDF732E0055B5BB /* ImagesManager.swift in Sources */,
 				615665401DE322D70050AE5A /* AppDelegate.swift in Sources */,
 				6177EAAD1ED77EF500AEEA5B /* TipsRegionCell.swift in Sources */,
+				610D13CE1EE8A01B00C874E0 /* SlackHelper.swift in Sources */,
 				612BF6491DE5E2880092D43F /* CountryItemCell.swift in Sources */,
 				615BAD5C1DE4C13000D1478D /* Country.swift in Sources */,
 				612F29B61DEB512D0057E20B /* String+Localized.swift in Sources */,
 				613394591E21B4810001CF2A /* FacebookHelper.swift in Sources */,
 				612F29C11DEB62F40057E20B /* MainTabBarController.swift in Sources */,
+				614130291F13AEF00023DA28 /* NotificationCenterManager.swift in Sources */,
 				6133945F1E31485D0001CF2A /* Traver.xcdatamodeld in Sources */,
 				612F287F1DE74D9E0057E20B /* Dictionary+InverseKeysValues.swift in Sources */,
 				619D6ED61ED4C45C00DED7B7 /* DetailedTipController.swift in Sources */,
+				614BE7711EF8719400D531B6 /* AitaLoginController.swift in Sources */,
 				614534FF1ED22FBD005DE8C7 /* ApiManager.swift in Sources */,
 				619D6ED41ED48A0300DED7B7 /* TipAuthor.swift in Sources */,
 				612F29AB1DEB4D020057E20B /* RegionHeaderCell.swift in Sources */,
 				612F28811DE77CFB0057E20B /* Region.swift in Sources */,
 				613C54DC1DF0CF7C006660B9 /* VisitedCountriesImporter.swift in Sources */,
+				614130271F13A5F80023DA28 /* UserDeviceTokenApiManager.swift in Sources */,
 				613C54E01DF18C3B006660B9 /* StatusBarManager.swift in Sources */,
 				6156658A1DE384920050AE5A /* SettingsViewController.swift in Sources */,
 				619AE8891EA3F1C9005FCC46 /* FriendCell.swift in Sources */,
@@ -1165,7 +1225,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1173,7 +1235,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -1220,7 +1286,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1228,7 +1296,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -1266,6 +1338,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Traver/Traver.entitlements;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5H72FC97K4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1282,7 +1355,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Traver/Main/Traver-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";
@@ -1311,7 +1385,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = agerstown.Traver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Traver/Main/Traver-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";
@@ -1337,7 +1412,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = agerstown.TraverTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Traver.app/Traver";
 			};
 			name = Debug;
@@ -1361,7 +1437,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = agerstown.TraverTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Traver.app/Traver";
 			};
 			name = Release;
@@ -1375,7 +1452,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = agerstown.TraverUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = Traver;
 			};
 			name = Debug;
@@ -1389,7 +1467,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = agerstown.TraverUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = Traver;
 			};
 			name = Release;
@@ -1439,9 +1518,11 @@
 		6133945D1E31485D0001CF2A /* Traver.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				61FBC9231F0D471A00993CBA /* Traver v3.xcdatamodel */,
+				612A38A41EFC57F100C8B0DD /* Traver v2.xcdatamodel */,
 				6133945E1E31485D0001CF2A /* Traver.xcdatamodel */,
 			);
-			currentVersion = 6133945E1E31485D0001CF2A /* Traver.xcdatamodel */;
+			currentVersion = 61FBC9231F0D471A00993CBA /* Traver v3.xcdatamodel */;
 			path = Traver.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -3,10 +3,142 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "UserApiManager.(getPhoto(user : User) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.updatePhoto() -&gt; ():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.photo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(getPhoto() -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.photoPath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingsViewController.gestureRecognizer(UIGestureRecognizer, shouldReceive : UITouch) -&gt; Bool:SettingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "view.isKind(of: UITableViewCell.self)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SharePreviewController.handleTap(recognizer : UIGestureRecognizer) -&gt; ():SharePreviewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageViewSharePicture.frame.origin.y">
+            </PersistentString>
+            <PersistentString
+               value = "imageViewSharePicture.frame.size.height">
+            </PersistentString>
+            <PersistentString
+               value = "view?.hitTest(location, with: nil)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.currentLocation.getter:User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.currentRegion">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CountryVisitApiManager.(updateCountryVisits(user : User, codes : [String], completion : () -&gt; ()?) -&gt; ()).(closure #1):CountryVisitApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(getPhoto(user : User) -&gt; ()).(closure #1).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(updatePhoto(photo : UIImage, completion : () -&gt; ()) -&gt; ()).(closure #2).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MyTipsController.(tableView(UITableView, commit : UITableViewCellEditingStyle, forRowAt : IndexPath) -&gt; ()).(closure #1):MyTipsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tips">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ProfileViewController.prepare(for : UIStoryboardSegue, sender : Any?) -&gt; ():ProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "segue.destination">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "fetchedResultsController?.sections?[section].numberOfObjects">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileEditViewController.buttonSaveTapped(UIBarButtonItem) -&gt; ():ProfileEditViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.location">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.createCountryVisits() -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.visitedCountries.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.createCountryIfNeeded(for : String, in : Region) -&gt; Country?:User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "code.localized()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -19,10 +151,75 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FacebookHelper.login() -&gt; ():FacebookHelper.swift">
+         contextName = "UserApiManager.(updatePhoto(photo : UIImage, completion : () -&gt; ()) -&gt; ()).(closure #2):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "AccessToken.current">
+               value = "upload.responseJSON">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TipsInCountryController.reloadTipsTable(completion : () -&gt; ()) -&gt; ():TipsInCountryController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "lastLoadedPageNumber">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(updateFriends(friendsIDs : [String]) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.getOrCreateUserWithFacebook(id : String, email : String, name : String, location : String, photo : UIImage) -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.iCloudID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.getUser() -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.token">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CountryVisitApiManager.(addCountryVisits(codes : [String], completion : () -&gt; ()?) -&gt; ()).(closure #1):CountryVisitApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2).(closure #1):ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "country">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:ProfileViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CountriesViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CountriesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "regions">
+            </PersistentString>
+            <PersistentString
+               value = "regionsWithCountries">
+            </PersistentString>
+            <PersistentString
+               value = "Codes.Region(rawValue: section)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -35,7 +232,247 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2):ProfileViewController.swift">
+         contextName = "FriendsViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:FriendsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "fetchedResultsController?.sections?[section].numberOfObjects">
+            </PersistentString>
+            <PersistentString
+               value = "friends.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(updateFacebookInfo(id : String, email : String, name : String, location : String, photo : UIImage, completion : () -&gt; ()) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.photo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CountryVisitApiManager.updateCountryVisits(user : User, codes : [String], completion : () -&gt; ()?) -&gt; ():CountryVisitApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.token">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(updateFacebookInfo(id : String, email : String?, name : String, location : String?, photo : UIImage?, friendsIDs : [String]?) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+            <PersistentString
+               value = "friendsIDs">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.facebookEmail">
+            </PersistentString>
+            <PersistentString
+               value = "json[&quot;num_countries&quot;].int">
+            </PersistentString>
+            <PersistentString
+               value = "user.location">
+            </PersistentString>
+            <PersistentString
+               value = "user.facebookID">
+            </PersistentString>
+            <PersistentString
+               value = "json[&quot;num_countries&quot;].stringValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TipsController.prepare(for : UIStoryboardSegue, sender : Any?) -&gt; ():TipsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "countryCodesInSelectedRegion">
+            </PersistentString>
+            <PersistentString
+               value = "segue.destination as? NewTipController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(updateUser(token : String, completion : () -&gt; ()?) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.photo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CurrentLocationController.handleTap(recognizer : UIGestureRecognizer) -&gt; ():CurrentLocationController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pickerViewCountry.isFocused">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CountryVisitApiManager.updateCountryVisits(user : User, codes : [String], completion : () -&gt; ()?) -&gt; ():CountryVisitApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.token">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingsViewController.gestureRecognizer(UIGestureRecognizer, shouldReceive : UITouch) -&gt; Bool:SettingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.photo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "VisitedCountriesImporter.(getCountriesCodesFromLocations(using : CLGeocoder) -&gt; ()).(closure #1):VisitedCountriesImporter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.locations">
+            </PersistentString>
+            <PersistentString
+               value = "self.locationsCounter">
+            </PersistentString>
+            <PersistentString
+               value = "self.locations[(self.locationsCounter)]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainTabBarController.viewDidLoad() -&gt; ():MainTabBarController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tabBarController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsViewController.configureCell(FriendCell, at : IndexPath) -&gt; ():FriendsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.currentCountryCode">
+            </PersistentString>
+            <PersistentString
+               value = "user.currentRegion">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.getOrCreateUserWithFacebook(id : String, email : String?, name : String, location : String?, photo : UIImage?, friendsIDs : [String]?) -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.facebookID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CountryVisitApiManager.addCountryVisits(codes : [String], completion : () -&gt; ()?) -&gt; ():CountryVisitApiManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MyTipsController.reloadTipsTable() -&gt; ():MyTipsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.tips">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TipApiManager.(getTipsForCountry(Codes.Country) -&gt; ()).(closure #1):TipApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsViewController.viewWillAppear(Bool) -&gt; ():FriendsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.friends.array">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewTipController.buttonSaveTapped(Any) -&gt; ():NewTipController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "textViewText.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CountryVisitApiManager.(updateCountryVisits(user : User, codes : [String], completion : () -&gt; ()?) -&gt; ()).(closure #1):CountryVisitApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.controller(NSFetchedResultsController&lt;NSFetchRequestResult&gt;, didChange : Any, at : IndexPath?, for : NSFetchedResultsChangeType, newIndexPath : IndexPath?) -&gt; ():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.name">
+            </PersistentString>
+            <PersistentString
+               value = "user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(getUserInfo(user : User, completion : () -&gt; ()) -&gt; ()).(closure #2):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.saveCountry(for : String, in : Region) -&gt; ():User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "country.code">
+            </PersistentString>
+            <PersistentString
+               value = "self.visitedCountries.count">
+            </PersistentString>
+            <PersistentString
+               value = "region.code">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.token">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(createUserWithICloud(id : String, name : String?, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.token">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PhotosAccessManager.importVisitedCountries(controller : UIViewController) -&gt; ():PhotosAccessManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "country.code">
@@ -43,46 +480,146 @@
             <PersistentString
                value = "region.code">
             </PersistentString>
-            <PersistentString
-               value = "User.shared.visitedCountries">
-            </PersistentString>
-            <PersistentString
-               value = "User.shared.visitedRegions">
-            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "TipController.(buttonSaveTapped(Any) -&gt; ()).(closure #1):TipController.swift">
+         contextName = "UserApiManager.(getFriends(user : User) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.tipDelegate">
+               value = "User.shared.friends.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "TipController.tableView(UITableView, heightForRowAt : IndexPath) -&gt; CGFloat:TipController.swift">
+         contextName = "FacebookHelper.login() -&gt; ():FacebookHelper.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.view.bounds.height">
-            </PersistentString>
-            <PersistentString
-               value = "cellTipText.bounds.origin.x">
+               value = "AccessToken.current">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ProfileViewController.numberOfSections(in : UITableView) -&gt; Int:ProfileViewController.swift">
+         contextName = "UserApiManager.getPhoto() -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "fetchedResultsController?.sections?.count">
+               value = "User.shared.token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.(getPhoto(user : User) -&gt; ()).(closure #1).(closure #1):UserApiManager.swift">
+         contextName = "UserApiManager.updatePhoto(photo : UIImage, completion : () -&gt; ()) -&gt; ():UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.token">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.saveCountryVisit(code : String) -&gt; ():User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "region.code">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static User.(shared).(variable initialization expression).(closure #1):User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.locale">
+            </PersistentString>
+            <PersistentString
+               value = "self.locale">
+            </PersistentString>
+            <PersistentString
+               value = "user.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.saveCountryVisit(code : String) -&gt; Country?:User.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "region.code">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TipsInCountryController.loadMoreCoursesIfNecessary(row : Int) -&gt; ():TipsInCountryController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "activityIndicatorBottom">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(getOrCreateUserWithICloud(id : String, name : String?, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SharePreviewController.viewDidLoad() -&gt; ():SharePreviewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navigationController">
+            </PersistentString>
+            <PersistentString
+               value = "backgroundController?.tabBarController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TipApiManager.(getTipsForCountryFriends(Codes.Country, completion : ([Tip]) -&gt; ()) -&gt; ()).(closure #1):TipApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "JSON(response.result.value)[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsViewController.viewDidLoad() -&gt; ():FriendsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.friends.count">
+            </PersistentString>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.(createUserWithFacebook(id : String, email : String, name : String, location : String, photo : UIImage) -&gt; ()).(closure #1):UserApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileEditViewController.setPhoto() -&gt; ():ProfileEditViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "User.shared.photo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any, withCountries : Bool, withFriends : Bool) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "user.name">
+            </PersistentString>
+            <PersistentString
+               value = "profile[&quot;current_country_code&quot;].stringValue">
+            </PersistentString>
+            <PersistentString
+               value = "user.token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -109,121 +646,40 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.(getOrCreateUserWithICloud(id : String, name : String?, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
+         contextName = "FriendsViewController.configureView() -&gt; ():FriendsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "response.response?.statusCode">
+               value = "User.shared.friends.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "User.createCountryIfNeeded(for : String, in : Region) -&gt; Country?:User.swift">
+         contextName = "User.findOrCreateRegion(for : String) -&gt; Region:User.swift">
          <PersistentStrings>
             <PersistentString
-               value = "code.localized()">
+               value = "region">
+            </PersistentString>
+            <PersistentString
+               value = "">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.(createUserWithFacebook(id : String, email : String, name : String, location : String, photo : UIImage) -&gt; ()).(closure #1):UserApiManager.swift">
+         contextName = "ProfileViewController.numberOfSections(in : UITableView) -&gt; Int:ProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "response.response?.statusCode">
+               value = "fetchedResultsController?.sections?.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ProfileViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:ProfileViewController.swift">
+         contextName = "TipApiManager.(getExistingTipsCountries(completion : ([String]) -&gt; ()) -&gt; ()).(closure #1):TipApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "fetchedResultsController?.sections?[section].numberOfObjects">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "NewTipController.buttonSaveTapped(Any) -&gt; ():NewTipController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "textViewText.text">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "MyTipsController.(tableView(UITableView, commit : UITableViewCellEditingStyle, forRowAt : IndexPath) -&gt; ()).(closure #1):MyTipsController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.tips">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SharePreviewController.handleTap(recognizer : UIGestureRecognizer) -&gt; ():SharePreviewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "imageViewSharePicture.frame.origin.y">
+               value = "codeObject[&quot;count&quot;].intValue">
             </PersistentString>
             <PersistentString
-               value = "imageViewSharePicture.frame.size.height">
-            </PersistentString>
-            <PersistentString
-               value = "view?.hitTest(location, with: nil)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(createUserWithICloud(id : String, name : String?, location : String?, photo : UIImage?) -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.response?.statusCode">
-            </PersistentString>
-            <PersistentString
-               value = "User.shared.token">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(updateFriends(friendsIDs : [String]) -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.result.value">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfileViewController.configureButtonForUser() -&gt; ():ProfileViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user.name">
-            </PersistentString>
-            <PersistentString
-               value = "user">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.getOrCreateUserWithFacebook(id : String, email : String, name : String, location : String, photo : UIImage) -&gt; ():UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.iCloudID">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(updatePhoto(photo : UIImage, completion : () -&gt; ()) -&gt; ()).(closure #2).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.result.value">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(getPhoto() -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.result.value">
-            </PersistentString>
-            <PersistentString
-               value = "User.shared.photoPath">
+               value = "json[&quot;country_codes&quot;].arrayObject">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -236,136 +692,41 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ProfileViewController.updatePhoto() -&gt; ():ProfileViewController.swift">
+         contextName = "TipController.tableView(UITableView, heightForRowAt : IndexPath) -&gt; CGFloat:TipController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "User.shared.photo">
+               value = "self.view.bounds.height">
+            </PersistentString>
+            <PersistentString
+               value = "cellTipText.bounds.origin.x">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ProfileViewController.(tableView(UITableView, commit : UITableViewCellEditingStyle, forRowAt : IndexPath) -&gt; ()).(closure #1):ProfileViewController.swift">
+         contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2):ProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "country.code">
+               value = "json[&quot;num_countries&quot;].stringValue">
+            </PersistentString>
+            <PersistentString
+               value = "json[&quot;num_countries&quot;].int">
+            </PersistentString>
+            <PersistentString
+               value = "region.code">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.visitedCountries">
+            </PersistentString>
+            <PersistentString
+               value = "User.shared.visitedRegions">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.updatePhoto(photo : UIImage, completion : () -&gt; ()) -&gt; ():UserApiManager.swift">
+         contextName = "CountriesViewController.buttonDoneClicked(UIBarButtonItem) -&gt; ():CountriesViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "User.shared.token">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SharePreviewController.viewDidLoad() -&gt; ():SharePreviewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.navigationController">
-            </PersistentString>
-            <PersistentString
-               value = "backgroundController?.tabBarController">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TipsInCountryController.loadMoreCoursesIfNecessary(row : Int) -&gt; ():TipsInCountryController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "activityIndicatorBottom">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.createCountryVisits() -&gt; ():UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.visitedCountries.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CountryVisitApiManager.updateCountryVisits(user : User, codes : [String], completion : () -&gt; ()?) -&gt; ():CountryVisitApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user.token">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SettingsViewController.gestureRecognizer(UIGestureRecognizer, shouldReceive : UITouch) -&gt; Bool:SettingsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "view.isKind(of: UITableViewCell.self)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsViewController.tableView(UITableView, didSelectRowAt : IndexPath) -&gt; ():FriendsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.navigationController">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(updateFacebookInfo(id : String, email : String?, name : String, location : String?, photo : UIImage?, friendsIDs : [String]?) -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.response?.statusCode">
-            </PersistentString>
-            <PersistentString
-               value = "friendsIDs">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfileViewController.(countryCodeImported(notification : NSNotification) -&gt; ()).(closure #2).(closure #1):ProfileViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "country">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsViewController.configureView() -&gt; ():FriendsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.friends.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TipApiManager.(getTipsForCountry(Codes.Country) -&gt; ()).(closure #1):TipApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.result.value">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.response?.statusCode">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.getOrCreateUserWithFacebook(id : String, email : String?, name : String, location : String?, photo : UIImage?, friendsIDs : [String]?) -&gt; ():UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.facebookID">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CountryVisitApiManager.(updateCountryVisits(user : User, codes : [String], completion : () -&gt; ()?) -&gt; ()).(closure #1):CountryVisitApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.result.value">
+               value = "selectedCountries">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -381,105 +742,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.(getFriends(user : User, completion : () -&gt; ()?) -&gt; ()).(closure #1):UserApiManager.swift">
+         contextName = "TipController.(buttonSaveTapped(Any) -&gt; ()).(closure #1):TipController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "User.shared.friends.count">
+               value = "self.tipDelegate">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.(getPhoto(user : User) -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user.name">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.getUser() -&gt; ():UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.token">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.updateUserInfo(name : String, location : String, completion : () -&gt; ()) -&gt; ():UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.token">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "User.saveCountry(for : String, in : Region) -&gt; ():User.swift">
+         contextName = "ProfileViewController.(tableView(UITableView, commit : UITableViewCellEditingStyle, forRowAt : IndexPath) -&gt; ()).(closure #1):ProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "country.code">
-            </PersistentString>
-            <PersistentString
-               value = "region.code">
-            </PersistentString>
-            <PersistentString
-               value = "self.visitedCountries.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfileViewController.viewDidLoad() -&gt; ():ProfileViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared">
-            </PersistentString>
-            <PersistentString
-               value = "User.shared.name">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(getFriends(user : User) -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.friends.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(updateFacebookInfo(id : String, email : String, name : String, location : String, photo : UIImage, completion : () -&gt; ()) -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.photo">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:FriendsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "friends.count">
-            </PersistentString>
-            <PersistentString
-               value = "fetchedResultsController?.sections?[section].numberOfObjects">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(getOrCreateUserWithFacebook(id : String, email : String, name : String, location : String, photo : UIImage) -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.response?.statusCode">
-            </PersistentString>
-            <PersistentString
-               value = "User.shared.photo">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(updateUser(token : String, completion : () -&gt; ()?) -&gt; ()).(closure #1):UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.photo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -498,188 +772,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.(updatePhoto(photo : UIImage, completion : () -&gt; ()) -&gt; ()).(closure #2):UserApiManager.swift">
+         contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any, withCountries : Bool) -&gt; ():UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "upload.responseJSON">
+               value = "user.aitaAccessToken">
+            </PersistentString>
+            <PersistentString
+               value = "user.aitaRefreshToken">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MainTabBarController.viewDidLoad() -&gt; ():MainTabBarController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.tabBarController">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CountriesViewController.buttonDoneClicked(UIBarButtonItem) -&gt; ():CountriesViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "selectedCountries">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TipApiManager.(getTipsForCountryFriends(Codes.Country, completion : ([Tip]) -&gt; ()) -&gt; ()).(closure #1):TipApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "JSON(response.result.value)[0]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static User.(shared).(variable initialization expression).(closure #1):User.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "">
-            </PersistentString>
-            <PersistentString
-               value = "User.shared.locale">
-            </PersistentString>
-            <PersistentString
-               value = "self.locale">
-            </PersistentString>
-            <PersistentString
-               value = "user.name">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TipsInCountryController.reloadTipsTable(completion : () -&gt; ()) -&gt; ():TipsInCountryController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "lastLoadedPageNumber">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.(getUserInfo(user : User, completion : () -&gt; ()) -&gt; ()).(closure #2):UserApiManager.swift">
+         contextName = "UserDeviceTokenApiManager.(saveDeviceToken(token : String) -&gt; ()).(closure #1):UserDeviceTokenApiManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "response.response?.statusCode">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsViewController.viewDidLoad() -&gt; ():FriendsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.friends.count">
-            </PersistentString>
-            <PersistentString
-               value = "">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsViewController.viewWillAppear(Bool) -&gt; ():FriendsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.friends.array">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfileViewController.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:ProfileViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "CountriesViewController.numberOfSections(in : UITableView) -&gt; Int:CountriesViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "regions.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfileEditViewController.buttonSaveTapped(UIBarButtonItem) -&gt; ():ProfileEditViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.location">
-            </PersistentString>
-            <PersistentString
-               value = "User.shared.name">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any) -&gt; ():UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "json[&quot;num_countries&quot;].stringValue">
-            </PersistentString>
-            <PersistentString
-               value = "json[&quot;num_countries&quot;].int">
-            </PersistentString>
-            <PersistentString
-               value = "user.location">
-            </PersistentString>
-            <PersistentString
-               value = "User.shared.facebookEmail">
-            </PersistentString>
-            <PersistentString
-               value = "user.facebookID">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "User.currentLocation.getter:User.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.currentRegion">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TipApiManager.(getExistingTipsCountries(completion : ([String]) -&gt; ()) -&gt; ()).(closure #1):TipApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "codeObject[&quot;count&quot;].intValue">
-            </PersistentString>
-            <PersistentString
-               value = "json[&quot;country_codes&quot;].arrayObject">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "MyTipsController.reloadTipsTable() -&gt; ():MyTipsController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.tips">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserApiManager.parseAndSaveUser(user : User, from : Any, withCountries : Bool, withFriends : Bool) -&gt; ():UserApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user.name">
-            </PersistentString>
-            <PersistentString
-               value = "profile[&quot;current_country_code&quot;].stringValue">
-            </PersistentString>
-            <PersistentString
-               value = "user.token">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfileEditViewController.setPhoto() -&gt; ():ProfileEditViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "User.shared.photo">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TipsController.prepare(for : UIStoryboardSegue, sender : Any?) -&gt; ():TipsController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "countryCodesInSelectedRegion">
-            </PersistentString>
-            <PersistentString
-               value = "segue.destination as? NewTipController">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -695,16 +802,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CountriesViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:CountriesViewController.swift">
+         contextName = "UserDeviceTokenApiManager.saveDeviceToken(token : String) -&gt; ():UserDeviceTokenApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "regions">
+               value = "User.shared.token">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsViewController.tableView(UITableView, didSelectRowAt : IndexPath) -&gt; ():FriendsViewController.swift">
+         <PersistentStrings>
             <PersistentString
-               value = "Codes.Region(rawValue: section)">
-            </PersistentString>
-            <PersistentString
-               value = "regionsWithCountries">
+               value = "self.navigationController">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -717,56 +826,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserApiManager.getPhoto() -&gt; ():UserApiManager.swift">
+         contextName = "UserApiManager.(getFriends(user : User, completion : () -&gt; ()?) -&gt; ()).(closure #1):UserApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "User.shared.token">
+               value = "User.shared.friends.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "User.saveCountryVisit(code : String) -&gt; Country?:User.swift">
+         contextName = "CountriesViewController.numberOfSections(in : UITableView) -&gt; Int:CountriesViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "region.code">
+               value = "regions.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "User.findOrCreateRegion(for : String) -&gt; Region:User.swift">
+         contextName = "ProfileViewController.viewDidLoad() -&gt; ():ProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "region">
+               value = "User.shared">
             </PersistentString>
             <PersistentString
-               value = "">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "User.saveCountryVisit(code : String) -&gt; ():User.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "region.code">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CurrentLocationController.handleTap(recognizer : UIGestureRecognizer) -&gt; ():CurrentLocationController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "pickerViewCountry.isFocused">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsViewController.configureCell(FriendCell, at : IndexPath) -&gt; ():FriendsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user.currentCountryCode">
-            </PersistentString>
-            <PersistentString
-               value = "user.currentRegion">
+               value = "User.shared.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

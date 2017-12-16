@@ -18,6 +18,7 @@
         <attribute name="facebookID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feedbackEmail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iCloudID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="locale" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mainUser" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -32,6 +33,6 @@
     <elements>
         <element name="Country" positionX="-596" positionY="197" width="128" height="103"/>
         <element name="Region" positionX="-605" positionY="-9" width="128" height="90"/>
-        <element name="User" positionX="-794" positionY="-27" width="128" height="285"/>
+        <element name="User" positionX="-794" positionY="-27" width="128" height="300"/>
     </elements>
 </model>

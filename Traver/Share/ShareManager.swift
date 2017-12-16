@@ -28,11 +28,45 @@ class ShareManager: NSObject {
     }
     
     func shareProfile(picture: UIImage, controller: UIViewController) {
-        let activityViewController = UIActivityViewController(activityItems: [picture], applicationActivities: nil)
+        let imageItem = ImageProvider(image: picture)
+        let textItem = TextProvider(text: "My travel map".localized() + " via Traver - appsto.re/ru/tlslkb.i")
+        let activityViewController = UIActivityViewController(activityItems: [imageItem, textItem], applicationActivities: nil)
         activityViewController.completionWithItemsHandler = { activity, success, items, error in
             controller.dismiss(animated: true, completion: nil)
         }
         controller.present(activityViewController, animated: true, completion: nil)
     }
+
+}
+
+class TextProvider: NSObject, UIActivityItemSource {
+    var text: String
     
+    init(text: String) {
+        self.text = text
+    }
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return NSObject()
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+        return text
+    }
+}
+
+class ImageProvider: NSObject, UIActivityItemSource {
+    var image: UIImage
+    
+    init(image: UIImage) {
+        self.image = image
+    }
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return image
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+        return image
+    }
 }

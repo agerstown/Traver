@@ -187,8 +187,12 @@ class Codes {
         case ZA
         case ZM
         case ZW
+        case AD
+        case HK
+        case SG
+        case MT
         
-        static let all = [AE, AF, AL, AM, AO, AR, AT, AU, AZ, BA, BD, BE, BF, BG, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CF, CG, CH, CI, CL, CM, CN, CO, CR, CU, CY, CZ, DE, DJ, DK, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FK, FI, FJ, FR, GA, GB, GE, GF, GH, GL, GM, GN, GQ, GR, GT, GW, GY, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IR, IS, IT, JM, JO, JP, KE, KG, KH, KP, KR, XK, KW, KZ, LA, LB, LK, LR, LS, LT, LU, LV, LY, MA, MD, ME, MG, MK, ML, MM, MN, MR, MW, MX, MY, MZ, NA, NC, NE, NG, NI, NL, NO, NP, NZ, OM, PA, PE, PG, PH, PL, PK, PR, PS, PT, PY, QA, RO, RS, RU, RW, SA, SB, SD, SE, SI, SJ, SK, SL, SN, SO, SR, SS, SV, SY, SZ, TD, TF, TG, TH, TJ, TL, TM, TN, TR, TT, TW, TZ, UA, UG, US, UY, UZ, VE, VN, VU, YE, ZA, ZM, ZW]
+        static let all = [AE, AF, AL, AM, AO, AR, AT, AU, AZ, BA, BD, BE, BF, BG, BI, BJ, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CD, CF, CG, CH, CI, CL, CM, CN, CO, CR, CU, CY, CZ, DE, DJ, DK, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FK, FI, FJ, FR, GA, GB, GE, GF, GH, GL, GM, GN, GQ, GR, GT, GW, GY, HN, HR, HT, HU, ID, IE, IL, IN, IQ, IR, IS, IT, JM, JO, JP, KE, KG, KH, KP, KR, XK, KW, KZ, LA, LB, LK, LR, LS, LT, LU, LV, LY, MA, MD, ME, MG, MK, ML, MM, MN, MR, MW, MX, MY, MZ, NA, NC, NE, NG, NI, NL, NO, NP, NZ, OM, PA, PE, PG, PH, PL, PK, PR, PS, PT, PY, QA, RO, RS, RU, RW, SA, SB, SD, SE, SI, SJ, SK, SL, SN, SO, SR, SS, SV, SY, SZ, TD, TF, TG, TH, TJ, TL, TM, TN, TR, TT, TW, TZ, UA, UG, US, UY, UZ, VE, VN, VU, YE, ZA, ZM, ZW, AD, HK, SG, MT]
         
         static let allSorted = sortCountriesByName(all)
         
@@ -225,8 +229,8 @@ class Codes {
     }
     
     static let regions: [(Region, [Country])] = [
-        (.REU, sortCountriesByName([.AL, .AM, .AT, .AZ, .BY, .BE, .BA, .BG, .HR, .CY, .CZ, .DK, .EE, .FI, .FR, .GE, .DE, .GR, .GL, .HU, .IS, .IE, .IT, .KZ, .XK, .LV, .LT, .LU, .MK, .MD, .ME, .NL, .NO, .PL, .PT, .RO, .RU, .RS, .SK, .SI, .ES, .SJ, .SE, .CH, .TR, .UA, .GB])),
-        (.RAS, sortCountriesByName([.AF, .BD, .BT, .BN, .KH, .CN, .IN, .ID, .IR, .IQ, .IL, .JP, .JO, .KW, .KG, .LA, .LB, .MY, .MN, .MM, .NP, .KP, .OM, .PK, .PS, .PH, .QA, .SA, .KR, .LK, .SY, .TW, .TJ, .TH, .TM, .AE, .UZ, .VN, .YE])),
+        (.REU, sortCountriesByName([.AL, .AM, .AT, .AZ, .BY, .BE, .BA, .BG, .HR, .CY, .CZ, .DK, .EE, .FI, .FR, .GE, .DE, .GR, .GL, .HU, .IS, .IE, .IT, .KZ, .XK, .LV, .LT, .LU, .MK, .MD, .ME, .NL, .NO, .PL, .PT, .RO, .RU, .RS, .SK, .SI, .ES, .SJ, .SE, .CH, .TR, .UA, .GB, .AD, .MT])),
+        (.RAS, sortCountriesByName([.AF, .BD, .BT, .BN, .KH, .CN, .IN, .ID, .IR, .IQ, .IL, .JP, .JO, .KW, .KG, .LA, .LB, .MY, .MN, .MM, .NP, .KP, .OM, .PK, .PS, .PH, .QA, .SA, .KR, .LK, .SY, .TW, .TJ, .TH, .TM, .AE, .UZ, .VN, .YE, .HK, .SG])),
         (.RNA, sortCountriesByName([.BS, .BZ, .CA, .CR, .CU, .DO, .SV, .GT, .HT, .HN, .JM, .MX, .NI, .PA, .PR, .TT, .US])),
         (.RSA, sortCountriesByName([.AR, .BO, .BR, .CL, .CO, .EC, .FK, .GF, .GY, .PY, .PE, .SR, .UY, .VE])),
         (.RAU, sortCountriesByName([.AU, .FJ, .NC, .NZ, .PG, .SB, .TL, .VU])),
@@ -285,6 +289,8 @@ class Codes {
         "TR": .REU,
         "UA": .REU,
         "GB": .REU,
+        "AD": .REU,
+        "MT": .REU,
         "AF": .RAS,
         "BD": .RAS,
         "BT": .RAS,
@@ -324,6 +330,8 @@ class Codes {
         "UZ": .RAS,
         "VN": .RAS,
         "YE": .RAS,
+        "HK": .RAS,
+        "SG": .RAS,
         "BS": .RNA,
         "BZ": .RNA,
         "CA": .RNA,

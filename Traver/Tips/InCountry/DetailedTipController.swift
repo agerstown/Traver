@@ -20,6 +20,8 @@ class DetailedTipController: UIViewController {
     @IBOutlet weak var textViewTipText: UITextView!
     @IBOutlet weak var lableTipCreationDate: UILabel!
     
+    @IBOutlet weak var buttonReport: UIButton!
+    
     var tip: Tip?
     
     var backgroundImage: UIImage?
@@ -35,6 +37,8 @@ class DetailedTipController: UIViewController {
         }
         
         imageViewAuthorPhoto.layer.cornerRadius = imageViewAuthorPhoto.frame.height / 2
+        
+        buttonReport.setTitle("Report".localized(), for: .normal)
         
         if let tip = tip {
             imageViewAuthorPhoto.image = tip.author.photo ?? #imageLiteral(resourceName: "default_photo") 
@@ -53,6 +57,42 @@ class DetailedTipController: UIViewController {
         
         textViewTipText.setContentOffset(.zero, animated: false)
     }
+    
+    // MARK: - Actions
+    @IBAction func buttonReportTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Report tip".localized(), message: "Do you want to report the tip for objectionable or abusive content?".localized(), preferredStyle: UIAlertControllerStyle.alert)
+        let reportAction = UIAlertAction(title: "Report".localized(), style: .default) { _ in
+            if let tip = self.tip {
+                SlackHelper.shared.sendReport(tipID: tip.id) { success in
+                    if success {
+                        StatusBarManager.shared.showCustomStatusBarNeutral(text: "Your report has been sent succesfully!".localized())
+                    }
+                }
+            }
+        }
+        let blockUserAction = UIAlertAction(title: "Block author".localized(), style: .default) { _ in
+            if User.shared.token != nil {
+                if let tip = self.tip {
+                    UserApiManager.shared.blockUser(id: tip.author.id)
+                }
+            } else {
+                let alert = UIAlertController(title: "Log in".localized(), message: "Please log in using your iCloud account (in Settigs) or Facebook to block someone".localized(), preferredStyle: UIAlertControllerStyle.alert)
+                let connectFacebookAction = UIAlertAction(title: "Connect Facebook".localized(), style: .default) { _ in
+                    FacebookHelper.shared.login()
+                }
+                let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
+                alert.addAction(connectFacebookAction)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
+        alert.addAction(reportAction)
+        alert.addAction(blockUserAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 // MARK: - UIGestureRecognizerDelegate
@@ -60,12 +100,12 @@ extension DetailedTipController: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let view = touch.view {
-            return !(view.restorationIdentifier == "tipView" || view.isKind(of: UITextView.self))
+            return !(view.restorationIdentifier == "tipView" || view.isKind(of: UITextView.self) || view.isKind(of: UIButton.self))
         }
         return true
     }
     
-    func handleTap(recognizer: UIGestureRecognizer) {
+    @objc func handleTap(recognizer: UIGestureRecognizer) {
         if recognizer.state == .ended {
             self.dismiss(animated: true, completion: nil)
         }

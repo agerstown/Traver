@@ -59,6 +59,12 @@ class TipsInCountryController: UIViewController {
         reloadTipsTable() {
             self.stopSpinning()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(userBlocked), name: UserApiManager.shared.UserBlockedNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: Tips update
@@ -84,10 +90,18 @@ class TipsInCountryController: UIViewController {
         tableViewTips.reloadData()
     }
     
-    func handleRefresh(refreshControl: UIRefreshControl) {
+    @objc func handleRefresh(refreshControl: UIRefreshControl) {
         lastLoadedPageNumber = 0
         reloadTipsTable() {
             refreshControl.endRefreshing()
+        }
+    }
+    
+    @objc func userBlocked() {
+        lastLoadedPageNumber = 0
+        startSpinning()
+        reloadTipsTable() {
+            self.stopSpinning()
         }
     }
     

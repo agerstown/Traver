@@ -9,13 +9,11 @@
 import Foundation
 import Alamofire
 
-protocol FeedbackDelegate {
+protocol FeedbackDelegate: class {
     func feedbackSuccessfullySent()
 }
 
 class EmailController: UIViewController {
-    
-    let slackFeedbackURL = "https://hooks.slack.com/services/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"
     
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var textFieldEmail: UITextField!
@@ -25,7 +23,7 @@ class EmailController: UIViewController {
     
     var feedbackText: String?
     
-    var feedbackDelegate: FeedbackDelegate?
+    weak var feedbackDelegate: FeedbackDelegate?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -62,21 +60,14 @@ class EmailController: UIViewController {
                 UserApiManager.shared.setFeedbackEmail(email: email)
             }
             
-            let parameters: Parameters = [
-                "text": feedbackText ?? "no text",
-                "username": email
-            ]
-            
-            _ = Alamofire.request(slackFeedbackURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
-                if response.response?.statusCode == 200 {
+            SlackHelper.shared.sendFeedback(feedbackText: feedbackText, email: email) { success in
+                if success {
                     self.feedbackDelegate?.feedbackSuccessfullySent()
-                    
-                    self.dismiss(animated: true, completion: nil)
                     StatusBarManager.shared.showCustomStatusBarNeutral(text: "Your feedback has been sent!".localized())
                 } else {
-                    self.dismiss(animated: true, completion: nil)
                     StatusBarManager.shared.showCustomStatusBarError(text: "Error! Please try to send your feedback later.".localized())
                 }
+                self.dismiss(animated: true, completion: nil)
             }
         } else {
             StatusBarManager.shared.showCustomStatusBarError(text: "The email is not valid!".localized())
@@ -96,7 +87,7 @@ extension EmailController: UIGestureRecognizerDelegate {
     }
     
 
-    func handleTap(recognizer: UIGestureRecognizer) {
+    @objc func handleTap(recognizer: UIGestureRecognizer) {
         if recognizer.state == .ended {
             if textFieldEmail.isFirstResponder {
                 textFieldEmail.resignFirstResponder()

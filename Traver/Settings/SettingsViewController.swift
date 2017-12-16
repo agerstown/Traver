@@ -15,13 +15,19 @@ class SettingsViewController: UITableViewController {
     
     @IBOutlet weak var tableViewSettings: UITableView!
     @IBOutlet weak var cellImportFromPhotos: UITableViewCell!
+    @IBOutlet weak var cellImportFromAita: UITableViewCell!
     @IBOutlet weak var cellFacebook: UITableViewCell!
     @IBOutlet weak var textViewFeedback: UITextView!
     @IBOutlet weak var buttonSendFeedback: UIButton!
     @IBOutlet weak var labelVersion: UILabel!
     
-    let sectionsHeaders = ["Import".localized(), "Accounts".localized(), "Support and feedback".localized()];
-    let sectionsFooters = ["It may take some time, just wait a little.".localized(), "", ""];
+    @IBOutlet weak var imageViewPhotosIcon: UIImageView!
+    @IBOutlet weak var imageViewAitaIcon: UIImageView!
+    @IBOutlet weak var labelImportFromPhotos: UILabel!
+    @IBOutlet weak var labelImportFromAita: UILabel!
+    
+    
+    let sectionsHeaders = ["Import countries".localized(), "Accounts".localized(), "Support and feedback".localized()];
     
     let tapGestureRecognizer = UITapGestureRecognizer()
     
@@ -30,10 +36,14 @@ class SettingsViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "Settings".localized()
+
+        labelVersion.text = "Version".localized() + " " + "1.1"
         
-        labelVersion.text = "Version".localized() + " " + "1.0"
+        imageViewPhotosIcon.layer.cornerRadius = 5
+        imageViewAitaIcon.layer.cornerRadius = 5
         
-        cellImportFromPhotos.textLabel?.text = "Import countries from Photos".localized()
+        labelImportFromPhotos.text = "Import from Photos".localized()
+        labelImportFromAita.text = "Import from App in the Air".localized()
         
         cellFacebook.textLabel?.text = "Facebook".localized()
         cellFacebook.detailTextLabel?.text = FacebookHelper.shared.isConnected() ? "Connected".localized() : "Not connected".localized()
@@ -60,6 +70,7 @@ class SettingsViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
+    // MARK: - Actions
     @IBAction func buttonSendFeedbackTapped(_ sender: Any) {
         if textViewFeedback.text.isEmpty {
             StatusBarManager.shared.showCustomStatusBarError(text: "Please write something.".localized())
@@ -83,10 +94,6 @@ class SettingsViewController: UITableViewController {
         return sectionsHeaders[section]
     }
     
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return sectionsFooters[section]
-    }
-    
     // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableViewSettings.deselectRow(at: indexPath, animated: true)
@@ -96,13 +103,20 @@ class SettingsViewController: UITableViewController {
                 PhotosAccessManager.shared.importVisitedCountries(controller: self)
             case cellFacebook:
                 FacebookHelper.shared.login()
+            case cellImportFromAita:
+                if let accessToken = User.shared.aitaAccessToken, let refreshToken = User.shared.aitaRefreshToken {
+                    AitaHelper.shared.getUserCountries(accessToken: accessToken, refreshToken: refreshToken,
+                                                       completion:  nil)
+                } else {
+                    performSegue(withIdentifier: "segueToAitaLoginController", sender: nil)
+                }
             default: ()
             }
         }
     }
     
     // MARK: - Notifications
-    func updateAccountsInfo() {
+    @objc func updateAccountsInfo() {
         
         UIView.transition(with: cellFacebook.detailTextLabel!,
                           duration: 0.3,
@@ -115,7 +129,7 @@ class SettingsViewController: UITableViewController {
 
 // MARK: - UIGestureRecognizerDelegate
 extension SettingsViewController: UIGestureRecognizerDelegate {
-    func handleTap(recognizer: UIGestureRecognizer) {
+    @objc func handleTap(recognizer: UIGestureRecognizer) {
         if recognizer.state == .ended {
             textViewFeedback.resignFirstResponder()
             tapGestureRecognizer.isEnabled = false

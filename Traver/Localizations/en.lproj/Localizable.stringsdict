@@ -1,82 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   Localizable.stringsdict
-   Traver
-
-   Created by Natalia Nikitina on 11/27/16.
-   Copyright (c) 2016 Natalia Nikitina. All rights reserved.
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    
+<dict>
+	<key>%d/180 countries visited</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@countries@</string>
+		<key>countries</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d/180 country visited</string>
+			<key>other</key>
+			<string>%d/180 countries visited</string>
+		</dict>
+	</dict>
+	<key>%d countries visited</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@countries@</string>
+		<key>countries</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d country visited</string>
+			<key>other</key>
+			<string>%d countries visited</string>
+		</dict>
+	</dict>
+	<key>Import from Photos is finished: %d countries were found</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@countries@</string>
+		<key>countries</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>Import from Photos is finished: %d country was found</string>
+			<key>other</key>
+			<string>Import from Photos is finished: %d countries were found</string>
+		</dict>
+	</dict>
+	<key>%d tips</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@tips@</string>
+		<key>tips</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d tip</string>
+			<key>other</key>
+			<string>%d tips</string>
+		</dict>
+	</dict>
+    <key>%d new countries were succesfully imported from AitA</key>
     <dict>
-        <key>%d/176 countries visited</key>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@countries@</string>
+        <key>countries</key>
         <dict>
-            <key>NSStringLocalizedFormatKey</key>
-            <string>%#@countries@</string>
-            <key>countries</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>d</string>
-                <key>one</key>
-                <string>%d/176 country visited</string>
-                <key>other</key>
-                <string>%d/176 countries visited</string>
-            </dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>%d new country was succesfully imported from AitA</string>
+            <key>other</key>
+            <string>%d new countries were succesfully imported from AitA</string>
         </dict>
-        
-        <key>%d countries visited</key>
-        <dict>
-            <key>NSStringLocalizedFormatKey</key>
-            <string>%#@countries@</string>
-            <key>countries</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>d</string>
-                <key>one</key>
-                <string>%d country visited</string>
-                <key>other</key>
-                <string>%d countries visited</string>
-            </dict>
-        </dict>
-        
-        <key>Import from Photos is finished: %d countries were found</key>
-        <dict>
-            <key>NSStringLocalizedFormatKey</key>
-            <string>%#@countries@</string>
-            <key>countries</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>d</string>
-                <key>one</key>
-                <string>Import from Photos is finished: %d country was found</string>
-                <key>other</key>
-                <string>Import from Photos is finished: %d countries were found</string>
-            </dict>
-        </dict>
-        
-        <key>%d tips</key>
-        <dict>
-            <key>NSStringLocalizedFormatKey</key>
-            <string>%#@tips@</string>
-            <key>tips</key>
-            <dict>
-                <key>NSStringFormatSpecTypeKey</key>
-                <string>NSStringPluralRuleType</string>
-                <key>NSStringFormatValueTypeKey</key>
-                <string>d</string>
-                <key>one</key>
-                <string>%d tip</string>
-                <key>other</key>
-                <string>%d tips</string>
-            </dict>
-        </dict>
-        
     </dict>
+</dict>
 </plist>

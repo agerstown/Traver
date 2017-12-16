@@ -183,6 +183,10 @@
 "YE" = "Yemen";
 "ZM" = "Zambia";
 "ZW" = "Zimbabwe";
+"AD" = "Andorra";
+"HK" = "Hong Kong";
+"SG" = "Singapore";
+"MT" = "Malta";
 
 // Regions names
 "REU" = "Europe";
@@ -209,7 +213,9 @@
 
 // Import
 "Import countries from Photos" = "Import countries from Photos";
+"Import from Photos" = "Import from Photos";
 "Import" = "Import";
+"Import countries" = "Import countries";
 "It may take some time, just wait a little." = "It may take some time, just wait a little.";
 "Import has been started" = "Import has been started";
 "Import is impossible" = "Import is impossible";
@@ -218,9 +224,12 @@
 "Don't Allow" = "Don't Allow";
 "Access to Photos is restricted" = "Access to Photos is restricted";
 "We can't import visited countries from your Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it." = "We can't import visited countries from your Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it.";
+"Import from App in the Air" = "Import from App in the Air";
+"Countries from AitA were succesfully imported!" = "Countries from AitA were succesfully imported!";
 
 // Share
 "Share" = "Share";
+"My travel map" = "My travel map";
 
 // Accounts
 "Accounts" = "Accounts";
@@ -296,3 +305,29 @@
 
 // Settings
 "Version" = "Version";
+
+// My tips log in
+"Log in" = "Log in";
+"Please log in using your iCloud account (in Settigs) or Facebook to leave tips" = "Please log in using your iCloud account (in Settigs) or Facebook to leave tips";
+
+// Report tip, agreement, blocking
+"Report" = "Report";
+"Report tip" = "Report tip";
+"Do you want to report the tip for objectionable or abusive content?" = "Do you want to report the tip for objectionable or abusive content?";
+"Your report has been sent succesfully!" = "Your report has been sent succesfully!";
+"Agreement" = "Agreement";
+"In Traver you can write travel tips for other users." = "In Traver you can write travel tips for other users.";
+"Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content" = "Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content";
+"Agree" = "Agree";
+"Disagree" = "Disagree";
+"Block author" = "Block author";
+"User has been successfully blocked!" = "User has been successfully blocked!";
+"Please log in using your iCloud account (in Settigs) or Facebook to block someone" = "Please log in using your iCloud account (in Settigs) or Facebook to block someone";
+
+// Settings
+"Version" = "Version";
+
+// Tip request from friend
+"Ask for a tip" = "Ask for a tip";
+"Do you want to ask your friend to leave a tip about" = "Do you want to ask your friend to leave a tip about";
+"Send request" = "Send request";

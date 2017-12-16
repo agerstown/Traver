@@ -35,12 +35,14 @@ class ProfileViewController: UIViewController {
     
     var mapImage: SVGKImage = SVGKImage(named: "WorldMap.svg")!
     
-    let visitedCountriesText = "%d/176 countries visited"
+    let visitedCountriesText = "%d/180 countries visited"
     let mapHeightToWidthRatio: CGFloat = 1.5
     
     let refreshControl = UIRefreshControl()
     
     var fetchedResultsController: NSFetchedResultsController<Country>?
+    
+    //let buttonAskForTip = UIButton()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -96,10 +98,16 @@ class ProfileViewController: UIViewController {
         
         try! fetchedResultsController!.performFetch()
         
+//        buttonAskForTip.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+//        buttonAskForTip.addTarget(self, action: #selector(buttonAskForTipTapped), for: .touchUpInside)
+//        buttonAskForTip.setImage(UIImage(named: "question"), for: .normal)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(profileInfoUpdated), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(photoUpdated), name: UserApiManager.shared.PhotoUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countryCodeImported(notification:)), name: VisitedCountriesImporter.shared.CountryCodeImportedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(countriesUpdated), name: user!.CountriesUpdatedNotification, object: nil)
+        
+        //showAgreementAlert()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -164,7 +172,7 @@ class ProfileViewController: UIViewController {
         self.performSegue(withIdentifier: "segueToEditProfile", sender: nil)
     }
     
-    func handleRefresh(refreshControl: UIRefreshControl) {
+    @objc func handleRefresh(refreshControl: UIRefreshControl) {
         if user!.token != nil && user!.token != "" {
             UserApiManager.shared.getUserInfo(user: user!) { _ in
                 refreshControl.endRefreshing()
@@ -173,7 +181,35 @@ class ProfileViewController: UIViewController {
             refreshControl.endRefreshing()
         }
     }
-
+    
+    func buttonAskForTipTapped() {
+        
+    }
+    
+//    func showAgreementAlert() {
+//        if UserDefaults.standard.object(forKey: "agreedToTerms") as? Bool == nil {
+//            if let tips = User.shared.tips {
+//                UserDefaults.standard.set(tips.count > 0, forKey: "agreedToTerms")
+//            } else {
+//                UserDefaults.standard.set(false, forKey: "agreedToTerms")
+//            }
+//        }
+//        
+//        if let agreedToTerms = UserDefaults.standard.object(forKey: "agreedToTerms") as? Bool {
+//            if !agreedToTerms {
+//                let alert = UIAlertController(title: "Agreement".localized(), message: "In Traver you can write travel tips for other users.".localized() + " " + "Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content".localized(), preferredStyle: UIAlertControllerStyle.alert)
+//                let agreeAction = UIAlertAction(title: "Agree".localized(), style: .default) { _ in
+//                    UserDefaults.standard.set(true, forKey: "agreedToTerms")
+//                }
+//                let disagreeAction = UIAlertAction(title: "Disagree".localized(), style: .cancel) { _ in
+//                    UserDefaults.standard.set(false, forKey: "agreedToTerms")
+//                }
+//                alert.addAction(agreeAction)
+//                alert.addAction(disagreeAction)
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//        }
+//    }
     
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -189,7 +225,7 @@ class ProfileViewController: UIViewController {
     }
 
     // MARK: - Notifications
-    func countryCodeImported(notification: NSNotification) {
+    @objc func countryCodeImported(notification: NSNotification) {
         if let countryCode = notification.userInfo?[VisitedCountriesImporter.shared.CountryCodeInfoKey] as? String {
             if !user!.visitedCountriesArray.contains(where: { $0.code == countryCode }) {
                 CountryVisitApiManager.shared.addCountryVisit(code: countryCode) {
@@ -204,15 +240,15 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    func countriesUpdated() {
+    @objc func countriesUpdated() {
         updateCountriesRelatedInfo()
     }
     
-    func profileInfoUpdated() {
+    @objc func profileInfoUpdated() {
         updateProfileInfo()
     }
     
-    func photoUpdated() {
+    @objc func photoUpdated() {
         updatePhoto()
     }
     
@@ -284,6 +320,13 @@ extension ProfileViewController: UITableViewDataSource {
         cell.labelCountryName.text = country.name
         cell.country = country
         cell.selectionStyle = .none
+        
+        if user != User.shared {
+            cell.tipRequestDelegate = self
+            cell.buttonAskForTip.isHidden = false
+            cell.constraintTrailingLabelName.constant = 36
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -394,3 +437,22 @@ extension ProfileViewController: NSFetchedResultsControllerDelegate {
 
 }
 
+// MARK: - TipRequestDelegate
+extension ProfileViewController: TipRequestDelegate {
+    func tipRequested(cell: UITableViewCell) {
+        if let indexPath = tableViewVisitedCountries.indexPath(for: cell) {
+            let country =  fetchedResultsController!.object(at: indexPath)
+            
+            let alert = UIAlertController(title: "Ask for a tip".localized(), message: "Do you want to ask your friend to leave a tip about".localized() + " " + country.name + "?", preferredStyle: UIAlertControllerStyle.alert)
+            let requestAction = UIAlertAction(title: "Send request".localized(), style: .default) { _ in
+                
+            }
+            let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel) { _ in
+                
+            }
+            alert.addAction(requestAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+}

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TipDelegate {
+protocol TipDelegate: class {
     func tipCreated(tip: Tip)
     func tipUpdated(tip: Tip)
 }
@@ -28,7 +28,7 @@ class TipController: UITableViewController {
     
     var alertTitleLengthShown = false
     
-    var tipDelegate: TipDelegate?
+    weak var tipDelegate: TipDelegate?
     
     var tip: Tip?
     
@@ -135,7 +135,7 @@ extension TipController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let text = textFieldTitle.text {
-            if text.characters.count + string.characters.count <= 100 {
+            if text.count + string.count <= 100 {
                 return true
             } else {
                 if !alertTitleLengthShown {
@@ -199,7 +199,7 @@ extension TipController: UIPickerViewDelegate {
 
 // MARK: - UIGestureRecognizerDelegate
 extension TipController: UIGestureRecognizerDelegate {
-    func handleTap(recognizer: UIGestureRecognizer) {
+    @objc func handleTap(recognizer: UIGestureRecognizer) {
         if recognizer.state == .ended {
             textFieldTitle.resignFirstResponder()
             textViewText.resignFirstResponder()

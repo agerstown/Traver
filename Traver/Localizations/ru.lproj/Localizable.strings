@@ -183,6 +183,10 @@
 "YE" =  "Йемен";
 "ZM" =  "Замбия";
 "ZW" =  "Зимбабве";
+"AD" =  "Андорра";
+"HK" =  "Гонконг";
+"SG" =  "Сингапур";
+"MT" =  "Мальта";
 
 // Regions names
 "REU" = "Европа";
@@ -209,7 +213,9 @@
 
 // Import
 "Import countries from Photos" = "Импортировать страны из Фото";
+"Import from Photos" = "Импортировать из Фото";
 "Import" = "Импорт";
+"Import countries" = "Импорт стран";
 "It may take some time, just wait a little." = "Это может занять некоторое время, просто подождите немного.";
 "Import has been started" = "Импорт начался";
 "Import is impossible" = "Импорт невозможен";
@@ -218,9 +224,12 @@
 "Don't Allow" = "Запретить";
 "Access to Photos is restricted" = "Доступ к Фото ограничен";
 "We can't import visited countries from your Photos as parental controls restrict your ability to grant Photo Library access to apps. Ask the owner to allow it." = "Мы не можем импортировать посещенные Вами страны из Фото, т.к. родительский контроль не позволяет Вам давать доступ к своим Фото для приложений. Попросите владельца разрешить доступ.";
+"Import from App in the Air" = "Импортировать из App in the Air";
+"Countries from AitA were succesfully imported!" = "Страны из AitA были успешно импортированы!";
 
 // Share
 "Share" = "Поделиться";
+"My travel map" = "Моя карта путешествий";
 
 // Accounts
 "Accounts" = "Аккаунты";
@@ -296,3 +305,29 @@
 
 // Settings
 "Version" = "Версия";
+
+// My tips log in
+"Log in" = "Регистрация";
+"Please log in using your iCloud account (in Settigs) or Facebook to leave tips" = "Пожалуйста, подключите свой iCloud аккаунт (в Настройках) или Facebook для того, чтобы оставлять советы";
+
+// Report tip, agreement, blocking
+"Report" = "Пожаловаться";
+"Report tip" = "Пожаловаться на совет";
+"Do you want to report the tip for objectionable or abusive content?" = "Вы хотите пожаловаться, что данный совет содержит оскорбительное или неподобающее содержание?";
+"Your report has been sent succesfully!" = "Ваша жалоба была успешно отправлена!";
+"Agreement" = "Соглашение";
+"In Traver you can write travel tips for other users." = "В приложении Traver Вы можете писать советы для других пользователей.";
+"Please confirm that you agree to the EULA terms and will not post any objectionable or abusive content" = "Пожалуйста, подтвердите, что Вы согласны с условиями соглашения EULA и не будете размещать неподобающий или оскорбительный контент";
+"Agree" = "Согласиться";
+"Disagree" = "Отказаться";
+"Block author" = "Заблокировать автора";
+"User has been successfully blocked!" = "Пользователь был успешно заблокирован!";
+"Please log in using your iCloud account (in Settigs) or Facebook to block someone" = "Пожалуйста, подключите свой iCloud аккаунт (в Настройках) или Facebook для того, чтобы заблокировать кого-либо";
+
+// Settings
+"Version" = "Версия";
+
+// Tip request from friend
+"Ask for a tip" = "Попросить совет";
+"Do you want to ask your friend to leave a tip about" = "Вы хотите попросить своего друга оставить совет о стране";
+"Send request" = "Отправить просьбу";

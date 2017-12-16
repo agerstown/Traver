@@ -56,7 +56,7 @@ extension SharePreviewController: UIGestureRecognizerDelegate {
         return true
     }
     
-    func handleTap(recognizer: UIGestureRecognizer) {
+    @objc func handleTap(recognizer: UIGestureRecognizer) {
         if recognizer.state == .ended {
             self.dismiss(animated: true, completion: nil)
         }

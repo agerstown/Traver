@@ -12,7 +12,10 @@ import CoreData
 @objc(User)
 class User: NSManagedObject {
     
-    static var shared: User = {
+    static let shared: User = {
+        
+        let coreDataStack = CoreDataStack.shared
+        
         let frUser = NSFetchRequest<User>(entityName: "User")
         let predicate = NSPredicate(format: "mainUser = %@", NSNumber(value: true))
         frUser.predicate = predicate
@@ -53,6 +56,7 @@ class User: NSManagedObject {
         }
     }()
     
+    @NSManaged var id: String?
     @NSManaged var token: String?
     @NSManaged var name: String?
     @NSManaged var photoData: Data?
@@ -69,7 +73,7 @@ class User: NSManagedObject {
     @NSManaged var location: String?
     @NSManaged var iCloudID: String?
     @NSManaged var locale: String?
-    @NSManaged var numberOfVisitedCountries: String?
+    @NSManaged var numberOfVisitedCountries: NSNumber?
     @NSManaged var feedbackEmail: String?
     @NSManaged var currentCountryCode: String?
     @NSManaged var currentRegion: String?
@@ -87,6 +91,8 @@ class User: NSManagedObject {
     @NSManaged var friends: NSOrderedSet
     @NSManaged var visitedCountries: NSSet
     @NSManaged var mainUser: NSNumber?
+    @NSManaged var aitaAccessToken: String?
+    @NSManaged var aitaRefreshToken: String?
     
     var username: String {
         return facebookID != nil ? "fb" + facebookID! : iCloudID != nil ? "ic" + iCloudID! : ""
@@ -123,6 +129,13 @@ class User: NSManagedObject {
     
     func addCountryVisit(code: String) {
         saveCountryVisit(code: code)
+        CoreDataStack.shared.saveContext()
+    }
+    
+    func addCountryVisits(codes: [String]) {
+        for code in codes {
+            saveCountryVisit(code: code)
+        }
         CoreDataStack.shared.saveContext()
     }
     

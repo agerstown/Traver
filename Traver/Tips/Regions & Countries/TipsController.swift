@@ -44,6 +44,13 @@ class TipsController: UIViewController {
         segmentedControlTipsCategory.setTitle("Friends".localized(), forSegmentAt: 1)
         
         reloadRegionsTable()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(facebookConnected), name: UserApiManager.shared.ProfileInfoUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(userBlocked), name: UserApiManager.shared.UserBlockedNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: Regions update
@@ -51,35 +58,21 @@ class TipsController: UIViewController {
         if segmentedControlTipsCategory.selectedSegmentIndex == 0 {
             viewNoFriends.isHidden = true
             tableViewRegions.isHidden = false
-            if allRegionsArray.isEmpty {
-                startSpinning()
-                TipApiManager.shared.getExistingTipsCountries() { countryCodes in
-                    self.filterCountryCodes(codes: countryCodes, countryCodes: &self.allCountryCodes,
-                                            regions: &self.allRegions, regionsArray: &self.allRegionsArray) {
-                        self.stopSpinning()
-                    }
+            startSpinning()
+            TipApiManager.shared.getExistingTipsCountries() { countryCodes in
+                self.filterCountryCodes(codes: countryCodes, countryCodes: &self.allCountryCodes,
+                                        regions: &self.allRegions, regionsArray: &self.allRegionsArray) {
+                    self.stopSpinning()
                 }
-            } else {
-                countryCodes = allCountryCodes
-                regions = allRegions
-                regionsArray = allRegionsArray
-                tableViewRegions.reloadData()
             }
         } else {
-            if friendsRegionsArray.isEmpty {
-                startSpinning()
-                TipApiManager.shared.getExistingTipsCountriesFriends() { countryCodes in
-                    self.filterCountryCodes(codes: countryCodes, countryCodes: &self.friendsCountryCodes,
-                                            regions: &self.friendsRegions, regionsArray: &self.friendsRegionsArray) {
-                        self.stopSpinning()
-                        self.configureFriendsSection()
-                    }
+            startSpinning()
+            TipApiManager.shared.getExistingTipsCountriesFriends() { countryCodes in
+                self.filterCountryCodes(codes: countryCodes, countryCodes: &self.friendsCountryCodes,
+                                        regions: &self.friendsRegions, regionsArray: &self.friendsRegionsArray) {
+                    self.stopSpinning()
+                    self.configureFriendsSection()
                 }
-            } else {
-                countryCodes = friendsCountryCodes
-                regions = friendsRegions
-                regionsArray = friendsRegionsArray
-                tableViewRegions.reloadData()
             }
         }
     }
@@ -140,6 +133,52 @@ class TipsController: UIViewController {
     
     // MARK: - Actions
     @IBAction func segmentedControlTipsCategoryChanged(_ sender: UISegmentedControl) {
+        if segmentedControlTipsCategory.selectedSegmentIndex == 0 {
+            if allRegionsArray.isEmpty {
+                reloadRegionsTable()
+            } else {
+                viewNoFriends.isHidden = true
+                tableViewRegions.isHidden = false
+                
+                countryCodes = allCountryCodes
+                regions = allRegions
+                regionsArray = allRegionsArray
+                tableViewRegions.reloadData()
+            }
+        } else {
+            if friendsRegionsArray.isEmpty {
+                reloadRegionsTable()
+            } else {
+                countryCodes = friendsCountryCodes
+                regions = friendsRegions
+                regionsArray = friendsRegionsArray
+                tableViewRegions.reloadData()
+            }
+        }
+    }
+    
+    @IBAction func buttonMyTipsTapped(_ sender: Any) {
+        if User.shared.token == nil {
+            let alert = UIAlertController(title: "Log in".localized(), message: "Please log in using your iCloud account (in Settigs) or Facebook to leave tips".localized(), preferredStyle: UIAlertControllerStyle.alert)
+            let connectFacebookAction = UIAlertAction(title: "Connect Facebook".localized(), style: .default) { _ in
+                FacebookHelper.shared.login()
+            }
+            let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
+            alert.addAction(connectFacebookAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            performSegue(withIdentifier: "segueToMyTipsController", sender: nil)
+        }
+    }
+    
+    @objc func facebookConnected() {
+        segmentedControlTipsCategory.selectedSegmentIndex = 0
+        reloadRegionsTable()
+    }
+    
+    @objc func userBlocked() {
+        segmentedControlTipsCategory.selectedSegmentIndex = 0
         reloadRegionsTable()
     }
     
