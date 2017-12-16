@@ -18,6 +18,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var cellFacebook: UITableViewCell!
     @IBOutlet weak var textViewFeedback: UITextView!
     @IBOutlet weak var buttonSendFeedback: UIButton!
+    @IBOutlet weak var labelVersion: UILabel!
     
     let sectionsHeaders = ["Import".localized(), "Accounts".localized(), "Support and feedback".localized()];
     let sectionsFooters = ["It may take some time, just wait a little.".localized(), "", ""];
@@ -29,6 +30,8 @@ class SettingsViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "Settings".localized()
+        
+        labelVersion.text = "Version".localized() + " " + "1.0"
         
         cellImportFromPhotos.textLabel?.text = "Import countries from Photos".localized()
         

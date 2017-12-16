@@ -131,7 +131,7 @@ class TipApiManager: ApiManager {
     }
     
     func getAuthorPhoto(author: TipAuthor, putInto imageView: UIImageView) {
-        imageView.image = UIImage(named: "default_photo")
+        imageView.image = #imageLiteral(resourceName: "default_photo")
         if let path = author.photoPath {
             ImagesManager.shared.loadImage(withURL: photosHost + "traver-media/" + path, intoImageView: imageView) { handler in
                 let image = handler.0.value

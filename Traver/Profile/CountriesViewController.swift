@@ -61,7 +61,7 @@ extension CountriesViewController: UITableViewDataSource {
         cell.labelCountryName.text = countriesInRegion[indexPath.row].name
         cell.country = countriesInRegion[indexPath.row]
         
-        let image = selectedCountries.contains(countriesInRegion[indexPath.row]) ? UIImage(named: "item_checked") : UIImage(named: "item_unchecked")
+        let image = selectedCountries.contains(countriesInRegion[indexPath.row]) ? #imageLiteral(resourceName: "item_checked") : #imageLiteral(resourceName: "item_unchecked")
         cell.buttonItemState.setImage(image, for: .normal)
         cell.selectionStyle = .none
         
@@ -79,10 +79,10 @@ extension CountriesViewController: UITableViewDelegate {
             
             var image: UIImage?
             if !selectedCountries.contains(country) {
-                image = UIImage(named: "item_checked")
+                image = #imageLiteral(resourceName: "item_checked")
                 selectedCountries.append(country) { $0.name < $1.name }
             } else {
-                image = UIImage(named: "item_unchecked")
+                image = #imageLiteral(resourceName: "item_unchecked")
                 selectedCountries.removeObject(country)
             }
             

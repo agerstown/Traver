@@ -150,9 +150,9 @@ class ProfileViewController: UIViewController {
     
     func updatePhoto() {
         if user == User.shared {
-            imageViewPhoto.image = user!.photo != nil ? user!.photo : UIImage(named: "default_photo")
+            imageViewPhoto.image = user!.photo != nil ? user!.photo : #imageLiteral(resourceName: "default_photo")
         } else {
-            imageViewPhoto.image = UIImage(named: "default_photo")
+            imageViewPhoto.image = #imageLiteral(resourceName: "default_photo")
             if let path = user!.photoPath {
                 ImagesManager.shared.loadImage(withURL: UserApiManager.shared.photosHost + "traver-media/" + path,
                                            intoImageView: imageViewPhoto)

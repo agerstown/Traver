@@ -29,9 +29,7 @@ class TipsController: UIViewController {
     var selectedRegion: Codes.Region?
     var countriesInSelectedRegion: [Codes.Country] = []
     
-    let pictures: [Codes.Region: UIImage?] = [.REU: UIImage(named: "europe"), .RAS: UIImage(named: "asia"),
-                                             .RNA: UIImage(named: "north-america"), .RSA: UIImage(named: "south-america"),
-                                             .RAU: UIImage(named: "australia"), .RAF: UIImage(named: "africa")]
+    let pictures: [Codes.Region: UIImage?] = [.REU: #imageLiteral(resourceName: "europe"), .RAS: #imageLiteral(resourceName: "asia"), .RNA: #imageLiteral(resourceName: "north-america"), .RSA: #imageLiteral(resourceName: "south-america"), .RAU: #imageLiteral(resourceName: "australia"), .RAF: #imageLiteral(resourceName: "africa")]
     
     let activityIndicatorInitialLoading = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     

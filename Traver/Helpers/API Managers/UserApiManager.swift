@@ -492,13 +492,7 @@ class UserApiManager: ApiManager {
     func updatePhoto(user: User, photo: UIImage, completion: @escaping () -> Void) {
         if User.shared.token != nil && !User.shared.token!.isEmpty {
             
-            var reducedPhoto = photo
-            
-            if let photo = photo.reduced() {
-                reducedPhoto = photo
-            }
-            
-            let photoData = UIImagePNGRepresentation(reducedPhoto)!
+            let photoData = UIImagePNGRepresentation(photo)!
             
             let headers: HTTPHeaders = [
                 "Authorization": "Token \(User.shared.token!)"

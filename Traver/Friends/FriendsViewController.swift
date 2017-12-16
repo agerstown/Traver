@@ -134,7 +134,7 @@ class FriendsViewController: UIViewController {
             
             viewInnerHeader.layer.cornerRadius = 5
             imageViewPhoto.layer.cornerRadius = imageViewPhoto.frame.height / 2
-            imageViewPhoto.image = User.shared.photo ?? UIImage(named: "default_photo")
+            imageViewPhoto.image = User.shared.photo ?? #imageLiteral(resourceName: "default_photo")
             
             labelCurrentLocation.layer.cornerRadius = 5
             labelCurrentLocation.layer.borderColor = UIColor.lightGray.cgColor
@@ -219,7 +219,7 @@ extension FriendsViewController: UITableViewDataSource {
         if let path = user.photoPath {
             ImagesManager.shared.loadImage(withURL: UserApiManager.shared.photosHost + "traver-media/" + path, intoImageView: cell.imageViewPhoto)
         } else {
-            cell.imageViewPhoto.image = UIImage(named: "default_photo")
+            cell.imageViewPhoto.image = #imageLiteral(resourceName: "default_photo") 
         }
         
         if let location = user.currentLocation {

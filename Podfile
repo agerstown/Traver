@@ -14,4 +14,6 @@ target 'Traver' do
 	pod 'Crashlytics'
 	pod 'Nuke', '~> 5.1'
 	pod 'DFCache', '~> 4.0.1'
+	pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
+	pod 'CocoaLumberjack'
 end
